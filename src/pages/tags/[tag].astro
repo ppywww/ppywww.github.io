@@ -56,32 +56,35 @@ const posts = (await getCollection('posts', ({ data }) => (import.meta.env.PROD 
 
   <main class="main" id="main-content">
     <div class="container">
-      <div class="page-head">
-        <p class="page-eyebrow">标签</p>
-        <h1 class="page-title">{tag}</h1>
-        <p class="page-lead">共 {posts.length} 篇文章。</p>
+      {/* 内容列（换肤层 .content）：与首页同宽 —— 内容 768px + 两侧 --gap，卡片宽度全站一致 */}
+      <div class="content">
+        <div class="page-head">
+          <p class="page-eyebrow">标签</p>
+          <h1 class="page-title">{tag}</h1>
+          <p class="page-lead">共 {posts.length} 篇文章。</p>
+        </div>
+
+        {
+          posts.length === 0 ? (
+            <div class="empty">
+              <p class="empty__title">这个标签下还没有文章</p>
+              <p>
+                换一个标签看看，或者浏览<a href="/tags/">全部标签</a>。
+              </p>
+            </div>
+          ) : (
+            <ul class="post-list">
+              {posts.map((post) => (
+                <PostCard post={post} />
+              ))}
+            </ul>
+          )
+        }
+
+        <p class="page-back">
+          <a href="/tags/">← 全部标签</a>
+        </p>
       </div>
-
-      {
-        posts.length === 0 ? (
-          <div class="empty">
-            <p class="empty__title">这个标签下还没有文章</p>
-            <p>
-              换一个标签看看，或者浏览<a href="/tags/">全部标签</a>。
-            </p>
-          </div>
-        ) : (
-          <ul class="post-list">
-            {posts.map((post) => (
-              <PostCard post={post} />
-            ))}
-          </ul>
-        )
-      }
-
-      <p class="page-back">
-        <a href="/tags/">← 全部标签</a>
-      </p>
     </div>
   </main>
 

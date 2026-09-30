@@ -46,32 +46,35 @@ const posts = (
 
   <main class="main" id="main-content">
     <div class="container">
-      <div class="page-head">
-        <p class="page-eyebrow">分类</p>
-        <h1 class="page-title">{category}</h1>
-        <p class="page-lead">共 {posts.length} 篇文章。</p>
+      {/* 内容列（换肤层 .content）：与首页同宽 —— 内容 768px + 两侧 --gap，卡片宽度全站一致 */}
+      <div class="content">
+        <div class="page-head">
+          <p class="page-eyebrow">分类</p>
+          <h1 class="page-title">{category}</h1>
+          <p class="page-lead">共 {posts.length} 篇文章。</p>
+        </div>
+
+        {
+          posts.length === 0 ? (
+            <div class="empty">
+              <p class="empty__title">这个栏目还没有文章</p>
+              <p>
+                换一个栏目看看，或者浏览<a href="/posts/">全部文章</a>。
+              </p>
+            </div>
+          ) : (
+            <ul class="post-list">
+              {posts.map((post) => (
+                <PostCard post={post} />
+              ))}
+            </ul>
+          )
+        }
+
+        <p class="page-back">
+          <a href="/categories/">← 全部分类</a>
+        </p>
       </div>
-
-      {
-        posts.length === 0 ? (
-          <div class="empty">
-            <p class="empty__title">这个栏目还没有文章</p>
-            <p>
-              换一个栏目看看，或者浏览<a href="/posts/">全部文章</a>。
-            </p>
-          </div>
-        ) : (
-          <ul class="post-list">
-            {posts.map((post) => (
-              <PostCard post={post} />
-            ))}
-          </ul>
-        )
-      }
-
-      <p class="page-back">
-        <a href="/categories/">← 全部分类</a>
-      </p>
     </div>
   </main>
 

@@ -31,34 +31,37 @@ for (const post of posts) {
 
   <main class="main" id="main-content">
     <div class="container">
-      <div class="page-head">
-        <h1 class="page-title">分类</h1>
-        <p class="page-lead">
-          共 {CATEGORIES.length} 个栏目、{posts.length} 篇文章。栏目少而稳，用来导航；标签多而活，用来聚类。
-        </p>
-      </div>
+      {/* 内容列（换肤层 .content）：与首页同宽 —— 内容 768px + 两侧 --gap，卡片宽度全站一致 */}
+      <div class="content">
+        <div class="page-head">
+          <h1 class="page-title">分类</h1>
+          <p class="page-lead">
+            共 {CATEGORIES.length} 个栏目、{posts.length} 篇文章。栏目少而稳，用来导航；标签多而活，用来聚类。
+          </p>
+        </div>
 
-      <ul class="term-cloud">
+        <ul class="term-cloud">
+          {
+            CATEGORIES.map((name) => (
+              <li>
+                <TermPill label={name} href={`/categories/${encodeURIComponent(name)}/`} count={counts.get(name) ?? 0} />
+              </li>
+            ))
+          }
+        </ul>
+
         {
-          CATEGORIES.map((name) => (
-            <li>
-              <TermPill label={name} href={`/categories/${encodeURIComponent(name)}/`} count={counts.get(name) ?? 0} />
-            </li>
-          ))
+          posts.length === 0 && (
+            <div class="empty">
+              <p class="empty__title">还没有文章</p>
+              <p>写下第一篇后，四个栏目的计数会自动更新。</p>
+              <p>
+                <a href="/">返回首页</a>
+              </p>
+            </div>
+          )
         }
-      </ul>
-
-      {
-        posts.length === 0 && (
-          <div class="empty">
-            <p class="empty__title">还没有文章</p>
-            <p>写下第一篇后，四个栏目的计数会自动更新。</p>
-            <p>
-              <a href="/">返回首页</a>
-            </p>
-          </div>
-        )
-      }
+      </div>
     </div>
   </main>
 

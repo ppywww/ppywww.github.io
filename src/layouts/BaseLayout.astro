@@ -34,6 +34,12 @@ interface Props {
   publishedTime?: string;
   modifiedTime?: string;
   noindex?: boolean;
+  /**
+   * 追加到 <body> 的类名（v1.1-BC 冻结接口）。
+   * 列表类页面传 "list"：换肤层 base.css 用 body.list 切列表页底色与吸顶页头底色。
+   * 不传时 <body> 不带任何类，现有页面行为不变。
+   */
+  bodyClass?: string;
   /** 追加的 JSON-LD 结构化数据 */
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
@@ -50,6 +56,7 @@ const {
   publishedTime,
   modifiedTime,
   noindex = false,
+  bodyClass,
   jsonLd,
 } = Astro.props;
 
@@ -157,7 +164,7 @@ const jsonLdText = JSON.stringify(structuredData).replace(/</g, '\\u003c');
     <script type="application/ld+json" set:html={jsonLdText}></script>
   </head>
 
-  <body>
+  <body class={bodyClass}>
     <a class="skip-link" href="#main-content">跳到正文</a>
     <slot />
 

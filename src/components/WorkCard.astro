@@ -29,10 +29,10 @@ const demoHost = demo ? new URL(demo).host : undefined;
   }
 
   <div class="work-card__body">
-    <h3 class="work-card__title">
+    <h2 class="work-card__title">
       {title}
       {featured && <span class="work-card__badge">精选</span>}
-    </h3>
+    </h2>
 
     <p class="work-card__summary">{summary}</p>
 
@@ -122,11 +122,17 @@ const demoHost = demo ? new URL(demo).host : undefined;
     flex: 1 1 auto;
   }
 
+  /* 语义层级用 h2（/works/ 结构是 h1 → 卡片标题，不能跳级，Lighthouse heading-order）；
+     字号/行高/字距仍锁设计系统 §3.1 的「卡片标题 = --fs-h3」档，
+     否则 base.css 的 h2 规则会把标题放大到 22.4px（改标签前是 18.4px）。 */
   .work-card__title {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: var(--space-2);
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-h3);
+    letter-spacing: 0;
   }
 
   .work-card__badge {

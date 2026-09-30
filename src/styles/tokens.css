@@ -125,6 +125,11 @@
   --container-width: 1024px;       /* 导航列 / 页脚列 */
   --column-width: 768px;           /* 内容列（.content 内层） */
   --content-width: 720px;          /* 正文列（.prose，硬约束不变） */
+
+  /* --header-height 是页头的 min-height，也是 skip-link 与 TOC 锚点偏移的基准线。
+     **页头不得在任何断点超过它**：<768px 时 5 个导航项折进汉堡下拉面板（position:
+     absolute，脱离文档流），页头因此稳定在 56px。若再把导航项铺回页头，320px 视口下
+     页头会涨到 205px —— 既吃掉首屏，也会与聚焦态的 skip-link 重叠。 */
   --header-height: 60px;
   --footer-height: 60px;
 
@@ -223,6 +228,6 @@
 @media (max-width: 768px) {
   :root {
     --gap: 14px;          /* 卡片 padding / 卡间距 / 页面左右留白同步收窄 */
-    --header-height: 56px;
+    --header-height: 56px; /* 移动端页头基准；导航项见 Header.astro 的汉堡面板 */
   }
 }

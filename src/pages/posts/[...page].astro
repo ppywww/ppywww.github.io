@@ -45,38 +45,41 @@ const { page } = Astro.props;
 
   <main class="main" id="main-content">
     <div class="container">
-      <div class="page-head">
-        <p class="page-eyebrow">文章</p>
-        <h1 class="page-title">全部文章</h1>
-        <p class="page-lead">
-          共 {page.total} 篇{page.lastPage > 1 && ` · 第 ${page.currentPage} / ${page.lastPage} 页`}。
-        </p>
+      {/* 内容列（换肤层 .content）：与首页同宽 —— 内容 768px + 两侧 --gap，卡片宽度全站一致 */}
+      <div class="content">
+        <div class="page-head">
+          <p class="page-eyebrow">文章</p>
+          <h1 class="page-title">全部文章</h1>
+          <p class="page-lead">
+            共 {page.total} 篇{page.lastPage > 1 && ` · 第 ${page.currentPage} / ${page.lastPage} 页`}。
+          </p>
+        </div>
+
+        {
+          page.total === 0 ? (
+            <div class="empty">
+              <p class="empty__title">还没有文章</p>
+              <p>
+                把 Markdown 放进 <code>src/content/posts/</code>，提交后自动上线。先去
+                <a href="/">首页</a> 看看，或浏览 <a href="/archives/">归档</a>。
+              </p>
+            </div>
+          ) : (
+            <ul class="post-list">
+              {page.data.map((post: any) => (
+                <PostCard post={post} />
+              ))}
+            </ul>
+          )
+        }
+
+        <Pagination
+          currentPage={page.currentPage}
+          lastPage={page.lastPage}
+          urlPrev={page.url.prev}
+          urlNext={page.url.next}
+        />
       </div>
-
-      {
-        page.total === 0 ? (
-          <div class="empty">
-            <p class="empty__title">还没有文章</p>
-            <p>
-              把 Markdown 放进 <code>src/content/posts/</code>，提交后自动上线。先去
-              <a href="/">首页</a> 看看，或浏览 <a href="/archives/">归档</a>。
-            </p>
-          </div>
-        ) : (
-          <ul class="post-list">
-            {page.data.map((post: any) => (
-              <PostCard post={post} />
-            ))}
-          </ul>
-        )
-      }
-
-      <Pagination
-        currentPage={page.currentPage}
-        lastPage={page.lastPage}
-        urlPrev={page.url.prev}
-        urlNext={page.url.next}
-      />
     </div>
   </main>
 

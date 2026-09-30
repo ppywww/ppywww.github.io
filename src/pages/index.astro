@@ -1,7 +1,11 @@
 ---
 /**
- * 首页 —— 最小可跑版本（PRD §7.1 / §4 J1）
- * 第一屏先回答「这是谁」（欢迎卡），再回答「这里有什么」（最新文章流）。
+ * 首页（PRD §7.1 / §4 J1，v1.1-BC 骨架）
+ *
+ * 结构：ProfileCard（这是谁）→ .content 内容列里的「最新文章」（这里有什么）。
+ * · bodyClass="list"：换肤层用 body.list 切列表页底色（含吸顶页头底色同步）。
+ * · profile 块跟着 .container 走（可比 720px 正文列宽，最高 --container-width）；
+ *   文章列表收在 .content 列内，保持与其它列表页一致的阅读宽度。
  * 0 篇文章时必须仍可正常构建：走空态分支，不报错、不白屏。
  */
 import { getCollection } from 'astro:content';
@@ -9,7 +13,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PostCard from '../components/PostCard.astro';
-import { SITE } from '../consts';
+import ProfileCard from '../components/ProfileCard.astro';
 
 // 生产构建过滤草稿；本地 dev 保留草稿便于预览
 const posts = (
@@ -17,36 +21,35 @@ const posts = (
 ).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
-<BaseLayout>
+<BaseLayout bodyClass="list">
   <Header />
 
   <main class="main" id="main-content">
     <div class="container">
-      <section class="hero" aria-labelledby="hero-title">
-        <h1 class="hero__title" id="hero-title">{SITE.title}</h1>
-        <p class="hero__lead">{SITE.description}</p>
-      </section>
+      <ProfileCard />
 
-      <section aria-labelledby="latest-title">
-        <h2 class="section-title" id="latest-title">最新文章</h2>
+      <div class="content">
+        <section aria-labelledby="latest-title">
+          <h2 class="section-title" id="latest-title">最新文章</h2>
 
-        {
-          posts.length === 0 ? (
-            <div class="empty">
-              <p class="empty__title">还没有文章</p>
-              <p>
-                把 Markdown 放进 <code>src/content/posts/</code>，提交后自动上线。
-              </p>
-            </div>
-          ) : (
-            <ul class="card-list">
-              {posts.map((post) => (
-                <PostCard post={post} />
-              ))}
-            </ul>
-          )
-        }
-      </section>
+          {
+            posts.length === 0 ? (
+              <div class="empty">
+                <p class="empty__title">还没有文章</p>
+                <p>
+                  把 Markdown 放进 <code>src/content/posts/</code>，提交后自动上线。
+                </p>
+              </div>
+            ) : (
+              <ul class="card-list">
+                {posts.map((post) => (
+                  <PostCard post={post} />
+                ))}
+              </ul>
+            )
+          }
+        </section>
+      </div>
     </div>
   </main>
 

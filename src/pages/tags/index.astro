@@ -32,30 +32,33 @@ const tags = [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeComp
 
   <main class="main" id="main-content">
     <div class="container">
-      <div class="page-head">
-        <h1 class="page-title">标签</h1>
-        <p class="page-lead">共 {tags.length} 个标签、{posts.length} 篇文章，按文章数量从多到少排列。</p>
-      </div>
+      {/* 内容列（换肤层 .content）：与首页同宽 —— 内容 768px + 两侧 --gap，卡片宽度全站一致 */}
+      <div class="content">
+        <div class="page-head">
+          <h1 class="page-title">标签</h1>
+          <p class="page-lead">共 {tags.length} 个标签、{posts.length} 篇文章，按文章数量从多到少排列。</p>
+        </div>
 
-      {
-        tags.length === 0 ? (
-          <div class="empty">
-            <p class="empty__title">还没有标签</p>
-            <p>文章 Front-Matter 里的 tags 会自动聚合成这里的标签云。</p>
-            <p>
-              <a href="/posts/">浏览全部文章</a>
-            </p>
-          </div>
-        ) : (
-          <ul class="term-cloud">
-            {tags.map(([tag, count]) => (
-              <li>
-                <TermPill label={tag} href={`/tags/${encodeURIComponent(tag)}/`} count={count} />
-              </li>
-            ))}
-          </ul>
-        )
-      }
+        {
+          tags.length === 0 ? (
+            <div class="empty">
+              <p class="empty__title">还没有标签</p>
+              <p>文章 Front-Matter 里的 tags 会自动聚合成这里的标签云。</p>
+              <p>
+                <a href="/posts/">浏览全部文章</a>
+              </p>
+            </div>
+          ) : (
+            <ul class="term-cloud">
+              {tags.map(([tag, count]) => (
+                <li>
+                  <TermPill label={tag} href={`/tags/${encodeURIComponent(tag)}/`} count={count} />
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </div>
     </div>
   </main>
 

@@ -140,6 +140,10 @@ export async function launchChrome({ chromePath = DEFAULT_CHROME, width = 1280, 
         }
         return res.result.value;
       },
+      /** 原生 CDP 透传（截图等需要直接调协议方法的场景） */
+      send(method, params = {}) {
+        return cdp.send(method, params, sessionId);
+      },
       async close() {
         try {
           await cdp.send('Target.closeTarget', { targetId });

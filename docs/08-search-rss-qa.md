@@ -328,3 +328,90 @@ B-7 ✅ 无整站封禁        B-8 ✅ 语法合法（无非法行，有 User-ag
 | **robots.txt（task-16）** | ✅ **通过** | B-1~B-8 线上全绿，指向的 sitemap 有效、无死路径、无整站封禁 |
 
 > 验收方声明：本轮**未修改任何实现代码**；所有结论来自可复现脚本的实测输出。三处「不可信风险」（并发构建、进程退出码、网络故障）均已加固为自动检测或自动降级，不依赖人眼盯。
+
+---
+
+## 十二、v1.1-A 换肤专项复验：强调色变量「静默失效」检查（task-20）
+
+| 项 | 内容 |
+|---|---|
+| 被测部署 | `4a1e86f`（v1.1-A 换肤已推送部署；构建方 design-system 已停手） |
+| 被测对象 | **线上产物 CSS**（外链样式表 + 页面内联 `<style>` 两路都要收，只收外链会漏掉 Astro 内联的 scoped CSS） |
+| 工具 | `node scripts/qa-search/check-theme-tokens.mjs`（零依赖，只读线上） |
+| 结果 | **26 通过 / 0 不通过 / 0 无法验证 · 退出码 0** |
+| 结论 | **11 处「写范围之外」的强调色引用零静默失效；8 个区域逐条可解析到具体色值** |
+| 回归 | 同批跑 `run-all --base https://ppywww.github.io`：**58 通过 / 0 不通过**（搜索 28 · RSS 13 · sitemap+robots 17），产物指纹前后一致 |
+
+### 12.1 与 Lead reference 对表
+
+| 项 | Lead 实测 | 本次实测 | 是否一致 |
+|---|---|---|---|
+| `--color-accent` 有定义 | ✅ | ✅ 亮 `#3b4ce0` / 暗 `#8e9cff` | ✅ |
+| `--color-accent-text` 有定义 | ✅ | ✅ 亮 `#3b4ce0` / 暗 `#8e9cff` | ✅ |
+| `--color-on-accent` 有定义 | ✅ | ✅ 亮 `#fff` / 暗 `#1d1e20` | ✅ |
+| 产物 CSS 体积 | 21.15 KiB | **21.15 KiB**（外链 Footer 11.23 + 主包 9.92；另有内联 14.58 KiB） | ✅ 完全一致 |
+| `--color-accent` 使用处数 | 10 | **9**（口径差异，见 12.4） | ⚠️ 数字差 1，行为一致 |
+
+### 12.2 逐条证据：元素/选择器 → 变量 → 定义值
+
+8 个「v1.1-A 写范围之外」的引用点全部完好（`--color-accent` 亮 `#3b4ce0` / 暗 `#8e9cff`）：
+
+| 文件 | 来源 | 选择器 → 变量 | 亮 / 暗 |
+|---|---|---|---|
+| Toc.astro | 主包 | `.toc__link[…]:hover { border-left-color: var(--color-accent) }` | `#3b4ce0` / `#8e9cff` |
+| Toc.astro | 主包 | `.toc__link[…]:focus-visible { border-left-color: var(--color-accent) }` | `#3b4ce0` / `#8e9cff` |
+| TermPill.astro | 内联 `/tags/` | `.tag-pill[…][aria-current=page] { border-color: var(--color-accent) }` | `#3b4ce0` / `#8e9cff` |
+| TermPill.astro | 内联 `/tags/` | `.tag-pill[…][aria-current=page] { color: var(--color-accent-text) }` | `#3b4ce0` / `#8e9cff` |
+| search.astro | 内联 `/search/` | `.search-input[…]:focus { border-color: var(--color-accent) }` | `#3b4ce0` / `#8e9cff` |
+| search.astro | 内联 `/search/` | `.search-result__title[…] a[…]:hover { color: var(--color-accent-text) }` | `#3b4ce0` / `#8e9cff` |
+| PostLayout.astro | 主包 | `.post__copyright[…] a[…] { color: var(--color-accent-text) }` | `#3b4ce0` / `#8e9cff` |
+| ArchiveEntry.astro | 内联 `/archives/` | `.archive-item__link[…]:hover { border-left-color: var(--color-accent) }` | `#3b4ce0` / `#8e9cff` |
+| Pagination.astro | 内联 `/posts/` | `.pagination__link[…][aria-current=page] { color: var(--color-accent-text) }` | `#3b4ce0` / `#8e9cff` |
+| 404.astro | 内联 `/404.html` | `.search-input[…]:focus { border-color: var(--color-accent) }` | `#3b4ce0` / `#8e9cff` |
+| prose.css | 主包 | `.prose a { color: var(--color-accent-text) }` | `#3b4ce0` / `#8e9cff` |
+
+**定义侧（含 var() 链，证明确有值而不是空定义）**：
+
+| 变量 | 亮色定义（`:root`） | 暗色定义（`:root.dark` / `@media (prefers-color-scheme:dark) :root:not(.light)`） | 定义条数 |
+|---|---|---|---|
+| `--color-accent` | `var(--palette-indigo-600)` = `#3b4ce0` | `var(--palette-indigo-300)` = `#8e9cff` | 3 |
+| `--color-accent-text` | `var(--palette-indigo-600)` = `#3b4ce0` | `var(--palette-indigo-300)` = `#8e9cff` | 3 |
+| `--color-accent-hover` | `var(--palette-indigo-700)` = `#2f3dc4` | `var(--palette-indigo-200)` = `#a8b4ff` | 3 |
+| `--color-on-accent` | `var(--palette-white)` = `#fff` | `var(--palette-ink-950)` = `#1d1e20` | 3 |
+| `--color-focus` | `var(--palette-indigo-600)` = `#3b4ce0` | `var(--palette-indigo-300)` = `#8e9cff` | 3 |
+
+**反向验证（V-5）**：把产物 CSS 里所有 `var()` 引用逐条解析，**21 条强调色引用全部解析到具体值，零处失效**。
+
+### 12.3 对比度（客观量化，不靠肉眼）
+
+| 场景 | 换肤前 | 换肤后 | WCAG AA (4.5:1) |
+|---|---|---|---|
+| 正文链接 vs 背景 · 亮 | 6.21:1（`#3b4ce0/#fcfcfd`） | **6.37:1**（`#3b4ce0/#fff`） | ✅ |
+| 正文链接 vs 背景 · 暗 | 7.51:1（`#8e9cff/#0f1115`） | **6.63:1**（`#8e9cff/#1d1e20`） | ✅ |
+| 按钮文字 vs 强调底 · 亮 | 6.37:1 | **6.37:1** | ✅ |
+| 按钮文字 vs 强调底 · 暗 | 7.51:1 | **6.63:1** | ✅ |
+
+亮色背景由 `#fcfcfd` → `#fff`、暗色由 `#0f1115` → `#1d1e20`（PaperMod 工程参数），对比度略降但**仍全部高于 AA 门槛**。
+
+### 12.4 「10 处 vs 9 处」的口径说明（不让数字含糊过去）
+
+- 我按 **`var(--color-accent)` 精确匹配**统计，覆盖**外链 + 内联**全部 CSS：**9 处**（accent-text 8、accent-hover 2、on-accent 1、focus 1，合计 21 处）。
+- 若只看**外链**（21.15 KiB 那两个文件）：`var(--color-accent)` 仅 **4 处**；其余 5 处在页面内联 scoped CSS 里。
+- 你实测的 10 处与我的 9 处差 1，最可能是**统计口径**不同（子串计数会把 `--color-accent-text`/`-hover` 一起算进来；或统计范围只含外链/含定义行）。
+- 无论哪种口径，**行为结论一致**：三个关键变量均有有效定义，21 条引用全部可解析，无静默失效。
+
+### 12.5 视觉证据（人工复核用）
+
+- [theme-light.png](scripts/qa-search/evidence/theme-light.png)｜[theme-dark.png](scripts/qa-search/evidence/theme-dark.png)（1264×771，`snap-theme.mjs` 生成）
+- 亮色：白底 + 靛蓝导航「文章」下划线 + 靛蓝正文链接可辨识；暗色：`#1d1e20` 底 + 提亮靛蓝，两者对比清晰。
+
+### 12.6 连带回归（换肤是否带崩搜索/RSS/sitemap/robots）
+
+| 套件 | 结果 |
+|---|---|
+| 站内搜索 | 28 通过 / 0 不通过（AC-5 中文命中、深链、0 结果清空、键盘 ↑↓ 全部保持） |
+| RSS | 13 通过 / 0 不通过 |
+| sitemap + robots.txt | 17 通过 / 0 不通过 |
+| 产物指纹 | 开始 = 结束（`page_count=3`、robots 200、sitemap 22 条、搜索页 200）→ 结论未被并发部署污染 |
+
+> 未验证项沿用 §10.6（Feedly 真机、GitHub Actions 实跑、RSS draft 运行时）；「视觉是否好看」属主观评审，不在本报告的量化结论内。

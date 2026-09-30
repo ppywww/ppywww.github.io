@@ -16,7 +16,8 @@ function isCurrent(href: string): boolean {
     <a class="brand" href="/">{SITE.title}</a>
 
     <div class="site-header__nav">
-      <nav aria-label="主导航">
+      <!-- 桌面端：平铺导航；<768px：同一个元素变成汉堡下拉面板（不复制导航项，避免 DOM 与字节翻倍） -->
+      <nav id="site-menu" class="site-menu" aria-label="主导航">
         <ul class="nav">
           {
             NAV.map((item) => (
@@ -27,6 +28,8 @@ function isCurrent(href: string): boolean {
               </li>
             ))
           }
+          {/* 移动端菜单专属的搜索入口（桌面端由页头图标承担，此项在桌面端 display:none） */}
+          <li class="nav__mobile-only"><a href="/search/">搜索</a></li>
         </ul>
       </nav>
 
@@ -49,6 +52,29 @@ function isCurrent(href: string): boolean {
         </a>
 
         <ThemeToggle />
+
+        <!-- 汉堡按钮：<768px 显示，桌面端 display:none（行为与样式在桌面端完全不变） -->
+        <button
+          class="icon-btn menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-menu"
+          aria-label="导航菜单"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M4 7h16"></path>
+            <path d="M4 12h16"></path>
+            <path d="M4 17h16"></path>
+          </svg>
+        </button>
       </div>
     </div>
   </div>
@@ -107,4 +133,99 @@ function isCurrent(href: string): boolean {
       height: 44px;
     }
   }
+
+  /* ---------------------------------------------------------------------------
+     移动端汉堡菜单（<768px）
+     桌面端（≥768px）完全不变：.menu-toggle 与 .nav__mobile-only 不显示，
+     .site-menu 仍是页头内的平铺导航（下列规则全部包在媒体查询里）。
+     --------------------------------------------------------------------------- */
+  .menu-toggle { display: none; }
+  .nav__mobile-only { display: none; }
+
+  @media (max-width: 767.98px) {
+    .menu-toggle { display: inline-flex; }
+
+    /* 面板：绝对定位脱离文档流 → 关闭态零高度、不产生 CLS；
+       z-index 15：高于页头(10)与正文，低于 skip-link(20)，不遮挡焦点态 */
+    .site-menu {
+      display: none;
+      position: absolute;
+      inset-inline: 0;
+      top: 100%;
+      z-index: 15;
+      max-height: calc(100dvh - var(--header-height));
+      overflow-y: auto;
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .site-menu.is-open { display: block; }
+
+    /* 导航项改为整行可点：≥44px 触控目标 */
+    .site-menu .nav {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: var(--space-2) var(--gap);
+    }
+
+    .site-menu .nav a {
+      display: flex;
+      align-items: center;
+      min-height: 44px;
+      padding: var(--space-3) var(--space-2);
+    }
+
+    .nav__mobile-only { display: list-item; }
+  }
+
+  /* 无 JS（含脚本被拦截）：退回平铺导航 = 改动前的行为，并隐藏汉堡按钮。
+     用 @media (scripting: none) 而不是 noscript，避免在 body 里插 <style>。 */
+  @media (scripting: none) {
+    .site-menu { display: block !important; position: static; }
+    .menu-toggle { display: none !important; }
+    .nav__mobile-only { display: none; }
+  }
 </style>
+
+<script>
+  /*
+    汉堡菜单：渐进增强，minify 后约 0.6KB。只做四件事：开合 / Esc 关闭 / 点击外部关闭 / 焦点进出。
+    Astro 会把组件内的 <script> 打包成 module（defer 语义）并与同页其它脚本合并，
+    不在解析期阻塞首屏；无 JS 时由上面的 @media (scripting: none) 退回平铺导航。
+    视口变宽到 ≥768px 时不再复位状态：此时汉堡按钮 display:none（已移出无障碍树），
+    桌面导航本就常显，保留状态不会产生可见或可感知的异常。
+  */
+  (function () {
+    var btn = document.querySelector('.menu-toggle');
+    var panel = document.getElementById('site-menu');
+    if (!btn || !panel) return;
+
+    function isOpen() {
+      return btn.getAttribute('aria-expanded') === 'true';
+    }
+
+    function setOpen(open, refocus) {
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      panel.classList.toggle('is-open', open);
+      if (open) {
+        var first = panel.querySelector('a');
+        if (first) first.focus();
+      } else if (refocus) {
+        btn.focus();
+      }
+    }
+
+    btn.addEventListener('click', function () {
+      setOpen(!isOpen(), isOpen());
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && isOpen()) setOpen(false, true);
+    });
+
+    document.addEventListener('click', function (e) {
+      if (isOpen() && !panel.contains(e.target) && !btn.contains(e.target)) setOpen(false, false);
+    });
+  })();
+</script>

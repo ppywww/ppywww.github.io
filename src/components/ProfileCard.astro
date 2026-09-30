@@ -1,0 +1,33 @@
+---
+/**
+ * ProfileCard · 首页欢迎区（v1.1-B / 设计系统 06 §3）
+ *
+ * 冻结接口：<section class="profile"> → h1.profile__title（SITE.greeting）
+ *           → p.profile__lead（SITE.description）→ <SocialIcons />
+ * 默认**不放头像**（决策 D5 未拍板：昵称 + 头像，不公开真名）。
+ * 文案全部来自 consts.ts 的单点配置，本组件不硬编码任何站点名或副标题。
+ * 视觉来自换肤层 base.css，组件内只有一处必要覆盖（见 <style> 与注释）。
+ */
+import { SITE } from '../consts';
+import SocialIcons from './SocialIcons.astro';
+---
+
+<section class="profile" aria-labelledby="profile-title">
+  <h1 class="profile__title" id="profile-title">{SITE.greeting}</h1>
+  <p class="profile__lead">{SITE.description}</p>
+  <SocialIcons />
+</section>
+
+<style>
+  /*
+    UI 问题①（老板反馈）：base.css 给 .profile__lead 设了 max-width: 46ch（≈410px），
+    老板定稿的英文副标题因此被折成两行。要求「≥900px 视口单行、16px 字号不许缩小、
+    profile 块可宽于 720px 正文列、最高到 --container-width」。
+    修法：只解除这一条宽度上限 —— 文案撑满外层 .container（--container-width 1024px + 两侧 --gap），
+    字号、颜色、行高全部沿用 base.css，一个字没改。
+    窄屏（<900px）不强制 nowrap，仍随容器自然换行，避免出现横向滚动条。
+  */
+  .profile__lead {
+    max-width: none;
+  }
+</style>

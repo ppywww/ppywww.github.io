@@ -191,11 +191,16 @@
   --shadow-card: 0 1px 2px rgba(16, 18, 22, 0.05);
 
   /* ---------- 布局 ---------- */
-  /* v1.1（2026-09-30 · task-19，依 06-visual-spec §3）：--content-width 768px 指**外层内容列**（含左右 24px padding）
-     → 内层正文恒为 720px；--container-width 1072px。tokens.css 实际值在换肤 commit 时同步。 */
-  --content-width:   768px;
-  --container-width: 1072px;
-  --header-height:   56px;   /* v1.1：06-visual-spec §3 要求页头 60px，本值待换肤时同步 */
+  /* v1.1（2026-09-30 · task-19；token 命名经 Lead 二轮修正，与 tokens.css 实现对齐）
+     三个宽度是三个不同的东西，禁止混用：
+       --content-width   720px  = 正文列（.prose）—— 硬约束，被 8 个文件读取（含 prose.css / PostLayout / 404 / search / categories / works / tags），禁止改值
+       --column-width    768px  = 内容列（.content 的内层宽）；.content 实际 max-width = calc(768px + --gap×2)
+       --container-width 1024px = 导航列 / 页脚列；.container 实际 max-width = calc(1024px + --gap×2) = 1072px（--gap 24px）
+     渲染几何与 06-visual-spec §3 完全一致，仅 token 命名与 06 的文字描述不同。 */
+  --content-width:   720px;
+  --column-width:    768px;
+  --container-width: 1024px;
+  --header-height:   60px;   /* v1.1：与 06-visual-spec §3 及 tokens.css 一致（原 56px） */
 
   /* ---------- 动效 ---------- */
   --dur-fast: 120ms;
@@ -269,6 +274,25 @@ html.dark {
 **明令禁止**：作为大面积背景填充（除按钮外任何纯色块 > 40×40px）、用于正文文字、用于边框装饰、用于图标默认态、用于卡片/区块/表头底色、用于代码语法高亮的品牌色。
 
 **自检方法**：页面截图去色后，靛蓝应仍只出现在"可以点的地方"；若去色后某处失去含义，说明该处违规使用。
+
+---
+
+### 2.7 代码块底色不变式（构建期耦合 · 2026-09-30 · task-19）
+
+**不变式（硬约束）**：`src/styles/tokens.css` 的 `--color-code-bg` **必须与 `astro.config.mjs` 的 `CODE_BG` 同值，或更保守** —— **亮色端更浅、暗色端更深**。
+
+**为什么**：`astro.config.mjs` 的 Shiki transformer 以 `CODE_BG` 为基准，把**每一个**语法 token 颜色二分混合兜底到 ≥4.5:1（见该文件顶部注释与 `ensureContrast`）。若实际代码底色比 `CODE_BG` 更暗（亮色端）或更亮（暗色端），兜底就是按**错误的基准**算的 —— **对比度门禁被静默踩穿**：构建照常通过，只有 `scripts/qa-contrast/check-code-tokens.mjs` 对构建产物逐条实算才能发现。
+
+**当前取值（2026-09-30 实测）**
+
+| 主题 | `CODE_BG`（`astro.config.mjs`） | `--color-code-bg`（`tokens.css`） | 关系 | 实测对比度 |
+|---|---|---|---|---|
+| 亮色 | `#F7F8FA` | `#FFFFFF`（`--palette-white`） | **更浅** ✅ | 4.80:1 |
+| 暗色 | `#1F232B` | `#1C1D21`（`--palette-code-block`） | **更深** ✅ | 4.82:1 |
+
+> 这两条"更保守"的取值都是被实测逼出来的：亮色端 `#F5F5F5` 只有 4.40:1（不达标）；暗色端 `06-visual-spec` §1.3 的 `#2E2E33` 只有 3.87:1（不达标）。
+
+**改代码块配色时的强制流程**：同时改 `astro.config.mjs` 的 `CODE_BG` 与 `tokens.css` 的 `--color-code-bg`（**三处**：`:root` / `:root.dark` / `@media (prefers-color-scheme: dark)` 回退块）→ 重跑 `node scripts/qa-contrast/check-code-tokens.mjs` → 全绿才算完成。**只改一处 = 违规。**
 
 ---
 
@@ -364,7 +388,7 @@ html.dark {
 
 ```css
 .prose {
-  max-width: 100%;                      /* v1.1：正文列宽由外层 .content（768px − 24px×2 padding）决定 = 720px；任何视口都不放宽（PRD G2 / AC-4） */
+  max-width: var(--content-width);      /* 720px；v1.1 起 token 名与值均不变（**禁止改成 768px**：会让正文列变宽，违反 06 §3 与 PRD G2）；任何视口都不放宽（AC-4） */
   margin-inline: auto;
   font-family: var(--font-body);
   font-size: var(--fs-body);            /* 16px */
@@ -406,11 +430,12 @@ html.dark {
 ### 4.2 容器与断点
 
 ```css
-/* v1.1（2026-09-30 · task-19，依 06-visual-spec §3）：--container-width 1072px / --content-width 768px（含 padding）
-   .content 的 768px = 24px×2 padding + 720px 内层正文，正文宽度因此恒为 720px */
-.container { width: 100%; max-width: var(--container-width); margin-inline: auto; padding-inline: var(--space-4); }
-@media (min-width: 640px) { .container { padding-inline: var(--space-6); } }
-.content  { width: 100%; max-width: var(--content-width); margin-inline: auto; padding-inline: var(--space-6); }
+/* v1.1（2026-09-30 · task-19；token 命名经 Lead 二轮修正，逐行对齐 src/styles/base.css）
+   正文列 720px（--content-width，.prose）/ 内容列 768px（--column-width，.content 内层）/ 容器 1024px（--container-width）
+   下面两条 calc 即实现写法：.content 实际 816px、.container 实际 1072px（--gap 24px） */
+.container { width: 100%; max-width: calc(var(--container-width) + var(--gap) * 2); margin-inline: auto; padding-inline: var(--gap); }
+.content   { width: 100%; max-width: calc(var(--column-width) + var(--gap) * 2); margin-inline: auto; padding-inline: var(--gap); }
+.prose     { max-width: var(--content-width); }
 ```
 
 | 断点 | 范围 | 变化 |
@@ -418,9 +443,11 @@ html.dark {
 | **sm** | < 640px | 单列；容器左右 16px；顶部导航折叠为汉堡；卡片 padding 16px 20px；h2 上边距 36px；TOC 为折叠块；归档页降级为单列 |
 | **md** | 640–899px | 容器左右 24px；卡片 padding 20px 24px；h2 上边距 44px |
 | **lg** | ≥ 900px | 顶部导航完整展开；页脚两栏；归档页启用"年份脊"（sticky）；作品页网格 ≥2 列 |
-| **xl** | ≥ 1080px | 容器达 **1072px**（v1.1，原 1080px，依 06-visual-spec §3）；**正文仍锁 720px 居中**，不随视口变宽 |
+| **xl** | ≥ 1080px | 容器实际渲染 **1072px**（=`calc(var(--container-width) 1024px + var(--gap) 24px × 2)`，v1.1；原 1080px）；**正文仍锁 720px 居中**，不随视口变宽 |
 
 > CSS 媒体查询条件里**必须写字面值**（`@media (min-width: 900px)`），CSS 变量不能用于媒体查询条件；`tokens.css` 中的断点注释仅供文档与 JS 引用。
+>
+> **v1.1 注（2026-09-30 · task-19）**：上面断点表里的「容器左右 16px / 24px」是 v1.0 旧值。自 v1.1 起容器左右内边距统一随 `--gap` 走（桌面 24px、≤768px 收窄为 14px，见 06-visual-spec §3），`base.css` 中已无 640px 的 padding 媒体查询。
 
 ### 4.3 垂直节奏总表（正文区）
 
@@ -982,3 +1009,98 @@ html.dark {
 
 | 状态 | `.btn--primary` | `.btn--secondary` | `.btn--ghost` | `.icon-btn` |
 |---|---|---|---|---|
+
+---
+
+### 6.18 分享图 OG Image（v1.1 新增 · 2026-09-30 · task-19）
+
+**用途**：`og:image` / `twitter:image` 的唯一资产来源，社交平台链接预览大图。
+**补本节的原因**：该资产此前**只有实现、没有规范依据**（`public/og-default.png` 已上线，但设计系统中无任何条目描述它），属"孤儿资产"。本节把它的尺寸、配色、版式、文案来源与复验方式一次落档。
+
+**资产与生成**
+
+| 项 | 值 | 出处（实测） |
+|---|---|---|
+| 产出文件 | `public/og-default.png` | 仓库存在 |
+| 生成器 | `scripts/og-image/generate-og-image.py`（Pillow，4× 超采样后 LANCZOS 缩放） | 脚本 |
+| 尺寸 | **1200 × 630**，PNG24 | 线上证据 `scripts/qa/evidence/og-image.json`：`contentType: image/png`、`bytes: 56952`、`dimensions { 1200, 630 }` |
+| 体积上限 | **200 KB**（脚本 `--max-kb` 默认；超限打印 `[FAIL]` 并返回退出码 1） | 脚本 |
+| 引用常量 | `BaseLayout.astro`：`DEFAULT_OG_IMAGE='/og-default.png'`、`DEFAULT_OG_IMAGE_WIDTH=1200`、`DEFAULT_OG_IMAGE_HEIGHT=630` | 代码 |
+| 覆盖面 | 实测 14 条路由 **100%** 带 `og:image` 与 `twitter:image` | `check-og-image.mjs` 证据 |
+| 自定义 | 文章可传 `image` 覆盖；一旦传了自定义图，就不再输出宽高与 `image/png` 类型 | `BaseLayout.astro` |
+
+**配色（唯一来源：本文档 §2.2 原始层色板，禁止在脚本里另起一套颜色）**
+
+| 用途 | 原始层 Token | 值 |
+|---|---|---|
+| 画布底 | `--palette-paper-50` | `#FCFCFD` |
+| logomark 底 | `--palette-indigo-600` | `#3B4CE0` |
+| logomark 字形 | `--palette-paper-0` | `#FFFFFF` |
+| 站名 | `--palette-ink-900` | `#16181D` |
+| 副标题 / 域名 | `--palette-ink-600` | `#5B6270` |
+| 分隔线 / 描边 | `--palette-paper-200` | `#E3E5EA` |
+
+> **只用亮色**：社交平台的预览卡片底色普遍是白的，暗色图在浅色卡片上会显脏 —— **不提供暗色版本**。
+> **与 §2.6 的关系**：分享图里靛蓝**只出现一次**（72×72 的 logomark，与 `public/favicon.svg` 同构）。§2.6 的「限定四处」约束的是**站内 UI**；分享图是独立品牌物料，但遵守同样的「靛蓝只做点睛」精神，不得整幅铺底色。
+
+> **⚠️ v1.1 换肤后必须复核（2026-09-30 · task-19）**：站点 `tokens.css` 已切到 `06-visual-spec` §1.1 的灰阶色板（`--palette-white` / `--palette-gray-*`），而本图生成器 `TOKENS` 仍使用本文档 §2.2 的墨蓝极简色值（`#FCFCFD` / `#16181D` / `#3B4CE0`）。**两者已经不同色** —— 换肤收口时**必须**按新色板重跑 `python scripts/og-image/generate-og-image.py`，否则分享图与站点观感不一致。
+
+**版式（1200 × 630 实测常量）**
+
+| 元素 | 规格 |
+|---|---|
+| 左右安全边距 | 96px（内容宽 1008px） |
+| 顶部品牌锁定 | logomark 72×72 / 圆角 16 / 字形 `p` 46px 白色；站名 **56px bold**，与 logomark 间距 24px |
+| 右上装饰 | 72×72 / 圆角 16 的描边回声，`--palette-paper-200`、1.5px，**纯装饰** |
+| 中部副标题 | **36px** / 行高 52px（1.45），按词贪心折行后在 196–462px 带内垂直居中 |
+| 底部分隔线 | y = 510，1px，`--palette-paper-200` |
+| 底部域名 | **26px**，y = 534，`--palette-ink-600` |
+| 字体 | 系统栈 Segoe UI（缺失回落 Arial）—— **与站点「零 Web Font」策略一致，不下载任何字体** |
+
+**文案（单一来源）**
+
+- 站名 ← `SITE.title`、副标题 ← `SITE.description`，均由脚本从 `src/consts.ts` 读取，**禁止硬编码**。
+- ⚠️ **已知偏离（待修）**：底部域名 `ppywww.github.io` 目前是生成器里的**字面量**，未从 `SITE.url` 派生 —— 换域名时该处不会自动跟随。
+- 字号下限：在 1200×630 画布上站名 ≥ 56px、副标题 ≥ 36px；**图片内不出现正文小字**（缩略后必然不可读）。
+
+**无障碍**
+
+- `og:image:alt` = `${SITE.title} · ${SITE.description}`（`BaseLayout.astro` 实测实现）；自定义图可用 `imageAlt` 覆盖。
+- 必须同时输出 `og:image:width` / `og:image:height`（1200 / 630），避免平台首抓时按错误比例裁切。
+- 信息**全部由文字承载**，不靠色块；去色后仍可完整理解。
+
+**变更纪律**：改文案 → 改 `consts.ts` → 重跑 `python scripts/og-image/generate-og-image.py` → `node scripts/qa/check-og-image.mjs` 复验。**不要手改 PNG。** 若 §2.2 原始层色板变更（v1.1 换肤），本图**必须同步重出**并重跑上述复验。
+
+---
+
+### 6.19 首页个人区块 `.profile`（v1.1 修订 · 2026-09-30 · task-19）
+
+> **锚点说明**：`06-visual-spec.md` §7 引用的「§1065 `.profile-card`」出自本文档的**历史版本**（commit `b2d3236`，1082 行）的 §6.17 补充组件表；本文档现版本**已无该章节**，故按 v1.1 口径在此重新落档，避免 `ProfileCard` 组件无规范可依。
+
+**用途**：首页首屏回答「这是谁」（PRD §7.1）。
+
+**结构**
+
+```html
+<section class="profile" aria-labelledby="profile-greeting">
+  <h1 class="profile__greeting" id="profile-greeting">👋 Welcome to ppy-Blog</h1>
+  <p class="profile__intro">Hi, this is ppy. I’m documenting my learning notes in this blog since 2026.</p>
+  <div class="profile__social"><!-- 社交图标行，见 06-visual-spec §4 --></div>
+</section>
+```
+
+**尺寸（v1.1）**
+
+| 项 | 值 | 备注 |
+|---|---|---|
+| 容器 | **无边框透明块**：无背景、无圆角、无边框、无 padding | v1.1 变更；旧版 `.profile-card` 是 `--color-surface` 卡片（依赖已废弃的 `--shadow-card`） |
+| 头像 | **默认不放** | v1.1 变更，对齐参考站 welcome 区；PRD §7.1 已同步标注「本轮不做」，决策 **D5 不再阻塞** |
+| 问候 `h1` | **34px** / 1.3 / **700** | 依 `06-visual-spec.md` §2；文案为该文档 §8 默认值 `👋 Welcome to ppy-Blog`，与 B-04 的英文一句话保持一致 |
+| 一句话 | `--fs-body` 16px / `--lh-body` 1.75，**最多 2 行** | 文案取自 `SITE.description`（`consts.ts`，禁止硬编码） |
+| 上留白 / 下留白 | 24px / 48px | 依 `06-visual-spec.md` §3 |
+| 社交图标 | 3 个（GitHub · RSS · X），26×26、间距 12px、上下 `padding: 12px 0`、色 `--color-text-secondary`（hover → `--color-text`） | 依 06-visual-spec §4；**微信 / QQ / Facebook 不在列** |
+
+**无障碍**：`<section>` 用 `aria-labelledby` 指向问候 `h1`（首页唯一 `h1`）；社交图标 `<a>` 必须有 `aria-label`（平台名）+ `target="_blank" rel="noopener noreferrer me"`；区块本身**不可点**（无 overlay 热区）。
+
+**禁止**：不放头像占位灰块、不加卡片背景 / 阴影 / 毛玻璃、不写超过 2 行的自我介绍（会挤掉首屏的「最新文章」）。
+

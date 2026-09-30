@@ -91,12 +91,21 @@ a {
   margin-inline: auto;
   padding-inline: var(--gap);
 }
-/* 内容列：内容 768px + 两侧 --gap；内层正文由 .prose 锁 720px */
+/* 内容列：内容 768px + 两侧 --gap；内层正文由 .prose 锁 720px。
+   单独使用时自带左右内边距；一旦嵌在 .container 里（首页就是这种结构），
+   由下面那条规则把内边距收掉，只保留外层一层 —— 见注释。 */
 .content {
   width: 100%;
   max-width: calc(var(--column-width) + var(--gap) * 2);
   margin-inline: auto;
   padding-inline: var(--gap);
+}
+/* 消除 .container > .content 的双重内边距：
+   两层各带一个 --gap，叠加后移动端列表比页头多缩进 14px（390px 实测：卡片左边界 28px
+   vs 页头 14px）。嵌套时内层退化为纯宽度约束，左边界与页头对齐。 */
+.container > .content {
+  max-width: var(--column-width);
+  padding-inline: 0;
 }
 .main { flex: 1 0 auto; padding-block: var(--space-9) var(--space-11); }
 .prose { max-width: var(--content-width); }
@@ -263,8 +272,7 @@ body.list .site-header { background: var(--color-bg-list); }
   margin-bottom: var(--space-2);
 }
 
-/* ---------- 首页 profile 区（06 §3：透明块，无边框/背景/圆角；上 24 下 48）----------
-   B 将用 .profile 取代旧的 .hero；旧类暂时保留，避免首页在 B 落地前掉样式。 */
+/* ---------- 首页 profile 区（06 §3：透明块，无边框/背景/圆角；上 24 下 48）---------- */
 .profile { margin-block: var(--space-6) var(--space-12); }
 .profile__title {
   font-size: var(--font-size-h1);
@@ -288,10 +296,6 @@ body.list .site-header { background: var(--color-bg-list); }
   .social-icons__link:hover { color: var(--color-text); }
 }
 
-/* ---------- 旧欢迎区（B 切换后删除）---------- */
-.hero { margin-bottom: var(--space-9); }
-.hero__title { margin-bottom: var(--space-3); }
-.hero__lead { color: var(--color-text-secondary); max-width: 46ch; }
 .section-title { margin-bottom: var(--space-5); }
 
 /* ---------- 页脚（06 §3：高 60px）---------- */
@@ -320,13 +324,42 @@ body.list .site-header { background: var(--color-bg-list); }
   padding: 0; margin: -1px; overflow: hidden;
   clip-path: inset(50%); white-space: nowrap; border: 0;
 }
+/* 跳到正文（skip-link）：未聚焦时视口内**零像素、零布局占位**；
+   聚焦时完整出现在左上角、落在 sticky 页头之下（页头 60px / 移动 56px）。
+   刻意不用 opacity:0（仍占位，且只是"看不见"）与 visibility:hidden
+   （会让元素失去可聚焦性 —— 它是全站第一个可聚焦元素，必须能被 Tab 到）。 */
 .skip-link {
-  position: absolute; left: var(--space-4); top: calc(-1 * var(--space-11));
-  z-index: 20; background: var(--color-surface); color: var(--color-text);
-  border: 1px solid var(--color-border); border-radius: var(--radius-sm);
-  padding: var(--space-3) var(--space-4);
+  position: fixed;                       /* 脱离文档流，不参与布局 */
+  left: var(--gap);
+  top: 0;
+  z-index: 20;
+  width: 1px;                            /* 先收成 1×1 */
+  height: 1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  clip: rect(0, 0, 0, 0);                /* 旧式裁剪兜底（部分验收脚本按 clip 判定） */
+  clip-path: inset(50%);                 /* 新式裁剪兜底 */
+  transform: translateY(-100%);          /* 再整体移出视口上沿 */
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-radius: var(--radius-sm);
 }
-.skip-link:focus { top: var(--space-4); }
+.skip-link:focus,
+.skip-link:focus-visible {
+  width: auto;
+  height: auto;
+  min-width: 24px;                       /* Lighthouse target-size 门禁 */
+  min-height: 24px;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
+  transform: none;
+  top: calc(var(--header-height) + var(--space-3));   /* 页头之下，不重叠 */
+}
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

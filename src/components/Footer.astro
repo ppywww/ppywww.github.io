@@ -11,8 +11,9 @@ const year = new Date().getFullYear();
       {SOCIAL.map((item) => (
         <li>
           {/^https?:\/\//i.test(item.href) ? (
-            /* 站外链接：AC-12 / 决策 V9 要求 target=_blank + rel="noopener noreferrer" */
-            <a href={item.href} target="_blank" rel="noopener noreferrer">
+            /* 站外链接：AC-12 / 决策 V9 要求 target=_blank + rel="noopener noreferrer"；
+               v1.1-C 追加 "me"（IndieWeb rel-me，用于身份聚合） */
+            <a href={item.href} target="_blank" rel="noopener noreferrer me">
               {item.label}
             </a>
           ) : (

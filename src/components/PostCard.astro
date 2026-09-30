@@ -1,4 +1,15 @@
 ---
+/**
+ * PostCard · 文章卡片（首页 / 列表页 / 分类页 / 标签页共用）
+ *
+ * v1.1-C 变更（冻结接口）：
+ *  ① 整卡热区：新增铺满卡片的 overlay 链接（position:absolute; inset:0）。
+ *     它带 tabindex="-1" + aria-hidden="true"，**不进 Tab 顺序也不进无障碍树** ——
+ *     卡片里唯一可聚焦的链接仍是标题链接，屏幕阅读器只会播报一次标题。
+ *  ② 标签区 z-index 抬到 overlay 之上，标签仍然可点。
+ *  ③ 元信息分隔符「·」→「|」（与 PostMeta 口径一致）。
+ * 类名（.card / .post-card__title / .meta / .tag …）与视觉都由换肤层 base.css 提供。
+ */
 import type { CollectionEntry } from 'astro:content';
 import { formatDate } from '../lib/date';
 import { readingTime } from '../lib/reading-time';
@@ -10,22 +21,31 @@ interface Props {
 const { post } = Astro.props;
 const { title, description, date, lastmod, categories, tags, draft } = post.data;
 const minutes = readingTime(post.body ?? '');
+const href = `/posts/${post.id}/`;
 ---
 
 <li class="card post-card">
-  <h3 class="post-card__title">
-    <a href={`/posts/${post.id}/`}>{title}</a>
-  </h3>
+  {/* 整卡热区：与标题链接同址，但不参与键盘与无障碍树 */}
+  <a class="post-card__overlay" href={href} tabindex="-1" aria-hidden="true"></a>
+
+  {/*
+    标题用 <h2>（设计系统 §6.3：「首页有 <h1> 时卡片用 <h2>，不得跳级」）。
+    列表页此前是 h1 → h3，Lighthouse 的 heading-order 判为跳级（/posts/ A11y 只有 98）；
+    卡片标题尺寸由 .post-card__title 的 font-size 决定，与标签名无关，视觉零变化。
+  */}
+  <h2 class="post-card__title">
+    <a href={href}>{title}</a>
+  </h2>
   <p class="post-card__desc">{description}</p>
 
   <div class="meta">
     <time datetime={date.toISOString()}>{formatDate(date)}</time>
-    <span class="meta__sep" aria-hidden="true">·</span>
+    <span class="meta__sep" aria-hidden="true">|</span>
     <span>{minutes} 分钟</span>
-    <span class="meta__sep" aria-hidden="true">·</span>
+    <span class="meta__sep" aria-hidden="true">|</span>
     <span>{categories[0]}</span>
-    {lastmod && <><span class="meta__sep" aria-hidden="true">·</span><span>更新于 {formatDate(lastmod)}</span></>}
-    {draft && <><span class="meta__sep" aria-hidden="true">·</span><span>草稿</span></>}
+    {lastmod && <><span class="meta__sep" aria-hidden="true">|</span><span>更新于 {formatDate(lastmod)}</span></>}
+    {draft && <><span class="meta__sep" aria-hidden="true">|</span><span>草稿</span></>}
   </div>
 
   {
@@ -42,3 +62,22 @@ const minutes = readingTime(post.body ?? '');
     )
   }
 </li>
+
+<style>
+  /*
+    换肤层 base.css 已给 .card 设了 position: relative（为整卡热区预留），
+    但 overlay 本身的定位与标签的层级抬升需要卡片自己声明 —— 只有两行，其余零改动。
+  */
+  .post-card__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+  }
+
+  /* 标签必须仍在 overlay 之上，否则标签点不动 */
+  .post-card .tag-list {
+    position: relative;
+    z-index: 2;
+  }
+</style>

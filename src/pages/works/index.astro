@@ -30,32 +30,35 @@ const featuredCount = works.filter((work) => work.data.featured).length;
 
   <main class="main" id="main-content">
     <div class="container">
-      <div class="page-head">
-        <h1 class="page-title">作品</h1>
-        <p class="page-lead">
-          共 {works.length} 个项目{featuredCount > 0 && `，其中 ${featuredCount} 个精选`}。
-        </p>
-      </div>
+      {/* 内容列（换肤层 .content）：与首页同宽 —— 内容 768px + 两侧 --gap，卡片宽度全站一致 */}
+      <div class="content">
+        <div class="page-head">
+          <h1 class="page-title">作品</h1>
+          <p class="page-lead">
+            共 {works.length} 个项目{featuredCount > 0 && `，其中 ${featuredCount} 个精选`}。
+          </p>
+        </div>
 
-      {
-        works.length === 0 ? (
-          <div class="empty">
-            <p class="empty__title">还没有作品</p>
-            <p>
-              把 Markdown 放进 <code>src/content/works/</code>，这里会自动生成作品网格。
-            </p>
-            <p>
-              <a href="/">返回首页</a>
-            </p>
-          </div>
-        ) : (
-          <ul class="work-grid">
-            {works.map((work) => (
-              <WorkCard work={work} />
-            ))}
-          </ul>
-        )
-      }
+        {
+          works.length === 0 ? (
+            <div class="empty">
+              <p class="empty__title">还没有作品</p>
+              <p>
+                把 Markdown 放进 <code>src/content/works/</code>，这里会自动生成作品网格。
+              </p>
+              <p>
+                <a href="/">返回首页</a>
+              </p>
+            </div>
+          ) : (
+            <ul class="work-grid">
+              {works.map((work) => (
+                <WorkCard work={work} />
+              ))}
+            </ul>
+          )
+        }
+      </div>
     </div>
   </main>
 

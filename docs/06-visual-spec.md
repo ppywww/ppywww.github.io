@@ -199,7 +199,26 @@
 - [ ] 素材已齐，无阻塞项
 - [ ] （可选）头像：默认不放；要放的话是唯一"加了不破坏风格"的增项
 - [ ] （可选）首页问候语：默认 `👋 Welcome to ppy-Blog`，与 B-04 的英文一句话保持一致；可一句话替换
-- [ ] 修复 pwsh 沙箱 ACL，跑构建验证
+- [x] pwsh 沙箱 ACL 已修复（2026-09-30，受限模式重跑命令成功）
+- [ ] ⚠️ **本会话受限 shell 仍写不进 `personal-blog/`**（令牌为 Low 完整性；沙箱授权只落在工作区根目录及此后新建的目录，未覆盖已存在的 `personal-blog` 子树。Python 与 PowerShell 均复现 `Permission denied`）。另一个会话可以正常写入（`.astro` 18:26 / `dist` 18:39 由其它进程生成），故属**本会话授权范围**问题：需要我在本地跑构建验证时，把本会话切「完全权限」即可
+
+---
+
+## 9. 站点图标 favicon（方案 E · 2026-09-30 老板选定）
+
+| 项 | 值 |
+|---|---|
+| 方案 | **E**：头部 + 双耳方形裁切 + **1px 白描边** |
+| 源图 | ⚠️ **待落位**：目前在 `E:\DPH_Projects\_scratch\stitch-src.png`；目标位置 `personal-blog/assets/favicon/stitch-source.png`（518×717，白底，换成更好的原图后重跑脚本即可）。**复制进仓库这一步被沙箱拒绝写入，需先在实施会话切「完全权限」** |
+| 处理链路 | ① 去背（源图若已带 alpha 则跳过）→ ② 取 **alpha 包围盒的左上角正方形**（实测 `(6,8,507,509)`，即头 + 双耳）→ ③ 缩放到目标尺寸 → ④ **在该目标尺寸上**加 1px 白描边 |
+| 关键细节 | 描边必须在**目标尺寸**生成。在大图上描边再缩小，16px 下会变成亚像素而消失 |
+| 产出（`public/`） | `favicon.ico`(16/32/48 三尺寸) · `favicon-16x16.png` · `favicon-32x32.png` · `favicon-192.png` · `favicon-512.png` · `apple-touch-icon.png`(180，**不透明白底、不预圆角** —— iOS 会把透明区填黑) |
+| 参考实现 | `E:\DPH_Projects\_scratch\make_preview.py`（去背 / 裁切 / `halo()` 均已跑通，可直接改写为 `scripts/build-favicon.py`） |
+| HTML | `BaseLayout.astro`：`<link rel="icon">` 换成 ico + 16/32 png + apple-touch-icon；删除 `public/favicon.svg`（旧蓝色 P） |
+
+**选型依据**（5 方案实测对比见 `_scratch/favicon-preview.png`）：A 保留白底 → 深色标签栏里是一个白方块；B 全身抠图 → 等比缩放后只有约 11×16px，16px 下糊成一团；C 头+耳 → 可辨，但深色栏下对比度不足；D 白底板 → 醒目，但浅色栏里底板消失、且压缩角色尺寸；**E 在深浅两种标签栏下都成立，且不需要维护两套图标**。
+
+> 版权提示：史迪仔为迪士尼角色。个人站点自用；不要用于商用或周边。
 
 ---
 

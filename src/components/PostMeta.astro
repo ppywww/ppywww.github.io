@@ -23,12 +23,12 @@ const minutes = readingTime(post.body ?? '');
 
 <div class="post-meta">
   <time class="post-meta__time" datetime={date.toISOString()}>{formatDate(date)}</time>
-  <span class="post-meta__sep" aria-hidden="true">·</span>
+  <span class="post-meta__sep" aria-hidden="true">|</span>
   <span>{minutes} 分钟</span>
   {
     category && (
       <>
-        <span class="post-meta__sep" aria-hidden="true">·</span>
+        <span class="post-meta__sep" aria-hidden="true">|</span>
         <a class="post-meta__link" href={`/categories/${encodeURIComponent(category)}/`}>{category}</a>
       </>
     )
@@ -36,7 +36,7 @@ const minutes = readingTime(post.body ?? '');
   {
     tags.length > 0 && (
       <>
-        <span class="post-meta__sep" aria-hidden="true">·</span>
+        <span class="post-meta__sep" aria-hidden="true">|</span>
         <ul class="post-meta__tags">
           {tags.map((tag) => (
             <li>

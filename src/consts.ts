@@ -7,6 +7,11 @@ export const SITE = {
   /** 站点名（决策 B-02 已锁定） */
   title: 'ppy-Blog',
   /**
+   * 首页问候语（v1.1-B 冻结接口）：首页 <h1> 用它，不再拿站名当 h1。
+   * 站名仍然出现在页头品牌、页脚、<title>、RSS 标题里。
+   */
+  greeting: '👋 Welcome to ppy-Blog',
+  /**
    * 站点副标题 —— 老板 2026-09-30 定稿（含弯引号 ’，请勿改成直引号）。
    * 单点配置：<meta description> / OG / Twitter Card / RSS description / 首页欢迎卡
    * 全部引用本字段，禁止在任何页面硬编码这段文案。

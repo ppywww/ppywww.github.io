@@ -214,7 +214,28 @@ export async function run(opts = {}) {
     for (const d of scanned.defs) defs.push(Object.assign({ sheet: sheet.url }, d));
     for (const r of scanned.refs) refs.push(Object.assign({ sheet: sheet.url }, r));
   }
-  rep.note('V-2', 'CSS 规模', '自定义属性定义 ' + defs.length + ' 条 · var() 引用 ' + refs.length + ' 处');
+  const externalCssBytes = sheets
+    .filter((s) => !s.url.startsWith('inline:'))
+    .reduce((n, s) => n + Buffer.byteLength(s.css, 'utf8'), 0);
+  const inlineCssBytes = sheets
+    .filter((s) => s.url.startsWith('inline:'))
+    .reduce((n, s) => n + Buffer.byteLength(s.css, 'utf8'), 0);
+  rep.note(
+    'V-2',
+    'CSS 规模',
+    '自定义属性定义 ' + defs.length + ' 条 · var() 引用 ' + refs.length + ' 处 · 外链 CSS 合计 ' +
+      (externalCssBytes / 1024).toFixed(2) + ' KiB · 内联 CSS 合计 ' + (inlineCssBytes / 1024).toFixed(2) + ' KiB',
+  );
+
+  // ---- 按变量统计使用处数（便于与人工实测对表）----
+  const perVar = {};
+  for (const r of refs) perVar[r.name] = (perVar[r.name] || 0) + 1;
+  rep.note(
+    'V-2b',
+    '强调色变量使用处数（按变量）',
+    ACCENT_VARS.map((n) => n.replace('--color-', '') + '=' + (perVar[n] || 0)).join(' · ') +
+      ' · 定义条数：' + ACCENT_VARS.map((n) => n.replace('--color-', '') + '=' + defs.filter((d) => d.name === n).length).join('/'),
+  );
 
   // ---- ① 关键变量是否有有效定义（亮/暗两套）----
   for (const name of ACCENT_VARS) {
