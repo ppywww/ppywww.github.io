@@ -1,7 +1,7 @@
 // scripts/qa/lib/link-status.js
-// 在浏览器上下文里逐个 GET 站内链接，记录最终状态码（占位符 __URLS__ 由调用方替换）。
+// 在浏览器上下文里逐个 GET 站内链接，记录最终状态码（URL 数组由调用方注入）。
 (async () => {
-  const urls = __URLS__;
+  const urls = __URLS_JSON__;
   const out = [];
   for (const u of urls) {
     try {

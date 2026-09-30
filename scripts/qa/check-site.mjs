@@ -41,7 +41,7 @@ async function inspect(cdp, url, opts) {
     await cdp.send("Network.enable", {}, sessionId);
     if (o.media) await cdp.send("Emulation.setEmulatedMedia", { features: [{ name: "prefers-color-scheme", value: o.media }] }, sessionId);
     await cdp.send("Emulation.setDeviceMetricsOverride", { width: width, height: height, deviceScaleFactor: 1, mobile: mobile }, sessionId);
-    if (o.seedStorage) await cdp.send("Page.addScriptToEvaluateOnNewDocument", { source: SEED_THEME.replace("__THEME__", JSON.stringify(o.seedStorage)) }, sessionId);
+    if (o.seedStorage) await cdp.send("Page.addScriptToEvaluateOnNewDocument", { source: SEED_THEME.replace("__THEME_VALUE__", JSON.stringify(o.seedStorage)) }, sessionId);
     await cdp.send("Page.addScriptToEvaluateOnNewDocument", { source: OBSERVER }, sessionId);
     const loaded = cdp.waitFor("Page.loadEventFired", 45000, sessionId);
     await cdp.send("Page.navigate", { url: url }, sessionId);
@@ -119,7 +119,7 @@ async function linkStatuses(cdp, urls) {
     const loaded = cdp.waitFor("Page.loadEventFired", 45000, sessionId);
     await cdp.send("Page.navigate", { url: ORIGIN + "/" }, sessionId);
     await loaded.catch(() => {});
-    const r = await cdp.send("Runtime.evaluate", { expression: LINK_EXPR.replace("__URLS__", JSON.stringify(urls)), returnByValue: true, awaitPromise: true }, sessionId);
+    const r = await cdp.send("Runtime.evaluate", { expression: LINK_EXPR.replace("__URLS_JSON__", JSON.stringify(urls)), returnByValue: true, awaitPromise: true }, sessionId);
     if (r.exceptionDetails) {
       console.error("link-status 注入异常: " + JSON.stringify(r.exceptionDetails).slice(0, 500));
       return [];

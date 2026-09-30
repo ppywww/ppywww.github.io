@@ -1,0 +1,7 @@
+{
+  "generatedAt": "2026-09-30T09:05:07.807Z",
+  "origin": "https://ppywww.github.io",
+  "links": [],
+  "notFoundPage": null,
+  "error": "Error: 注入异常: {\"exceptionId\":1,\"text\":\"Uncaught (in promise) ReferenceError: __URLS__ is not defined\",\"lineNumber\":4,\"columnNumber\":16,\"scriptId\":\"5\",\"stackTrace\":{\"callFrames\":[{\"functionName\":\"\",\"scriptId\":\"5\",\"url\":\"\",\"lineNumber\":3,\"columnNumber\":15},{\"functionName\":\"\",\"scriptId\":\"5\",\"url\":\"\",\"lineNumber\":14,\n    at main (file:///E:/DPH_Projects/personal-blog/scripts/qa/check-links.mjs:43:35)"
+}

@@ -39,7 +39,7 @@ async function main() {
     await cdp.send("Page.navigate", { url: ORIGIN + "/" }, sid);
     await loaded.catch(() => {});
     const urls = URLS.map((u) => ORIGIN + u);
-    const r = await cdp.send("Runtime.evaluate", { expression: LINK_EXPR.replace("__URLS__", JSON.stringify(urls)), returnByValue: true, awaitPromise: true }, sid);
+    const r = await cdp.send("Runtime.evaluate", { expression: LINK_EXPR.replace("__URLS_JSON__", JSON.stringify(urls)), returnByValue: true, awaitPromise: true }, sid);
     if (r.exceptionDetails) throw new Error("注入异常: " + JSON.stringify(r.exceptionDetails).slice(0, 300));
     result.links = (r.result.value || []).map((x) => ({ path: x.url.replace(ORIGIN, "") || "/", status: x.status, finalUrl: x.finalUrl, err: x.err || null }));
     await cdp.send("Page.navigate", { url: ORIGIN + "/this-page-does-not-exist-xyz/" }, sid);

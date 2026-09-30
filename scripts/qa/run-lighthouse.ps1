@@ -13,7 +13,8 @@ $out = Join-Path $PSScriptRoot 'evidence'
 New-Item -ItemType Directory -Path $out -Force | Out-Null
 $targets = @(
   @{ name = 'lh-home'; url = 'https://ppywww.github.io/' },
-  @{ name = 'lh-post'; url = 'https://ppywww.github.io/posts/2026-09-30-build-this-blog/' }
+  @{ name = 'lh-post'; url = 'https://ppywww.github.io/posts/2026-09-30-build-this-blog/' },
+  @{ name = 'lh-search'; url = 'https://ppywww.github.io/search/' }
 )
 foreach ($t in $targets) {
   $json = Join-Path $out ($t.name + '.json')

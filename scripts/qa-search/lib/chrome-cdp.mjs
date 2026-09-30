@@ -15,6 +15,22 @@ function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
+/** 临时目录：某些受限环境里 process.env 为空，os.tmpdir() 会返回 undefined，故多级兜底 */
+function tempRoot() {
+  const candidates = [process.env.TEMP, process.env.TMP, process.env.TMPDIR];
+  try {
+    candidates.push(os.tmpdir());
+  } catch {
+    /* 忽略 */
+  }
+  for (const c of candidates) {
+    if (c && fs.existsSync(c)) return c;
+  }
+  const fallback = path.join(process.cwd(), '.qa-tmp');
+  fs.mkdirSync(fallback, { recursive: true });
+  return fallback;
+}
+
 /** 等待 Chrome 写出 DevToolsActivePort（内含实际调试端口） */
 async function waitForPort(userDataDir, timeoutMs) {
   const file = path.join(userDataDir, 'DevToolsActivePort');
@@ -72,7 +88,7 @@ class Cdp {
  */
 export async function launchChrome({ chromePath = DEFAULT_CHROME, width = 1280, height = 900 } = {}) {
   if (!fs.existsSync(chromePath)) throw new Error('找不到 Chrome：' + chromePath);
-  const userDataDir = fs.mkdtempSync(path.join(os.tmpdir(), 'qa-chrome-'));
+  const userDataDir = fs.mkdtempSync(path.join(tempRoot(), 'qa-chrome-'));
   const child = spawn(
     chromePath,
     [

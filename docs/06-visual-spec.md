@@ -12,7 +12,7 @@
 
 ## 0. 一句话
 
-全站换成 PaperMod 的**纯灰阶体系（删除强调色）**，布局 / 间距 / 圆角 / 字号逐值对齐；中文排版只保留**正文行高 1.75** 一项偏离；社交入口 = **GitHub · RSS · X · Facebook**。
+全站换成 PaperMod 的**纯灰阶体系（删除强调色）**，布局 / 间距 / 圆角 / 字号逐值对齐；中文排版只保留**正文行高 1.75** 一项偏离；社交入口 = **GitHub · RSS · X**（3 个）。
 
 ---
 
@@ -127,7 +127,17 @@
 
 ## 4. 社交图标行
 
-**4 个图标，顺序：GitHub · RSS · X · Facebook**（能正常访问的两个在前，大陆需代理的两个在后）。
+**3 个图标，顺序：GitHub · RSS · X**（能正常访问的两个在前；X 在大陆需代理，放最后）。
+
+最终数据（`consts.ts` 的 `SOCIAL`）：
+
+`@ts
+{ label: 'GitHub', href: 'https://github.com/ppywww', icon: 'github' }
+{ label: 'RSS',    href: '/rss.xml',                  icon: 'rss'    }
+{ label: 'X',      href: 'https://x.com/ppy00111404', icon: 'x'      }
+`@
+
+**已剔除**：微信 / QQ（老板决定不做）· Facebook（2026-09-30 撤除 —— 该链接会跳转到 `facebook.com/people/<真名>/pfbid…`，暴露姓名，与 `00-decision-log.md` D5「不公开真名」冲突）。
 
 | 项 | 值 |
 |---|---|
@@ -137,11 +147,11 @@
 | 颜色 | `--color-text-secondary`（hover → `--color-text`） |
 | 图标风格 | **实心官方 mark**（Simple Icons 单路径，内联 SVG，不引图标库） |
 | 链接属性 | `target="_blank" rel="noopener noreferrer me"` + `aria-label`（平台名） |
-| 数据结构 | **不变**：`{ label, href, icon }`（微信/QQ 移除后无需扩展类型） |
+| 数据结构 | **不变**：`{ label, href, icon }`（微信 / QQ / Facebook 均不在列，无需扩展类型） |
 
 **关于描边 vs 实心**：原站用 `stroke-width: 2 / fill: none` 的描边风格，但 **X 的 logo 只有实心字形**，混用比统一实心更伤观感 —— 故统一实心，靠灰色把视觉重量压下来。尺寸/间距/颜色/位置四项与原站完全一致。
 
-**待补素材**：X handle、Facebook 主页 URL。RSS 指向 `/rss.xml`。
+**素材已齐**：X = `https://x.com/ppy00111404`（2026-09-30 实测 200，显示名 `ppy001`，无隐私风险）；RSS 指向 `/rss.xml`。
 
 ---
 
@@ -185,7 +195,8 @@
 ## 8. 待办清单
 
 - [ ] 老板确认本方案
-- [ ] 提供 X handle、Facebook 主页 URL
+- [x] 社交素材已确认：X = `https://x.com/ppy00111404`；**不含 Facebook**（撤除，理由见 §4）
+- [ ] 素材已齐，无阻塞项
 - [ ] （可选）头像：默认不放；要放的话是唯一"加了不破坏风格"的增项
 - [ ] （可选）首页问候语：默认 `👋 Welcome to ppy-Blog`，与 B-04 的英文一句话保持一致；可一句话替换
 - [ ] 修复 pwsh 沙箱 ACL，跑构建验证

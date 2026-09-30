@@ -89,6 +89,13 @@ export async function serveDist({ distDir, port = 0, extraRoutes = {} }) {
     origin: 'http://127.0.0.1:' + actualPort,
     port: actualPort,
     requests,
-    close: () => new Promise((resolve) => server.close(() => resolve())),
+    close: () =>
+      new Promise((resolve) => {
+        // Chrome 的 keep-alive 连接会让 server.close() 永远不回调 → 必须主动断开
+        if (typeof server.closeAllConnections === 'function') server.closeAllConnections();
+        server.close(() => resolve());
+        // 双保险：1s 后仍未关掉也放行，避免脚本挂死
+        setTimeout(resolve, 1000).unref();
+      }),
   };
 }
