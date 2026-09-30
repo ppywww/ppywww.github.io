@@ -29,7 +29,70 @@ function isCurrent(href: string): boolean {
           }
         </ul>
       </nav>
-      <ThemeToggle />
+
+      <div class="site-header__actions">
+        <!-- 搜索入口（设计系统 §6.1）：Alt+/ 快捷键属 P1（F-18），MVP 不实现，故 aria-label 不承诺快捷键 -->
+        <a class="icon-btn" href="/search/" aria-label="站内搜索" title="站内搜索">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="m20 20-3.6-3.6"></path>
+          </svg>
+        </a>
+
+        <ThemeToggle />
+      </div>
     </div>
   </div>
 </header>
+
+<style>
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  /* 图标按钮：视觉 36×36，图标 18×18（设计系统 §6.0 / §6.14） */
+  .icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .icon-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .icon-btn:hover {
+      color: var(--color-text);
+      background: var(--color-surface-2);
+    }
+  }
+
+  .icon-btn:active {
+    background: var(--color-surface-2);
+  }
+
+  /* 触控命中区 ≥44×44（§6.0） */
+  @media (pointer: coarse) {
+    .icon-btn {
+      width: 44px;
+      height: 44px;
+    }
+  }
+</style>

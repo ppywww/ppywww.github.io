@@ -1,0 +1,429 @@
+---
+/**
+ * 站内搜索 —— /search/（PRD §7.5 / F-05 / 设计系统 §6.16）
+ *
+ * 索引：Pagefind（构建后执行 pagefind --site dist 生成 dist/pagefind/）。
+ * UI：**自建结果列表 DOM**，直接调 Pagefind 的 JS API —— 而不是用 @pagefind/default-ui。
+ *     理由（设计系统 §6.16 的落地建议）：默认 UI 自带一套 DOM 与 CSS 变量，无法 100% 对齐
+ *     本项目的语义 token 与 §6.16 的尺寸/状态规范；自建 DOM 才能做到「样式只用 --color-* 等 token」。
+ *
+ * 无障碍（§6.16）：结果计数用 role="status" aria-live="polite"（不给整个列表加 aria-live，
+ * 否则每次输入都会朗读全文）；输入框有 visually-hidden 的 label；Esc 清空；↑/↓ 在结果间移动焦点。
+ * 交互（PRD §9）：输入 200ms 防抖；无 JS 时表单仍可 GET 提交，查询词由服务端渲染回输入框。
+ *
+ * 本页 noindex：搜索结果是工具页，不进搜索引擎索引（也因此不写进 sitemap.xml）。
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../consts';
+
+/** 无 JS / 刷新场景：把 ?q= 回填到输入框，查询词不丢 */
+const initialQuery = Astro.url.searchParams.get('q') ?? '';
+---
+
+<BaseLayout
+  title="搜索"
+  description={`在 ${SITE.title} 内检索文章的标题、正文与标签。`}
+  noindex
+>
+  <Header />
+
+  <main class="main" id="main-content">
+    {/* data-pagefind-ignore：搜索页自身不进索引，避免"搜到自己" */}
+    <div class="container search" data-pagefind-ignore>
+      <div class="page-head">
+        <p class="page-eyebrow">搜索</p>
+        <h1 class="page-title">站内搜索</h1>
+        <p class="page-lead">输入关键词，检索全站文章的标题与正文。</p>
+      </div>
+
+      <form class="search-form" role="search" action="/search/" method="get">
+        <label class="visually-hidden" for="search-input">搜索关键词</label>
+        <input
+          class="search-input"
+          id="search-input"
+          type="search"
+          name="q"
+          value={initialQuery}
+          placeholder="输入关键词…"
+          autocomplete="off"
+          spellcheck="false"
+          autofocus
+        />
+      </form>
+
+      <p class="search-status" id="search-status" role="status" aria-live="polite"></p>
+
+      <ul class="search-results" id="search-results" role="list"></ul>
+
+      <div class="search-empty" id="search-empty">
+        <p class="search-empty__title" id="search-empty-title">输入关键词开始搜索</p>
+        <p class="search-empty__hint" id="search-empty-hint">
+          可以搜标题、正文与标签，例如「性能优化」「Astro」。
+        </p>
+        <p class="search-empty__actions" id="search-empty-actions" hidden>
+          <a class="btn" href="/posts/">浏览全部文章</a>
+          <a class="btn" href="/tags/">按标签找</a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  (function () {
+    var input = document.getElementById('search-input');
+    var form = document.querySelector('.search-form');
+    var statusEl = document.getElementById('search-status');
+    var listEl = document.getElementById('search-results');
+    var emptyEl = document.getElementById('search-empty');
+    var emptyTitle = document.getElementById('search-empty-title');
+    var emptyHint = document.getElementById('search-empty-hint');
+    var emptyActions = document.getElementById('search-empty-actions');
+    if (!input || !form || !statusEl || !listEl || !emptyEl) return;
+
+    var DEFAULT_EMPTY = {
+      title: '输入关键词开始搜索',
+      hint: '可以搜标题、正文与标签，例如「性能优化」「Astro」。',
+      actions: false,
+    };
+    var NO_RESULT = {
+      title: '没有找到匹配的内容',
+      hint: '试试更短的关键词，或者换一个说法。',
+      actions: true,
+    };
+
+    var engine = null;
+    var engineFailed = false;
+    var seq = 0; // 竞态保护：只渲染最后一次查询的结果
+    var timer = 0;
+    var DEBOUNCE_MS = 200;
+
+    function setEmpty(state) {
+      if (!state) {
+        emptyEl.hidden = true;
+        return;
+      }
+      emptyTitle.textContent = state.title;
+      emptyHint.textContent = state.hint;
+      emptyActions.hidden = !state.actions;
+      emptyEl.hidden = false;
+    }
+
+    /** 懒加载 Pagefind 模块；dev 模式或索引缺失时返回 null，由调用方给友好提示 */
+    function getEngine() {
+      if (engine || engineFailed) return Promise.resolve(engine);
+      // 变量形式 + @vite-ignore：pagefind 产物只在构建后的 dist 里，构建期的 public/ 中不存在，
+      // 写成字面量的话 Vite 会在构建时尝试解析并报错。
+      var url = '/pagefind/pagefind.js';
+      return import(/* @vite-ignore */ url)
+        .then(function (mod) {
+          engine = mod;
+          return engine;
+        })
+        .catch(function () {
+          engineFailed = true;
+          return null;
+        });
+    }
+
+    /** 结果里的日期直接从 URL 反推（本站文章 URL 形态固定为 /posts/YYYY-MM-DD-slug/） */
+    function dateFromUrl(url) {
+      var m = /\/(\d{4}-\d{2}-\d{2})-/.exec(url || '');
+      return m ? m[1] : '';
+    }
+
+    function renderResults(items) {
+      var frag = document.createDocumentFragment();
+      items.forEach(function (item) {
+        var li = document.createElement('li');
+        li.className = 'search-result';
+
+        var title = document.createElement('h2');
+        title.className = 'search-result__title';
+        var link = document.createElement('a');
+        link.href = item.url;
+        link.textContent = (item.meta && item.meta.title) || item.url;
+        title.appendChild(link);
+        li.appendChild(title);
+
+        if (item.excerpt) {
+          var excerpt = document.createElement('p');
+          excerpt.className = 'search-result__excerpt';
+          // Pagefind 的摘要是 HTML 片段，只含 <mark> 高亮；这里只放行 mark，其余标签一律剥离
+          excerpt.innerHTML = String(item.excerpt).replace(/<(?!\/?mark\b)[^>]*>/gi, '');
+          li.appendChild(excerpt);
+        }
+
+        var date = dateFromUrl(item.url);
+        if (date) {
+          var meta = document.createElement('p');
+          meta.className = 'search-result__meta';
+          var time = document.createElement('time');
+          time.dateTime = date;
+          time.textContent = date;
+          meta.appendChild(time);
+          li.appendChild(meta);
+        }
+
+        frag.appendChild(li);
+      });
+      listEl.replaceChildren(frag);
+    }
+
+    function run(query) {
+      var q = String(query || '').trim();
+      var mySeq = ++seq;
+
+      if (!q) {
+        statusEl.textContent = '';
+        listEl.replaceChildren();
+        setEmpty(DEFAULT_EMPTY);
+        return;
+      }
+
+      setEmpty(null);
+      statusEl.textContent = '搜索中…';
+
+      getEngine().then(function (pf) {
+        if (mySeq !== seq) return;
+        if (!pf) {
+          statusEl.textContent = '';
+          setEmpty({
+            title: '搜索索引还没就绪',
+            hint: '本地开发时需要先执行一次 npm run build，生成 dist/pagefind 索引后再试。',
+            actions: true,
+          });
+          return;
+        }
+        return pf
+          .search(q)
+          .then(function (search) {
+            return Promise.all(
+              search.results.slice(0, 20).map(function (r) {
+                return r.data();
+              }),
+            );
+          })
+          .then(function (items) {
+            if (mySeq !== seq) return;
+            if (!items.length) {
+              statusEl.textContent = '找到 0 条结果';
+              setEmpty(NO_RESULT);
+              return;
+            }
+            statusEl.textContent = '找到 ' + items.length + ' 条结果';
+            renderResults(items);
+          })
+          .catch(function () {
+            if (mySeq !== seq) return;
+            statusEl.textContent = '';
+            setEmpty({ title: '搜索出错了', hint: '请刷新页面后重试。', actions: false });
+          });
+      });
+    }
+
+    function debouncedRun() {
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        run(input.value);
+      }, DEBOUNCE_MS);
+    }
+
+    input.addEventListener('input', debouncedRun);
+
+    form.addEventListener('submit', function (event) {
+      // 有 JS 时不刷新页面；无 JS 时表单会 GET 到 /search/?q=…（查询词由服务端渲染回填）
+      event.preventDefault();
+      clearTimeout(timer);
+      run(input.value);
+    });
+
+    input.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        input.value = '';
+        clearTimeout(timer);
+        run('');
+        return;
+      }
+      if (event.key === 'ArrowDown') {
+        var first = listEl.querySelector('a');
+        if (first) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    });
+
+    // ↑/↓ 在结果链接之间移动焦点（普通链接列表 + 焦点移动，不用 combobox/listbox 模式）
+    listEl.addEventListener('keydown', function (event) {
+      if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
+      var links = Array.prototype.slice.call(listEl.querySelectorAll('.search-result__title a'));
+      var index = links.indexOf(document.activeElement);
+      if (index === -1) return;
+      event.preventDefault();
+      var next = event.key === 'ArrowDown' ? Math.min(index + 1, links.length - 1) : Math.max(index - 1, 0);
+      links[next].focus();
+    });
+
+    if (input.value.trim()) {
+      run(input.value);
+    } else {
+      setEmpty(DEFAULT_EMPTY);
+    }
+  })();
+</script>
+
+<style>
+  .page-head {
+    margin-bottom: var(--space-6);
+  }
+
+  .page-eyebrow {
+    margin-bottom: var(--space-2);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+  }
+
+  .page-title {
+    margin-bottom: var(--space-3);
+  }
+
+  .page-lead {
+    color: var(--color-text-secondary);
+  }
+
+  /* ---------- 输入框（设计系统 §6.17 .search-input）---------- */
+  .search-form {
+    margin-bottom: var(--space-6);
+  }
+
+  .search-input {
+    width: 100%;
+    max-width: var(--content-width);
+    height: 40px;
+    padding-inline: var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-2);
+    color: var(--color-text);
+    font-family: inherit;
+    font-size: var(--font-size-sm);
+  }
+
+  .search-input::placeholder {
+    color: var(--color-text-secondary);
+  }
+
+  .search-input:focus {
+    border-color: var(--color-accent);
+  }
+
+  /* ---------- 结果计数（唯一允许 aria-live 的地方）---------- */
+  .search-status {
+    margin-bottom: var(--space-3);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+  }
+
+  .search-status:empty {
+    margin-bottom: 0;
+  }
+
+  /* ---------- 结果列表（§6.16）---------- */
+  .search-results {
+    max-width: var(--content-width);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .search-result {
+    padding: var(--space-4) 0;
+  }
+
+  .search-result + .search-result {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .search-result__title {
+    margin-bottom: var(--space-2);
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-h3);
+  }
+
+  .search-result__title a {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .search-result__title a:hover {
+      color: var(--color-accent-text);
+      text-decoration: underline;
+    }
+  }
+
+  .search-result__excerpt {
+    margin-bottom: var(--space-2);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-body);
+  }
+
+  /* 覆盖浏览器默认的黄色 mark（§6.16） */
+  .search-result__excerpt :global(mark) {
+    padding: 0 2px;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-2);
+    color: var(--color-text);
+  }
+
+  .search-result__meta {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+  }
+
+  .search-result__meta time {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- 空态（§6.17 .empty-state）---------- */
+  .search-empty {
+    max-width: var(--content-width);
+    padding-block: var(--space-11);
+    text-align: center;
+  }
+
+  .search-empty[hidden] {
+    display: none;
+  }
+
+  .search-empty__title {
+    margin-bottom: var(--space-2);
+    color: var(--color-text);
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-h3);
+  }
+
+  .search-empty__hint {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+  }
+
+  .search-empty__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+  }
+
+  .search-empty__actions[hidden] {
+    display: none;
+  }
+</style>

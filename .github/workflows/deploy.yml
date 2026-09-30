@@ -31,10 +31,18 @@ jobs:
 
       # withastro/action 自动完成：装依赖 → 构建 → configure-pages → upload-pages-artifact
       # 包管理器按仓库内的 lockfile 自动识别（本项目为 package-lock.json → npm）
+      #
+      # ⚠️ 搜索索引（Pagefind）就在 npm run build 里：
+      #     "build": "astro build && pagefind --site dist --exclude-selectors \".notfound\""
+      #     （--exclude-selectors 用于把 404 页正文排除出索引；Pagefind 不支持 glob 取反）
+      #     所以 CI 与本地是同一条命令，dist/pagefind/ 会随产物一起上传。
+      #     Pagefind 的平台二进制来自 optionalDependencies（lockfile 已含 linux-x64），npm ci 可正常安装。
+      #     这里显式写出 build-cmd（默认值也是它），让 Actions 日志里能看到实际执行的命令。
       - name: Install, build, and upload site
         uses: withastro/action@v6
         with:
           node-version: 24
+          build-cmd: npm run build
           # path: .   # Astro 项目就在仓库根目录，无需指定
 
   deploy:
