@@ -155,11 +155,15 @@ const jsonLdText = JSON.stringify(structuredData).replace(/</g, '\\u003c');
     <meta name="twitter:image:alt" content={ogImageAlt} />
 
     <!--
-      浏览器地址栏配色。<meta> 无法引用 CSS 变量，故此处色值与 tokens.css
-      的 --color-bg 亮/暗值同步（改配色时记得一起改）。
+      ⚠️ 浏览器地址栏 / 状态栏配色 —— 这两个色值**必须与 src/styles/tokens.css 的 --color-bg 保持同值**：
+        · 亮色 --color-bg = var(--palette-white)   = #FFFFFF
+        · 暗色 --color-bg = var(--palette-ink-950) = #1D1E20
+      <meta> 引用不了 CSS 变量，只能写字面量，所以这里是全站唯一「换肤时会漏掉」的地方：
+      改 tokens.css 的 --color-bg 时务必同步改这两行，否则移动端地址栏会与页面底色不一致。
+      结构保持两个 media 分开写（只跟随系统配色，不跟随站内手动切换 —— 与设计系统 §7.6 一致）。
     -->
-    <meta name="theme-color" content="#FCFCFD" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0F1115" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1D1E20" media="(prefers-color-scheme: dark)" />
 
     <script type="application/ld+json" set:html={jsonLdText}></script>
   </head>

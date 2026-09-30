@@ -1,0 +1,412 @@
+{
+  "url": "https://ppywww.github.io/",
+  "generatedAt": "2026-09-30T11:55:25.187Z",
+  "cases": [
+    {
+      "viewport": 1440,
+      "content": {
+        "left": 328.5,
+        "right": 1096.5,
+        "width": 768,
+        "top": 121,
+        "height": 898.36
+      },
+      "container": {
+        "left": 176.5,
+        "right": 1248.5,
+        "width": 1072,
+        "top": 0,
+        "height": 60
+      },
+      "profile": {
+        "left": 328.5,
+        "right": 1096.5,
+        "width": 768,
+        "top": 121,
+        "height": 142.19
+      },
+      "profileTitle": {
+        "left": 328.5,
+        "right": 1096.5,
+        "width": 768,
+        "top": 121,
+        "height": 44.19
+      },
+      "firstCard": {
+        "left": 328.5,
+        "right": 1096.5,
+        "width": 768,
+        "top": 365.98,
+        "height": 216.72
+      },
+      "sectionTitle": {
+        "left": 328.5,
+        "right": 1096.5,
+        "width": 768,
+        "top": 311.19,
+        "height": 34.8
+      },
+      "lead": {
+        "left": 328.5,
+        "right": 1096.5,
+        "width": 768,
+        "top": 177.19,
+        "height": 28
+      },
+      "leadLines": 1,
+      "leadLineBoxes": [
+        {
+          "top": 180.2,
+          "width": 518.9
+        }
+      ],
+      "leadFontSize": "16px",
+      "leadLineHeight": "28px",
+      "leadWhiteSpace": "normal",
+      "leadMaxWidth": "none",
+      "leadTextLength": 75,
+      "alignDelta": 0,
+      "scrollWidth": 1425,
+      "clientWidth": 1440
+    },
+    {
+      "viewport": 1024,
+      "content": {
+        "left": 120.5,
+        "right": 888.5,
+        "width": 768,
+        "top": 121,
+        "height": 898.36
+      },
+      "container": {
+        "left": 0,
+        "right": 1009,
+        "width": 1009,
+        "top": 0,
+        "height": 60
+      },
+      "profile": {
+        "left": 120.5,
+        "right": 888.5,
+        "width": 768,
+        "top": 121,
+        "height": 142.19
+      },
+      "profileTitle": {
+        "left": 120.5,
+        "right": 888.5,
+        "width": 768,
+        "top": 121,
+        "height": 44.19
+      },
+      "firstCard": {
+        "left": 120.5,
+        "right": 888.5,
+        "width": 768,
+        "top": 365.98,
+        "height": 216.72
+      },
+      "sectionTitle": {
+        "left": 120.5,
+        "right": 888.5,
+        "width": 768,
+        "top": 311.19,
+        "height": 34.8
+      },
+      "lead": {
+        "left": 120.5,
+        "right": 888.5,
+        "width": 768,
+        "top": 177.19,
+        "height": 28
+      },
+      "leadLines": 1,
+      "leadLineBoxes": [
+        {
+          "top": 180.2,
+          "width": 518.9
+        }
+      ],
+      "leadFontSize": "16px",
+      "leadLineHeight": "28px",
+      "leadWhiteSpace": "normal",
+      "leadMaxWidth": "none",
+      "leadTextLength": 75,
+      "alignDelta": 0,
+      "scrollWidth": 1009,
+      "clientWidth": 1024
+    },
+    {
+      "viewport": 900,
+      "content": {
+        "left": 58.5,
+        "right": 826.5,
+        "width": 768,
+        "top": 121,
+        "height": 898.36
+      },
+      "container": {
+        "left": 0,
+        "right": 885,
+        "width": 885,
+        "top": 0,
+        "height": 60
+      },
+      "profile": {
+        "left": 58.5,
+        "right": 826.5,
+        "width": 768,
+        "top": 121,
+        "height": 142.19
+      },
+      "profileTitle": {
+        "left": 58.5,
+        "right": 826.5,
+        "width": 768,
+        "top": 121,
+        "height": 44.19
+      },
+      "firstCard": {
+        "left": 58.5,
+        "right": 826.5,
+        "width": 768,
+        "top": 365.98,
+        "height": 216.72
+      },
+      "sectionTitle": {
+        "left": 58.5,
+        "right": 826.5,
+        "width": 768,
+        "top": 311.19,
+        "height": 34.8
+      },
+      "lead": {
+        "left": 58.5,
+        "right": 826.5,
+        "width": 768,
+        "top": 177.19,
+        "height": 28
+      },
+      "leadLines": 1,
+      "leadLineBoxes": [
+        {
+          "top": 180.2,
+          "width": 518.9
+        }
+      ],
+      "leadFontSize": "16px",
+      "leadLineHeight": "28px",
+      "leadWhiteSpace": "normal",
+      "leadMaxWidth": "none",
+      "leadTextLength": 75,
+      "alignDelta": 0,
+      "scrollWidth": 885,
+      "clientWidth": 900
+    },
+    {
+      "viewport": 768,
+      "content": {
+        "left": 14,
+        "right": 739,
+        "width": 725,
+        "top": 117,
+        "height": 818.36
+      },
+      "container": {
+        "left": 0,
+        "right": 753,
+        "width": 753,
+        "top": 0,
+        "height": 56
+      },
+      "profile": {
+        "left": 14,
+        "right": 739,
+        "width": 725,
+        "top": 117,
+        "height": 142.19
+      },
+      "profileTitle": {
+        "left": 14,
+        "right": 739,
+        "width": 725,
+        "top": 117,
+        "height": 44.19
+      },
+      "firstCard": {
+        "left": 14,
+        "right": 739,
+        "width": 725,
+        "top": 361.98,
+        "height": 196.72
+      },
+      "sectionTitle": {
+        "left": 14,
+        "right": 739,
+        "width": 725,
+        "top": 307.19,
+        "height": 34.8
+      },
+      "lead": {
+        "left": 14,
+        "right": 739,
+        "width": 725,
+        "top": 173.19,
+        "height": 28
+      },
+      "leadLines": 1,
+      "leadLineBoxes": [
+        {
+          "top": 176.2,
+          "width": 518.9
+        }
+      ],
+      "leadFontSize": "16px",
+      "leadLineHeight": "28px",
+      "leadWhiteSpace": "normal",
+      "leadMaxWidth": "none",
+      "leadTextLength": 75,
+      "alignDelta": 0,
+      "scrollWidth": 753,
+      "clientWidth": 768
+    },
+    {
+      "viewport": 640,
+      "content": {
+        "left": 14,
+        "right": 611,
+        "width": 597,
+        "top": 117,
+        "height": 863.14
+      },
+      "container": {
+        "left": 0,
+        "right": 625,
+        "width": 625,
+        "top": 0,
+        "height": 56
+      },
+      "profile": {
+        "left": 14,
+        "right": 611,
+        "width": 597,
+        "top": 117,
+        "height": 142.19
+      },
+      "profileTitle": {
+        "left": 14,
+        "right": 611,
+        "width": 597,
+        "top": 117,
+        "height": 44.19
+      },
+      "firstCard": {
+        "left": 14,
+        "right": 611,
+        "width": 597,
+        "top": 361.98,
+        "height": 196.72
+      },
+      "sectionTitle": {
+        "left": 14,
+        "right": 611,
+        "width": 597,
+        "top": 307.19,
+        "height": 34.8
+      },
+      "lead": {
+        "left": 14,
+        "right": 611,
+        "width": 597,
+        "top": 173.19,
+        "height": 28
+      },
+      "leadLines": 1,
+      "leadLineBoxes": [
+        {
+          "top": 176.2,
+          "width": 518.9
+        }
+      ],
+      "leadFontSize": "16px",
+      "leadLineHeight": "28px",
+      "leadWhiteSpace": "normal",
+      "leadMaxWidth": "none",
+      "leadTextLength": 75,
+      "alignDelta": 0,
+      "scrollWidth": 625,
+      "clientWidth": 640
+    },
+    {
+      "viewport": 480,
+      "content": {
+        "left": 14,
+        "right": 451,
+        "width": 437,
+        "top": 117,
+        "height": 953.52
+      },
+      "container": {
+        "left": 0,
+        "right": 465,
+        "width": 465,
+        "top": 0,
+        "height": 56
+      },
+      "profile": {
+        "left": 14,
+        "right": 451,
+        "width": 437,
+        "top": 117,
+        "height": 170.19
+      },
+      "profileTitle": {
+        "left": 14,
+        "right": 451,
+        "width": 437,
+        "top": 117,
+        "height": 44.19
+      },
+      "firstCard": {
+        "left": 14,
+        "right": 451,
+        "width": 437,
+        "top": 389.98,
+        "height": 227.91
+      },
+      "sectionTitle": {
+        "left": 14,
+        "right": 451,
+        "width": 437,
+        "top": 335.19,
+        "height": 34.8
+      },
+      "lead": {
+        "left": 14,
+        "right": 451,
+        "width": 437,
+        "top": 173.19,
+        "height": 56
+      },
+      "leadLines": 2,
+      "leadLineBoxes": [
+        {
+          "top": 176.2,
+          "width": 436.7
+        },
+        {
+          "top": 204.2,
+          "width": 77.8
+        }
+      ],
+      "leadFontSize": "16px",
+      "leadLineHeight": "28px",
+      "leadWhiteSpace": "normal",
+      "leadMaxWidth": "none",
+      "leadTextLength": 75,
+      "alignDelta": 0,
+      "scrollWidth": 465,
+      "clientWidth": 480
+    }
+  ]
+}

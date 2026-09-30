@@ -10,9 +10,26 @@
 
 ---
 
+## ⚠️ 已被 G-15 否决的条款（必读 · 2026-09-30）
+
+本文件是 **v1.0 视觉定稿**。老板裁决 **G-05 / G-15** 采纳了它的**工程参数**（字号阶 / 间距 / 圆角 8px / 整卡可点 / 链接常驻下划线 / 页头 60px / 列表底色），但**否决了下面两条** —— **照着原文做会静默破坏代码**：
+
+| # | 本文档原条款 | 位置 | G-15 裁决（**现行有效**） |
+|---|---|---|---|
+| **①** | 「强调色：**删除**」—— 移除 `--color-accent` / `--color-accent-text` / `--color-on-accent` / `--palette-indigo-*` | §1.4 | **不采纳**。三个变量名与靛蓝值**全部保留**，使用位置**限定四处**：正文链接 / 当前导航项 / 按钮 / 焦点环。全仓有 **11 处引用落在 `tokens.css` 之外**（Toc / TermPill / search / PostLayout / ArchiveEntry / Pagination / 404 / prose.css），**删名不会报错、只会静默掉色** |
+| **②** | 「正文链接 = `--color-text` + 常驻 1px 下划线，hover 变 `--color-link-hover`」 | §1.4 | **不采纳**。改为「**强调色 + 常驻 1px 下划线**」—— 颜色与下划线**双通道**区分链接，无障碍更优 |
+
+**另有一处状态订正**：本文件 §7 写的「B-01 标注**已废止**」**亦不采纳** —— B-01（墨蓝极简）经 G-05 / G-15 修正后**继续有效**（见 `00-decision-log.md` 的 B-01 备注与 **B-05**）。
+
+**其余条款均已落地**；本文件与实现若有出入，一律以 `04-design-system.md` 与 `src/styles/*.css` 为准。
+
+---
+
 ## 0. 一句话
 
 全站换成 PaperMod 的**纯灰阶体系（删除强调色）**，布局 / 间距 / 圆角 / 字号逐值对齐；中文排版只保留**正文行高 1.75** 一项偏离；社交入口 = **GitHub · RSS · X**（3 个）。
+
+> ⚠️ **本句里的「删除强调色」已被 G-15 否决**（2026-09-30）：现行方案是「**保留靛蓝强调色、限定四处使用**」。详见文首《已被 G-15 否决的条款》。
 
 ---
 
@@ -54,7 +71,7 @@
 | `--color-text-secondary` | `#6C6C6C` | 摘要、元信息、图标 |
 | `--color-text-tertiary` | `#D6D6D6` | 分隔符、禁用态 |
 | `--color-border` | `#EEEEEE` | 卡片边框、页头底线 |
-| `--color-link-hover` | `#AAAAAA` | 链接 hover |
+| `--color-link-hover` | `#AAAAAA` | 链接 hover —— ⚠️ **该用途已被 G-15 否决**：正文链接 hover 改走强调色；本 token 保留但**当前无消费者**（见 `04-design-system.md` §12.3 U12） |
 | `--color-code-bg` | `#F5F5F5` | 行内代码底 |
 | `--color-code-block-bg` | `#1C1D21` | 代码块底（见 §5 第 3 条） |
 | `--color-focus` | `#1E1E1E` | **焦点环**（替代原 `--color-accent`） |
@@ -76,12 +93,14 @@
 | `--color-code-block-bg` | `#2E2E33` |
 | `--color-focus` | `#DADADB` |
 
-### 1.4 强调色：**删除**
+### 1.4 强调色：~~**删除**~~ ⚠️ **本条已被 G-15 否决（2026-09-30）**
 
-- `--color-accent` / `--color-accent-text` / `--color-on-accent` / `--palette-indigo-*` **全部移除**（原站 CSS 中不存在任何强调色 token，实测确认）
-- 正文链接 = `--color-text` + **常驻 1px 下划线**，hover 变 `--color-link-hover`
-- 导航当前项 = `font-weight: 500` + `border-bottom: 2px solid currentColor`（**不再用颜色标记**）
-- 焦点环改用 `--color-focus`（仍是 2px 实线，无障碍要求不降级）
+> **本节整体不采纳。** 保留 `--color-accent` / `--color-accent-text` / `--color-on-accent` 三个变量名与靛蓝值，使用位置**限定四处**（正文链接 / 当前导航项 / 按钮 / 焦点环）。下列原文条目逐条标注裁决结果，保留在此仅为追溯：
+
+- ❌ ~~`--color-accent` / `--color-accent-text` / `--color-on-accent` / `--palette-indigo-*` **全部移除**~~ → **不采纳**：三个变量名全部保留，`--palette-indigo-600 / 700 / 300 / 200` 亦保留。**删名不会报错、只会静默掉色** —— 全仓有 11 处引用落在本文件的写范围之外（Toc / TermPill / search / PostLayout / ArchiveEntry / Pagination / 404 / prose.css）
+- ❌ ~~正文链接 = `--color-text` + **常驻 1px 下划线**，hover 变 `--color-link-hover`~~ → **不采纳**：现行是 **`--color-accent-text` + 常驻 1px 下划线**，hover 只把下划线加粗到 2px（颜色与下划线**双通道**）
+- ✅ 导航当前项 = `font-weight: 500` + `border-bottom: 2px solid currentColor`（不再用颜色标记）→ **采纳**，现行实现即如此
+- ✅ 焦点环改用 `--color-focus`（仍是 2px 实线，无障碍要求不降级）→ **采纳**，现行 `--color-focus` = 靛蓝
 
 ---
 
@@ -185,7 +204,7 @@
 
 | 文档 | 变更 |
 |---|---|
-| `00-decision-log.md` | B-01 标注**已废止**；新增 **B-05 视觉方向 = 对齐 Lil'Log 灰阶**；T-02 修订为"借鉴结构 + 对齐视觉 token" |
+| `00-decision-log.md` | ~~B-01 标注**已废止**~~ ⚠️ **该条已由 G-15 纠正**：B-01 经 G-05 / G-15 修正后**继续有效**（保留强调色）；新增 **B-05 视觉方向 = 对齐 Lil'Log / PaperMod 工程参数 + 保留品牌强调色**；T-02 修订为「借鉴结构 + 对齐视觉 token」 |
 | `04-design-system.md` | §288（字号上限 30px）**作废**；§444（圆角 ≤6px）→ 8px；§586 卡片标题 → 24px；§1065 `.profile-card` → 透明块、无头像；§523 保留 sticky（标注偏离） |
 | `01-recon-lilianweng.md` | §0 "黑白灰加一个**酒红**点缀" → **订正**为"纯灰阶、无强调色"（实测 CSS 中不存在酒红，唯一痕迹是 favicon 文件名） |
 | `02-prd.md` §7.1 | 个人卡片的"头像"一项标注为**本轮不做**（D5 不再阻塞） |
