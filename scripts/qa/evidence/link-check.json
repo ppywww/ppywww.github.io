@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T10:09:46.715Z",
+  "generatedAt": "2026-09-30T11:22:40.968Z",
   "origin": "https://ppywww.github.io",
   "links": [
     {
@@ -224,10 +224,10 @@
     "pathname": "/this-page-does-not-exist-xyz/",
     "hasBackHome": true,
     "hasSearchEntry": true,
-    "hasRecentPosts": 4,
+    "hasRecentPosts": 7,
     "robots": "noindex, nofollow",
     "h1": "这个页面走丢了",
-    "textHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 404 这个页面走丢了 链接可能已失效，或者文章被移到了别处。可以回到首页，或者直接搜索。 返回首页 站内搜索 最新文章 从 0 搭建这个博客：选型、目录与实测数据 记录本站从选型到骨架跑通的真实过程：Astro、Hugo、VitePress 的实测对比结论、最终目录结构，以及构建产物的真实体积数据。 2026-09-30 · 4 分钟 · 技术 · 更新于 2026-09-30",
+    "textHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 404 这个页面走丢了 链接可能已失效，或者文章被移到了别处。可以回到首页，或者直接搜索。 返回首页 站内搜索 最新文章 从 0 搭建这个博客：选型、目录与实测数据 记录本站从选型到骨架跑通的真实过程：Astro、Hugo、VitePress 的实测对比结论、最终目录结构，以及构建产物的真实体积数据。 2026-09-30 | 4 分钟 | 技术 | 更新于 2026-09-30",
     "form": {
       "hasForm": true,
       "action": "/search/",

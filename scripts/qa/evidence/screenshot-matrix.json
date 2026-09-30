@@ -1,0 +1,198 @@
+[
+  {
+    "file": "v11-home-light-desktop.png",
+    "page": "/",
+    "theme": "light",
+    "device": "desktop",
+    "viewport": "1440x900",
+    "state": {
+      "theme": "light",
+      "cls": "light",
+      "bodyBg": "rgb(245, 245, 245)",
+      "headerH": 61,
+      "aria": "false"
+    }
+  },
+  {
+    "file": "v11-home-light-mobile.png",
+    "page": "/",
+    "theme": "light",
+    "device": "mobile",
+    "viewport": "390x844",
+    "state": {
+      "theme": "light",
+      "cls": "light",
+      "bodyBg": "rgb(245, 245, 245)",
+      "headerH": 57,
+      "aria": "false"
+    }
+  },
+  {
+    "file": "v11-home-dark-desktop.png",
+    "page": "/",
+    "theme": "dark",
+    "device": "desktop",
+    "viewport": "1440x900",
+    "state": {
+      "theme": "dark",
+      "cls": "dark",
+      "bodyBg": "rgb(29, 30, 32)",
+      "headerH": 61,
+      "aria": "false"
+    }
+  },
+  {
+    "file": "v11-home-dark-mobile.png",
+    "page": "/",
+    "theme": "dark",
+    "device": "mobile",
+    "viewport": "390x844",
+    "state": {
+      "theme": "dark",
+      "cls": "dark",
+      "bodyBg": "rgb(29, 30, 32)",
+      "headerH": 57,
+      "aria": "false"
+    }
+  },
+  {
+    "file": "v11-post-light-desktop.png",
+    "page": "/posts/2026-09-30-build-this-blog/",
+    "theme": "light",
+    "device": "desktop",
+    "viewport": "1440x900",
+    "state": {
+      "theme": "light",
+      "cls": "light",
+      "bodyBg": "rgb(255, 255, 255)",
+      "headerH": 61,
+      "aria": "false"
+    }
+  },
+  {
+    "file": "v11-post-light-mobile.png",
+    "page": "/posts/2026-09-30-build-this-blog/",
+    "theme": "light",
+    "device": "mobile",
+    "viewport": "390x844",
+    "state": {
+      "theme": "light",
+      "cls": "light",
+      "bodyBg": "rgb(255, 255, 255)",
+      "headerH": 57,
+      "aria": "false"
+    }
+  },
+  {
+    "file": "v11-post-dark-desktop.png",
+    "page": "/posts/2026-09-30-build-this-blog/",
+    "theme": "dark",
+    "device": "desktop",
+    "viewport": "1440x900",
+    "state": {
+      "theme": "dark",
+      "cls": "dark",
+      "bodyBg": "rgb(29, 30, 32)",
+      "headerH": 61,
+      "aria": "false"
+    }
+  },
+  {
+    "file": "v11-post-dark-mobile.png",
+    "page": "/posts/2026-09-30-build-this-blog/",
+    "theme": "dark",
+    "device": "mobile",
+    "viewport": "390x844",
+    "state": {
+      "theme": "dark",
+      "cls": "dark",
+      "bodyBg": "rgb(29, 30, 32)",
+      "headerH": 57,
+      "aria": "false"
+    }
+  },
+  {
+    "file": "v11-archives-light-desktop.png",
+    "page": "/archives/",
+    "theme": "light",
+    "device": "desktop",
+    "viewport": "1440x900",
+    "state": {
+      "theme": "light",
+      "cls": "light",
+      "bodyBg": "rgb(255, 255, 255)",
+      "headerH": 61,
+      "aria": "false"
+    }
+  },
+  {
+    "file": "v11-archives-light-mobile.png",
+    "page": "/archives/",
+    "theme": "light",
+    "device": "mobile",
+    "viewport": "390x844",
+    "state": {
+      "theme": "light",
+      "cls": "light",
+      "bodyBg": "rgb(255, 255, 255)",
+      "headerH": 57,
+      "aria": "false"
+    }
+  },
+  {
+    "file": "v11-archives-dark-desktop.png",
+    "page": "/archives/",
+    "theme": "dark",
+    "device": "desktop",
+    "viewport": "1440x900",
+    "state": {
+      "theme": "dark",
+      "cls": "dark",
+      "bodyBg": "rgb(29, 30, 32)",
+      "headerH": 61,
+      "aria": "false"
+    }
+  },
+  {
+    "file": "v11-archives-dark-mobile.png",
+    "page": "/archives/",
+    "theme": "dark",
+    "device": "mobile",
+    "viewport": "390x844",
+    "state": {
+      "theme": "dark",
+      "cls": "dark",
+      "bodyBg": "rgb(29, 30, 32)",
+      "headerH": 57,
+      "aria": "false"
+    }
+  },
+  {
+    "file": "v11-home-menu-open-light-mobile.png",
+    "page": "/",
+    "theme": "light",
+    "device": "mobile",
+    "viewport": "390x844",
+    "state": {
+      "theme": "light",
+      "cls": "light",
+      "bodyBg": "rgb(245, 245, 245)",
+      "headerH": 57,
+      "aria": "true"
+    }
+  },
+  {
+    "file": "v11-home-menu-open-dark-mobile.png",
+    "page": "/",
+    "theme": "dark",
+    "device": "mobile",
+    "viewport": "390x844",
+    "state": {
+      "theme": "dark",
+      "cls": "dark",
+      "bodyBg": "rgb(29, 30, 32)",
+      "headerH": 57,
+      "aria": "true"
+    }
+  }
+]

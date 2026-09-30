@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T11:29:17.702Z",
+  "generatedAt": "2026-09-30T10:19:37.935Z",
   "origin": "https://ppywww.github.io",
   "chrome": "Chrome/154.0.8037.59",
   "pages": [
@@ -11,8 +11,8 @@
       "dataTheme": "light",
       "inlineColorScheme": "light",
       "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgb(245, 245, 245)",
-      "bodyColor": "rgb(30, 30, 30)",
+      "bodyBg": "rgb(252, 252, 253)",
+      "bodyColor": "rgb(22, 24, 29)",
       "scrollWidth": 1265,
       "clientWidth": 1280,
       "bodyScrollWidth": 1265,
@@ -65,30 +65,6 @@
           "href": "https://ppywww.github.io/search/",
           "target": null,
           "rel": null,
-          "text": "搜索"
-        },
-        {
-          "href": "https://ppywww.github.io/search/",
-          "target": null,
-          "rel": null,
-          "text": ""
-        },
-        {
-          "href": "https://github.com/ppywww",
-          "target": "_blank",
-          "rel": "noopener noreferrer me",
-          "text": ""
-        },
-        {
-          "href": "https://ppywww.github.io/rss.xml",
-          "target": null,
-          "rel": null,
-          "text": ""
-        },
-        {
-          "href": "https://ppywww.github.io/posts/2026-09-30-build-this-blog/",
-          "target": null,
-          "rel": null,
           "text": ""
         },
         {
@@ -125,12 +101,6 @@
           "href": "https://ppywww.github.io/posts/2026-09-28-why-i-blog/",
           "target": null,
           "rel": null,
-          "text": ""
-        },
-        {
-          "href": "https://ppywww.github.io/posts/2026-09-28-why-i-blog/",
-          "target": null,
-          "rel": null,
           "text": "我为什么开始写博客"
         },
         {
@@ -144,12 +114,6 @@
           "target": null,
           "rel": null,
           "text": "随笔"
-        },
-        {
-          "href": "https://ppywww.github.io/posts/2026-09-25-reading-note-template/",
-          "target": null,
-          "rel": null,
-          "text": ""
         },
         {
           "href": "https://ppywww.github.io/posts/2026-09-25-reading-note-template/",
@@ -178,7 +142,7 @@
         {
           "href": "https://github.com/ppywww",
           "target": "_blank",
-          "rel": "noopener noreferrer me",
+          "rel": "noopener noreferrer",
           "text": "GitHub"
         },
         {
@@ -190,13 +154,13 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.u56VWBAB.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
-          "transfer": 3339,
-          "encoded": 3039,
-          "decoded": 12793,
-          "start": 266,
-          "end": 350
+          "transfer": 2821,
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 165,
+          "end": 404
         },
         {
           "name": "/favicon.svg",
@@ -204,35 +168,35 @@
           "transfer": 564,
           "encoded": 264,
           "decoded": 337,
-          "start": 505,
-          "end": 660
+          "start": 519,
+          "end": 869
         }
       ],
       "navTiming": {
-        "ttfb": 255.5,
-        "dcl": 353.8000000715256,
-        "load": 356.8000000715256,
-        "transfer": 5256,
-        "encoded": 4956
+        "ttfb": 152.69999992847443,
+        "dcl": 406.59999990463257,
+        "load": 516.0999999046326,
+        "transfer": 3946,
+        "encoded": 3646
       },
-      "lcp": 552,
+      "lcp": 940,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 552
+          "t": 940
         },
         {
           "name": "first-contentful-paint",
-          "t": 552
+          "t": 940
         }
       ],
       "headingLevels": [
         1,
         2,
-        2,
-        2,
-        2
+        3,
+        3,
+        3
       ],
       "h1Count": 1,
       "imgCount": 0,
@@ -261,7 +225,7 @@
       "robots": null,
       "viewport": "width=device-width, initial-scale=1",
       "searchInputs": 0,
-      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 👋 Welcome to ppy-Blog Hi, this is ppy. I’m documenting my learning notes in this blog since 2026. 最新文章 从 0 搭建这个博客：选型、目录与实测数据 记录本站从选型到骨架跑通的真实过程：Astro、Hugo、VitePress 的实测对比结",
+      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 ppy-Blog Hi, this is ppy. I’m documenting my learning notes in this blog since 2026. 最新文章 从 0 搭建这个博客：选型、目录与实测数据 记录本站从选型到骨架跑通的真实过程：Astro、Hugo、VitePress 的实测对比结论、最终目录结构，以及构建产",
       "httpStatus": 200
     },
     {
@@ -272,8 +236,8 @@
       "dataTheme": "light",
       "inlineColorScheme": "light",
       "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgb(255, 255, 255)",
-      "bodyColor": "rgb(30, 30, 30)",
+      "bodyBg": "rgb(252, 252, 253)",
+      "bodyColor": "rgb(22, 24, 29)",
       "scrollWidth": 1265,
       "clientWidth": 1280,
       "bodyScrollWidth": 1265,
@@ -326,18 +290,6 @@
           "href": "https://ppywww.github.io/search/",
           "target": null,
           "rel": null,
-          "text": "搜索"
-        },
-        {
-          "href": "https://ppywww.github.io/search/",
-          "target": null,
-          "rel": null,
-          "text": ""
-        },
-        {
-          "href": "https://ppywww.github.io/posts/2026-09-30-build-this-blog/",
-          "target": null,
-          "rel": null,
           "text": ""
         },
         {
@@ -374,12 +326,6 @@
           "href": "https://ppywww.github.io/posts/2026-09-28-why-i-blog/",
           "target": null,
           "rel": null,
-          "text": ""
-        },
-        {
-          "href": "https://ppywww.github.io/posts/2026-09-28-why-i-blog/",
-          "target": null,
-          "rel": null,
           "text": "我为什么开始写博客"
         },
         {
@@ -393,12 +339,6 @@
           "target": null,
           "rel": null,
           "text": "随笔"
-        },
-        {
-          "href": "https://ppywww.github.io/posts/2026-09-25-reading-note-template/",
-          "target": null,
-          "rel": null,
-          "text": ""
         },
         {
           "href": "https://ppywww.github.io/posts/2026-09-25-reading-note-template/",
@@ -427,7 +367,7 @@
         {
           "href": "https://github.com/ppywww",
           "target": "_blank",
-          "rel": "noopener noreferrer me",
+          "rel": "noopener noreferrer",
           "text": "GitHub"
         },
         {
@@ -439,39 +379,39 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.u56VWBAB.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 3039,
-          "decoded": 12793,
-          "start": 55,
-          "end": 89
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 301,
+          "end": 397
         }
       ],
       "navTiming": {
-        "ttfb": 45.60000002384186,
-        "dcl": 91,
-        "load": 93.39999997615814,
-        "transfer": 5058,
-        "encoded": 4758
+        "ttfb": 295.8000000715256,
+        "dcl": 463.90000009536743,
+        "load": 464.10000002384186,
+        "transfer": 4414,
+        "encoded": 4114
       },
-      "lcp": 216,
+      "lcp": 496,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 216
+          "t": 496
         },
         {
           "name": "first-contentful-paint",
-          "t": 216
+          "t": 496
         }
       ],
       "headingLevels": [
         1,
-        2,
-        2,
-        2
+        3,
+        3,
+        3
       ],
       "h1Count": 1,
       "imgCount": 0,
@@ -500,7 +440,7 @@
       "robots": null,
       "viewport": "width=device-width, initial-scale=1",
       "searchInputs": 0,
-      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 文章 全部文章 共 3 篇。 从 0 搭建这个博客：选型、目录与实测数据 记录本站从选型到骨架跑通的真实过程：Astro、Hugo、VitePress 的实测对比结论、最终目录结构，以及构建产物的真实体积数据。 2026-09-30 | 4 分钟 | 技术 | 更新于 2026-09-30 Astro 静态站点 性能优化 GitHub Pa",
+      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 文章 全部文章 共 3 篇。 从 0 搭建这个博客：选型、目录与实测数据 记录本站从选型到骨架跑通的真实过程：Astro、Hugo、VitePress 的实测对比结论、最终目录结构，以及构建产物的真实体积数据。 2026-09-30 · 4 分钟 · 技术 · 更新于 2026-09-30 Astro 静态站点 性能优化 GitHub Pa",
       "httpStatus": 200
     },
     {
@@ -511,8 +451,8 @@
       "dataTheme": "light",
       "inlineColorScheme": "light",
       "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgb(255, 255, 255)",
-      "bodyColor": "rgb(30, 30, 30)",
+      "bodyBg": "rgb(252, 252, 253)",
+      "bodyColor": "rgb(22, 24, 29)",
       "scrollWidth": 1265,
       "clientWidth": 1280,
       "bodyScrollWidth": 1265,
@@ -565,25 +505,7 @@
           "href": "https://ppywww.github.io/search/",
           "target": null,
           "rel": null,
-          "text": "搜索"
-        },
-        {
-          "href": "https://ppywww.github.io/search/",
-          "target": null,
-          "rel": null,
           "text": ""
-        },
-        {
-          "href": "https://ppywww.github.io/categories/",
-          "target": null,
-          "rel": null,
-          "text": "按分类浏览"
-        },
-        {
-          "href": "https://ppywww.github.io/tags/",
-          "target": null,
-          "rel": null,
-          "text": "按标签浏览"
         },
         {
           "href": "https://ppywww.github.io/posts/2026-09-30-build-this-blog/",
@@ -604,9 +526,21 @@
           "text": "09-25读书笔记模板：把读完的书变成能回看的东西2 分钟"
         },
         {
+          "href": "https://ppywww.github.io/categories/",
+          "target": null,
+          "rel": null,
+          "text": "按分类浏览"
+        },
+        {
+          "href": "https://ppywww.github.io/tags/",
+          "target": null,
+          "rel": null,
+          "text": "按标签浏览"
+        },
+        {
           "href": "https://github.com/ppywww",
           "target": "_blank",
-          "rel": "noopener noreferrer me",
+          "rel": "noopener noreferrer",
           "text": "GitHub"
         },
         {
@@ -618,32 +552,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.u56VWBAB.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 3039,
-          "decoded": 12793,
-          "start": 61,
-          "end": 224
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 369,
+          "end": 402
         }
       ],
       "navTiming": {
-        "ttfb": 51.09999990463257,
-        "dcl": 359.5,
-        "load": 359.7999999523163,
-        "transfer": 5006,
-        "encoded": 4706
+        "ttfb": 359.8000000715256,
+        "dcl": 403.8000000715256,
+        "load": 516.3000000715256,
+        "transfer": 4207,
+        "encoded": 3907
       },
-      "lcp": 388,
+      "lcp": 544,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 388
+          "t": 544
         },
         {
           "name": "first-contentful-paint",
-          "t": 388
+          "t": 544
         }
       ],
       "headingLevels": [
@@ -658,7 +592,7 @@
         "main": true,
         "header": true,
         "footer": true,
-        "nav": 2
+        "nav": 1
       },
       "detailsCount": 0,
       "summaryCount": 0,
@@ -678,7 +612,7 @@
       "robots": null,
       "viewport": "width=device-width, initial-scale=1",
       "searchInputs": 0,
-      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 归档 按年份与月份排列，共 3 篇文章。 按分类浏览 按标签浏览 2026 年 3 篇 9 月3 篇 09-30 从 0 搭建这个博客：选型、目录与实测数据 4 分钟 09-28 我为什么开始写博客 2 分钟 09-25 读书笔记模板：把读完的书变成能回看的东西 2 分钟 © 2026 ppy · ppy-Blog GitHub RSS",
+      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 归档 按年份与月份排列，共 3 篇文章。 2026 年 3 篇 9 月3 篇 09-30 从 0 搭建这个博客：选型、目录与实测数据 4 分钟 09-28 我为什么开始写博客 2 分钟 09-25 读书笔记模板：把读完的书变成能回看的东西 2 分钟 按分类浏览·按标签浏览 © 2026 ppy · ppy-Blog GitHub RSS",
       "httpStatus": 200
     },
     {
@@ -689,8 +623,8 @@
       "dataTheme": "light",
       "inlineColorScheme": "light",
       "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgb(255, 255, 255)",
-      "bodyColor": "rgb(30, 30, 30)",
+      "bodyBg": "rgb(252, 252, 253)",
+      "bodyColor": "rgb(22, 24, 29)",
       "scrollWidth": 1265,
       "clientWidth": 1280,
       "bodyScrollWidth": 1265,
@@ -743,12 +677,6 @@
           "href": "https://ppywww.github.io/search/",
           "target": null,
           "rel": null,
-          "text": "搜索"
-        },
-        {
-          "href": "https://ppywww.github.io/search/",
-          "target": null,
-          "rel": null,
           "text": ""
         },
         {
@@ -766,7 +694,7 @@
         {
           "href": "https://github.com/ppywww",
           "target": "_blank",
-          "rel": "noopener noreferrer me",
+          "rel": "noopener noreferrer",
           "text": "GitHub"
         },
         {
@@ -778,38 +706,38 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.u56VWBAB.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 3039,
-          "decoded": 12793,
+          "encoded": 2521,
+          "decoded": 9971,
           "start": 54,
-          "end": 129
+          "end": 87
         }
       ],
       "navTiming": {
-        "ttfb": 44.699999928474426,
-        "dcl": 135.19999992847443,
-        "load": 137.79999995231628,
-        "transfer": 4645,
-        "encoded": 4345
+        "ttfb": 45.10000002384186,
+        "dcl": 173.39999997615814,
+        "load": 173.79999995231628,
+        "transfer": 4144,
+        "encoded": 3844
       },
-      "lcp": 260,
+      "lcp": 196,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 260
+          "t": 196
         },
         {
           "name": "first-contentful-paint",
-          "t": 260
+          "t": 196
         }
       ],
       "headingLevels": [
         1,
-        2,
-        2
+        3,
+        3
       ],
       "h1Count": 1,
       "imgCount": 0,
@@ -849,8 +777,8 @@
       "dataTheme": "light",
       "inlineColorScheme": "light",
       "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgb(255, 255, 255)",
-      "bodyColor": "rgb(30, 30, 30)",
+      "bodyBg": "rgb(252, 252, 253)",
+      "bodyColor": "rgb(22, 24, 29)",
       "scrollWidth": 1265,
       "clientWidth": 1280,
       "bodyScrollWidth": 1265,
@@ -903,12 +831,6 @@
           "href": "https://ppywww.github.io/search/",
           "target": null,
           "rel": null,
-          "text": "搜索"
-        },
-        {
-          "href": "https://ppywww.github.io/search/",
-          "target": null,
-          "rel": null,
           "text": ""
         },
         {
@@ -926,7 +848,7 @@
         {
           "href": "https://github.com/ppywww",
           "target": "_blank",
-          "rel": "noopener noreferrer me",
+          "rel": "noopener noreferrer",
           "text": "GitHub"
         },
         {
@@ -938,32 +860,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.u56VWBAB.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 3039,
-          "decoded": 12793,
-          "start": 56,
-          "end": 90
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 58,
+          "end": 89
         }
       ],
       "navTiming": {
-        "ttfb": 50.299999952316284,
-        "dcl": 152.79999995231628,
-        "load": 248.39999997615814,
-        "transfer": 4973,
-        "encoded": 4673
+        "ttfb": 45.10000002384186,
+        "dcl": 242,
+        "load": 242.60000002384186,
+        "transfer": 4496,
+        "encoded": 4196
       },
-      "lcp": 296,
+      "lcp": 276,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 296
+          "t": 276
         },
         {
           "name": "first-contentful-paint",
-          "t": 296
+          "t": 276
         }
       ],
       "headingLevels": [
@@ -1011,8 +933,8 @@
       "dataTheme": "light",
       "inlineColorScheme": "light",
       "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgb(255, 255, 255)",
-      "bodyColor": "rgb(30, 30, 30)",
+      "bodyBg": "rgb(252, 252, 253)",
+      "bodyColor": "rgb(22, 24, 29)",
       "scrollWidth": 1265,
       "clientWidth": 1280,
       "bodyScrollWidth": 1265,
@@ -1065,12 +987,6 @@
           "href": "https://ppywww.github.io/search/",
           "target": null,
           "rel": null,
-          "text": "搜索"
-        },
-        {
-          "href": "https://ppywww.github.io/search/",
-          "target": null,
-          "rel": null,
           "text": ""
         },
         {
@@ -1088,7 +1004,7 @@
         {
           "href": "https://github.com/ppywww",
           "target": "_blank",
-          "rel": "noopener noreferrer me",
+          "rel": "noopener noreferrer",
           "text": "GitHub"
         },
         {
@@ -1100,13 +1016,13 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.u56VWBAB.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 3039,
-          "decoded": 12793,
-          "start": 52,
-          "end": 106
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 391,
+          "end": 422
         },
         {
           "name": "/_astro/search.astro_astro_type_script_index_0_lang.zwndWbBl.js",
@@ -1114,27 +1030,27 @@
           "transfer": 2440,
           "encoded": 2140,
           "decoded": 4680,
-          "start": 53,
-          "end": 150
+          "start": 391,
+          "end": 471
         }
       ],
       "navTiming": {
-        "ttfb": 45.199999928474426,
-        "dcl": 202.39999997615814,
-        "load": 203.5,
-        "transfer": 4580,
-        "encoded": 4280
+        "ttfb": 379.89999997615814,
+        "dcl": 506.39999997615814,
+        "load": 507.7999999523163,
+        "transfer": 4092,
+        "encoded": 3792
       },
-      "lcp": 220,
+      "lcp": 540,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 220
+          "t": 540
         },
         {
           "name": "first-contentful-paint",
-          "t": 220
+          "t": 540
         }
       ],
       "headingLevels": [
@@ -1171,77 +1087,6 @@
       "httpStatus": 200
     },
     {
-      "url": "https://ppywww.github.io/rss.xml",
-      "title": "",
-      "lang": "",
-      "htmlClass": "",
-      "dataTheme": null,
-      "inlineColorScheme": null,
-      "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgba(0, 0, 0, 0)",
-      "bodyColor": "rgb(0, 0, 0)",
-      "scrollWidth": 1280,
-      "clientWidth": 1280,
-      "bodyScrollWidth": 1280,
-      "innerWidth": 1280,
-      "overflowEls": [],
-      "anchors": [],
-      "resources": [
-        {
-          "name": "/favicon.ico",
-          "type": "other",
-          "transfer": 5314,
-          "encoded": 5014,
-          "decoded": 15354,
-          "start": 398,
-          "end": 734
-        }
-      ],
-      "navTiming": {
-        "ttfb": 290.1999999284744,
-        "dcl": 351.2999999523163,
-        "load": 356.7999999523163,
-        "transfer": 1259,
-        "encoded": 959
-      },
-      "lcp": 428,
-      "cls": 0,
-      "paints": [
-        {
-          "name": "first-paint",
-          "t": 428
-        },
-        {
-          "name": "first-contentful-paint",
-          "t": 428
-        }
-      ],
-      "headingLevels": [],
-      "h1Count": 0,
-      "imgCount": 0,
-      "imgsNoAlt": 0,
-      "landmarks": {
-        "main": false,
-        "header": false,
-        "footer": false,
-        "nav": 0
-      },
-      "detailsCount": 0,
-      "summaryCount": 0,
-      "skipLink": null,
-      "metaDescription": null,
-      "canonical": null,
-      "ogTitle": null,
-      "ogImage": null,
-      "twitterCard": null,
-      "jsonLdTypes": [],
-      "robots": null,
-      "viewport": null,
-      "searchInputs": 0,
-      "bodyTextHead": "This XML file does not appear to have any style information associated with it. The document tree is shown below. <rss version=\"2.0\"> <channel> <title>ppy-Blog</title> <description>Hi, this is ppy. I’",
-      "httpStatus": 200
-    },
-    {
       "url": "https://ppywww.github.io/posts/2026-09-30-build-this-blog/",
       "title": "从 0 搭建这个博客：选型、目录与实测数据 · ppy-Blog",
       "lang": "zh-CN",
@@ -1249,8 +1094,8 @@
       "dataTheme": "light",
       "inlineColorScheme": "light",
       "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgb(255, 255, 255)",
-      "bodyColor": "rgb(30, 30, 30)",
+      "bodyBg": "rgb(252, 252, 253)",
+      "bodyColor": "rgb(22, 24, 29)",
       "scrollWidth": 1265,
       "clientWidth": 1280,
       "bodyScrollWidth": 1265,
@@ -1298,12 +1143,6 @@
           "target": null,
           "rel": null,
           "text": "关于"
-        },
-        {
-          "href": "https://ppywww.github.io/search/",
-          "target": null,
-          "rel": null,
-          "text": "搜索"
         },
         {
           "href": "https://ppywww.github.io/search/",
@@ -1452,7 +1291,7 @@
         {
           "href": "https://github.com/ppywww",
           "target": "_blank",
-          "rel": "noopener noreferrer me",
+          "rel": "noopener noreferrer",
           "text": "GitHub"
         },
         {
@@ -1464,13 +1303,13 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.u56VWBAB.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 3039,
-          "decoded": 12793,
-          "start": 56,
-          "end": 81
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 342,
+          "end": 381
         },
         {
           "name": "/_astro/_..DUCWxe9z.css",
@@ -1478,27 +1317,27 @@
           "transfer": 2402,
           "encoded": 2102,
           "decoded": 10153,
-          "start": 57,
-          "end": 373
+          "start": 342,
+          "end": 686
         }
       ],
       "navTiming": {
-        "ttfb": 48.800000071525574,
-        "dcl": 646.5,
-        "load": 648.8000000715256,
-        "transfer": 11395,
-        "encoded": 11095
+        "ttfb": 330.2999999523163,
+        "dcl": 955.6999999284744,
+        "load": 956.5,
+        "transfer": 10855,
+        "encoded": 10555
       },
-      "lcp": 680,
+      "lcp": 1000,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 680
+          "t": 1000
         },
         {
           "name": "first-contentful-paint",
-          "t": 680
+          "t": 1000
         }
       ],
       "headingLevels": [
@@ -1546,7 +1385,7 @@
       "robots": null,
       "viewport": "width=device-width, initial-scale=1",
       "searchInputs": 0,
-      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 首页 技术 从 0 搭建这个博客：选型、目录与实测数据 从 0 搭建这个博客：选型、目录与实测数据 2026-09-30 | 4 分钟 | 技术 | Astro 静态站点 性能优化 GitHub Pages 目录15 这篇文章记录本站（个人博客）从选型到骨架跑通的真实过程。文中的数据来自项目的选型矩阵、架构决策记录与本机构建产物的实测；凡是",
+      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 首页 技术 从 0 搭建这个博客：选型、目录与实测数据 从 0 搭建这个博客：选型、目录与实测数据 2026-09-30 · 4 分钟 · 技术 · Astro 静态站点 性能优化 GitHub Pages 目录15 这篇文章记录本站（个人博客）从选型到骨架跑通的真实过程。文中的数据来自项目的选型矩阵、架构决策记录与本机构建产物的实测；凡是",
       "httpStatus": 200
     },
     {
@@ -1557,8 +1396,8 @@
       "dataTheme": "light",
       "inlineColorScheme": "light",
       "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgb(255, 255, 255)",
-      "bodyColor": "rgb(30, 30, 30)",
+      "bodyBg": "rgb(252, 252, 253)",
+      "bodyColor": "rgb(22, 24, 29)",
       "scrollWidth": 1265,
       "clientWidth": 1280,
       "bodyScrollWidth": 1265,
@@ -1611,18 +1450,6 @@
           "href": "https://ppywww.github.io/search/",
           "target": null,
           "rel": null,
-          "text": "搜索"
-        },
-        {
-          "href": "https://ppywww.github.io/search/",
-          "target": null,
-          "rel": null,
-          "text": ""
-        },
-        {
-          "href": "https://ppywww.github.io/posts/2026-09-30-build-this-blog/",
-          "target": null,
-          "rel": null,
           "text": ""
         },
         {
@@ -1664,7 +1491,7 @@
         {
           "href": "https://github.com/ppywww",
           "target": "_blank",
-          "rel": "noopener noreferrer me",
+          "rel": "noopener noreferrer",
           "text": "GitHub"
         },
         {
@@ -1676,37 +1503,37 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.u56VWBAB.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 3039,
-          "decoded": 12793,
-          "start": 50,
-          "end": 73
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 62,
+          "end": 120
         }
       ],
       "navTiming": {
-        "ttfb": 44.10000002384186,
-        "dcl": 74.40000009536743,
-        "load": 76.30000007152557,
-        "transfer": 4327,
-        "encoded": 4027
+        "ttfb": 50.699999928474426,
+        "dcl": 206.19999992847443,
+        "load": 206.60000002384186,
+        "transfer": 3701,
+        "encoded": 3401
       },
-      "lcp": 164,
+      "lcp": 224,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 164
+          "t": 224
         },
         {
           "name": "first-contentful-paint",
-          "t": 164
+          "t": 224
         }
       ],
       "headingLevels": [
         1,
-        2
+        3
       ],
       "h1Count": 1,
       "imgCount": 0,
@@ -1735,7 +1562,7 @@
       "robots": null,
       "viewport": "width=device-width, initial-scale=1",
       "searchInputs": 0,
-      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 标签 Astro 共 1 篇文章。 从 0 搭建这个博客：选型、目录与实测数据 记录本站从选型到骨架跑通的真实过程：Astro、Hugo、VitePress 的实测对比结论、最终目录结构，以及构建产物的真实体积数据。 2026-09-30 | 4 分钟 | 技术 | 更新于 2026-09-30 Astro 静态站点 性能优化 GitHub",
+      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 标签 Astro 共 1 篇文章。 从 0 搭建这个博客：选型、目录与实测数据 记录本站从选型到骨架跑通的真实过程：Astro、Hugo、VitePress 的实测对比结论、最终目录结构，以及构建产物的真实体积数据。 2026-09-30 · 4 分钟 · 技术 · 更新于 2026-09-30 Astro 静态站点 性能优化 GitHub",
       "httpStatus": 200
     },
     {
@@ -1746,8 +1573,8 @@
       "dataTheme": "light",
       "inlineColorScheme": "light",
       "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgb(255, 255, 255)",
-      "bodyColor": "rgb(30, 30, 30)",
+      "bodyBg": "rgb(252, 252, 253)",
+      "bodyColor": "rgb(22, 24, 29)",
       "scrollWidth": 1265,
       "clientWidth": 1280,
       "bodyScrollWidth": 1265,
@@ -1800,18 +1627,6 @@
           "href": "https://ppywww.github.io/search/",
           "target": null,
           "rel": null,
-          "text": "搜索"
-        },
-        {
-          "href": "https://ppywww.github.io/search/",
-          "target": null,
-          "rel": null,
-          "text": ""
-        },
-        {
-          "href": "https://ppywww.github.io/posts/2026-09-30-build-this-blog/",
-          "target": null,
-          "rel": null,
           "text": ""
         },
         {
@@ -1853,7 +1668,7 @@
         {
           "href": "https://github.com/ppywww",
           "target": "_blank",
-          "rel": "noopener noreferrer me",
+          "rel": "noopener noreferrer",
           "text": "GitHub"
         },
         {
@@ -1865,37 +1680,37 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.u56VWBAB.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 3039,
-          "decoded": 12793,
-          "start": 309,
-          "end": 339
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 58,
+          "end": 86
         }
       ],
       "navTiming": {
-        "ttfb": 301.09999990463257,
-        "dcl": 341,
-        "load": 343.09999990463257,
-        "transfer": 4332,
-        "encoded": 4032
+        "ttfb": 45.799999952316284,
+        "dcl": 143.5,
+        "load": 217.89999997615814,
+        "transfer": 3706,
+        "encoded": 3406
       },
-      "lcp": 432,
+      "lcp": 232,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 432
+          "t": 232
         },
         {
           "name": "first-contentful-paint",
-          "t": 432
+          "t": 232
         }
       ],
       "headingLevels": [
         1,
-        2
+        3
       ],
       "h1Count": 1,
       "imgCount": 0,
@@ -1924,7 +1739,7 @@
       "robots": null,
       "viewport": "width=device-width, initial-scale=1",
       "searchInputs": 0,
-      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 标签 静态站点 共 1 篇文章。 从 0 搭建这个博客：选型、目录与实测数据 记录本站从选型到骨架跑通的真实过程：Astro、Hugo、VitePress 的实测对比结论、最终目录结构，以及构建产物的真实体积数据。 2026-09-30 | 4 分钟 | 技术 | 更新于 2026-09-30 Astro 静态站点 性能优化 GitHub ",
+      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 标签 静态站点 共 1 篇文章。 从 0 搭建这个博客：选型、目录与实测数据 记录本站从选型到骨架跑通的真实过程：Astro、Hugo、VitePress 的实测对比结论、最终目录结构，以及构建产物的真实体积数据。 2026-09-30 · 4 分钟 · 技术 · 更新于 2026-09-30 Astro 静态站点 性能优化 GitHub ",
       "httpStatus": 200
     },
     {
@@ -1935,8 +1750,8 @@
       "dataTheme": "light",
       "inlineColorScheme": "light",
       "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgb(255, 255, 255)",
-      "bodyColor": "rgb(30, 30, 30)",
+      "bodyBg": "rgb(252, 252, 253)",
+      "bodyColor": "rgb(22, 24, 29)",
       "scrollWidth": 1265,
       "clientWidth": 1280,
       "bodyScrollWidth": 1265,
@@ -1989,18 +1804,6 @@
           "href": "https://ppywww.github.io/search/",
           "target": null,
           "rel": null,
-          "text": "搜索"
-        },
-        {
-          "href": "https://ppywww.github.io/search/",
-          "target": null,
-          "rel": null,
-          "text": ""
-        },
-        {
-          "href": "https://ppywww.github.io/posts/2026-09-30-build-this-blog/",
-          "target": null,
-          "rel": null,
           "text": ""
         },
         {
@@ -2042,7 +1845,7 @@
         {
           "href": "https://github.com/ppywww",
           "target": "_blank",
-          "rel": "noopener noreferrer me",
+          "rel": "noopener noreferrer",
           "text": "GitHub"
         },
         {
@@ -2054,37 +1857,37 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.u56VWBAB.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 3039,
-          "decoded": 12793,
-          "start": 289,
-          "end": 318
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 57,
+          "end": 91
         }
       ],
       "navTiming": {
-        "ttfb": 281.10000002384186,
-        "dcl": 319.39999997615814,
-        "load": 370.1999999284744,
-        "transfer": 4338,
-        "encoded": 4038
+        "ttfb": 45.39999997615814,
+        "dcl": 92.89999997615814,
+        "load": 96,
+        "transfer": 3712,
+        "encoded": 3412
       },
-      "lcp": 404,
+      "lcp": 200,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 404
+          "t": 200
         },
         {
           "name": "first-contentful-paint",
-          "t": 404
+          "t": 200
         }
       ],
       "headingLevels": [
         1,
-        2
+        3
       ],
       "h1Count": 1,
       "imgCount": 0,
@@ -2113,7 +1916,7 @@
       "robots": null,
       "viewport": "width=device-width, initial-scale=1",
       "searchInputs": 0,
-      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 标签 性能优化 共 1 篇文章。 从 0 搭建这个博客：选型、目录与实测数据 记录本站从选型到骨架跑通的真实过程：Astro、Hugo、VitePress 的实测对比结论、最终目录结构，以及构建产物的真实体积数据。 2026-09-30 | 4 分钟 | 技术 | 更新于 2026-09-30 Astro 静态站点 性能优化 GitHub ",
+      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 标签 性能优化 共 1 篇文章。 从 0 搭建这个博客：选型、目录与实测数据 记录本站从选型到骨架跑通的真实过程：Astro、Hugo、VitePress 的实测对比结论、最终目录结构，以及构建产物的真实体积数据。 2026-09-30 · 4 分钟 · 技术 · 更新于 2026-09-30 Astro 静态站点 性能优化 GitHub ",
       "httpStatus": 200
     },
     {
@@ -2124,8 +1927,8 @@
       "dataTheme": "light",
       "inlineColorScheme": "light",
       "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgb(255, 255, 255)",
-      "bodyColor": "rgb(30, 30, 30)",
+      "bodyBg": "rgb(252, 252, 253)",
+      "bodyColor": "rgb(22, 24, 29)",
       "scrollWidth": 1265,
       "clientWidth": 1280,
       "bodyScrollWidth": 1265,
@@ -2178,18 +1981,6 @@
           "href": "https://ppywww.github.io/search/",
           "target": null,
           "rel": null,
-          "text": "搜索"
-        },
-        {
-          "href": "https://ppywww.github.io/search/",
-          "target": null,
-          "rel": null,
-          "text": ""
-        },
-        {
-          "href": "https://ppywww.github.io/posts/2026-09-30-build-this-blog/",
-          "target": null,
-          "rel": null,
           "text": ""
         },
         {
@@ -2231,7 +2022,7 @@
         {
           "href": "https://github.com/ppywww",
           "target": "_blank",
-          "rel": "noopener noreferrer me",
+          "rel": "noopener noreferrer",
           "text": "GitHub"
         },
         {
@@ -2243,37 +2034,37 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.u56VWBAB.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 3039,
-          "decoded": 12793,
-          "start": 293,
-          "end": 330
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 56,
+          "end": 80
         }
       ],
       "navTiming": {
-        "ttfb": 282.7000000476837,
-        "dcl": 384.10000002384186,
-        "load": 384.40000009536743,
-        "transfer": 4334,
-        "encoded": 4034
+        "ttfb": 47.60000002384186,
+        "dcl": 82.89999997615814,
+        "load": 152.60000002384186,
+        "transfer": 3709,
+        "encoded": 3409
       },
-      "lcp": 412,
+      "lcp": 168,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 412
+          "t": 168
         },
         {
           "name": "first-contentful-paint",
-          "t": 412
+          "t": 168
         }
       ],
       "headingLevels": [
         1,
-        2
+        3
       ],
       "h1Count": 1,
       "imgCount": 0,
@@ -2302,7 +2093,7 @@
       "robots": null,
       "viewport": "width=device-width, initial-scale=1",
       "searchInputs": 0,
-      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 标签 GitHub Pages 共 1 篇文章。 从 0 搭建这个博客：选型、目录与实测数据 记录本站从选型到骨架跑通的真实过程：Astro、Hugo、VitePress 的实测对比结论、最终目录结构，以及构建产物的真实体积数据。 2026-09-30 | 4 分钟 | 技术 | 更新于 2026-09-30 Astro 静态站点 性能优化",
+      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 标签 GitHub Pages 共 1 篇文章。 从 0 搭建这个博客：选型、目录与实测数据 记录本站从选型到骨架跑通的真实过程：Astro、Hugo、VitePress 的实测对比结论、最终目录结构，以及构建产物的真实体积数据。 2026-09-30 · 4 分钟 · 技术 · 更新于 2026-09-30 Astro 静态站点 性能优化",
       "httpStatus": 200
     },
     {
@@ -2313,8 +2104,8 @@
       "dataTheme": "light",
       "inlineColorScheme": "light",
       "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgb(255, 255, 255)",
-      "bodyColor": "rgb(30, 30, 30)",
+      "bodyBg": "rgb(252, 252, 253)",
+      "bodyColor": "rgb(22, 24, 29)",
       "scrollWidth": 1265,
       "clientWidth": 1280,
       "bodyScrollWidth": 1265,
@@ -2362,12 +2153,6 @@
           "target": null,
           "rel": null,
           "text": "关于"
-        },
-        {
-          "href": "https://ppywww.github.io/search/",
-          "target": null,
-          "rel": null,
-          "text": "搜索"
         },
         {
           "href": "https://ppywww.github.io/search/",
@@ -2462,7 +2247,7 @@
         {
           "href": "https://github.com/ppywww",
           "target": "_blank",
-          "rel": "noopener noreferrer me",
+          "rel": "noopener noreferrer",
           "text": "GitHub"
         },
         {
@@ -2474,13 +2259,13 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.u56VWBAB.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 3039,
-          "decoded": 12793,
-          "start": 297,
-          "end": 319
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 57,
+          "end": 100
         },
         {
           "name": "/_astro/_..DUCWxe9z.css",
@@ -2488,27 +2273,27 @@
           "transfer": 0,
           "encoded": 2102,
           "decoded": 10153,
-          "start": 298,
-          "end": 319
+          "start": 57,
+          "end": 100
         }
       ],
       "navTiming": {
-        "ttfb": 288.7999999523163,
-        "dcl": 323.2999999523163,
-        "load": 429.60000002384186,
-        "transfer": 6383,
-        "encoded": 6083
+        "ttfb": 45.39999997615814,
+        "dcl": 103.5,
+        "load": 249.70000004768372,
+        "transfer": 5902,
+        "encoded": 5602
       },
-      "lcp": 464,
+      "lcp": 284,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 464
+          "t": 284
         },
         {
           "name": "first-contentful-paint",
-          "t": 464
+          "t": 284
         }
       ],
       "headingLevels": [
@@ -2549,7 +2334,7 @@
       "robots": null,
       "viewport": "width=device-width, initial-scale=1",
       "searchInputs": 0,
-      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 首页 生活 我为什么开始写博客 我为什么开始写博客 2026-09-28 | 2 分钟 | 生活 | 写作 随笔 目录8 示例文章，请替换为你的真实内容。 下面是一篇通用的「为什么开始写博客」，不含任何具体的个人经历，可以直接当作模板改写成你自己的版本。 一个朴素的理由 开始写博客的理由可以很简单：有些东西，如果不写下来，就等于没有想过。 ",
+      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 首页 生活 我为什么开始写博客 我为什么开始写博客 2026-09-28 · 2 分钟 · 生活 · 写作 随笔 目录8 示例文章，请替换为你的真实内容。 下面是一篇通用的「为什么开始写博客」，不含任何具体的个人经历，可以直接当作模板改写成你自己的版本。 一个朴素的理由 开始写博客的理由可以很简单：有些东西，如果不写下来，就等于没有想过。 ",
       "httpStatus": 200
     },
     {
@@ -2560,8 +2345,8 @@
       "dataTheme": "light",
       "inlineColorScheme": "light",
       "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgb(255, 255, 255)",
-      "bodyColor": "rgb(30, 30, 30)",
+      "bodyBg": "rgb(252, 252, 253)",
+      "bodyColor": "rgb(22, 24, 29)",
       "scrollWidth": 1265,
       "clientWidth": 1280,
       "bodyScrollWidth": 1265,
@@ -2614,18 +2399,6 @@
           "href": "https://ppywww.github.io/search/",
           "target": null,
           "rel": null,
-          "text": "搜索"
-        },
-        {
-          "href": "https://ppywww.github.io/search/",
-          "target": null,
-          "rel": null,
-          "text": ""
-        },
-        {
-          "href": "https://ppywww.github.io/posts/2026-09-28-why-i-blog/",
-          "target": null,
-          "rel": null,
           "text": ""
         },
         {
@@ -2645,12 +2418,6 @@
           "target": null,
           "rel": null,
           "text": "随笔"
-        },
-        {
-          "href": "https://ppywww.github.io/posts/2026-09-25-reading-note-template/",
-          "target": null,
-          "rel": null,
-          "text": ""
         },
         {
           "href": "https://ppywww.github.io/posts/2026-09-25-reading-note-template/",
@@ -2685,7 +2452,7 @@
         {
           "href": "https://github.com/ppywww",
           "target": "_blank",
-          "rel": "noopener noreferrer me",
+          "rel": "noopener noreferrer",
           "text": "GitHub"
         },
         {
@@ -2697,38 +2464,38 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.u56VWBAB.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 3039,
-          "decoded": 12793,
-          "start": 283,
-          "end": 303
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 313,
+          "end": 361
         }
       ],
       "navTiming": {
-        "ttfb": 277.5,
-        "dcl": 350.7999999523163,
-        "load": 402,
-        "transfer": 4469,
-        "encoded": 4169
+        "ttfb": 302.39999997615814,
+        "dcl": 412.7000000476837,
+        "load": 484.60000002384186,
+        "transfer": 3841,
+        "encoded": 3541
       },
-      "lcp": 428,
+      "lcp": 508,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 428
+          "t": 508
         },
         {
           "name": "first-contentful-paint",
-          "t": 428
+          "t": 508
         }
       ],
       "headingLevels": [
         1,
-        2,
-        2
+        3,
+        3
       ],
       "h1Count": 1,
       "imgCount": 0,
@@ -2757,7 +2524,7 @@
       "robots": null,
       "viewport": "width=device-width, initial-scale=1",
       "searchInputs": 0,
-      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 标签 写作 共 2 篇文章。 我为什么开始写博客 关于记录、公开写作与长期主义的一点想法：写博客不是输出表演，而是把模糊的念头逼成清晰句子的过程。 2026-09-28 | 2 分钟 | 生活 写作 随笔 读书笔记模板：把读完的书变成能回看的东西 一份可直接复用的读书笔记模板：从书籍信息、一句话结论，到摘抄卡片与行动清单，复制结构即可开始写",
+      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 标签 写作 共 2 篇文章。 我为什么开始写博客 关于记录、公开写作与长期主义的一点想法：写博客不是输出表演，而是把模糊的念头逼成清晰句子的过程。 2026-09-28 · 2 分钟 · 生活 写作 随笔 读书笔记模板：把读完的书变成能回看的东西 一份可直接复用的读书笔记模板：从书籍信息、一句话结论，到摘抄卡片与行动清单，复制结构即可开始写",
       "httpStatus": 200
     },
     {
@@ -2768,8 +2535,8 @@
       "dataTheme": "light",
       "inlineColorScheme": "light",
       "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgb(255, 255, 255)",
-      "bodyColor": "rgb(30, 30, 30)",
+      "bodyBg": "rgb(252, 252, 253)",
+      "bodyColor": "rgb(22, 24, 29)",
       "scrollWidth": 1265,
       "clientWidth": 1280,
       "bodyScrollWidth": 1265,
@@ -2822,18 +2589,6 @@
           "href": "https://ppywww.github.io/search/",
           "target": null,
           "rel": null,
-          "text": "搜索"
-        },
-        {
-          "href": "https://ppywww.github.io/search/",
-          "target": null,
-          "rel": null,
-          "text": ""
-        },
-        {
-          "href": "https://ppywww.github.io/posts/2026-09-28-why-i-blog/",
-          "target": null,
-          "rel": null,
           "text": ""
         },
         {
@@ -2863,7 +2618,7 @@
         {
           "href": "https://github.com/ppywww",
           "target": "_blank",
-          "rel": "noopener noreferrer me",
+          "rel": "noopener noreferrer",
           "text": "GitHub"
         },
         {
@@ -2875,37 +2630,37 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.u56VWBAB.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 3039,
-          "decoded": 12793,
-          "start": 307,
-          "end": 330
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 349,
+          "end": 374
         }
       ],
       "navTiming": {
-        "ttfb": 299.2999999523163,
-        "dcl": 331.89999997615814,
-        "load": 334.09999990463257,
-        "transfer": 4214,
-        "encoded": 3914
+        "ttfb": 339.2000000476837,
+        "dcl": 376,
+        "load": 380.7999999523163,
+        "transfer": 3595,
+        "encoded": 3295
       },
-      "lcp": 400,
+      "lcp": 468,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 400
+          "t": 468
         },
         {
           "name": "first-contentful-paint",
-          "t": 400
+          "t": 468
         }
       ],
       "headingLevels": [
         1,
-        2
+        3
       ],
       "h1Count": 1,
       "imgCount": 0,
@@ -2934,7 +2689,7 @@
       "robots": null,
       "viewport": "width=device-width, initial-scale=1",
       "searchInputs": 0,
-      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 标签 随笔 共 1 篇文章。 我为什么开始写博客 关于记录、公开写作与长期主义的一点想法：写博客不是输出表演，而是把模糊的念头逼成清晰句子的过程。 2026-09-28 | 2 分钟 | 生活 写作 随笔 ← 全部标签 © 2026 ppy · ppy-Blog GitHub RSS",
+      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 标签 随笔 共 1 篇文章。 我为什么开始写博客 关于记录、公开写作与长期主义的一点想法：写博客不是输出表演，而是把模糊的念头逼成清晰句子的过程。 2026-09-28 · 2 分钟 · 生活 写作 随笔 ← 全部标签 © 2026 ppy · ppy-Blog GitHub RSS",
       "httpStatus": 200
     },
     {
@@ -2945,8 +2700,8 @@
       "dataTheme": "light",
       "inlineColorScheme": "light",
       "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgb(255, 255, 255)",
-      "bodyColor": "rgb(30, 30, 30)",
+      "bodyBg": "rgb(252, 252, 253)",
+      "bodyColor": "rgb(22, 24, 29)",
       "scrollWidth": 1265,
       "clientWidth": 1280,
       "bodyScrollWidth": 1265,
@@ -2994,12 +2749,6 @@
           "target": null,
           "rel": null,
           "text": "关于"
-        },
-        {
-          "href": "https://ppywww.github.io/search/",
-          "target": null,
-          "rel": null,
-          "text": "搜索"
         },
         {
           "href": "https://ppywww.github.io/search/",
@@ -3124,7 +2873,7 @@
         {
           "href": "https://github.com/ppywww",
           "target": "_blank",
-          "rel": "noopener noreferrer me",
+          "rel": "noopener noreferrer",
           "text": "GitHub"
         },
         {
@@ -3136,13 +2885,13 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.u56VWBAB.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 3039,
-          "decoded": 12793,
-          "start": 299,
-          "end": 326
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 57,
+          "end": 88
         },
         {
           "name": "/_astro/_..DUCWxe9z.css",
@@ -3150,27 +2899,27 @@
           "transfer": 0,
           "encoded": 2102,
           "decoded": 10153,
-          "start": 299,
-          "end": 326
+          "start": 58,
+          "end": 88
         }
       ],
       "navTiming": {
-        "ttfb": 290.60000002384186,
-        "dcl": 511.39999997615814,
-        "load": 511.7999999523163,
-        "transfer": 6989,
-        "encoded": 6689
+        "ttfb": 45.700000047683716,
+        "dcl": 90.20000004768372,
+        "load": 267.89999997615814,
+        "transfer": 6512,
+        "encoded": 6212
       },
-      "lcp": 532,
+      "lcp": 300,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 532
+          "t": 300
         },
         {
           "name": "first-contentful-paint",
-          "t": 532
+          "t": 300
         }
       ],
       "headingLevels": [
@@ -3215,7 +2964,7 @@
       "robots": null,
       "viewport": "width=device-width, initial-scale=1",
       "searchInputs": 0,
-      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 首页 读书 读书笔记模板：把读完的书变成能回看的东西 读书笔记模板：把读完的书变成能回看的东西 2026-09-25 | 2 分钟 | 读书 | 读书笔记 模板 写作 目录12 这是一份模板，不是一篇读书笔记。 把下面各节方括号里的内容替换成你自己的记录即可；不需要的章节可以整节删掉。 怎么用这份模板 写作顺序建议：先填「一句话结论」与「行",
+      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 首页 读书 读书笔记模板：把读完的书变成能回看的东西 读书笔记模板：把读完的书变成能回看的东西 2026-09-25 · 2 分钟 · 读书 · 读书笔记 模板 写作 目录12 这是一份模板，不是一篇读书笔记。 把下面各节方括号里的内容替换成你自己的记录即可；不需要的章节可以整节删掉。 怎么用这份模板 写作顺序建议：先填「一句话结论」与「行",
       "httpStatus": 200
     },
     {
@@ -3226,8 +2975,8 @@
       "dataTheme": "light",
       "inlineColorScheme": "light",
       "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgb(255, 255, 255)",
-      "bodyColor": "rgb(30, 30, 30)",
+      "bodyBg": "rgb(252, 252, 253)",
+      "bodyColor": "rgb(22, 24, 29)",
       "scrollWidth": 1265,
       "clientWidth": 1280,
       "bodyScrollWidth": 1265,
@@ -3280,18 +3029,6 @@
           "href": "https://ppywww.github.io/search/",
           "target": null,
           "rel": null,
-          "text": "搜索"
-        },
-        {
-          "href": "https://ppywww.github.io/search/",
-          "target": null,
-          "rel": null,
-          "text": ""
-        },
-        {
-          "href": "https://ppywww.github.io/posts/2026-09-25-reading-note-template/",
-          "target": null,
-          "rel": null,
           "text": ""
         },
         {
@@ -3327,7 +3064,7 @@
         {
           "href": "https://github.com/ppywww",
           "target": "_blank",
-          "rel": "noopener noreferrer me",
+          "rel": "noopener noreferrer",
           "text": "GitHub"
         },
         {
@@ -3339,37 +3076,37 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.u56VWBAB.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 3039,
-          "decoded": 12793,
-          "start": 296,
-          "end": 321
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 54,
+          "end": 78
         }
       ],
       "navTiming": {
-        "ttfb": 287.5,
-        "dcl": 322.5,
-        "load": 324.5,
-        "transfer": 4254,
-        "encoded": 3954
+        "ttfb": 46.5,
+        "dcl": 79.5,
+        "load": 82.39999997615814,
+        "transfer": 3640,
+        "encoded": 3340
       },
-      "lcp": 420,
+      "lcp": 176,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 420
+          "t": 176
         },
         {
           "name": "first-contentful-paint",
-          "t": 420
+          "t": 176
         }
       ],
       "headingLevels": [
         1,
-        2
+        3
       ],
       "h1Count": 1,
       "imgCount": 0,
@@ -3398,7 +3135,7 @@
       "robots": null,
       "viewport": "width=device-width, initial-scale=1",
       "searchInputs": 0,
-      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 标签 读书笔记 共 1 篇文章。 读书笔记模板：把读完的书变成能回看的东西 一份可直接复用的读书笔记模板：从书籍信息、一句话结论，到摘抄卡片与行动清单，复制结构即可开始写。 2026-09-25 | 2 分钟 | 读书 读书笔记 模板 写作 ← 全部标签 © 2026 ppy · ppy-Blog GitHub RSS",
+      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 标签 读书笔记 共 1 篇文章。 读书笔记模板：把读完的书变成能回看的东西 一份可直接复用的读书笔记模板：从书籍信息、一句话结论，到摘抄卡片与行动清单，复制结构即可开始写。 2026-09-25 · 2 分钟 · 读书 读书笔记 模板 写作 ← 全部标签 © 2026 ppy · ppy-Blog GitHub RSS",
       "httpStatus": 200
     },
     {
@@ -3409,8 +3146,8 @@
       "dataTheme": "light",
       "inlineColorScheme": "light",
       "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgb(255, 255, 255)",
-      "bodyColor": "rgb(30, 30, 30)",
+      "bodyBg": "rgb(252, 252, 253)",
+      "bodyColor": "rgb(22, 24, 29)",
       "scrollWidth": 1265,
       "clientWidth": 1280,
       "bodyScrollWidth": 1265,
@@ -3463,18 +3200,6 @@
           "href": "https://ppywww.github.io/search/",
           "target": null,
           "rel": null,
-          "text": "搜索"
-        },
-        {
-          "href": "https://ppywww.github.io/search/",
-          "target": null,
-          "rel": null,
-          "text": ""
-        },
-        {
-          "href": "https://ppywww.github.io/posts/2026-09-25-reading-note-template/",
-          "target": null,
-          "rel": null,
           "text": ""
         },
         {
@@ -3510,7 +3235,7 @@
         {
           "href": "https://github.com/ppywww",
           "target": "_blank",
-          "rel": "noopener noreferrer me",
+          "rel": "noopener noreferrer",
           "text": "GitHub"
         },
         {
@@ -3522,37 +3247,37 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.u56VWBAB.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 3039,
-          "decoded": 12793,
-          "start": 294,
-          "end": 315
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 57,
+          "end": 85
         }
       ],
       "navTiming": {
-        "ttfb": 284.5,
-        "dcl": 316.90000009536743,
-        "load": 319.5,
-        "transfer": 4259,
-        "encoded": 3959
+        "ttfb": 48.300000071525574,
+        "dcl": 87.80000007152557,
+        "load": 92.70000004768372,
+        "transfer": 3640,
+        "encoded": 3340
       },
-      "lcp": 396,
+      "lcp": 196,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 396
+          "t": 196
         },
         {
           "name": "first-contentful-paint",
-          "t": 396
+          "t": 196
         }
       ],
       "headingLevels": [
         1,
-        2
+        3
       ],
       "h1Count": 1,
       "imgCount": 0,
@@ -3581,7 +3306,78 @@
       "robots": null,
       "viewport": "width=device-width, initial-scale=1",
       "searchInputs": 0,
-      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 标签 模板 共 1 篇文章。 读书笔记模板：把读完的书变成能回看的东西 一份可直接复用的读书笔记模板：从书籍信息、一句话结论，到摘抄卡片与行动清单，复制结构即可开始写。 2026-09-25 | 2 分钟 | 读书 读书笔记 模板 写作 ← 全部标签 © 2026 ppy · ppy-Blog GitHub RSS",
+      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 标签 模板 共 1 篇文章。 读书笔记模板：把读完的书变成能回看的东西 一份可直接复用的读书笔记模板：从书籍信息、一句话结论，到摘抄卡片与行动清单，复制结构即可开始写。 2026-09-25 · 2 分钟 · 读书 读书笔记 模板 写作 ← 全部标签 © 2026 ppy · ppy-Blog GitHub RSS",
+      "httpStatus": 200
+    },
+    {
+      "url": "https://ppywww.github.io/rss.xml",
+      "title": "",
+      "lang": "",
+      "htmlClass": "",
+      "dataTheme": null,
+      "inlineColorScheme": null,
+      "htmlBg": "rgba(0, 0, 0, 0)",
+      "bodyBg": "rgba(0, 0, 0, 0)",
+      "bodyColor": "rgb(0, 0, 0)",
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "bodyScrollWidth": 1280,
+      "innerWidth": 1280,
+      "overflowEls": [],
+      "anchors": [],
+      "resources": [
+        {
+          "name": "/favicon.ico",
+          "type": "other",
+          "transfer": 4680,
+          "encoded": 4380,
+          "decoded": 12007,
+          "start": 160,
+          "end": 491
+        }
+      ],
+      "navTiming": {
+        "ttfb": 44.700000047683716,
+        "dcl": 111.10000002384186,
+        "load": 115.60000002384186,
+        "transfer": 1259,
+        "encoded": 959
+      },
+      "lcp": 196,
+      "cls": 0,
+      "paints": [
+        {
+          "name": "first-paint",
+          "t": 196
+        },
+        {
+          "name": "first-contentful-paint",
+          "t": 196
+        }
+      ],
+      "headingLevels": [],
+      "h1Count": 0,
+      "imgCount": 0,
+      "imgsNoAlt": 0,
+      "landmarks": {
+        "main": false,
+        "header": false,
+        "footer": false,
+        "nav": 0
+      },
+      "detailsCount": 0,
+      "summaryCount": 0,
+      "skipLink": null,
+      "metaDescription": null,
+      "canonical": null,
+      "ogTitle": null,
+      "ogImage": null,
+      "twitterCard": null,
+      "jsonLdTypes": [],
+      "robots": null,
+      "viewport": null,
+      "searchInputs": 0,
+      "bodyTextHead": "This XML file does not appear to have any style information associated with it. The document tree is shown below. <rss version=\"2.0\"> <channel> <title>ppy-Blog</title> <description>Hi, this is ppy. I’",
       "httpStatus": 200
     },
     {
@@ -3592,8 +3388,8 @@
       "dataTheme": "light",
       "inlineColorScheme": "light",
       "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgb(255, 255, 255)",
-      "bodyColor": "rgb(30, 30, 30)",
+      "bodyBg": "rgb(252, 252, 253)",
+      "bodyColor": "rgb(22, 24, 29)",
       "scrollWidth": 1265,
       "clientWidth": 1280,
       "bodyScrollWidth": 1265,
@@ -3646,12 +3442,6 @@
           "href": "https://ppywww.github.io/search/",
           "target": null,
           "rel": null,
-          "text": "搜索"
-        },
-        {
-          "href": "https://ppywww.github.io/search/",
-          "target": null,
-          "rel": null,
           "text": ""
         },
         {
@@ -3681,7 +3471,7 @@
         {
           "href": "https://github.com/ppywww",
           "target": "_blank",
-          "rel": "noopener noreferrer me",
+          "rel": "noopener noreferrer",
           "text": "GitHub"
         },
         {
@@ -3693,32 +3483,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.u56VWBAB.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 3039,
-          "decoded": 12793,
-          "start": 58,
-          "end": 84
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 60,
+          "end": 85
         }
       ],
       "navTiming": {
-        "ttfb": 45.700000047683716,
-        "dcl": 85.70000004768372,
-        "load": 87.70000004768372,
-        "transfer": 4214,
-        "encoded": 3914
+        "ttfb": 48.89999997615814,
+        "dcl": 88,
+        "load": 89.89999997615814,
+        "transfer": 3731,
+        "encoded": 3431
       },
-      "lcp": 152,
+      "lcp": 164,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 152
+          "t": 164
         },
         {
           "name": "first-contentful-paint",
-          "t": 152
+          "t": 164
         }
       ],
       "headingLevels": [
@@ -3762,8 +3552,8 @@
       "dataTheme": "light",
       "inlineColorScheme": "light",
       "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgb(255, 255, 255)",
-      "bodyColor": "rgb(30, 30, 30)",
+      "bodyBg": "rgb(252, 252, 253)",
+      "bodyColor": "rgb(22, 24, 29)",
       "scrollWidth": 1265,
       "clientWidth": 1280,
       "bodyScrollWidth": 1265,
@@ -3811,12 +3601,6 @@
           "target": null,
           "rel": null,
           "text": "关于"
-        },
-        {
-          "href": "https://ppywww.github.io/search/",
-          "target": null,
-          "rel": null,
-          "text": "搜索"
         },
         {
           "href": "https://ppywww.github.io/search/",
@@ -3875,7 +3659,7 @@
         {
           "href": "https://github.com/ppywww",
           "target": "_blank",
-          "rel": "noopener noreferrer me",
+          "rel": "noopener noreferrer",
           "text": "GitHub"
         },
         {
@@ -3887,32 +3671,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.u56VWBAB.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 3039,
-          "decoded": 12793,
-          "start": 51,
-          "end": 82
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 300,
+          "end": 324
         }
       ],
       "navTiming": {
-        "ttfb": 45.60000002384186,
-        "dcl": 83.89999997615814,
-        "load": 143,
-        "transfer": 4303,
-        "encoded": 4003
+        "ttfb": 294.60000002384186,
+        "dcl": 324.8000000715256,
+        "load": 326.5,
+        "transfer": 3818,
+        "encoded": 3518
       },
-      "lcp": 172,
+      "lcp": 404,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 172
+          "t": 404
         },
         {
           "name": "first-contentful-paint",
-          "t": 172
+          "t": 404
         }
       ],
       "headingLevels": [
@@ -3956,8 +3740,8 @@
       "dataTheme": "light",
       "inlineColorScheme": "light",
       "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgb(255, 255, 255)",
-      "bodyColor": "rgb(30, 30, 30)",
+      "bodyBg": "rgb(252, 252, 253)",
+      "bodyColor": "rgb(22, 24, 29)",
       "scrollWidth": 1265,
       "clientWidth": 1280,
       "bodyScrollWidth": 1265,
@@ -4010,18 +3794,6 @@
           "href": "https://ppywww.github.io/search/",
           "target": null,
           "rel": null,
-          "text": "搜索"
-        },
-        {
-          "href": "https://ppywww.github.io/search/",
-          "target": null,
-          "rel": null,
-          "text": ""
-        },
-        {
-          "href": "https://ppywww.github.io/posts/2026-09-30-build-this-blog/",
-          "target": null,
-          "rel": null,
           "text": ""
         },
         {
@@ -4063,7 +3835,7 @@
         {
           "href": "https://github.com/ppywww",
           "target": "_blank",
-          "rel": "noopener noreferrer me",
+          "rel": "noopener noreferrer",
           "text": "GitHub"
         },
         {
@@ -4075,37 +3847,37 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.u56VWBAB.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 3039,
-          "decoded": 12793,
-          "start": 300,
-          "end": 321
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 62,
+          "end": 94
         }
       ],
       "navTiming": {
-        "ttfb": 295.5,
-        "dcl": 376.60000002384186,
-        "load": 376.7999999523163,
-        "transfer": 4342,
-        "encoded": 4042
+        "ttfb": 51.700000047683716,
+        "dcl": 96.60000002384186,
+        "load": 99.5,
+        "transfer": 3716,
+        "encoded": 3416
       },
-      "lcp": 392,
+      "lcp": 212,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 392
+          "t": 212
         },
         {
           "name": "first-contentful-paint",
-          "t": 392
+          "t": 212
         }
       ],
       "headingLevels": [
         1,
-        2
+        3
       ],
       "h1Count": 1,
       "imgCount": 0,
@@ -4134,7 +3906,7 @@
       "robots": null,
       "viewport": "width=device-width, initial-scale=1",
       "searchInputs": 0,
-      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 分类 技术 共 1 篇文章。 从 0 搭建这个博客：选型、目录与实测数据 记录本站从选型到骨架跑通的真实过程：Astro、Hugo、VitePress 的实测对比结论、最终目录结构，以及构建产物的真实体积数据。 2026-09-30 | 4 分钟 | 技术 | 更新于 2026-09-30 Astro 静态站点 性能优化 GitHub Pa",
+      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 分类 技术 共 1 篇文章。 从 0 搭建这个博客：选型、目录与实测数据 记录本站从选型到骨架跑通的真实过程：Astro、Hugo、VitePress 的实测对比结论、最终目录结构，以及构建产物的真实体积数据。 2026-09-30 · 4 分钟 · 技术 · 更新于 2026-09-30 Astro 静态站点 性能优化 GitHub Pa",
       "httpStatus": 200
     },
     {
@@ -4145,8 +3917,8 @@
       "dataTheme": "light",
       "inlineColorScheme": "light",
       "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgb(255, 255, 255)",
-      "bodyColor": "rgb(30, 30, 30)",
+      "bodyBg": "rgb(252, 252, 253)",
+      "bodyColor": "rgb(22, 24, 29)",
       "scrollWidth": 1265,
       "clientWidth": 1280,
       "bodyScrollWidth": 1265,
@@ -4199,18 +3971,6 @@
           "href": "https://ppywww.github.io/search/",
           "target": null,
           "rel": null,
-          "text": "搜索"
-        },
-        {
-          "href": "https://ppywww.github.io/search/",
-          "target": null,
-          "rel": null,
-          "text": ""
-        },
-        {
-          "href": "https://ppywww.github.io/posts/2026-09-28-why-i-blog/",
-          "target": null,
-          "rel": null,
           "text": ""
         },
         {
@@ -4240,7 +4000,7 @@
         {
           "href": "https://github.com/ppywww",
           "target": "_blank",
-          "rel": "noopener noreferrer me",
+          "rel": "noopener noreferrer",
           "text": "GitHub"
         },
         {
@@ -4252,37 +4012,37 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.u56VWBAB.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 3039,
-          "decoded": 12793,
-          "start": 301,
-          "end": 334
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 57,
+          "end": 80
         }
       ],
       "navTiming": {
-        "ttfb": 291.2000000476837,
-        "dcl": 381.60000002384186,
-        "load": 381.8000000715256,
-        "transfer": 4224,
-        "encoded": 3924
+        "ttfb": 47.10000002384186,
+        "dcl": 81.80000007152557,
+        "load": 84.20000004768372,
+        "transfer": 3603,
+        "encoded": 3303
       },
-      "lcp": 388,
+      "lcp": 176,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 388
+          "t": 176
         },
         {
           "name": "first-contentful-paint",
-          "t": 388
+          "t": 176
         }
       ],
       "headingLevels": [
         1,
-        2
+        3
       ],
       "h1Count": 1,
       "imgCount": 0,
@@ -4311,7 +4071,7 @@
       "robots": null,
       "viewport": "width=device-width, initial-scale=1",
       "searchInputs": 0,
-      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 分类 生活 共 1 篇文章。 我为什么开始写博客 关于记录、公开写作与长期主义的一点想法：写博客不是输出表演，而是把模糊的念头逼成清晰句子的过程。 2026-09-28 | 2 分钟 | 生活 写作 随笔 ← 全部分类 © 2026 ppy · ppy-Blog GitHub RSS",
+      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 分类 生活 共 1 篇文章。 我为什么开始写博客 关于记录、公开写作与长期主义的一点想法：写博客不是输出表演，而是把模糊的念头逼成清晰句子的过程。 2026-09-28 · 2 分钟 · 生活 写作 随笔 ← 全部分类 © 2026 ppy · ppy-Blog GitHub RSS",
       "httpStatus": 200
     },
     {
@@ -4322,8 +4082,8 @@
       "dataTheme": "light",
       "inlineColorScheme": "light",
       "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgb(255, 255, 255)",
-      "bodyColor": "rgb(30, 30, 30)",
+      "bodyBg": "rgb(252, 252, 253)",
+      "bodyColor": "rgb(22, 24, 29)",
       "scrollWidth": 1265,
       "clientWidth": 1280,
       "bodyScrollWidth": 1265,
@@ -4376,18 +4136,6 @@
           "href": "https://ppywww.github.io/search/",
           "target": null,
           "rel": null,
-          "text": "搜索"
-        },
-        {
-          "href": "https://ppywww.github.io/search/",
-          "target": null,
-          "rel": null,
-          "text": ""
-        },
-        {
-          "href": "https://ppywww.github.io/posts/2026-09-25-reading-note-template/",
-          "target": null,
-          "rel": null,
           "text": ""
         },
         {
@@ -4423,7 +4171,7 @@
         {
           "href": "https://github.com/ppywww",
           "target": "_blank",
-          "rel": "noopener noreferrer me",
+          "rel": "noopener noreferrer",
           "text": "GitHub"
         },
         {
@@ -4435,37 +4183,37 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.u56VWBAB.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 3039,
-          "decoded": 12793,
-          "start": 301,
-          "end": 337
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 60,
+          "end": 92
         }
       ],
       "navTiming": {
-        "ttfb": 292.2999999523163,
-        "dcl": 377.5,
-        "load": 428.10000002384186,
-        "transfer": 4250,
-        "encoded": 3950
+        "ttfb": 49.699999928474426,
+        "dcl": 93.39999997615814,
+        "load": 98,
+        "transfer": 3634,
+        "encoded": 3334
       },
-      "lcp": 448,
+      "lcp": 188,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 448
+          "t": 188
         },
         {
           "name": "first-contentful-paint",
-          "t": 448
+          "t": 188
         }
       ],
       "headingLevels": [
         1,
-        2
+        3
       ],
       "h1Count": 1,
       "imgCount": 0,
@@ -4494,7 +4242,7 @@
       "robots": null,
       "viewport": "width=device-width, initial-scale=1",
       "searchInputs": 0,
-      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 分类 读书 共 1 篇文章。 读书笔记模板：把读完的书变成能回看的东西 一份可直接复用的读书笔记模板：从书籍信息、一句话结论，到摘抄卡片与行动清单，复制结构即可开始写。 2026-09-25 | 2 分钟 | 读书 读书笔记 模板 写作 ← 全部分类 © 2026 ppy · ppy-Blog GitHub RSS",
+      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 分类 读书 共 1 篇文章。 读书笔记模板：把读完的书变成能回看的东西 一份可直接复用的读书笔记模板：从书籍信息、一句话结论，到摘抄卡片与行动清单，复制结构即可开始写。 2026-09-25 · 2 分钟 · 读书 读书笔记 模板 写作 ← 全部分类 © 2026 ppy · ppy-Blog GitHub RSS",
       "httpStatus": 200
     },
     {
@@ -4505,8 +4253,8 @@
       "dataTheme": "light",
       "inlineColorScheme": "light",
       "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgb(255, 255, 255)",
-      "bodyColor": "rgb(30, 30, 30)",
+      "bodyBg": "rgb(252, 252, 253)",
+      "bodyColor": "rgb(22, 24, 29)",
       "scrollWidth": 1265,
       "clientWidth": 1280,
       "bodyScrollWidth": 1265,
@@ -4559,12 +4307,6 @@
           "href": "https://ppywww.github.io/search/",
           "target": null,
           "rel": null,
-          "text": "搜索"
-        },
-        {
-          "href": "https://ppywww.github.io/search/",
-          "target": null,
-          "rel": null,
           "text": ""
         },
         {
@@ -4582,7 +4324,7 @@
         {
           "href": "https://github.com/ppywww",
           "target": "_blank",
-          "rel": "noopener noreferrer me",
+          "rel": "noopener noreferrer",
           "text": "GitHub"
         },
         {
@@ -4594,32 +4336,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.u56VWBAB.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 3039,
-          "decoded": 12793,
-          "start": 320,
-          "end": 342
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 62,
+          "end": 87
         }
       ],
       "navTiming": {
-        "ttfb": 315.7999999523163,
-        "dcl": 386.2999999523163,
-        "load": 386.7000000476837,
-        "transfer": 3897,
-        "encoded": 3597
+        "ttfb": 54.200000047683716,
+        "dcl": 88.5,
+        "load": 90.39999997615814,
+        "transfer": 3323,
+        "encoded": 3023
       },
-      "lcp": 404,
+      "lcp": 184,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 404
+          "t": 184
         },
         {
           "name": "first-contentful-paint",
-          "t": 404
+          "t": 184
         }
       ],
       "headingLevels": [
@@ -4857,16 +4599,16 @@
       "innerWidth": 320,
       "overflow": false,
       "overflowEls": [
-        "code right=477",
-        "span.line right=410",
-        "span right=410",
-        "span.line right=477",
-        "span right=477",
-        "span.line right=463",
-        "span right=463",
-        "code right=625",
-        "span.line right=515",
-        "span right=515"
+        "code right=479",
+        "span.line right=412",
+        "span right=412",
+        "span.line right=479",
+        "span right=479",
+        "span.line right=465",
+        "span right=465",
+        "code right=627",
+        "span.line right=517",
+        "span right=517"
       ],
       "screenshot": "w320-post.png"
     },
@@ -4936,14 +4678,14 @@
           "rect": "98x54",
           "visible": true,
           "skipLink": {
-            "top": 72,
-            "left": 24,
+            "top": 16,
+            "left": 16,
             "w": 98,
             "h": 54,
             "clip": "auto",
             "transform": "none",
             "opacity": "1",
-            "position": "fixed"
+            "position": "absolute"
           }
         },
         {
@@ -4954,17 +4696,17 @@
           "aria": null,
           "outline": "solid 2px rgb(142, 156, 255)",
           "boxShadow": "none",
-          "rect": "104x50",
+          "rect": "70x38",
           "visible": true,
           "skipLink": {
-            "top": -1,
-            "left": 24,
-            "w": 1,
-            "h": 1,
-            "clip": "rect(0px, 0px, 0px, 0px)",
-            "transform": "matrix(1, 0, 0, 1, 0, -1)",
+            "top": -44,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
             "opacity": "1",
-            "position": "fixed"
+            "position": "absolute"
           }
         },
         {
@@ -4975,17 +4717,17 @@
           "aria": null,
           "outline": "solid 2px rgb(142, 156, 255)",
           "boxShadow": "none",
-          "rect": "56x46",
+          "rect": "54x42",
           "visible": true,
           "skipLink": {
-            "top": -1,
-            "left": 24,
-            "w": 1,
-            "h": 1,
-            "clip": "rect(0px, 0px, 0px, 0px)",
-            "transform": "matrix(1, 0, 0, 1, 0, -1)",
+            "top": -44,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
             "opacity": "1",
-            "position": "fixed"
+            "position": "absolute"
           }
         },
         {
@@ -4996,17 +4738,17 @@
           "aria": null,
           "outline": "solid 2px rgb(142, 156, 255)",
           "boxShadow": "none",
-          "rect": "56x46",
+          "rect": "54x42",
           "visible": true,
           "skipLink": {
-            "top": -1,
-            "left": 24,
-            "w": 1,
-            "h": 1,
-            "clip": "rect(0px, 0px, 0px, 0px)",
-            "transform": "matrix(1, 0, 0, 1, 0, -1)",
+            "top": -44,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
             "opacity": "1",
-            "position": "fixed"
+            "position": "absolute"
           }
         },
         {
@@ -5017,17 +4759,17 @@
           "aria": null,
           "outline": "solid 2px rgb(142, 156, 255)",
           "boxShadow": "none",
-          "rect": "56x46",
+          "rect": "54x42",
           "visible": true,
           "skipLink": {
-            "top": -1,
-            "left": 24,
-            "w": 1,
-            "h": 1,
-            "clip": "rect(0px, 0px, 0px, 0px)",
-            "transform": "matrix(1, 0, 0, 1, 0, -1)",
+            "top": -44,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
             "opacity": "1",
-            "position": "fixed"
+            "position": "absolute"
           }
         },
         {
@@ -5038,17 +4780,17 @@
           "aria": null,
           "outline": "solid 2px rgb(142, 156, 255)",
           "boxShadow": "none",
-          "rect": "56x46",
+          "rect": "54x42",
           "visible": true,
           "skipLink": {
-            "top": -1,
-            "left": 24,
-            "w": 1,
-            "h": 1,
-            "clip": "rect(0px, 0px, 0px, 0px)",
-            "transform": "matrix(1, 0, 0, 1, 0, -1)",
+            "top": -44,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
             "opacity": "1",
-            "position": "fixed"
+            "position": "absolute"
           }
         },
         {
@@ -5059,17 +4801,17 @@
           "aria": null,
           "outline": "solid 2px rgb(142, 156, 255)",
           "boxShadow": "none",
-          "rect": "56x46",
+          "rect": "54x42",
           "visible": true,
           "skipLink": {
-            "top": -1,
-            "left": 24,
-            "w": 1,
-            "h": 1,
-            "clip": "rect(0px, 0px, 0px, 0px)",
-            "transform": "matrix(1, 0, 0, 1, 0, -1)",
+            "top": -44,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
             "opacity": "1",
-            "position": "fixed"
+            "position": "absolute"
           }
         },
         {
@@ -5083,14 +4825,14 @@
           "rect": "36x36",
           "visible": true,
           "skipLink": {
-            "top": -1,
-            "left": 24,
-            "w": 1,
-            "h": 1,
-            "clip": "rect(0px, 0px, 0px, 0px)",
-            "transform": "matrix(1, 0, 0, 1, 0, -1)",
+            "top": -44,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
             "opacity": "1",
-            "position": "fixed"
+            "position": "absolute"
           }
         },
         {
@@ -5104,35 +4846,35 @@
           "rect": "36x36",
           "visible": true,
           "skipLink": {
-            "top": -1,
-            "left": 24,
-            "w": 1,
-            "h": 1,
-            "clip": "rect(0px, 0px, 0px, 0px)",
-            "transform": "matrix(1, 0, 0, 1, 0, -1)",
+            "top": -44,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
             "opacity": "1",
-            "position": "fixed"
+            "position": "absolute"
           }
         },
         {
           "tag": "a",
-          "text": "",
-          "href": "https://github.com/ppywww",
-          "cls": "social-icons__link",
-          "aria": "GitHub",
+          "text": "从 0 搭建这个博客：选型、目录与实测数据",
+          "href": "/posts/2026-09-30-build-this-blog/",
+          "cls": null,
+          "aria": null,
           "outline": "solid 2px rgb(142, 156, 255)",
           "boxShadow": "none",
-          "rect": "26x26",
+          "rect": "352x25",
           "visible": true,
           "skipLink": {
-            "top": -1,
-            "left": 24,
-            "w": 1,
-            "h": 1,
-            "clip": "rect(0px, 0px, 0px, 0px)",
-            "transform": "matrix(1, 0, 0, 1, 0, -1)",
+            "top": -44,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
             "opacity": "1",
-            "position": "fixed"
+            "position": "absolute"
           }
         }
       ],
@@ -5140,7 +4882,7 @@
         "cls": "dark",
         "theme": "dark",
         "bg": "rgba(0, 0, 0, 0)",
-        "bodyBg": "rgb(29, 30, 32)",
+        "bodyBg": "rgb(15, 17, 21)",
         "inlineColorScheme": "dark",
         "stored": "dark",
         "aria": "true",
@@ -5150,7 +4892,7 @@
         "cls": "light",
         "theme": "light",
         "bg": "rgba(0, 0, 0, 0)",
-        "bodyBg": "rgb(245, 245, 245)",
+        "bodyBg": "rgb(252, 252, 253)",
         "inlineColorScheme": "light",
         "stored": "light",
         "aria": "false",
@@ -5174,14 +4916,14 @@
           "rect": "98x54",
           "visible": true,
           "skipLink": {
-            "top": 72,
-            "left": 24,
+            "top": 16,
+            "left": 16,
             "w": 98,
             "h": 54,
             "clip": "auto",
             "transform": "none",
             "opacity": "1",
-            "position": "fixed"
+            "position": "absolute"
           }
         },
         {
@@ -5192,17 +4934,17 @@
           "aria": null,
           "outline": "solid 2px rgb(59, 76, 224)",
           "boxShadow": "none",
-          "rect": "104x50",
+          "rect": "70x38",
           "visible": true,
           "skipLink": {
-            "top": -1,
-            "left": 24,
-            "w": 1,
-            "h": 1,
-            "clip": "rect(0px, 0px, 0px, 0px)",
-            "transform": "matrix(1, 0, 0, 1, 0, -1)",
+            "top": -44,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
             "opacity": "1",
-            "position": "fixed"
+            "position": "absolute"
           }
         },
         {
@@ -5213,17 +4955,17 @@
           "aria": null,
           "outline": "solid 2px rgb(59, 76, 224)",
           "boxShadow": "none",
-          "rect": "56x46",
+          "rect": "54x42",
           "visible": true,
           "skipLink": {
-            "top": -1,
-            "left": 24,
-            "w": 1,
-            "h": 1,
-            "clip": "rect(0px, 0px, 0px, 0px)",
-            "transform": "matrix(1, 0, 0, 1, 0, -1)",
+            "top": -44,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
             "opacity": "1",
-            "position": "fixed"
+            "position": "absolute"
           }
         },
         {
@@ -5234,17 +4976,17 @@
           "aria": null,
           "outline": "solid 2px rgb(59, 76, 224)",
           "boxShadow": "none",
-          "rect": "56x46",
+          "rect": "54x42",
           "visible": true,
           "skipLink": {
-            "top": -1,
-            "left": 24,
-            "w": 1,
-            "h": 1,
-            "clip": "rect(0px, 0px, 0px, 0px)",
-            "transform": "matrix(1, 0, 0, 1, 0, -1)",
+            "top": -44,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
             "opacity": "1",
-            "position": "fixed"
+            "position": "absolute"
           }
         },
         {
@@ -5255,17 +4997,17 @@
           "aria": null,
           "outline": "solid 2px rgb(59, 76, 224)",
           "boxShadow": "none",
-          "rect": "56x46",
+          "rect": "54x42",
           "visible": true,
           "skipLink": {
-            "top": -1,
-            "left": 24,
-            "w": 1,
-            "h": 1,
-            "clip": "rect(0px, 0px, 0px, 0px)",
-            "transform": "matrix(1, 0, 0, 1, 0, -1)",
+            "top": -44,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
             "opacity": "1",
-            "position": "fixed"
+            "position": "absolute"
           }
         },
         {
@@ -5276,17 +5018,17 @@
           "aria": null,
           "outline": "solid 2px rgb(59, 76, 224)",
           "boxShadow": "none",
-          "rect": "56x46",
+          "rect": "54x42",
           "visible": true,
           "skipLink": {
-            "top": -1,
-            "left": 24,
-            "w": 1,
-            "h": 1,
-            "clip": "rect(0px, 0px, 0px, 0px)",
-            "transform": "matrix(1, 0, 0, 1, 0, -1)",
+            "top": -44,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
             "opacity": "1",
-            "position": "fixed"
+            "position": "absolute"
           }
         },
         {
@@ -5297,17 +5039,17 @@
           "aria": null,
           "outline": "solid 2px rgb(59, 76, 224)",
           "boxShadow": "none",
-          "rect": "56x46",
+          "rect": "54x42",
           "visible": true,
           "skipLink": {
-            "top": -1,
-            "left": 24,
-            "w": 1,
-            "h": 1,
-            "clip": "rect(0px, 0px, 0px, 0px)",
-            "transform": "matrix(1, 0, 0, 1, 0, -1)",
+            "top": -44,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
             "opacity": "1",
-            "position": "fixed"
+            "position": "absolute"
           }
         },
         {
@@ -5321,14 +5063,14 @@
           "rect": "36x36",
           "visible": true,
           "skipLink": {
-            "top": -1,
-            "left": 24,
-            "w": 1,
-            "h": 1,
-            "clip": "rect(0px, 0px, 0px, 0px)",
-            "transform": "matrix(1, 0, 0, 1, 0, -1)",
+            "top": -44,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
             "opacity": "1",
-            "position": "fixed"
+            "position": "absolute"
           }
         }
       ],
@@ -5336,7 +5078,7 @@
         "cls": "light",
         "theme": "light",
         "bg": "rgba(0, 0, 0, 0)",
-        "bodyBg": "rgb(255, 255, 255)",
+        "bodyBg": "rgb(252, 252, 253)",
         "inlineColorScheme": "light",
         "stored": "light",
         "aria": "false",
@@ -5346,7 +5088,7 @@
         "cls": "dark",
         "theme": "dark",
         "bg": "rgba(0, 0, 0, 0)",
-        "bodyBg": "rgb(29, 30, 32)",
+        "bodyBg": "rgb(15, 17, 21)",
         "inlineColorScheme": "dark",
         "stored": "dark",
         "aria": "true",
@@ -5362,12 +5104,11 @@
   "externalLinks": [
     {
       "url": "https://github.com/ppywww",
-      "count": 25,
+      "count": 24,
       "targets": [
         "_blank"
       ],
       "rels": [
-        "noopener noreferrer me",
         "noopener noreferrer"
       ]
     },
@@ -5409,5 +5150,5 @@
     }
   ],
   "errors": [],
-  "durationMs": 74997
+  "durationMs": 76164
 }

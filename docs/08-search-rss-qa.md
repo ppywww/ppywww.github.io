@@ -13,7 +13,9 @@
 | 脚本 | `scripts/qa-search/`（零第三方依赖，见该目录 README） |
 | 约束遵守 | **未修改任何 `src/`、`package.json`、`deploy.yml`；未执行 `npm run build`**（构建权归实现方） |
 
-> ### 📌 最新结论（2026-09-30 晚 · 正式线上复验）：**全部通过**
+> ### 📌 最新结论（v1.1 · 部署 `12e1255`）：**三类验证全绿** —— 搜索/RSS/sitemap/robots 58 通过 · 强调色 26 通过（零静默失效）· 移动端无横向溢出。见 **§十三**。
+>
+> ### 📌 M4 基线结论（2026-09-30 · 部署 `44117c0`）：**全部通过**
 > 部署 `44117c0`｜线上 58 通过 / **0 不通过** / 0 无法验证 / 14 记录｜退出码 **0**｜产物指纹前后一致。
 > 首轮发现的 D-1、S-14、Q-2 三项缺陷**均已修复且线上转绿**；AC-5 与标签命中无回归；robots.txt 8 条校验全绿。
 > 详见 **§十**。（§一~§八 保留首轮验收原貌，用于追溯「发现 → 派修 → 复验」全过程。）
@@ -415,3 +417,71 @@ B-7 ✅ 无整站封禁        B-8 ✅ 语法合法（无非法行，有 User-ag
 | 产物指纹 | 开始 = 结束（`page_count=3`、robots 200、sitemap 22 条、搜索页 200）→ 结论未被并发部署污染 |
 
 > 未验证项沿用 §10.6（Feedly 真机、GitHub Actions 实跑、RSS draft 运行时）；「视觉是否好看」属主观评审，不在本报告的量化结论内。
+
+---
+
+## 十三、v1.1 最终验收门（部署 `12e1255`）
+
+| 项 | 内容 |
+|---|---|
+| 触发原因 | task-20 跑在 `4a1e86f`；此后 tokens/base **又变过**（新增 `.container > .content { padding-inline: 0 }` 消除移动端双重内边距、删掉死代码 `.hero`），故三项全部重跑 |
+| 环境 | 线上 `https://ppywww.github.io`（构建方全部停手，无并发构建）；**只读，未执行 `npm run build`** |
+| 结果 | ① `run-all`：**58 通过 / 0 不通过 / 0 无法验证**，退出码 0<br>② `check-theme-tokens`：**26 通过 / 0 不通过 / 0 无法验证**，退出码 0<br>③ robots.txt：**B-1~B-8 全绿**（含在 `run-all` 的 sitemap 套件内） |
+| 产物指纹 | 开始 = 结束 = `{"pagefindEntry":"zh-cn:zh-cn_7ef7ef62b2f65:page_count=3","robots":"HTTP 200","sitemapLocs":"22","searchPage":"HTTP 200"}` |
+| 判定 | **v1.1 通过最终验收门**（搜索 F-05 / RSS F-09 / sitemap F-10 / robots / 强调色零静默失效） |
+
+### 13.1 搜索：三项历史缺陷保持转绿，AC-5 与标签命中无回归
+
+| 检查 | 结果 | 证据 |
+|---|---|---|
+| D-1 深链 `/search/?q=搭建` | ✅ | 输入框回填 + 自动搜索（`找到 1 条结果`） |
+| S-14 0 结果清空旧列表 | ✅ | 切到 0 命中后「仍在 DOM 里的旧结果数=0」 |
+| Q-2 结果质量 | ✅ | 非文章页 **0 条**；「为什么」目标文章第 1 位 |
+| AC-5 标题词命中 | ✅ 3/3 | 搭建 → `/posts/2026-09-30-build-this-blog/`；读书笔记 → `/posts/2026-09-25-reading-note-template/`；为什么 → `/posts/2026-09-28-why-i-blog/`（均第 1 位，且带 `<mark>` 高亮） |
+| 标签词命中 | ✅ | 性能优化 → `/posts/2026-09-30-build-this-blog/` |
+| 交互 | ✅ | 防抖（≥200ms）、Esc 清空、键盘 ↑/↓（3 条结果 1→2→1）、结果链接全部 200、运行时加载 `/pagefind/` 资源 |
+| 索引卫生 | ✅ | 搜索页与 404 均未污染结果 |
+
+### 13.2 RSS / sitemap / robots
+
+- **RSS 13 通过 / 0 不通过**：线上 200、XML 合法、`channel/description` 与 `consts.ts` 的 `SITE.description` 逐字符相同（含弯引号 `’`）、3 条 item 的 pubDate 倒序且为合法 RFC-822。
+- **sitemap 17 通过 / 0 不通过**：22 条 loc 线上逐条 200（无死链）、canonical 域名一致、中文百分号编码、`page_count=3` = 3 个正文页。
+- **robots.txt B-1~B-8 全绿**：200 · 含 Sitemap 行 · 域名 = `consts.ts` 的 `SITE.url`（读源码比对）· 指向的 `/sitemap.xml` 实际 200 · 含 `Disallow: /search/` · **反向校验** Allow `/`=200 与 Disallow `/search/`=200 都是真实路径 · 无整站封禁 · 语法合法。
+
+### 13.3 强调色：11 处写范围外引用在新 base.css / 页面结构下**仍零静默失效**
+
+8 个区域逐条可解析（完整表见 §12.2，本轮取值与 §12.2 完全一致）：
+
+| 区域 | 代表规则 | 亮 / 暗 |
+|---|---|---|
+| Toc | `.toc__link[…]:hover { border-left-color: var(--color-accent) }` | `#3b4ce0` / `#8e9cff` |
+| TermPill | `.tag-pill[…][aria-current=page] { border-color/color: var(--color-accent/-text) }` | 同上 |
+| search | `.search-input[…]:focus`、`.search-result__title[…] a[…]:hover` | 同上 |
+| PostLayout | `.post__copyright[…] a[…] { color: var(--color-accent-text) }` | 同上 |
+| ArchiveEntry | `.archive-item__link[…]:hover { border-left-color: var(--color-accent) }` | 同上 |
+| Pagination | `.pagination__link[…][aria-current=page] { color: var(--color-accent-text) }` | 同上 |
+| 404 | `.search-input[…]:focus { border-color: var(--color-accent) }` | 同上 |
+| prose | `.prose a { color: var(--color-accent-text) }` | 同上 |
+
+- **反向验证**：产物 CSS 中 **21 条强调色 `var()` 引用全部解析到具体值**，零处失效。
+- 变量定义（各 3 条：`:root` + `:root.dark` + `@media` 回退）：`accent`/`accent-text` = `palette-indigo-600`(亮)/`300`(暗)；`on-accent` = `white`(亮)/`ink-950`(暗)。
+- 对比度：链接 vs 背景 亮 **6.37:1** / 暗 **6.63:1**；按钮 亮 6.37 / 暗 6.63 —— 全部 ≥ AA 4.5:1。
+- CSS 体积：外链 **22.41 KiB**（上轮 21.15，因 base.css 新增规则）+ 内联 16.42 KiB；`@font-face` = 0、无字体文件 URL、首页无第三方 JS。
+
+### 13.4 附加：A 的移动端内边距改动实测（4 页面 × 4 宽度，共 16 组）
+
+| 视口 | `.container` padding | `.container > .content` padding | 横向溢出 |
+|---|---|---|---|
+| 320 / 375 / 768 | 14px | **0px** | ✅ 无 |
+| 1264 | 24px | **0px** | ✅ 无 |
+
+- `.content` 的 `padding-inline` 被显式归零 → **A 想消除的「移动端双重内边距」确实不再发生**；
+- 四个页面类型（首页 / 文章页 / 搜索页 / 归档页）× 四个宽度**均无横向滚动**（PRD AC-4）。
+
+### 13.5 视觉证据（本轮更新）
+
+- 桌面：`theme-light.png` / `theme-dark.png`（1264×771）
+- 移动端：`theme-light-w320.png` / `theme-dark-w320.png`（**320×720**）
+- 修正说明（诚实记录）：截图工具最初只传 `--window-size`，而 **Chrome 在 Windows 上有约 500px 的最小窗口宽度**，导致「标称 320」实际输出 500×591。已改用 `Emulation.setDeviceMetricsOverride` 强制视口，现文件尺寸与标称一致（已用 PNG IHDR 复核为 320×720）。
+
+> 未验证项沿用 §10.6（Feedly 真机、GitHub Actions 实跑、RSS `draft:true` 运行时）；「视觉审美」属主观评审，不在本报告量化结论内。

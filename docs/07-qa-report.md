@@ -308,3 +308,133 @@ pwsh -NoProfile -File scripts/qa/run-lighthouse.ps1   # 线上三页 Lighthouse 
 
 *第二轮复验由同一位独立验收方（tech-scout）在 2026-09-30 18:07–18:25 完成，全部数值取自线上地址的本次实测。*
 
+---
+
+# 10. v1.1 线上终验（commit 12e1255）
+
+| 项 | 内容 |
+|---|---|
+| 验收时间 | 2026-09-30 **19:07–19:45**，全部针对**线上** https://ppywww.github.io |
+| 验收方 | tech-scout（独立验收方；**未改源码、未跑 `npm run build`**，只写本报告与 `scripts/qa/`） |
+| 变更内容 | v1.1：移动端汉堡菜单（G-19 修复）、A11y 标题层级修复、换肤（调色板更名）与页头/B/C 重构 |
+| 总裁决 | **4 个必答问题全部通过**；A11y 8/8 页 100 分；未发现阻断或严重问题；2 项文档/内容侧待办 |
+
+## 10.1 问题 1（G-17 红线）：1KB 有没有击穿文章页 LCP？→ **没有击穿**
+
+**实测（Lighthouse 移动端模拟 4G，文章页独立跑 3 次）**
+
+| 运行 | LCP | FCP | TBT | CLS | Performance | A11y |
+|---|---|---|---|---|---|---|
+| 文章页 #1 | **1435ms** | 1435ms | 0ms | 0 | 100 | 100 |
+| 文章页 #2 | **1310ms** | 1310ms | 0ms | 0 | 100 | 100 |
+| 文章页 #3 | **1251ms** | 1251ms | 0ms | 0 | 100 | 100 |
+| 首页（参照） | 1014ms | 1014ms | 0ms | 0 | 100 | 100 |
+
+→ 三次最大值 **1435ms < 1500ms**，**余量 ≥65ms**。
+
+**这 1KB 到底有多大（实测，不是估算）**：用同一套 CDP 抓取脚本对比 v1.0 与 v1.1 每个页面的文档字节数（`navTiming.encodedBodySize`，gzip 后传输字节）：
+
+| 页面 | v1.0 | v1.1 | Δ |
+|---|---|---|---|
+| 文章页 | 10,555B | 11,095B | **+540B** |
+| 首页 | 3,646B | 4,956B | +1,310B（含新增内联 PostCard 样式） |
+| 标签页（8 个） | ~3,400B | ~4,000B | +614…+628B |
+| **全站 24 页平均** | 3,917B | 4,504B | **+588B/页** |
+
+**量化结论**：+540B 在 Lighthouse 模拟 Slow-4G（下行 1.6Mbps）下的传输时间约 **2.7ms**（540×8/1600），仅为实测余量（65ms）的 **1/24**；且文章页**外部 JS 仍为 0B**（汉堡脚本是内联在文档里的）。**因此不需要为了性能把菜单降级成 `<details>`。**
+
+**两点必须记录在案：**
+1. 按 **G-17 的字面规定**（"禁止给文章页增加任何首屏资源"），这个内联脚本技术上仍属"给文章页加了首屏 JS"。本轮实测把它验证为**安全的例外**，建议 Lead 在决策日志里补一条追认（否则后续每次复验都会触发同一条红线争议）。
+2. **v1.0 的 1498ms 是单次采样**，v1.1 是三次采样（1251–1435ms）。跨版本差异落在运行间噪声范围内，**不能据此断言"变快了"**，只能说"未击穿"。
+
+## 10.2 问题 2：A11y 全站（线上 8 个页面，各跑一次 Lighthouse）
+
+| 页面 | Performance | **Accessibility** | Best Practices | SEO | LCP | `heading-order` | `target-size` | `color-contrast` |
+|---|---|---|---|---|---|---|---|---|
+| `/` 首页 | 100 | **100** | 100 | 100 | 1014ms | 1 | 1 | 1 |
+| `/posts/2026-09-30-build-this-blog/` 文章页 | 100 | **100** | 100 | 100 | 1435ms | 1 | 1 | 1 |
+| `/posts/` 列表 | 100 | **100** | 100 | 100 | 902ms | 1 | 1 | 1 |
+| `/works/` | 100 | **100** | 100 | 100 | 890ms | 1 | 1 | 1 |
+| `/archives/` | 100 | **100** | 100 | 100 | 927ms | 1 | 1 | 1 |
+| `/tags/Astro/` | 100 | **100** | 100 | 100 | 883ms | 1 | 1 | 1 |
+| `/about/` | 100 | **100** | 100 | 100 | 965ms | 1 | 1 | 1 |
+| `/search/` | 100 | **100** | 100 | 66 ⚠️ | 899ms | 1 | 1 | 1 |
+
+- **`heading-order` 与 `target-size` 两个 audit 已消失**：8/8 页 score 均为 1（`/works/` 与 `/posts/` 的标题层级跳级修复确认生效）。
+- `color-contrast` 8/8 页 score = 1，v1.0 的代码块配色问题未回归。
+- 搜索页 SEO 66 仍为 `noindex` + `robots.txt Disallow` 所致（有意），口径待你裁定（§9.1 L-3）。
+
+## 10.3 问题 3：移动端页头（真实视口 + 真实鼠标/键盘事件）
+
+| 视口 | 页头高度 | 汉堡按钮 | 可见导航项 | 横向滚动 |
+|---|---|---|---|---|
+| 320px | **57px** | display:flex，**44×44** | 0（收起） | 320 = 320 ✅ |
+| 375px | **57px** | display:flex，44×44 | 0（收起） | 375 = 375 ✅ |
+| 480px | **57px** | display:flex，44×44 | 0（收起） | 480 = 480 ✅ |
+| 767px | **57px** | display:flex，44×44 | 0（收起） | 767 = 767 ✅ |
+| 768px | 61px | display:none | 5（首页/文章/归档/作品/关于） | ✅ |
+| 1024px | 61px | display:none | 5 | ✅ |
+| 1440px | 61px | display:none | 5 | ✅ |
+
+（G-19 修复前：320px → 205px、375px → 155px、480px → 111px；**现已全部为 57px**，达成设计目标。）
+
+**汉堡菜单行为（真实 `Input.dispatchMouseEvent` / `dispatchKeyEvent`）**
+- **开**：`aria-expanded` false → true，`aria-controls="site-menu"` 生效，面板高度 0 → **341px**，可见项 **6** 个（首页/文章/归档/作品/关于/搜索）
+- **焦点**：打开后焦点**自动落到第一项"首页"**；Tab 依次 首页 → 文章 → 归档 → 作品 → 关于 → 搜索 → 页头搜索图标 → …（顺序连续，无死角）
+- **Esc**：菜单关闭（`aria-expanded=false`、面板高度 0）且**焦点交还给汉堡按钮**（`button[导航菜单]`）——焦点管理正确
+- 每个导航项高度 ≈57px（341 ÷ 6），满足设计系统"每项 44px 高"的下限
+
+## 10.4 问题 4：回归确认（换肤 + B/C 重构未带崩）
+
+| 项 | 结论 | 实测证据 |
+|---|---|---|
+| **AC-3** 零闪烁 | ✅ 无回归 | 主题内联脚本仍在原始 HTML 第 **273** 字节，早于首个外部 CSS（**3144**）与首个内联 `<style>`（**3202**）；三种情形（系统暗 / 系统亮 / 亮+已存 dark）的 **firstRaf 首帧回调**时 `html.class` 与 body 背景**已是目标主题**（暗 `#1D1E20` / 亮 `#F5F5F5`），样式表 2 张 |
+| **AC-4** 320px | ✅ 无回归 | 7 个代表性页面 `scrollWidth = clientWidth = 320`，溢出 0；另在 320/375/480/767 四档复测页头，均无横向滚动 |
+| **AC-12** 外链属性 | ✅ 无回归 | 3 个外链域共 29 处引用，`target="_blank"` 缺 `noopener` = **0**；新出现的 `github.com/ppywww`（25 处）rel 为 `noopener noreferrer me`，合规 |
+| **AC-5** 搜索 | ✅ 无回归 | "读书笔记" → **2 条**，首条即目标文章；Esc 清空 ✓；`↑/↓` 焦点逐条移动（第 1 → 第 2 → 回第 1）✓；`role=status` 计数 ✓；无结果空态 ✓；单字"的" → 3 条 |
+| 其他 | ✅ | og:image 覆盖 23/23 个 HTML 页；`/rss.xml`、`/sitemap.xml`、`/robots.txt`、`/search/` 全 200；`example.com` 占位外链仍为 0 |
+| 性能预算 | ✅ | 首页/文章页**外部 JS 0B**；CSS 3,039B（首页）/5,141B（文章页）；搜索页 JS 2,140B；**字体请求 0**；24 页 CLS 全 0；真实网络 LCP 220–680ms |
+
+## 10.5 截图矩阵（给老板的视觉依据，14 张）
+
+亮/暗 × 桌面(1440×900)/移动(390×844，DPR 2) × 首页/文章页/归档页 = 12 张，另附移动端菜单展开态 2 张。全部位于 `scripts/qa/evidence/`：
+
+| 文件 | 说明 |
+|---|---|
+| `v11-home-light-desktop.png` / `v11-home-dark-desktop.png` | 首页 亮/暗 桌面 |
+| `v11-home-light-mobile.png` / `v11-home-dark-mobile.png` | 首页 亮/暗 移动 |
+| `v11-post-light-desktop.png` / `v11-post-dark-desktop.png` | 文章页 亮/暗 桌面 |
+| `v11-post-light-mobile.png` / `v11-post-dark-mobile.png` | 文章页 亮/暗 移动 |
+| `v11-archives-light-desktop.png` / `v11-archives-dark-desktop.png` | 归档页 亮/暗 桌面 |
+| `v11-archives-light-mobile.png` / `v11-archives-dark-mobile.png` | 归档页 亮/暗 移动 |
+| `v11-home-menu-open-light-mobile.png` / `v11-home-menu-open-dark-mobile.png` | 移动端汉堡菜单展开态 亮/暗 |
+
+每张截图都带自检字段（`screenshot-matrix.json`）：主题 class、body 背景色、页头高度、菜单 `aria-expanded`——可确认截图确实是目标主题/目标视口下的真实渲染。
+
+## 10.6 本轮新发现
+
+| # | 级别 | 问题 | 建议 |
+|---|---|---|---|
+| **D-1** | 一般 | **设计系统文档未同步 v1.1**：① §2.3 语义 token 表仍是旧调色板（`--color-bg: #FCFCFD / #0F1115`、`paper-*`/`night-*` 命名），而线上 `tokens.css` 已改为 `--palette-white / gray-* / ink-*` 并新增了 `--color-bg-list`（列表页底 `#F5F5F5` vs 文章页 `#FFFFFF`，实测两值并存且符合代码注释，非缺陷）；② §6.1 仍写"移动端 <900px 用**原生 `<details>`**、零 JS"，而实现是 **JS 按钮 + 768px 断点**。文档与实现不一致，会影响后续维护者判断 | 派 **design-system** 更新 `04-design-system.md`；若实现方式是 task-24 的有意选择，请在 `00-decision-log.md` 追认并改文档 |
+| **D-2** | 记录 | **误报排除**：桌面截图中 RSS 图标看似塌缩成一个小点。用 CDP 实测两个社交图标均为 **26×26 CSS px**、`viewBox="0 0 24 24"`、各含 1 个 path、各 676 px² → **不是缺陷**，是 RSS 字形本身笔画细，在预览缩放下显小 | 无需处理 |
+| **D-3** | 一般（沿用） | L-1 未变：`/about/` 仍是"本页是骨架，待替换"占位；`/works/` 第 2 条仍标"示例作品（占位）" | 老板/内容方在 tag 前决策 |
+
+## 10.7 仍未验证（沿用 §9.6，无变化）
+
+构建耗时 <60s（禁止构建）、CI 运行日志（GitHub API 403）、Feedly 实订、无 JS 回退、移动真机蜂窝网络、Giscus 逐篇可开、320px 全 24 页逐页覆盖（本轮抽测 7 页 + 页头 4 档视口）。
+
+**本轮新增复现命令**
+
+```powershell
+pwsh -NoProfile -File scripts/qa/run-lighthouse-v11.ps1   # 8 页 A11y + 文章页 LCP x3
+node scripts/qa/check-mobile-header.mjs                    # 页头高度 / 汉堡开合 / Esc / Tab
+node scripts/qa/shoot-matrix.mjs                           # 亮暗 x 桌面移动 截图矩阵
+node scripts/qa/check-social-icons.mjs                     # 社交图标渲染尺寸
+node scripts/qa/check-first-paint.mjs                      # AC-3 首帧证据
+node scripts/qa/check-search.mjs                           # AC-5 回归
+node scripts/qa/check-site.mjs                             # 全站抓取（含 320px / 键盘 / 外链 / 体积）
+```
+
+*v1.1 终验由 tech-scout 于 2026-09-30 19:07–19:45 在线上地址完成；所有数值均为本次实测，未采信实现方自述。*
+
+

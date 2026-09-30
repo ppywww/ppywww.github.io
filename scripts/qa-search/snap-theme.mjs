@@ -17,11 +17,13 @@ const PROJECT_ROOT = new URL('../../', import.meta.url).pathname.replace(/^\/([A
 const OUT_DIR = PROJECT_ROOT + 'scripts/qa-search/evidence';
 
 function parseArgs(argv) {
-  const opts = { base: 'https://ppywww.github.io', page: '/posts/2026-09-30-build-this-blog/', out: OUT_DIR };
+  const opts = { base: 'https://ppywww.github.io', page: '/posts/2026-09-30-build-this-blog/', out: OUT_DIR, width: 1264, height: 771 };
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === '--base') opts.base = argv[++i];
     else if (argv[i] === '--page') opts.page = argv[++i];
     else if (argv[i] === '--out') opts.out = argv[++i];
+    else if (argv[i] === '--width') opts.width = Number(argv[++i]);
+    else if (argv[i] === '--height') opts.height = Number(argv[++i]);
   }
   return opts;
 }
@@ -35,10 +37,18 @@ export async function run(opts = {}) {
     server = await serveDist({ distDir: PROJECT_ROOT + 'dist', port: 0 });
     origin = server.origin;
   }
-  const chrome = await launchChrome({});
+  const chrome = await launchChrome({ width: o.width, height: o.height });
   const written = [];
   try {
     const page = await chrome.openPage(origin + o.page);
+    // Chrome 在 Windows 上有约 500px 的**最小窗口宽度**：只靠 --window-size 拿到的是被撑大的视口，
+    // 截图会与标称宽度不符。用 Emulation 强制设备度量，才能保证「标称 320 就真是 320」。
+    await page.send('Emulation.setDeviceMetricsOverride', {
+      width: o.width,
+      height: o.height,
+      deviceScaleFactor: 1,
+      mobile: o.width <= 768,
+    });
     await new Promise((r) => setTimeout(r, 1200));
     for (const mode of ['light', 'dark']) {
       await page.evaluate(
@@ -52,7 +62,8 @@ export async function run(opts = {}) {
       );
       await new Promise((r) => setTimeout(r, 250));
       const shot = await page.send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: false });
-      const file = path.join(o.out, 'theme-' + mode + '.png');
+      const suffix = o.width === 1264 ? '' : '-w' + o.width;
+      const file = path.join(o.out, 'theme-' + mode + suffix + '.png');
       fs.writeFileSync(file, Buffer.from(shot.data, 'base64'));
       written.push(file);
     }

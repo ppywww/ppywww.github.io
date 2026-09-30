@@ -66,6 +66,13 @@
 | R-14 | 搜索拼音/模糊匹配 | F-25 | P2 |
 | R-15 | 邮件订阅 | F-26 | P3 |
 
+### 来自 v1.1 最终验收的新增债务
+
+| ID | 需求 | 来源 | 建议级别 | 备注 |
+|---|---|---|---|---|
+| R-19 | 04-design-system.md §2.3 调色板仍为旧版（paper/night、#FCFCFD/#0F1115），线上 tokens.css 已是 --palette-white/gray/ink 且新增 --color-bg-list（列表页 #F5F5F5 / 文章页 #FFFFFF） | tech-scout D-1 | **P1** | 并入 R-16 一起返修；会让后来者照错文档干活 |
+| R-20 | 04-design-system.md §6.1 的"<900px 用原生 <details> 零 JS"与实现不一致 | tech-scout D-1 | P2 | 已在 G-23 追认实现，文档待改；并入 R-16 |
+
 ### 来自 v1.1 实施过程的债务（Lead 记账）
 
 | ID | 需求 | 来源 | 建议级别 | 备注 |

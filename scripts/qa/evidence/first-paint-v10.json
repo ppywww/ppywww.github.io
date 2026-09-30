@@ -1,22 +1,22 @@
 {
   "url": "https://ppywww.github.io/",
-  "generatedAt": "2026-09-30T11:19:31.506Z",
+  "generatedAt": "2026-09-30T10:12:58.105Z",
   "structural": {
     "firstInlineScriptAt": 273,
     "firstScriptSrcAt": -1,
     "firstExternalCssAt": 3144,
-    "firstStyleBlockAt": 3202,
-    "bodyAt": -1,
+    "firstStyleBlockAt": -1,
+    "bodyAt": 3209,
     "themeScriptBeforeFirstCss": true,
-    "themeScriptBeforeBody": false,
+    "themeScriptBeforeBody": true,
     "inlineStyleBeforeBody": false,
     "themeScriptMentions": {
       "localStorage": true,
       "prefersColorScheme": true,
       "darkClass": true
     },
-    "firstStyleBlockHead": "<style>.post-card__overlay[data-astro-cid-sbmovh4h]{z-index:1;border-radius:inherit;position:absolute;inset:0}.post-card[data-astro-cid-sbmovh4h] .tag-list[data",
-    "headBytes": null
+    "firstStyleBlockHead": "",
+    "headBytes": 3209
   },
   "cases": [
     {
@@ -25,48 +25,48 @@
       "seededTheme": null,
       "samples": {
         "dcl": {
-          "t": 264,
+          "t": 51,
           "readyState": "interactive",
           "htmlClass": "dark",
           "dataTheme": "dark",
           "htmlBg": "rgba(0, 0, 0, 0)",
           "bodyExists": true,
-          "bodyBg": "rgb(29, 30, 32)",
+          "bodyBg": "rgb(15, 17, 21)",
           "stored": null,
-          "styleSheetCount": 2
-        },
-        "firstRaf": {
-          "t": 267,
-          "readyState": "interactive",
-          "htmlClass": "dark",
-          "dataTheme": "dark",
-          "htmlBg": "rgba(0, 0, 0, 0)",
-          "bodyExists": true,
-          "bodyBg": "rgb(29, 30, 32)",
-          "stored": null,
-          "styleSheetCount": 2
+          "styleSheetCount": 1
         },
         "load": {
-          "t": 270,
+          "t": 65,
           "readyState": "complete",
           "htmlClass": "dark",
           "dataTheme": "dark",
           "htmlBg": "rgba(0, 0, 0, 0)",
           "bodyExists": true,
-          "bodyBg": "rgb(29, 30, 32)",
+          "bodyBg": "rgb(15, 17, 21)",
           "stored": null,
-          "styleSheetCount": 2
+          "styleSheetCount": 1
+        },
+        "firstRaf": {
+          "t": 155,
+          "readyState": "complete",
+          "htmlClass": "dark",
+          "dataTheme": "dark",
+          "htmlBg": "rgba(0, 0, 0, 0)",
+          "bodyExists": true,
+          "bodyBg": "rgb(15, 17, 21)",
+          "stored": null,
+          "styleSheetCount": 1
         },
         "secondRaf": {
-          "t": 271,
+          "t": 159,
           "readyState": "complete",
           "htmlClass": "dark",
           "dataTheme": "dark",
           "htmlBg": "rgba(0, 0, 0, 0)",
           "bodyExists": true,
-          "bodyBg": "rgb(29, 30, 32)",
+          "bodyBg": "rgb(15, 17, 21)",
           "stored": null,
-          "styleSheetCount": 2
+          "styleSheetCount": 1
         }
       }
     },
@@ -76,48 +76,48 @@
       "seededTheme": null,
       "samples": {
         "dcl": {
-          "t": 35,
+          "t": 116,
           "readyState": "interactive",
           "htmlClass": "light",
           "dataTheme": "light",
           "htmlBg": "rgba(0, 0, 0, 0)",
           "bodyExists": true,
-          "bodyBg": "rgb(245, 245, 245)",
+          "bodyBg": "rgb(252, 252, 253)",
           "stored": null,
-          "styleSheetCount": 2
-        },
-        "load": {
-          "t": 39,
-          "readyState": "complete",
-          "htmlClass": "light",
-          "dataTheme": "light",
-          "htmlBg": "rgba(0, 0, 0, 0)",
-          "bodyExists": true,
-          "bodyBg": "rgb(245, 245, 245)",
-          "stored": null,
-          "styleSheetCount": 2
+          "styleSheetCount": 1
         },
         "firstRaf": {
-          "t": 165,
+          "t": 131,
+          "readyState": "interactive",
+          "htmlClass": "light",
+          "dataTheme": "light",
+          "htmlBg": "rgba(0, 0, 0, 0)",
+          "bodyExists": true,
+          "bodyBg": "rgb(252, 252, 253)",
+          "stored": null,
+          "styleSheetCount": 1
+        },
+        "load": {
+          "t": 210,
           "readyState": "complete",
           "htmlClass": "light",
           "dataTheme": "light",
           "htmlBg": "rgba(0, 0, 0, 0)",
           "bodyExists": true,
-          "bodyBg": "rgb(245, 245, 245)",
+          "bodyBg": "rgb(252, 252, 253)",
           "stored": null,
-          "styleSheetCount": 2
+          "styleSheetCount": 1
         },
         "secondRaf": {
-          "t": 167,
+          "t": 210,
           "readyState": "complete",
           "htmlClass": "light",
           "dataTheme": "light",
           "htmlBg": "rgba(0, 0, 0, 0)",
           "bodyExists": true,
-          "bodyBg": "rgb(245, 245, 245)",
+          "bodyBg": "rgb(252, 252, 253)",
           "stored": null,
-          "styleSheetCount": 2
+          "styleSheetCount": 1
         }
       }
     },
@@ -127,48 +127,48 @@
       "seededTheme": "dark",
       "samples": {
         "dcl": {
-          "t": 35,
+          "t": 70,
           "readyState": "interactive",
           "htmlClass": "dark",
           "dataTheme": "dark",
           "htmlBg": "rgba(0, 0, 0, 0)",
           "bodyExists": true,
-          "bodyBg": "rgb(29, 30, 32)",
+          "bodyBg": "rgb(15, 17, 21)",
           "stored": "dark",
-          "styleSheetCount": 2
-        },
-        "load": {
-          "t": 38,
-          "readyState": "complete",
-          "htmlClass": "dark",
-          "dataTheme": "dark",
-          "htmlBg": "rgba(0, 0, 0, 0)",
-          "bodyExists": true,
-          "bodyBg": "rgb(29, 30, 32)",
-          "stored": "dark",
-          "styleSheetCount": 2
+          "styleSheetCount": 1
         },
         "firstRaf": {
-          "t": 181,
+          "t": 86,
+          "readyState": "interactive",
+          "htmlClass": "dark",
+          "dataTheme": "dark",
+          "htmlBg": "rgba(0, 0, 0, 0)",
+          "bodyExists": true,
+          "bodyBg": "rgb(15, 17, 21)",
+          "stored": "dark",
+          "styleSheetCount": 1
+        },
+        "load": {
+          "t": 183,
           "readyState": "complete",
           "htmlClass": "dark",
           "dataTheme": "dark",
           "htmlBg": "rgba(0, 0, 0, 0)",
           "bodyExists": true,
-          "bodyBg": "rgb(29, 30, 32)",
+          "bodyBg": "rgb(15, 17, 21)",
           "stored": "dark",
-          "styleSheetCount": 2
+          "styleSheetCount": 1
         },
         "secondRaf": {
-          "t": 187,
+          "t": 184,
           "readyState": "complete",
           "htmlClass": "dark",
           "dataTheme": "dark",
           "htmlBg": "rgba(0, 0, 0, 0)",
           "bodyExists": true,
-          "bodyBg": "rgb(29, 30, 32)",
+          "bodyBg": "rgb(15, 17, 21)",
           "stored": "dark",
-          "styleSheetCount": 2
+          "styleSheetCount": 1
         }
       }
     }
