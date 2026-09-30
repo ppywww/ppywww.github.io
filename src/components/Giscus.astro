@@ -1,0 +1,155 @@
+---
+/**
+ * Giscus 评论 —— 全站唯一的第三方资源（PRD F-08 / 设计系统 §6.17 / 决策 D6）
+ *
+ * 三条硬性行为：
+ *  ① 未配置 = 完全不存在：enabled 为 false，或 repo / repoId / categoryId 任一为空时，
+ *     本组件不输出任何 DOM、不输出任何脚本、不留空白块、也不显示"未配置"之类的开发者提示。
+ *  ② 懒加载：容器本身是空的；只有滚动到评论区附近（IntersectionObserver，提前 200px）才注入
+ *     https://giscus.app/client.js。**没有评论的文章页因此零额外脚本**，有评论的页面也不会有
+ *     第三方脚本进首屏。
+ *  ③ 主题同步：注入时按 html[data-theme] 决定初始主题；用户切换主题时用 MutationObserver
+ *     监听 html 的 class / data-theme 变化，再通过 postMessage 通知 giscus iframe 换肤
+ *     （设计系统 §12 U6 记为未实测项 —— 这里按 giscus 官方推荐的 postMessage 方案实现）。
+ *
+ * 配置全部来自 consts.ts 的 GISCUS（单点配置）；启用步骤见那里的注释。
+ */
+import { GISCUS } from '../consts';
+
+const { repo, repoId, category, categoryId, mapping, reactionsEnabled, inputPosition, lang } = GISCUS;
+
+/** 三重闸门：总开关 → 必填项齐备。任一不满足就整块不渲染 */
+const configured = Boolean(GISCUS.enabled && repo && repoId && categoryId);
+---
+
+{
+  configured && (
+    <section class="giscus-wrap" aria-labelledby="comments-title">
+      <h2 class="giscus-wrap__title" id="comments-title">
+        评论
+      </h2>
+
+      {/* 空容器：真正的 iframe 由下面的内联引导脚本在滚动到视口时才注入 */}
+      <div
+        class="giscus"
+        data-repo={repo}
+        data-repo-id={repoId}
+        data-category={category}
+        data-category-id={categoryId}
+        data-mapping={mapping}
+        data-reactions-enabled={reactionsEnabled}
+        data-input-position={inputPosition}
+        data-lang={lang}
+      />
+
+      <noscript>
+        <p class="giscus-wrap__note">评论由 Giscus 提供，需要启用 JavaScript 才能加载。</p>
+      </noscript>
+
+      {/*
+        内联引导脚本（is:inline）是刻意的：
+        · Astro 会把普通 <script> 提升并打进**页面级 bundle**——那样没有评论的文章页也会多一个
+          脚本请求，违反「无评论页零额外脚本」的红线；
+        · is:inline 的内容只在渲染到这段 DOM 时才出现在 HTML 里，未配置时一个字节都不输出。
+        体积约 1.4KB（未压缩），只做两件事：挂 IntersectionObserver、挂主题 MutationObserver。
+      */}
+      <script is:inline>
+        (function () {
+          var host = document.querySelector('.giscus');
+          if (!host) return;
+
+          var d = host.dataset;
+          var injected = false;
+
+          /** 当前主题：BaseLayout 的首帧脚本与切换逻辑都会同步 html 的 data-theme */
+          function currentTheme() {
+            return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+          }
+
+          /** 滚动到评论区附近才注入 giscus 官方脚本 */
+          function inject() {
+            if (injected) return;
+            injected = true;
+            var s = document.createElement('script');
+            s.src = 'https://giscus.app/client.js';
+            s.async = true;
+            s.crossOrigin = 'anonymous';
+            s.setAttribute('data-repo', d.repo || '');
+            s.setAttribute('data-repo-id', d.repoId || '');
+            s.setAttribute('data-category', d.category || '');
+            s.setAttribute('data-category-id', d.categoryId || '');
+            s.setAttribute('data-mapping', d.mapping || 'pathname');
+            s.setAttribute('data-strict', '0');
+            s.setAttribute('data-reactions-enabled', d.reactionsEnabled || '1');
+            s.setAttribute('data-emit-metadata', '0');
+            s.setAttribute('data-input-position', d.inputPosition || 'top');
+            s.setAttribute('data-theme', currentTheme());
+            s.setAttribute('data-lang', d.lang || 'zh-CN');
+            s.setAttribute('data-loading', 'lazy');
+            host.appendChild(s);
+          }
+
+          /** 主题切换 → 通知 giscus iframe 换肤 */
+          function syncTheme() {
+            var frame = document.querySelector('iframe.giscus-frame');
+            if (!frame || !frame.contentWindow) return;
+            frame.contentWindow.postMessage(
+              { giscus: { setConfig: { theme: currentTheme() } } },
+              'https://giscus.app',
+            );
+          }
+
+          if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(
+              function (entries) {
+                for (var i = 0; i < entries.length; i++) {
+                  if (entries[i].isIntersecting) {
+                    io.disconnect();
+                    inject();
+                    return;
+                  }
+                }
+              },
+              { rootMargin: '200px 0px' },
+            );
+            io.observe(host);
+          } else {
+            inject();
+          }
+
+          if ('MutationObserver' in window) {
+            new MutationObserver(syncTheme).observe(document.documentElement, {
+              attributes: true,
+              attributeFilter: ['class', 'data-theme'],
+            });
+          }
+        })();
+      </script>
+    </section>
+  )
+}
+
+<style>
+  /* 设计系统 §6.17 .giscus-wrap：顶部 1px 分隔线 + 上边距 44px + padding-top 32px */
+  .giscus-wrap {
+    margin-top: var(--space-11);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .giscus-wrap__title {
+    margin-bottom: var(--space-3);
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-h3);
+  }
+
+  .giscus-wrap__note {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+  }
+
+  /* 容器宽度撑满 720px 阅读列；高度由 giscus 注入的 iframe 决定 */
+  .giscus {
+    margin-top: var(--space-4);
+  }
+</style>

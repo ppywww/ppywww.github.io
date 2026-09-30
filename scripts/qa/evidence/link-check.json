@@ -1,7 +1,241 @@
 {
-  "generatedAt": "2026-09-30T09:05:07.807Z",
+  "generatedAt": "2026-09-30T09:15:21.218Z",
   "origin": "https://ppywww.github.io",
-  "links": [],
-  "notFoundPage": null,
-  "error": "Error: 注入异常: {\"exceptionId\":1,\"text\":\"Uncaught (in promise) ReferenceError: __URLS__ is not defined\",\"lineNumber\":4,\"columnNumber\":16,\"scriptId\":\"5\",\"stackTrace\":{\"callFrames\":[{\"functionName\":\"\",\"scriptId\":\"5\",\"url\":\"\",\"lineNumber\":3,\"columnNumber\":15},{\"functionName\":\"\",\"scriptId\":\"5\",\"url\":\"\",\"lineNumber\":14,\n    at main (file:///E:/DPH_Projects/personal-blog/scripts/qa/check-links.mjs:43:35)"
+  "links": [
+    {
+      "path": "/",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/",
+      "err": null
+    },
+    {
+      "path": "/posts/",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/posts/",
+      "err": null
+    },
+    {
+      "path": "/archives/",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/archives/",
+      "err": null
+    },
+    {
+      "path": "/categories/",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/categories/",
+      "err": null
+    },
+    {
+      "path": "/tags/",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/tags/",
+      "err": null
+    },
+    {
+      "path": "/works/",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/works/",
+      "err": null
+    },
+    {
+      "path": "/about/",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/about/",
+      "err": null
+    },
+    {
+      "path": "/posts/2026-09-30-build-this-blog/",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/posts/2026-09-30-build-this-blog/",
+      "err": null
+    },
+    {
+      "path": "/posts/2026-09-28-why-i-blog/",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/posts/2026-09-28-why-i-blog/",
+      "err": null
+    },
+    {
+      "path": "/posts/2026-09-25-reading-note-template/",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/posts/2026-09-25-reading-note-template/",
+      "err": null
+    },
+    {
+      "path": "/categories/%E6%8A%80%E6%9C%AF/",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/categories/%E6%8A%80%E6%9C%AF/",
+      "err": null
+    },
+    {
+      "path": "/categories/%E7%94%9F%E6%B4%BB/",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/categories/%E7%94%9F%E6%B4%BB/",
+      "err": null
+    },
+    {
+      "path": "/categories/%E8%AF%BB%E4%B9%A6/",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/categories/%E8%AF%BB%E4%B9%A6/",
+      "err": null
+    },
+    {
+      "path": "/categories/%E4%BD%9C%E5%93%81/",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/categories/%E4%BD%9C%E5%93%81/",
+      "err": null
+    },
+    {
+      "path": "/tags/Astro/",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/tags/Astro/",
+      "err": null
+    },
+    {
+      "path": "/tags/GitHub%20Pages/",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/tags/GitHub%20Pages/",
+      "err": null
+    },
+    {
+      "path": "/tags/%E5%86%99%E4%BD%9C/",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/tags/%E5%86%99%E4%BD%9C/",
+      "err": null
+    },
+    {
+      "path": "/tags/%E9%9A%8F%E7%AC%94/",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/tags/%E9%9A%8F%E7%AC%94/",
+      "err": null
+    },
+    {
+      "path": "/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/",
+      "err": null
+    },
+    {
+      "path": "/tags/%E6%A8%A1%E6%9D%BF/",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/tags/%E6%A8%A1%E6%9D%BF/",
+      "err": null
+    },
+    {
+      "path": "/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/",
+      "err": null
+    },
+    {
+      "path": "/tags/%E9%9D%99%E6%80%81%E7%AB%99%E7%82%B9/",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/tags/%E9%9D%99%E6%80%81%E7%AB%99%E7%82%B9/",
+      "err": null
+    },
+    {
+      "path": "/rss.xml",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/rss.xml",
+      "err": null
+    },
+    {
+      "path": "/feed.xml",
+      "status": 404,
+      "finalUrl": "https://ppywww.github.io/feed.xml",
+      "err": null
+    },
+    {
+      "path": "/index.xml",
+      "status": 404,
+      "finalUrl": "https://ppywww.github.io/index.xml",
+      "err": null
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/sitemap.xml",
+      "err": null
+    },
+    {
+      "path": "/sitemap-index.xml",
+      "status": 404,
+      "finalUrl": "https://ppywww.github.io/sitemap-index.xml",
+      "err": null
+    },
+    {
+      "path": "/robots.txt",
+      "status": 404,
+      "finalUrl": "https://ppywww.github.io/robots.txt",
+      "err": null
+    },
+    {
+      "path": "/search/",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/search/",
+      "err": null
+    },
+    {
+      "path": "/search-index.json",
+      "status": 404,
+      "finalUrl": "https://ppywww.github.io/search-index.json",
+      "err": null
+    },
+    {
+      "path": "/pagefind/pagefind.js",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/pagefind/pagefind.js",
+      "err": null
+    },
+    {
+      "path": "/404/",
+      "status": 404,
+      "finalUrl": "https://ppywww.github.io/404/",
+      "err": null
+    },
+    {
+      "path": "/404.html",
+      "status": 200,
+      "finalUrl": "https://ppywww.github.io/404.html",
+      "err": null
+    },
+    {
+      "path": "/this-page-does-not-exist-xyz/",
+      "status": 404,
+      "finalUrl": "https://ppywww.github.io/this-page-does-not-exist-xyz/",
+      "err": null
+    },
+    {
+      "path": "/posts/nonexistent-slug/",
+      "status": 404,
+      "finalUrl": "https://ppywww.github.io/posts/nonexistent-slug/",
+      "err": null
+    },
+    {
+      "path": "/works/ppy-blog/",
+      "status": 404,
+      "finalUrl": "https://ppywww.github.io/works/ppy-blog/",
+      "err": null
+    }
+  ],
+  "notFoundPage": {
+    "title": "页面未找到 · ppy-Blog",
+    "pathname": "/this-page-does-not-exist-xyz/",
+    "hasBackHome": true,
+    "hasSearchEntry": true,
+    "hasRecentPosts": 4,
+    "robots": "noindex, nofollow",
+    "h1": "这个页面走丢了",
+    "textHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 404 这个页面走丢了 链接可能已失效，或者文章被移到了别处。可以回到首页，或者直接搜索。 返回首页 站内搜索 最新文章 从 0 搭建这个博客：选型、目录与实测数据 记录本站从选型到骨架跑通的真实过程：Astro、Hugo、VitePress 的实测对比结论、最终目录结构，以及构建产物的真实体积数据。 2026-09-30 · 4 分钟 · 技术 · 更新于 2026-09-30",
+    "form": {
+      "hasForm": true,
+      "action": "/search/",
+      "method": "get",
+      "inputName": "q",
+      "inputPlaceholder": "输入关键词……",
+      "scriptSrcs": [],
+      "pagefindUiPresent": false
+    }
+  }
 }

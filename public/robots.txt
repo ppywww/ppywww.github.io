@@ -1,0 +1,14 @@
+# ppy-Blog · robots.txt
+# 站点：https://ppywww.github.io（GitHub Pages 用户站点，站点位于根路径 /）
+#
+# 维护约定：Sitemap 里的域名必须与 src/consts.ts 的 SITE.url 保持一致，改域名时两处一起改。
+# 本文件位于 public/，Astro 会原样复制到 dist 根目录 → 线上地址为 /robots.txt。
+
+User-agent: *
+Allow: /
+
+# /search/ 是工具页且已带 <meta name="robots" content="noindex">（见 src/pages/search.astro），
+# 禁止抓取以免浪费爬取配额；它同样不列入 sitemap.xml。
+Disallow: /search/
+
+Sitemap: https://ppywww.github.io/sitemap.xml

@@ -9,7 +9,9 @@
  *
  * 无障碍（§6.16）：结果计数用 role="status" aria-live="polite"（不给整个列表加 aria-live，
  * 否则每次输入都会朗读全文）；输入框有 visually-hidden 的 label；Esc 清空；↑/↓ 在结果间移动焦点。
- * 交互（PRD §9）：输入 200ms 防抖；无 JS 时表单仍可 GET 提交，查询词由服务端渲染回输入框。
+ * 交互（PRD §9）：输入 200ms 防抖；表单保留 GET 提交（action=/search/），
+ * ?q= 由**客户端**读取并回填 —— 纯静态托管没有服务端，构建期读 searchParams 永远是空串
+ * （独立验收 D-1 的根因，已修：见文件末尾初始化段）。
  *
  * 本页 noindex：搜索结果是工具页，不进搜索引擎索引（也因此不写进 sitemap.xml）。
  */
@@ -18,8 +20,6 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE } from '../consts';
 
-/** 无 JS / 刷新场景：把 ?q= 回填到输入框，查询词不丢 */
-const initialQuery = Astro.url.searchParams.get('q') ?? '';
 ---
 
 <BaseLayout
@@ -45,7 +45,6 @@ const initialQuery = Astro.url.searchParams.get('q') ?? '';
           id="search-input"
           type="search"
           name="q"
-          value={initialQuery}
           placeholder="输入关键词…"
           autocomplete="off"
           spellcheck="false"
@@ -107,6 +106,9 @@ const initialQuery = Astro.url.searchParams.get('q') ?? '';
         emptyEl.hidden = true;
         return;
       }
+      // 显示空态 / 错误态时先清空结果列表：否则 0 结果那次会留着上一次的旧结果，
+      // 用户同时看到「没有找到匹配的内容」和一堆结果（独立验收 D-2）。
+      listEl.replaceChildren();
       emptyTitle.textContent = state.title;
       emptyHint.textContent = state.hint;
       emptyActions.hidden = !state.actions;
@@ -269,8 +271,23 @@ const initialQuery = Astro.url.searchParams.get('q') ?? '';
       links[next].focus();
     });
 
-    if (input.value.trim()) {
-      run(input.value);
+    // 深链 / 404 页的搜索表单提交后都会带 ?q=：纯静态托管只能在客户端取词
+    // （构建期读 Astro.url.searchParams 永远是空串 —— 独立验收 D-1）。
+    var deepLinkQuery = '';
+    try {
+      deepLinkQuery = new URLSearchParams(window.location.search).get('q') || '';
+    } catch (err) {
+      deepLinkQuery = '';
+    }
+
+    // 三种来源都在这一个入口收口：?q= 深链、脚本执行前输入框就已被填入/键入的值、以及正常空态。
+    // 后者是真实存在的时序问题：页面的 <script> 是 module（延迟执行），而输入框在 HTML 里更早出现，
+    // 如果在这段窗口里发生输入（自动化工具、浏览器表单恢复、极快的键入），input 事件会丢失 ——
+    // 初始化时补一次「已有值就搜」即可兜住。
+    var startQuery = deepLinkQuery || input.value;
+    if (startQuery.trim()) {
+      input.value = startQuery;
+      run(startQuery);
     } else {
       setEmpty(DEFAULT_EMPTY);
     }

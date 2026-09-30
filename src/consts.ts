@@ -37,6 +37,42 @@ export const NAV = [
 export const CATEGORIES = ['技术', '生活', '读书', '作品'] as const;
 export type Category = (typeof CATEGORIES)[number];
 
+/**
+ * Giscus 评论配置（PRD F-08 / 决策 D6：全局默认关闭、逐篇可开）
+ *
+ * 当前状态：**enabled: false**
+ *   老板尚未在仓库开启 Discussions、也未安装 giscus App，因此还拿不到 categoryId。
+ *   category 与 categoryId 已留空占位。
+ *
+ * 老板补齐后的启用步骤（只改这一个文件）：
+ *   1) 仓库 Settings → General → Features 勾选 Discussions，并新建一个 Announcements 分类；
+ *   2) 安装 giscus App（https://github.com/apps/giscus）并授权 ppywww.github.io 仓库；
+ *   3) 打开 https://giscus.app/zh-CN，填入仓库，页面会给出 category 名称与 categoryId；
+ *   4) 把下面的 category / categoryId 填上，并把 enabled 改成 true —— 构建后即生效。
+ *
+ * 行为约定：enabled 为 false **或** categoryId 为空时，页面不输出任何评论 DOM、不加载任何脚本。
+ */
+export const GISCUS = {
+  /** 总开关：false 时全站一行评论 DOM 都不渲染 */
+  enabled: false,
+  /** GitHub 仓库（owner/repo） */
+  repo: 'ppywww/ppywww.github.io',
+  /** 仓库 node_id（老板已提供，公开信息） */
+  repoId: 'R_kgDOU0nLtg',
+  /** Discussions 分类名（老板开 Discussions 后填入） */
+  category: '',
+  /** Discussions 分类 ID（giscus.app 会直接给出，如 DIC_kwDOU0nLtg4C...） */
+  categoryId: '',
+  /** 文章与 Discussion 的映射方式：本站 URL 稳定，用 pathname */
+  mapping: 'pathname',
+  /** '1' 开启表情回应 */
+  reactionsEnabled: '1',
+  /** 评论输入框在评论列表上方 */
+  inputPosition: 'top',
+  /** 界面语言 */
+  lang: 'zh-CN',
+};
+
 /** 社交 / 订阅入口（D5 定稿前先占位，不写真实邮箱） */
 export const SOCIAL = [
   { label: 'GitHub', href: 'https://github.com/ppywww', icon: 'github' },

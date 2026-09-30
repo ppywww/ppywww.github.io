@@ -55,6 +55,18 @@ function isCurrent(href: string): boolean {
 </header>
 
 <style>
+  /*
+    触控目标修复（task-14 第 2 项 / WCAG 2.2 AA 2.5.8 ≥24×24）：
+    站点名是纯文本链接，原来命中的只有文字行盒（≈17px 高），Lighthouse 报 a.brand 不达标。
+    用 padding 把命中区撑到 ≈28px；父级是 align-items: center 的 flex，不影响视觉位置。
+  */
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    padding-block: var(--space-1);
+  }
+
   .site-header__actions {
     display: flex;
     align-items: center;

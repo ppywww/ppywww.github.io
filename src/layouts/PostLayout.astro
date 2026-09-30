@@ -12,7 +12,8 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PostMeta from '../components/PostMeta.astro';
 import Toc from '../components/Toc.astro';
-import { SITE } from '../consts';
+import Giscus from '../components/Giscus.astro';
+import { GISCUS, SITE } from '../consts';
 import { formatDate } from '../lib/date';
 import '../styles/prose.css';
 
@@ -58,7 +59,15 @@ const jsonLd = {
 
   <main class="main" id="main-content">
     <div class="container">
-      <article class="post">
+      {/*
+        Q-2 修复（task-13）：Pagefind 官方文档明确「站内只要有任一页面带 data-pagefind-body，
+        没有该属性的页面就完全不进索引」（https://pagefind.app/docs/indexing/）。
+        因此这一层必须放在 <article> 上：标题 h1、元信息里的分类/标签、正文全都在它内部，
+        AC-5（标题词命中）与「标签可搜」得以保持；导航/页脚/列表页/标签页/分类页则整体退出索引，
+        搜索结果自然以文章为主。
+        ⚠️ 不要下移到 <div class="prose">：那会把标题与标签一起挤出索引，AC-5 会回归。
+      */}
+      <article class="post" data-pagefind-body>
         <nav class="breadcrumb" aria-label="面包屑">
           <ol class="breadcrumb__list">
             <li class="breadcrumb__item"><a href="/">首页</a></li>
@@ -102,22 +111,13 @@ const jsonLd = {
           </p>
         </footer>
 
-        {
-          comments && (
-            <section class="giscus-wrap" aria-labelledby="comments-title">
-              <h2 class="giscus-wrap__title" id="comments-title">
-                评论
-              </h2>
-              <p class="giscus-wrap__note">
-                评论由 Giscus（基于 GitHub Discussions）提供，将在 M4 接入。若此处没有出现评论区，说明你的浏览器未启用 JavaScript。
-              </p>
-              {/* Giscus 容器占位（PRD F-08，默认关闭、逐篇可开）：
-                  M4 接入时把 <script src="https://giscus.app/client.js" data-repo=… data-mapping="pathname"
-                  data-theme=… loading="lazy"> 放进本 section，并删掉上面的说明文字。
-                  注意：暗色主题需随 :root.dark 用 postMessage 同步（设计系统 §12 U6，未实测）。 */}
-            </section>
-          )
-        }
+        {/*
+          评论区（PRD F-08 / 决策 D6：全局默认关闭、逐篇可开）。
+          双重闸门：文章的 comments:true **且** consts.ts 的 GISCUS.enabled 为 true 才渲染；
+          任一不满足时这里不求值任何内容 —— 页面里既没有评论 DOM，也没有评论脚本，更没有空白块。
+          （Giscus 组件内部还有第三道闸门：categoryId 为空时同样什么都不输出。）
+        */}
+        {comments && GISCUS.enabled && <Giscus />}
       </article>
     </div>
   </main>
@@ -230,21 +230,5 @@ const jsonLd = {
     text-underline-offset: 0.18em;
   }
 
-  /* ---------- 评论区占位（设计系统 §6.17 .giscus-wrap）---------- */
-  .giscus-wrap {
-    margin-top: var(--space-11);
-    padding-top: var(--space-8);
-    border-top: 1px solid var(--color-border);
-  }
-
-  .giscus-wrap__title {
-    margin-bottom: var(--space-3);
-    font-size: var(--font-size-h3);
-    line-height: var(--line-height-h3);
-  }
-
-  .giscus-wrap__note {
-    font-size: var(--font-size-xs);
-    color: var(--color-text-secondary);
-  }
+  /* 评论区的样式在 Giscus.astro 自己的 scoped style 里（组件只在启用时才渲染） */
 </style>

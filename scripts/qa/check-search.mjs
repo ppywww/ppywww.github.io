@@ -63,7 +63,7 @@ async function main() {
     out.steps.afterEscape = await evalState();
     // 3) 重新输入 + 上下键移动焦点
     await cdp.send("Runtime.evaluate", { expression: "document.querySelector('#search-input').focus()" }, sid);
-    await cdp.send("Input.insertText", { text: "博客" }, sid);
+    await cdp.send("Input.insertText", { text: "的" }, sid);
     await sleep(1500);
     const before = await evalState();
     await key("ArrowDown", 40);
@@ -84,10 +84,22 @@ async function main() {
     // 4) 无结果空态
     await cdp.send("Runtime.evaluate", { expression: "var i=document.querySelector('#search-input'); i.value=''; i.dispatchEvent(new Event('input',{bubbles:true})); i.focus();" }, sid);
     await sleep(400);
-    await cdp.send("Input.insertText", { text: "zzz不存在的词qqq" }, sid);
+    await cdp.send("Input.insertText", { text: "qqqzzzxxx" }, sid);
     await sleep(1800);
     out.steps.noResult = await evalState();
     await shoot("search-empty.png");
+    // 4b) 中文常见单字查询（记录召回噪声观察）
+    await cdp.send("Runtime.evaluate", { expression: "var i=document.querySelector('#search-input'); i.value=''; i.dispatchEvent(new Event('input',{bubbles:true})); i.focus();" }, sid);
+    await sleep(400);
+    await cdp.send("Input.insertText", { text: "的" }, sid);
+    await sleep(1600);
+    out.steps.singleCharQuery = { query: "的", count: (await evalState()).resultsCount, status: (await evalState()).statusText, titles: (await evalState()).resultTitles };
+    // 4c) 404 页文案是否被索引（构建时 --exclude-selectors ".notfound" 的独立复核）
+    await cdp.send("Runtime.evaluate", { expression: "var i=document.querySelector('#search-input'); i.value=''; i.dispatchEvent(new Event('input',{bubbles:true})); i.focus();" }, sid);
+    await sleep(400);
+    await cdp.send("Input.insertText", { text: "走丢" }, sid);
+    await sleep(1600);
+    out.steps.notFoundIndexed = { query: "走丢", count: (await evalState()).resultsCount, status: (await evalState()).statusText, titles: (await evalState()).resultTitles };
     // 5) Enter 提交（表单回退行为）
     await cdp.send("Runtime.evaluate", { expression: "document.querySelector('#search-input').focus()" }, sid);
     await key("Enter", 13);

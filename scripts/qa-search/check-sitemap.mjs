@@ -11,8 +11,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import { createReporter } from './lib/report.mjs';
-import { readSiteConsts, listRoutes, routeToFile } from './lib/dist-info.mjs';
+import { readSiteConsts, listRoutes, listDistFiles, routeToFile } from './lib/dist-info.mjs';
 import { inspectXml } from './lib/xml-check.mjs';
+import { serveDist } from './lib/serve-dist.mjs';
 import { DEFAULT_CHROME } from './lib/chrome-cdp.mjs';
 
 const PROJECT_ROOT = new URL('../../', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1');
@@ -80,9 +81,16 @@ export async function run(opts = {}) {
   const badLastmod = d.urls.filter((u) => u.lastmod && !/^\d{4}-\d{2}-\d{2}(T[\d:+-]+)?$/.test(u.lastmod)).map((u) => u.loc + ' → ' + u.lastmod);
   rep.check('M-7', 'lastmod 格式合法（W3C 日期或日期时间）', badLastmod.length === 0, badLastmod.length ? JSON.stringify(badLastmod) : '已校验 ' + d.urls.filter((u) => u.lastmod).length + ' 条');
 
+  // 注意：new URL().pathname 保留百分号编码，而 dist 目录名是裸中文 → 统一解码后再比对，
+  // 否则会把「编码差异」误判成「漏列路由」（本脚本首版就踩过这个坑）。
   const paths = d.urls.map((u) => {
     try {
-      return new URL(u.loc).pathname;
+      const raw = new URL(u.loc).pathname;
+      try {
+        return decodeURIComponent(raw);
+      } catch {
+        return raw;
+      }
     } catch {
       return null;
     }
@@ -130,9 +138,141 @@ export async function run(opts = {}) {
     rep.note('M-13', '索引语种与页数', 'languages=' + JSON.stringify(languages) + ' page_count=' + JSON.stringify(counts));
     rep.check('M-14', '索引语种为 zh-cn（Pagefind 按页面 lang 分词，ADR-001 §3）', languages.length === 1 && languages[0] === 'zh-cn', JSON.stringify(languages));
     if (!opts.base) {
-      const htmlCount = listRoutes(DIST_DIR).length;
-      rep.check('M-15', 'Pagefind 索引页数 = dist HTML 页面数', total === htmlCount, 'page_count=' + total + ' vs HTML 路由=' + htmlCount);
+      // Pagefind 官方语义：站内只要有任一页面带 data-pagefind-body，就只有带该属性的页面进索引。
+      // 所以「期望索引页数」取决于当前模式，不能想当然按「全部 HTML」比对
+      // （2026-09-30 task-13 采用该属性做 Q-2 修复后，本检查已按模式自适应）。
+      const htmlFiles = listDistFiles(DIST_DIR).filter((f) => f.endsWith('.html'));
+      const bodyFiles = htmlFiles.filter((f) => fs.readFileSync(path.join(DIST_DIR, f), 'utf8').indexOf('data-pagefind-body') !== -1);
+      const routeCount = listRoutes(DIST_DIR).length;
+      const expectedPages = bodyFiles.length > 0 ? bodyFiles.length : routeCount;
+      const modeText =
+        bodyFiles.length > 0
+          ? 'data-pagefind-body 模式：仅 ' + bodyFiles.length + ' 个正文页进索引 ' + JSON.stringify(bodyFiles)
+          : '整页索引模式：无 data-pagefind-body，全部 ' + routeCount + ' 条路由都会进索引';
+      rep.note('M-15a', '索引模式判定', modeText);
+      rep.check('M-15', 'Pagefind 索引页数 = 当前模式下的期望页数', total === expectedPages, 'page_count=' + total + ' vs 期望=' + expectedPages + '（' + modeText + '）');
     }
+  }
+
+  // ==========================================================================
+  // robots.txt 校验（F-10 的配套；task-16 交付物）
+  // 口径：期望域名一律从 src/consts.ts 的 SITE.url 读（禁止硬编码），
+  //       否则将来改域名时，脚本会拿旧域名替我们说谎。
+  // ==========================================================================
+  let localServer = null;
+  let robotsText = null;
+  let robotsStatus = null;
+  let robotsWhere = '';
+
+  if (opts.base) {
+    const res = await fetch(origin + '/robots.txt');
+    robotsStatus = res.status;
+    robotsText = res.status === 200 ? await res.text() : null;
+    robotsWhere = origin + '/robots.txt';
+  } else {
+    localServer = await serveDist({ distDir: DIST_DIR, port: 0 });
+    const res = await fetch(localServer.origin + '/robots.txt');
+    robotsStatus = res.status;
+    robotsText = res.status === 200 ? await res.text() : null;
+    robotsWhere = 'dist/robots.txt（经内置静态服务器）';
+  }
+
+  try {
+    rep.check('B-1', 'robots.txt 存在且 HTTP 200', robotsStatus === 200, robotsWhere + ' → HTTP ' + robotsStatus);
+
+    if (!robotsText) {
+      const srcFile = path.join(PROJECT_ROOT, 'public', 'robots.txt');
+      rep.note(
+        'B-1b',
+        '源文件与产物的关系',
+        fs.existsSync(srcFile)
+          ? 'public/robots.txt 已存在，但被测产物里还没有它 → 要等下一次构建才会出现在 dist/ 与线上；此处的 B-1 不通过属于「尚未构建」，不是文件写错'
+          : 'public/robots.txt 也不存在 → 需要补源文件',
+      );
+      for (const id of ['B-2', 'B-3', 'B-4', 'B-5', 'B-6', 'B-7', 'B-8']) {
+        rep.skip(id, 'robots.txt 相关校验', '取不到 robots.txt（HTTP ' + robotsStatus + '），无法校验');
+      }
+    } else {
+      // 解析：字段名大小写不敏感，# 之后为注释
+      const records = [];
+      robotsText.split(/\r?\n/).forEach((raw, i) => {
+        const line = raw.replace(/#.*$/, '').trim();
+        if (!line) return;
+        const m = /^([A-Za-z][A-Za-z-]*)\s*:\s*(.*)$/.exec(line);
+        if (m) records.push({ field: m[1].toLowerCase(), value: m[2].trim(), lineNo: i + 1 });
+        else records.push({ field: '(非法行)', value: line, lineNo: i + 1 });
+      });
+      rep.note('B-0', 'robots.txt 指令清单', JSON.stringify(records.map((r) => r.field + ': ' + r.value)));
+
+      const badLines = records.filter((r) => r.field === '(非法行)');
+      const hasUserAgent = records.some((r) => r.field === 'user-agent');
+      rep.check(
+        'B-8',
+        '语法合法（每行「字段: 值」，且至少一条 User-agent）',
+        badLines.length === 0 && hasUserAgent,
+        badLines.length ? '非法行：' + JSON.stringify(badLines) : 'User-agent 存在，且无非法行',
+      );
+
+      const allows = records.filter((r) => r.field === 'allow').map((r) => r.value);
+      const disallows = records.filter((r) => r.field === 'disallow').map((r) => r.value);
+      const sitemaps = records.filter((r) => r.field === 'sitemap');
+
+      rep.check('B-2', '含 Sitemap 行', sitemaps.length > 0, sitemaps.map((r) => r.value).join(', ') || '未找到 Sitemap 行');
+      for (const sm of sitemaps) {
+        let u = null;
+        try {
+          u = new URL(sm.value);
+        } catch {
+          u = null;
+        }
+        rep.check(
+          'B-3',
+          'Sitemap 域名 = src/consts.ts 的 SITE.url（' + consts.url + '）',
+          !!u && u.origin === consts.url,
+          '第 ' + sm.lineNo + ' 行 → ' + (u ? u.origin : '不是合法绝对 URL：' + sm.value),
+        );
+        if (!u) continue;
+        const status = await httpStatus((opts.base ? origin : localServer.origin) + u.pathname);
+        rep.check('B-4', 'Sitemap 指向的 ' + u.pathname + ' 实际存在且 HTTP 200', status === 200, 'HTTP ' + status);
+      }
+
+      rep.check(
+        'B-5',
+        '含 Disallow: /search/（与「search 页 noindex 且不进 sitemap」口径一致）',
+        disallows.indexOf('/search/') !== -1,
+        'Disallow = ' + JSON.stringify(disallows),
+      );
+
+      // 反向校验：Allow/Disallow 的路径必须真实存在（别禁抓一个不存在的路径）
+      const localRoutes = opts.base ? null : new Set(listRoutes(DIST_DIR).map((r) => r.url));
+      const pathChecks = [];
+      for (const kind of ['Allow', 'Disallow']) {
+        for (const v of kind === 'Allow' ? allows : disallows) {
+          if (v === '') {
+            pathChecks.push({ kind: kind, path: v, ok: true, note: '空值 = 不限制' });
+            continue;
+          }
+          if (v.indexOf('*') !== -1 || v.indexOf('$') !== -1) {
+            pathChecks.push({ kind: kind, path: v, ok: null, note: '含通配符，无法反向校验' });
+            continue;
+          }
+          const status = await httpStatus((opts.base ? origin : localServer.origin) + v);
+          pathChecks.push({
+            kind: kind,
+            path: v,
+            ok: status === 200,
+            note: 'HTTP ' + status + (localRoutes ? ' · dist 路由存在=' + (localRoutes.has(v) || localRoutes.has(v.replace(/\/$/, '') + '/')) : ''),
+          });
+        }
+      }
+      const badPaths = pathChecks.filter((p) => p.ok === false);
+      rep.check('B-6', '反向校验：Allow/Disallow 的路径都真实存在（HTTP 200）', badPaths.length === 0, JSON.stringify(pathChecks));
+
+      const blocksAll = disallows.some((v) => v === '/' || v === '*');
+      rep.check('B-7', '不存在「Disallow: /」式整站封禁（最致命的一类笔误）', !blocksAll, 'Disallow = ' + JSON.stringify(disallows));
+    }
+  } finally {
+    if (localServer) await localServer.close();
   }
 
   if (!opts.json) rep.print();

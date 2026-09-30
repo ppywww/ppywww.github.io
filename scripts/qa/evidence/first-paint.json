@@ -1,0 +1,176 @@
+{
+  "url": "https://ppywww.github.io/",
+  "generatedAt": "2026-09-30T09:25:40.358Z",
+  "structural": {
+    "firstInlineScriptAt": 273,
+    "firstScriptSrcAt": -1,
+    "firstExternalCssAt": 2529,
+    "firstStyleBlockAt": -1,
+    "bodyAt": 2594,
+    "themeScriptBeforeFirstCss": true,
+    "themeScriptBeforeBody": true,
+    "inlineStyleBeforeBody": false,
+    "themeScriptMentions": {
+      "localStorage": true,
+      "prefersColorScheme": true,
+      "darkClass": true
+    },
+    "firstStyleBlockHead": "",
+    "headBytes": 2594
+  },
+  "cases": [
+    {
+      "label": "dark-system-no-storage",
+      "media": "dark",
+      "seededTheme": null,
+      "samples": {
+        "dcl": {
+          "t": 146,
+          "readyState": "interactive",
+          "htmlClass": "dark",
+          "dataTheme": "dark",
+          "htmlBg": "rgba(0, 0, 0, 0)",
+          "bodyExists": true,
+          "bodyBg": "rgb(15, 17, 21)",
+          "stored": null,
+          "styleSheetCount": 1
+        },
+        "firstRaf": {
+          "t": 164,
+          "readyState": "interactive",
+          "htmlClass": "dark",
+          "dataTheme": "dark",
+          "htmlBg": "rgba(0, 0, 0, 0)",
+          "bodyExists": true,
+          "bodyBg": "rgb(15, 17, 21)",
+          "stored": null,
+          "styleSheetCount": 1
+        },
+        "load": {
+          "t": 253,
+          "readyState": "complete",
+          "htmlClass": "dark",
+          "dataTheme": "dark",
+          "htmlBg": "rgba(0, 0, 0, 0)",
+          "bodyExists": true,
+          "bodyBg": "rgb(15, 17, 21)",
+          "stored": null,
+          "styleSheetCount": 1
+        },
+        "secondRaf": {
+          "t": 255,
+          "readyState": "complete",
+          "htmlClass": "dark",
+          "dataTheme": "dark",
+          "htmlBg": "rgba(0, 0, 0, 0)",
+          "bodyExists": true,
+          "bodyBg": "rgb(15, 17, 21)",
+          "stored": null,
+          "styleSheetCount": 1
+        }
+      }
+    },
+    {
+      "label": "light-system-no-storage",
+      "media": "light",
+      "seededTheme": null,
+      "samples": {
+        "dcl": {
+          "t": 46,
+          "readyState": "interactive",
+          "htmlClass": "light",
+          "dataTheme": "light",
+          "htmlBg": "rgba(0, 0, 0, 0)",
+          "bodyExists": true,
+          "bodyBg": "rgb(252, 252, 253)",
+          "stored": null,
+          "styleSheetCount": 1
+        },
+        "load": {
+          "t": 63,
+          "readyState": "complete",
+          "htmlClass": "light",
+          "dataTheme": "light",
+          "htmlBg": "rgba(0, 0, 0, 0)",
+          "bodyExists": true,
+          "bodyBg": "rgb(252, 252, 253)",
+          "stored": null,
+          "styleSheetCount": 1
+        },
+        "firstRaf": {
+          "t": 148,
+          "readyState": "complete",
+          "htmlClass": "light",
+          "dataTheme": "light",
+          "htmlBg": "rgba(0, 0, 0, 0)",
+          "bodyExists": true,
+          "bodyBg": "rgb(252, 252, 253)",
+          "stored": null,
+          "styleSheetCount": 1
+        },
+        "secondRaf": {
+          "t": 152,
+          "readyState": "complete",
+          "htmlClass": "light",
+          "dataTheme": "light",
+          "htmlBg": "rgba(0, 0, 0, 0)",
+          "bodyExists": true,
+          "bodyBg": "rgb(252, 252, 253)",
+          "stored": null,
+          "styleSheetCount": 1
+        }
+      }
+    },
+    {
+      "label": "light-system-with-storage-dark",
+      "media": "light",
+      "seededTheme": "dark",
+      "samples": {
+        "dcl": {
+          "t": 46,
+          "readyState": "interactive",
+          "htmlClass": "dark",
+          "dataTheme": "dark",
+          "htmlBg": "rgba(0, 0, 0, 0)",
+          "bodyExists": true,
+          "bodyBg": "rgb(15, 17, 21)",
+          "stored": "dark",
+          "styleSheetCount": 1
+        },
+        "load": {
+          "t": 62,
+          "readyState": "complete",
+          "htmlClass": "dark",
+          "dataTheme": "dark",
+          "htmlBg": "rgba(0, 0, 0, 0)",
+          "bodyExists": true,
+          "bodyBg": "rgb(15, 17, 21)",
+          "stored": "dark",
+          "styleSheetCount": 1
+        },
+        "firstRaf": {
+          "t": 150,
+          "readyState": "complete",
+          "htmlClass": "dark",
+          "dataTheme": "dark",
+          "htmlBg": "rgba(0, 0, 0, 0)",
+          "bodyExists": true,
+          "bodyBg": "rgb(15, 17, 21)",
+          "stored": "dark",
+          "styleSheetCount": 1
+        },
+        "secondRaf": {
+          "t": 155,
+          "readyState": "complete",
+          "htmlClass": "dark",
+          "dataTheme": "dark",
+          "htmlBg": "rgba(0, 0, 0, 0)",
+          "bodyExists": true,
+          "bodyBg": "rgb(15, 17, 21)",
+          "stored": "dark",
+          "styleSheetCount": 1
+        }
+      }
+    }
+  ]
+}

@@ -11,6 +11,86 @@ import { satteri } from '@astrojs/markdown-satteri';
 /** 站点源（与 consts.ts 的 SITE.url 一致）：site 与「站外链接」判定共用，避免两处硬编码打架 */
 const SITE_ORIGIN = 'https://ppywww.github.io';
 
+/* ===========================================================================
+   代码块 token 对比度兜底（task-14 第 1 项 / 设计系统 §12 U2）
+   ---------------------------------------------------------------------------
+   问题：Shiki 主题自带的高亮色不保证在**我们的**代码底色上达到 WCAG AA 4.5:1。
+   实测 github-light 有 3 个颜色不达标（#E36209 3.28、#D73A49 4.30、#22863A 4.35，底 #F7F8FA），
+   github-dark 有 1 个（#6A737D 3.27，底 #1F232B）。
+   做法：不改主题，而是在构建期对**每一个 token 颜色**逐个兜底 —— 不达标就把颜色朝黑（亮色主题）
+   或朝白（暗色主题）二分混合，取「刚好达标」的最小改动量，尽量保留原始色相。
+   这样以后无论换主题、加语言、加新 token，门禁都自动成立。
+   验证：scripts/qa-contrast/check-code-tokens.mjs 对构建产物逐条实算（不抽样）。
+   注意：CODE_BG 必须与 tokens.css 的 --color-code-bg 亮/暗取值保持一致。
+   =========================================================================== */
+const CODE_BG = { light: '#F7F8FA', dark: '#1F232B' };
+const MIN_CONTRAST = 4.5;
+
+function relativeLuminance(hex) {
+  const h = hex.replace('#', '');
+  const full = h.length === 3 ? h.split('').map((c) => c + c).join('') : h.slice(0, 6);
+  const [r, g, b] = [0, 2, 4]
+    .map((i) => parseInt(full.slice(i, i + 2), 16) / 255)
+    .map((c) => (c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4)));
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+function contrastRatio(a, b) {
+  const [hi, lo] = [relativeLuminance(a), relativeLuminance(b)].sort((x, y) => y - x);
+  return (hi + 0.05) / (lo + 0.05);
+}
+
+/** 线性 RGB 混合：t=0 原色，t=1 目标色 */
+function mixColor(hex, target, t) {
+  const toRgb = (h) => {
+    const s = h.replace('#', '');
+    return [0, 2, 4].map((i) => parseInt(s.slice(i, i + 2), 16));
+  };
+  const [a, b] = [toRgb(hex), toRgb(target)];
+  return (
+    '#' +
+    a
+      .map((v, i) => Math.max(0, Math.min(255, Math.round(v + (b[i] - v) * t))))
+      .map((v) => v.toString(16).padStart(2, '0'))
+      .join('')
+  );
+}
+
+/** 不达标就二分找「刚好达标」的最小混合量；已达标原样返回 */
+function ensureContrast(hex, bg, toward) {
+  if (contrastRatio(hex, bg) >= MIN_CONTRAST) return hex;
+  let lo = 0;
+  let hi = 1;
+  let best = hex;
+  for (let i = 0; i < 24; i++) {
+    const t = (lo + hi) / 2;
+    const candidate = mixColor(hex, toward, t);
+    if (contrastRatio(candidate, bg) >= MIN_CONTRAST + 0.01) {
+      best = candidate;
+      hi = t;
+    } else {
+      lo = t;
+    }
+  }
+  return best;
+}
+
+/** Shiki transformer：重写每个 token 上的 --shiki-light / --shiki-dark 变量 */
+const shikiContrast = {
+  name: 'ppy-shiki-contrast',
+  span(node) {
+    const style = node.properties && node.properties.style;
+    if (typeof style !== 'string' || !style.includes('--shiki-')) return;
+    node.properties.style = style
+      .replace(/--shiki-light:(#[0-9a-fA-F]{3,8})/g, (_, c) =>
+        '--shiki-light:' + ensureContrast(c.toUpperCase(), CODE_BG.light, '#000000'),
+      )
+      .replace(/--shiki-dark:(#[0-9a-fA-F]{3,8})/g, (_, c) =>
+        '--shiki-dark:' + ensureContrast(c.toUpperCase(), CODE_BG.dark, '#FFFFFF'),
+      );
+  },
+};
+
 /** 语言名白名单：fence 信息串来自文章作者，进 HTML 属性前必须过滤，避免属性注入 */
 function safeLang(value) {
   const raw = String(value ?? '').trim();
@@ -137,6 +217,8 @@ export default defineConfig({
     shikiConfig: {
       themes: { light: 'github-light', dark: 'github-dark' },
       defaultColor: false,
+      // 逐 token 兜底到 WCAG AA 4.5:1（见文件上方 shikiContrast 说明）
+      transformers: [shikiContrast],
     },
     processor: satteri({
       hastPlugins: [

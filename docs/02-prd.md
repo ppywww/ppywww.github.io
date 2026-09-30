@@ -115,7 +115,7 @@
 /works/                作品 / 项目集
 /about/                关于我
 /404                   找不到页面
-/index.xml             RSS
+/rss.xml             RSS
 /index.json            搜索索引（构建产物，非页面）
 `@
 
@@ -232,7 +232,7 @@ TOC（默认折叠，Alt+C 展开；<details> 实现）
 | F-06 | 深色模式 | 跟随系统 + 手动切换 + 记忆 + **无闪烁** |
 | F-07 | 关于我 / 作品页 | 内容可维护 |
 | F-08 | Giscus 评论 | 默认关闭，逐篇可开 |
-| F-09 | RSS 订阅 | `/index.xml` 可被阅读器识别 |
+| F-09 | RSS 订阅 | `/rss.xml` 可被阅读器识别 |
 | F-10 | SEO 元数据 | canonical / OG / Twitter Card / JSON-LD / sitemap |
 | F-11 | 响应式 | 320px–2560px 无横向滚动，断点自然 |
 | F-12 | 阅读时长 + TOC + 锚点 | 自动计算；目录可跳转 |

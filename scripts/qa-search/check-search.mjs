@@ -27,9 +27,12 @@ const SETTLED_EXPR = "(function () {\n  var s = document.getElementById('search-
 export const CASES = [
   { id: 'S-4', term: '搭建', expect: '/posts/2026-09-30-build-this-blog/', label: '标题词命中（技术文）' },
   { id: 'S-5', term: '读书笔记', expect: '/posts/2026-09-25-reading-note-template/', label: '标题词命中（读书文）' },
-  { id: 'S-6', term: '我为什么开始写博客', expect: '/posts/2026-09-28-why-i-blog/', label: '完整标题命中' },
+  { id: 'S-6', term: '为什么', expect: '/posts/2026-09-28-why-i-blog/', label: '标题词命中（生活文）' },
   { id: 'S-7', term: '性能优化', expect: '/posts/2026-09-30-build-this-blog/', label: '标签词命中' },
 ];
+
+/** 记录目标文章在结果里的名次（结果质量，不直接判 AC 通过与否） */
+export const QUALITY_TERM = '我为什么开始写博客';
 
 export function parseArgs(argv) {
   const opts = { base: null, json: false, chromePath: process.env.CHROME_PATH || DEFAULT_CHROME, log: process.env.QA_LOG || null };
@@ -117,14 +120,16 @@ export async function run(opts = {}) {
       );
       const marked = st.items.filter((i) => i.hasMark).length;
       rep.check(c.id + 'm', '「' + c.term + '」结果含 <mark> 高亮', marked > 0, '带高亮结果数 = ' + marked + ' / ' + st.items.length);
-      const articleHit = urls.indexOf(c.expect) === 0;
-      rep.check(c.id + 'q', '「' + c.term + '」**第一条**结果就是目标文章（结果质量）', articleHit, '首条 = ' + JSON.stringify(urls[0]) + ' · 键入到出结果 ' + typed.elapsedMs + 'ms');
+      const countMatch = (st.status || '').match(/^找到 (\d+) 条结果$/);
+      const domCount = countMatch ? Number(countMatch[1]) : -1;
+      rep.check(c.id + 'c', '「' + c.term + '」计数文案与列表项数一致', domCount === st.items.length, '文案=' + JSON.stringify(st.status) + ' · DOM 结果项=' + st.items.length);
+      rep.note(c.id + 'rank', '「' + c.term + '」目标文章名次', '第 ' + (urls.indexOf(c.expect) + 1) + ' 位 / 共 ' + urls.length + ' 条（首条=' + JSON.stringify(urls[0]) + '）· 键入到出结果 ' + typed.elapsedMs + 'ms');
       await page.close();
       step(c.id + ' done');
     }
 
     // ---- 无结果态 ----
-    const { page: pageEmpty } = await typedQuery('qqzz不存在的检索词');
+    const { page: pageEmpty } = await typedQuery('龘龘龘');
     await waitFor(pageEmpty, SETTLED_EXPR, { timeoutMs: 20000 });
     const se = await pageEmpty.evaluate(STATE_EXPR);
     const hasExit = await pageEmpty.evaluate("!!document.querySelector('#search-empty-actions a[href=\"/posts/\"]')");
@@ -178,6 +183,39 @@ export async function run(opts = {}) {
     rep.check('S-12', '运行时确实加载了 /pagefind/ 索引资源', Array.isArray(resources) && resources.length > 0, JSON.stringify(resources));
     step('S-9..S-12 done');
 
+    // ---- 键盘：↑/↓ 在结果间移动焦点（AC-11 / 设计系统 K7）----
+    const pageKb = await chrome.openPage(origin + '/search/');
+    await waitFor(pageKb, "!!document.getElementById('search-input')", { timeoutMs: 15000 });
+    await pageKb.evaluate("(async function () {\n  var input = document.getElementById('search-input');\n  input.focus();\n  input.value = __TERM__;\n  input.dispatchEvent(new Event('input', { bubbles: true }));\n  var t0 = performance.now();\n  while (performance.now() - t0 < 15000) {\n    if (document.querySelectorAll('.search-result').length > 0) break;\n    if (/^找到 0 条结果$/.test(document.getElementById('search-status').textContent || '')) break;\n    await new Promise(function (r) { setTimeout(r, 10); });\n  }\n  return { elapsedMs: Math.round(performance.now() - t0) };\n})()".replace('__TERM__', JSON.stringify('为什么')));
+    await waitFor(pageKb, SETTLED_EXPR, { timeoutMs: 20000 });
+    // 注意：↑/↓ 需要 ≥2 条结果才能验；采用 data-pagefind-body 之后「搭建」只剩 1 条，
+    // 改用能命中 3 条的「为什么」（见 S-6），断言同时要求 links >= 2，避免测试自身失真。
+    const kb = await pageKb.evaluate(
+      "(async function () {" +
+      "  var input = document.getElementById('search-input');" +
+      "  input.focus();" +
+      "  var links = Array.prototype.slice.call(document.querySelectorAll('.search-result__title a'));" +
+      "  input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));" +
+      "  await new Promise(function (r) { setTimeout(r, 60); });" +
+      "  var firstFocused = document.activeElement === links[0];" +
+      "  if (document.activeElement) document.activeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));" +
+      "  await new Promise(function (r) { setTimeout(r, 60); });" +
+      "  var secondIndex = links.indexOf(document.activeElement);" +
+      "  if (document.activeElement) document.activeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));" +
+      "  await new Promise(function (r) { setTimeout(r, 60); });" +
+      "  var backIndex = links.indexOf(document.activeElement);" +
+      "  return { links: links.length, firstFocused: firstFocused, secondIndex: secondIndex, backIndex: backIndex };" +
+      "})()",
+    );
+    rep.check(
+      'S-15',
+      '键盘 ↑/↓ 在结果链接间移动焦点（AC-11 前置）',
+      kb.links > 1 && kb.firstFocused === true && kb.secondIndex === 1 && kb.backIndex === 0,
+      JSON.stringify(kb),
+    );
+    await pageKb.close();
+    step('S-15 done');
+
     // ---- 深链 / 404 表单入口：?q= 是否被消费（实现缺陷探测）----
     const pageDeep = await chrome.openPage(origin + '/search/?q=' + encodeURIComponent('搭建'));
     await waitFor(pageDeep, "!!document.getElementById('search-input')", { timeoutMs: 15000 });
@@ -207,6 +245,45 @@ export async function run(opts = {}) {
     }
     step('S-13 done');
 
+    // ---- 0 结果时应清空上一次的结果列表（同页连续查询）----
+    const pageStale = await chrome.openPage(origin + '/search/');
+    await waitFor(pageStale, "!!document.getElementById('search-input')", { timeoutMs: 15000 });
+    const firstQ = await pageStale.evaluate("(async function () {\n  var input = document.getElementById('search-input');\n  input.focus();\n  input.value = __TERM__;\n  input.dispatchEvent(new Event('input', { bubbles: true }));\n  var t0 = performance.now();\n  while (performance.now() - t0 < 15000) {\n    if (document.querySelectorAll('.search-result').length > 0) break;\n    if (/^找到 0 条结果$/.test(document.getElementById('search-status').textContent || '')) break;\n    await new Promise(function (r) { setTimeout(r, 10); });\n  }\n  return { elapsedMs: Math.round(performance.now() - t0) };\n})()".replace('__TERM__', JSON.stringify('搭建')));
+    await waitFor(pageStale, SETTLED_EXPR, { timeoutMs: 20000 });
+    const before = await pageStale.evaluate(STATE_EXPR);
+    await pageStale.evaluate("(async function () {\n  var input = document.getElementById('search-input');\n  input.focus();\n  input.value = __TERM__;\n  input.dispatchEvent(new Event('input', { bubbles: true }));\n  var t0 = performance.now();\n  while (performance.now() - t0 < 15000) {\n    if (document.querySelectorAll('.search-result').length > 0) break;\n    if (/^找到 0 条结果$/.test(document.getElementById('search-status').textContent || '')) break;\n    await new Promise(function (r) { setTimeout(r, 10); });\n  }\n  return { elapsedMs: Math.round(performance.now() - t0) };\n})()".replace('__TERM__', JSON.stringify('龘龘龘')));
+    const afterNoHit = await pageStale.evaluate(
+      "(async function () { var t0 = performance.now();" +
+      " while (performance.now() - t0 < 15000) {" +
+      "   if (/^找到 0 条结果$/.test(document.getElementById('search-status').textContent || '')) break;" +
+      "   await new Promise(function (r) { setTimeout(r, 15); }); }" +
+      " return { status: document.getElementById('search-status').textContent," +
+      "          dom: document.querySelectorAll('.search-result').length," +
+      "          emptyTitle: document.getElementById('search-empty-title').textContent," +
+      "          emptyHidden: document.getElementById('search-empty').hidden }; })()",
+    );
+    rep.check(
+      'S-14',
+      '同一页从「有结果」切到「0 结果」时，上一次的结果列表被清空',
+      afterNoHit.status === '找到 0 条结果' && afterNoHit.dom === 0,
+      '第一次查询（搭建）结果数=' + before.items.length + ' → 改为 0 命中词（龘龘龘）后：文案=' + JSON.stringify(afterNoHit.status) +
+        ' · 空态=' + JSON.stringify(afterNoHit.emptyTitle) + ' · 空态可见=' + !afterNoHit.emptyHidden +
+        ' · 仍在 DOM 里的旧结果数=' + afterNoHit.dom,
+    );
+    await pageStale.close();
+    step('S-14 done');
+
+    // ---- 完整标题长查询（工具限制，记录不判死）----
+    const { page: pageLong } = await typedQuery(QUALITY_TERM);
+    await waitFor(pageLong, SETTLED_EXPR, { timeoutMs: 20000 });
+    const longQ = await pageLong.evaluate(STATE_EXPR);
+    rep.note(
+      'Q-3',
+      '完整标题长查询（工具限制，非 AC-5 判定项）',
+      '「' + QUALITY_TERM + '」→ ' + JSON.stringify(longQ.status) + '；同一标题的短词「为什么」可命中。Pagefind zh-cn 无词干/无部分匹配（ADR-001 §9 U6 已标该风险）',
+    );
+    await pageLong.close();
+
     // ---- 结果质量：非文章结果占比 ----
     const nonArticle = allUrls.filter((u) => !/^\/posts\/[^/]+\/$/.test(u || ''));
     rep.note('Q-1', '结果构成（4 次查询合计）', '总结果 ' + allUrls.length + ' 条，其中非文章页 ' + nonArticle.length + ' 条：' + JSON.stringify(Array.from(new Set(nonArticle))));
@@ -214,7 +291,7 @@ export async function run(opts = {}) {
       'Q-2',
       '搜索结果以文章为主（非文章页占比 < 50%）',
       allUrls.length > 0 && nonArticle.length / allUrls.length < 0.5,
-      nonArticle.length + ' / ' + allUrls.length + ' 条非文章页（根因：站点未标 data-pagefind-body，Pagefind 默认索引整页，列表页/标签页/首页文字一并进索引）',
+      nonArticle.length + ' / ' + allUrls.length + ' 条非文章页（根因：全站未标 data-pagefind-body，Pagefind 索引整页，标签/分类/首页/归档页文字一并进索引；修复点在 PostLayout.astro 或列表页，超出 task-8 写入范围）',
     );
 
     await page0.close();

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T08:53:44.543Z",
+  "generatedAt": "2026-09-30T09:21:59.469Z",
   "origin": "https://ppywww.github.io",
   "chrome": "Chrome/154.0.8037.59",
   "pages": [
@@ -60,6 +60,12 @@
           "target": null,
           "rel": null,
           "text": "关于"
+        },
+        {
+          "href": "https://ppywww.github.io/search/",
+          "target": null,
+          "rel": null,
+          "text": ""
         },
         {
           "href": "https://ppywww.github.io/posts/2026-09-30-build-this-blog/",
@@ -148,13 +154,13 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.CTXkZ4Th.css",
+          "name": "/_astro/Footer.c3_ocj9b.css",
           "type": "link",
-          "transfer": 2681,
-          "encoded": 2381,
-          "decoded": 9186,
-          "start": 2101,
-          "end": 2441
+          "transfer": 2799,
+          "encoded": 2499,
+          "decoded": 9855,
+          "start": 159,
+          "end": 285
         },
         {
           "name": "/favicon.svg",
@@ -162,27 +168,27 @@
           "transfer": 564,
           "encoded": 264,
           "decoded": 337,
-          "start": 2548,
-          "end": 2880
+          "start": 399,
+          "end": 447
         }
       ],
       "navTiming": {
-        "ttfb": 2091.1999999284744,
-        "dcl": 2541.6999999284744,
-        "load": 2542.1999999284744,
-        "transfer": 3626,
-        "encoded": 3326
+        "ttfb": 146.39999997615814,
+        "dcl": 393.2000000476837,
+        "load": 393.5,
+        "transfer": 3850,
+        "encoded": 3550
       },
-      "lcp": 2640,
+      "lcp": 464,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 2640
+          "t": 464
         },
         {
           "name": "first-contentful-paint",
-          "t": 2640
+          "t": 464
         }
       ],
       "headingLevels": [
@@ -281,6 +287,12 @@
           "text": "关于"
         },
         {
+          "href": "https://ppywww.github.io/search/",
+          "target": null,
+          "rel": null,
+          "text": ""
+        },
+        {
           "href": "https://ppywww.github.io/posts/2026-09-30-build-this-blog/",
           "target": null,
           "rel": null,
@@ -367,32 +379,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.CTXkZ4Th.css",
+          "name": "/_astro/Footer.c3_ocj9b.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2381,
-          "decoded": 9186,
-          "start": 303,
-          "end": 376
+          "encoded": 2499,
+          "decoded": 9855,
+          "start": 59,
+          "end": 98
         }
       ],
       "navTiming": {
-        "ttfb": 294.5,
-        "dcl": 402.5,
-        "load": 490.2000000476837,
-        "transfer": 4100,
-        "encoded": 3800
+        "ttfb": 49.90000009536743,
+        "dcl": 144.5,
+        "load": 147.30000007152557,
+        "transfer": 4326,
+        "encoded": 4026
       },
-      "lcp": 504,
+      "lcp": 224,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 504
+          "t": 224
         },
         {
           "name": "first-contentful-paint",
-          "t": 504
+          "t": 224
         }
       ],
       "headingLevels": [
@@ -490,6 +502,12 @@
           "text": "关于"
         },
         {
+          "href": "https://ppywww.github.io/search/",
+          "target": null,
+          "rel": null,
+          "text": ""
+        },
+        {
           "href": "https://ppywww.github.io/posts/2026-09-30-build-this-blog/",
           "target": null,
           "rel": null,
@@ -534,32 +552,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.CTXkZ4Th.css",
+          "name": "/_astro/Footer.c3_ocj9b.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2381,
-          "decoded": 9186,
-          "start": 511,
-          "end": 537
+          "encoded": 2499,
+          "decoded": 9855,
+          "start": 59,
+          "end": 87
         }
       ],
       "navTiming": {
-        "ttfb": 500.7000000476837,
-        "dcl": 639.2999999523163,
-        "load": 639.6000000238419,
-        "transfer": 3901,
-        "encoded": 3601
+        "ttfb": 50.59999990463257,
+        "dcl": 89,
+        "load": 187.29999995231628,
+        "transfer": 4122,
+        "encoded": 3822
       },
-      "lcp": 660,
+      "lcp": 208,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 660
+          "t": 208
         },
         {
           "name": "first-contentful-paint",
-          "t": 660
+          "t": 208
         }
       ],
       "headingLevels": [
@@ -656,6 +674,12 @@
           "text": "关于"
         },
         {
+          "href": "https://ppywww.github.io/search/",
+          "target": null,
+          "rel": null,
+          "text": ""
+        },
+        {
           "href": "https://github.com/ppywww/ppywww.github.io",
           "target": "_blank",
           "rel": "noopener",
@@ -694,32 +718,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.CTXkZ4Th.css",
+          "name": "/_astro/Footer.c3_ocj9b.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2381,
-          "decoded": 9186,
-          "start": 311,
-          "end": 340
+          "encoded": 2499,
+          "decoded": 9855,
+          "start": 53,
+          "end": 75
         }
       ],
       "navTiming": {
-        "ttfb": 299.6999999284744,
-        "dcl": 341.1999999284744,
-        "load": 343.5,
-        "transfer": 3888,
-        "encoded": 3588
+        "ttfb": 47.40000009536743,
+        "dcl": 76.30000007152557,
+        "load": 78.80000007152557,
+        "transfer": 4099,
+        "encoded": 3799
       },
-      "lcp": 448,
+      "lcp": 180,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 448
+          "t": 180
         },
         {
           "name": "first-contentful-paint",
-          "t": 448
+          "t": 180
         }
       ],
       "headingLevels": [
@@ -816,6 +840,12 @@
           "text": "关于"
         },
         {
+          "href": "https://ppywww.github.io/search/",
+          "target": null,
+          "rel": null,
+          "text": ""
+        },
+        {
           "href": "https://github.com/ppywww",
           "target": "_blank",
           "rel": "noopener noreferrer",
@@ -842,32 +872,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.CTXkZ4Th.css",
+          "name": "/_astro/Footer.c3_ocj9b.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2381,
-          "decoded": 9186,
-          "start": 310,
-          "end": 342
+          "encoded": 2499,
+          "decoded": 9855,
+          "start": 58,
+          "end": 82
         }
       ],
       "navTiming": {
-        "ttfb": 298.89999997615814,
-        "dcl": 344.2999999523163,
-        "load": 346.60000002384186,
-        "transfer": 4191,
-        "encoded": 3891
+        "ttfb": 48.5,
+        "dcl": 83.59999990463257,
+        "load": 86.69999992847443,
+        "transfer": 4407,
+        "encoded": 4107
       },
-      "lcp": 520,
+      "lcp": 240,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 520
+          "t": 240
         },
         {
           "name": "first-contentful-paint",
-          "t": 520
+          "t": 240
         }
       ],
       "headingLevels": [
@@ -905,6 +935,167 @@
       "viewport": "width=device-width, initial-scale=1",
       "searchInputs": 0,
       "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 关于我 最后更新 · 2026-09-30 本页是骨架，待替换。 下面四节覆盖了自我介绍最基本的问题：我是谁、我在做什么、这个站、联系方式。把方括号里的占位文字换成你自己的内容即可，不需要的部分整节删掉。 我是谁 [两到三行：你的称呼、所在的城市或时区、目前的状态。建议只用昵称，不公开真实姓名。] 我在做什么 [写你正在投入的方向：工作、学",
+      "httpStatus": 200
+    },
+    {
+      "url": "https://ppywww.github.io/search/",
+      "title": "搜索 · ppy-Blog",
+      "lang": "zh-CN",
+      "htmlClass": "light",
+      "dataTheme": "light",
+      "inlineColorScheme": "light",
+      "htmlBg": "rgba(0, 0, 0, 0)",
+      "bodyBg": "rgb(252, 252, 253)",
+      "bodyColor": "rgb(22, 24, 29)",
+      "scrollWidth": 1265,
+      "clientWidth": 1280,
+      "bodyScrollWidth": 1265,
+      "innerWidth": 1280,
+      "overflowEls": [],
+      "anchors": [
+        {
+          "href": "https://ppywww.github.io/search/#main-content",
+          "target": null,
+          "rel": null,
+          "text": "跳到正文"
+        },
+        {
+          "href": "https://ppywww.github.io/",
+          "target": null,
+          "rel": null,
+          "text": "ppy-Blog"
+        },
+        {
+          "href": "https://ppywww.github.io/",
+          "target": null,
+          "rel": null,
+          "text": "首页"
+        },
+        {
+          "href": "https://ppywww.github.io/posts/",
+          "target": null,
+          "rel": null,
+          "text": "文章"
+        },
+        {
+          "href": "https://ppywww.github.io/archives/",
+          "target": null,
+          "rel": null,
+          "text": "归档"
+        },
+        {
+          "href": "https://ppywww.github.io/works/",
+          "target": null,
+          "rel": null,
+          "text": "作品"
+        },
+        {
+          "href": "https://ppywww.github.io/about/",
+          "target": null,
+          "rel": null,
+          "text": "关于"
+        },
+        {
+          "href": "https://ppywww.github.io/search/",
+          "target": null,
+          "rel": null,
+          "text": ""
+        },
+        {
+          "href": "https://ppywww.github.io/posts/",
+          "target": null,
+          "rel": null,
+          "text": "浏览全部文章"
+        },
+        {
+          "href": "https://ppywww.github.io/tags/",
+          "target": null,
+          "rel": null,
+          "text": "按标签找"
+        },
+        {
+          "href": "https://github.com/ppywww",
+          "target": "_blank",
+          "rel": "noopener noreferrer",
+          "text": "GitHub"
+        },
+        {
+          "href": "https://ppywww.github.io/rss.xml",
+          "target": null,
+          "rel": null,
+          "text": "RSS"
+        }
+      ],
+      "resources": [
+        {
+          "name": "/_astro/Footer.c3_ocj9b.css",
+          "type": "link",
+          "transfer": 0,
+          "encoded": 2499,
+          "decoded": 9855,
+          "start": 54,
+          "end": 78
+        },
+        {
+          "name": "/_astro/search.astro_astro_type_script_index_0_lang.D3_SV1GQ.js",
+          "type": "script",
+          "transfer": 2374,
+          "encoded": 2074,
+          "decoded": 4560,
+          "start": 54,
+          "end": 125
+        }
+      ],
+      "navTiming": {
+        "ttfb": 46.700000047683716,
+        "dcl": 165.80000007152557,
+        "load": 167.39999997615814,
+        "transfer": 4009,
+        "encoded": 3709
+      },
+      "lcp": 152,
+      "cls": 0,
+      "paints": [
+        {
+          "name": "first-paint",
+          "t": 152
+        },
+        {
+          "name": "first-contentful-paint",
+          "t": 152
+        }
+      ],
+      "headingLevels": [
+        1
+      ],
+      "h1Count": 1,
+      "imgCount": 0,
+      "imgsNoAlt": 0,
+      "landmarks": {
+        "main": true,
+        "header": true,
+        "footer": true,
+        "nav": 1
+      },
+      "detailsCount": 0,
+      "summaryCount": 0,
+      "skipLink": {
+        "text": "跳到正文",
+        "href": "#main-content",
+        "cls": "skip-link"
+      },
+      "metaDescription": "在 ppy-Blog 内检索文章的标题、正文与标签。",
+      "canonical": "https://ppywww.github.io/search/",
+      "ogTitle": "搜索 · ppy-Blog",
+      "ogImage": null,
+      "twitterCard": "summary",
+      "jsonLdTypes": [
+        "WebSite"
+      ],
+      "robots": "noindex, nofollow",
+      "viewport": "width=device-width, initial-scale=1",
+      "searchInputs": 2,
+      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 搜索 站内搜索 输入关键词，检索全站文章的标题与正文。 搜索关键词 输入关键词开始搜索 可以搜标题、正文与标签，例如「性能优化」「Astro」。 © 2026 ppy · ppy-Blog GitHub RSS",
       "httpStatus": 200
     },
     {
@@ -964,6 +1155,12 @@
           "target": null,
           "rel": null,
           "text": "关于"
+        },
+        {
+          "href": "https://ppywww.github.io/search/",
+          "target": null,
+          "rel": null,
+          "text": ""
         },
         {
           "href": "https://ppywww.github.io/",
@@ -1118,13 +1315,13 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.CTXkZ4Th.css",
+          "name": "/_astro/Footer.c3_ocj9b.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2381,
-          "decoded": 9186,
-          "start": 62,
-          "end": 102
+          "encoded": 2499,
+          "decoded": 9855,
+          "start": 66,
+          "end": 95
         },
         {
           "name": "/_astro/_..DeutuQ4r.css",
@@ -1132,27 +1329,27 @@
           "transfer": 2374,
           "encoded": 2074,
           "decoded": 10094,
-          "start": 62,
-          "end": 405
+          "start": 67,
+          "end": 390
         }
       ],
       "navTiming": {
-        "ttfb": 49.800000071525574,
-        "dcl": 408.2000000476837,
-        "load": 718,
-        "transfer": 10561,
-        "encoded": 10261
+        "ttfb": 54.60000002384186,
+        "dcl": 392.1999999284744,
+        "load": 681,
+        "transfer": 10752,
+        "encoded": 10452
       },
-      "lcp": 740,
+      "lcp": 732,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 740
+          "t": 732
         },
         {
           "name": "first-contentful-paint",
-          "t": 740
+          "t": 732
         }
       ],
       "headingLevels": [
@@ -1262,6 +1459,12 @@
           "text": "关于"
         },
         {
+          "href": "https://ppywww.github.io/search/",
+          "target": null,
+          "rel": null,
+          "text": ""
+        },
+        {
           "href": "https://ppywww.github.io/posts/2026-09-30-build-this-blog/",
           "target": null,
           "rel": null,
@@ -1312,32 +1515,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.CTXkZ4Th.css",
+          "name": "/_astro/Footer.c3_ocj9b.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2381,
-          "decoded": 9186,
-          "start": 316,
-          "end": 347
+          "encoded": 2499,
+          "decoded": 9855,
+          "start": 60,
+          "end": 106
         }
       ],
       "navTiming": {
-        "ttfb": 306.1999999284744,
-        "dcl": 348.7999999523163,
-        "load": 352.60000002384186,
-        "transfer": 3388,
-        "encoded": 3088
+        "ttfb": 51.89999997615814,
+        "dcl": 107.60000002384186,
+        "load": 112.10000002384186,
+        "transfer": 3604,
+        "encoded": 3304
       },
-      "lcp": 464,
+      "lcp": 200,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 464
+          "t": 200
         },
         {
           "name": "first-contentful-paint",
-          "t": 464
+          "t": 200
         }
       ],
       "headingLevels": [
@@ -1433,6 +1636,12 @@
           "text": "关于"
         },
         {
+          "href": "https://ppywww.github.io/search/",
+          "target": null,
+          "rel": null,
+          "text": ""
+        },
+        {
           "href": "https://ppywww.github.io/posts/2026-09-30-build-this-blog/",
           "target": null,
           "rel": null,
@@ -1483,32 +1692,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.CTXkZ4Th.css",
+          "name": "/_astro/Footer.c3_ocj9b.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2381,
-          "decoded": 9186,
-          "start": 320,
-          "end": 394
+          "encoded": 2499,
+          "decoded": 9855,
+          "start": 61,
+          "end": 93
         }
       ],
       "navTiming": {
-        "ttfb": 307.7000000476837,
-        "dcl": 462.7000000476837,
-        "load": 463.10000002384186,
-        "transfer": 3393,
-        "encoded": 3093
+        "ttfb": 50.5,
+        "dcl": 150.29999995231628,
+        "load": 228.5,
+        "transfer": 3610,
+        "encoded": 3310
       },
-      "lcp": 480,
+      "lcp": 256,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 480
+          "t": 256
         },
         {
           "name": "first-contentful-paint",
-          "t": 480
+          "t": 256
         }
       ],
       "headingLevels": [
@@ -1604,6 +1813,12 @@
           "text": "关于"
         },
         {
+          "href": "https://ppywww.github.io/search/",
+          "target": null,
+          "rel": null,
+          "text": ""
+        },
+        {
           "href": "https://ppywww.github.io/posts/2026-09-30-build-this-blog/",
           "target": null,
           "rel": null,
@@ -1654,32 +1869,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.CTXkZ4Th.css",
+          "name": "/_astro/Footer.c3_ocj9b.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2381,
-          "decoded": 9186,
-          "start": 300,
-          "end": 328
+          "encoded": 2499,
+          "decoded": 9855,
+          "start": 54,
+          "end": 81
         }
       ],
       "navTiming": {
-        "ttfb": 295,
-        "dcl": 332.90000009536743,
-        "load": 334.60000002384186,
-        "transfer": 3398,
-        "encoded": 3098
+        "ttfb": 48.10000002384186,
+        "dcl": 83.20000004768372,
+        "load": 85.70000004768372,
+        "transfer": 3615,
+        "encoded": 3315
       },
-      "lcp": 428,
+      "lcp": 188,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 428
+          "t": 188
         },
         {
           "name": "first-contentful-paint",
-          "t": 428
+          "t": 188
         }
       ],
       "headingLevels": [
@@ -1775,6 +1990,12 @@
           "text": "关于"
         },
         {
+          "href": "https://ppywww.github.io/search/",
+          "target": null,
+          "rel": null,
+          "text": ""
+        },
+        {
           "href": "https://ppywww.github.io/posts/2026-09-30-build-this-blog/",
           "target": null,
           "rel": null,
@@ -1825,32 +2046,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.CTXkZ4Th.css",
+          "name": "/_astro/Footer.c3_ocj9b.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2381,
-          "decoded": 9186,
-          "start": 299,
-          "end": 332
+          "encoded": 2499,
+          "decoded": 9855,
+          "start": 60,
+          "end": 84
         }
       ],
       "navTiming": {
-        "ttfb": 288,
-        "dcl": 415.1999999284744,
-        "load": 415.89999997615814,
-        "transfer": 3395,
-        "encoded": 3095
+        "ttfb": 49.700000047683716,
+        "dcl": 141,
+        "load": 217.70000004768372,
+        "transfer": 3611,
+        "encoded": 3311
       },
-      "lcp": 452,
+      "lcp": 248,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 452
+          "t": 248
         },
         {
           "name": "first-contentful-paint",
-          "t": 452
+          "t": 248
         }
       ],
       "headingLevels": [
@@ -1944,6 +2165,12 @@
           "target": null,
           "rel": null,
           "text": "关于"
+        },
+        {
+          "href": "https://ppywww.github.io/search/",
+          "target": null,
+          "rel": null,
+          "text": ""
         },
         {
           "href": "https://ppywww.github.io/",
@@ -2044,13 +2271,13 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.CTXkZ4Th.css",
+          "name": "/_astro/Footer.c3_ocj9b.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2381,
-          "decoded": 9186,
-          "start": 320,
-          "end": 350
+          "encoded": 2499,
+          "decoded": 9855,
+          "start": 55,
+          "end": 87
         },
         {
           "name": "/_astro/_..DeutuQ4r.css",
@@ -2058,27 +2285,27 @@
           "transfer": 0,
           "encoded": 2074,
           "decoded": 10094,
-          "start": 320,
-          "end": 350
+          "start": 55,
+          "end": 88
         }
       ],
       "navTiming": {
-        "ttfb": 311.89999997615814,
-        "dcl": 353,
-        "load": 466,
-        "transfer": 5590,
-        "encoded": 5290
+        "ttfb": 48.10000002384186,
+        "dcl": 202.10000002384186,
+        "load": 341.89999997615814,
+        "transfer": 5791,
+        "encoded": 5491
       },
-      "lcp": 496,
+      "lcp": 372,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 496
+          "t": 372
         },
         {
           "name": "first-contentful-paint",
-          "t": 496
+          "t": 372
         }
       ],
       "headingLevels": [
@@ -2181,6 +2408,12 @@
           "text": "关于"
         },
         {
+          "href": "https://ppywww.github.io/search/",
+          "target": null,
+          "rel": null,
+          "text": ""
+        },
+        {
           "href": "https://ppywww.github.io/posts/2026-09-28-why-i-blog/",
           "target": null,
           "rel": null,
@@ -2243,32 +2476,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.CTXkZ4Th.css",
+          "name": "/_astro/Footer.c3_ocj9b.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2381,
-          "decoded": 9186,
-          "start": 294,
-          "end": 319
+          "encoded": 2499,
+          "decoded": 9855,
+          "start": 56,
+          "end": 90
         }
       ],
       "navTiming": {
-        "ttfb": 288.89999997615814,
-        "dcl": 319.6999999284744,
-        "load": 321.09999990463257,
-        "transfer": 3519,
-        "encoded": 3219
+        "ttfb": 47.39999997615814,
+        "dcl": 186.19999992847443,
+        "load": 186.5,
+        "transfer": 3743,
+        "encoded": 3443
       },
-      "lcp": 416,
+      "lcp": 212,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 416
+          "t": 212
         },
         {
           "name": "first-contentful-paint",
-          "t": 416
+          "t": 212
         }
       ],
       "headingLevels": [
@@ -2365,6 +2598,12 @@
           "text": "关于"
         },
         {
+          "href": "https://ppywww.github.io/search/",
+          "target": null,
+          "rel": null,
+          "text": ""
+        },
+        {
           "href": "https://ppywww.github.io/posts/2026-09-28-why-i-blog/",
           "target": null,
           "rel": null,
@@ -2403,32 +2642,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.CTXkZ4Th.css",
+          "name": "/_astro/Footer.c3_ocj9b.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2381,
-          "decoded": 9186,
-          "start": 322,
-          "end": 345
+          "encoded": 2499,
+          "decoded": 9855,
+          "start": 62,
+          "end": 84
         }
       ],
       "navTiming": {
-        "ttfb": 314.7999999523163,
-        "dcl": 389.5,
-        "load": 391.10000002384186,
-        "transfer": 3279,
-        "encoded": 2979
+        "ttfb": 51.39999997615814,
+        "dcl": 134.89999997615814,
+        "load": 211.59999990463257,
+        "transfer": 3500,
+        "encoded": 3200
       },
-      "lcp": 468,
+      "lcp": 228,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 468
+          "t": 228
         },
         {
           "name": "first-contentful-paint",
-          "t": 468
+          "t": 228
         }
       ],
       "headingLevels": [
@@ -2522,6 +2761,12 @@
           "target": null,
           "rel": null,
           "text": "关于"
+        },
+        {
+          "href": "https://ppywww.github.io/search/",
+          "target": null,
+          "rel": null,
+          "text": ""
         },
         {
           "href": "https://ppywww.github.io/",
@@ -2652,13 +2897,13 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.CTXkZ4Th.css",
+          "name": "/_astro/Footer.c3_ocj9b.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2381,
-          "decoded": 9186,
-          "start": 315,
-          "end": 362
+          "encoded": 2499,
+          "decoded": 9855,
+          "start": 61,
+          "end": 85
         },
         {
           "name": "/_astro/_..DeutuQ4r.css",
@@ -2666,27 +2911,27 @@
           "transfer": 0,
           "encoded": 2074,
           "decoded": 10094,
-          "start": 316,
-          "end": 363
+          "start": 62,
+          "end": 85
         }
       ],
       "navTiming": {
-        "ttfb": 304.7999999523163,
-        "dcl": 529.8999999761581,
-        "load": 530.2000000476837,
-        "transfer": 6200,
-        "encoded": 5900
+        "ttfb": 50.60000002384186,
+        "dcl": 89.10000002384186,
+        "load": 101.30000007152557,
+        "transfer": 6409,
+        "encoded": 6109
       },
-      "lcp": 564,
+      "lcp": 304,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 564
+          "t": 304
         },
         {
           "name": "first-contentful-paint",
-          "t": 564
+          "t": 304
         }
       ],
       "headingLevels": [
@@ -2793,6 +3038,12 @@
           "text": "关于"
         },
         {
+          "href": "https://ppywww.github.io/search/",
+          "target": null,
+          "rel": null,
+          "text": ""
+        },
+        {
           "href": "https://ppywww.github.io/posts/2026-09-25-reading-note-template/",
           "target": null,
           "rel": null,
@@ -2837,32 +3088,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.CTXkZ4Th.css",
+          "name": "/_astro/Footer.c3_ocj9b.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2381,
-          "decoded": 9186,
-          "start": 388,
-          "end": 475
+          "encoded": 2499,
+          "decoded": 9855,
+          "start": 53,
+          "end": 78
         }
       ],
       "navTiming": {
-        "ttfb": 377.5,
-        "dcl": 538.5,
-        "load": 538.6999999284744,
-        "transfer": 3331,
-        "encoded": 3031
+        "ttfb": 46.89999997615814,
+        "dcl": 80.19999992847443,
+        "load": 82.69999992847443,
+        "transfer": 3548,
+        "encoded": 3248
       },
-      "lcp": 572,
+      "lcp": 180,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 572
+          "t": 180
         },
         {
           "name": "first-contentful-paint",
-          "t": 572
+          "t": 180
         }
       ],
       "headingLevels": [
@@ -2958,6 +3209,12 @@
           "text": "关于"
         },
         {
+          "href": "https://ppywww.github.io/search/",
+          "target": null,
+          "rel": null,
+          "text": ""
+        },
+        {
           "href": "https://ppywww.github.io/posts/2026-09-25-reading-note-template/",
           "target": null,
           "rel": null,
@@ -3002,32 +3259,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.CTXkZ4Th.css",
+          "name": "/_astro/Footer.c3_ocj9b.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2381,
-          "decoded": 9186,
-          "start": 304,
-          "end": 337
+          "encoded": 2499,
+          "decoded": 9855,
+          "start": 55,
+          "end": 82
         }
       ],
       "navTiming": {
-        "ttfb": 294.10000002384186,
-        "dcl": 390.5,
-        "load": 450.1999999284744,
-        "transfer": 3328,
-        "encoded": 3028
+        "ttfb": 48.5,
+        "dcl": 191.59999990463257,
+        "load": 192.69999992847443,
+        "transfer": 3549,
+        "encoded": 3249
       },
-      "lcp": 460,
+      "lcp": 220,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 460
+          "t": 220
         },
         {
           "name": "first-contentful-paint",
-          "t": 460
+          "t": 220
         }
       ],
       "headingLevels": [
@@ -3066,219 +3323,74 @@
     },
     {
       "url": "https://ppywww.github.io/rss.xml",
-      "title": "页面未找到 · ppy-Blog",
-      "lang": "zh-CN",
-      "htmlClass": "light",
-      "dataTheme": "light",
-      "inlineColorScheme": "light",
+      "title": "",
+      "lang": "",
+      "htmlClass": "",
+      "dataTheme": null,
+      "inlineColorScheme": null,
       "htmlBg": "rgba(0, 0, 0, 0)",
-      "bodyBg": "rgb(252, 252, 253)",
-      "bodyColor": "rgb(22, 24, 29)",
-      "scrollWidth": 1265,
+      "bodyBg": "rgba(0, 0, 0, 0)",
+      "bodyColor": "rgb(0, 0, 0)",
+      "scrollWidth": 1280,
       "clientWidth": 1280,
-      "bodyScrollWidth": 1265,
+      "bodyScrollWidth": 1280,
       "innerWidth": 1280,
       "overflowEls": [],
-      "anchors": [
-        {
-          "href": "https://ppywww.github.io/rss.xml#main-content",
-          "target": null,
-          "rel": null,
-          "text": "跳到正文"
-        },
-        {
-          "href": "https://ppywww.github.io/",
-          "target": null,
-          "rel": null,
-          "text": "ppy-Blog"
-        },
-        {
-          "href": "https://ppywww.github.io/",
-          "target": null,
-          "rel": null,
-          "text": "首页"
-        },
-        {
-          "href": "https://ppywww.github.io/posts/",
-          "target": null,
-          "rel": null,
-          "text": "文章"
-        },
-        {
-          "href": "https://ppywww.github.io/archives/",
-          "target": null,
-          "rel": null,
-          "text": "归档"
-        },
-        {
-          "href": "https://ppywww.github.io/works/",
-          "target": null,
-          "rel": null,
-          "text": "作品"
-        },
-        {
-          "href": "https://ppywww.github.io/about/",
-          "target": null,
-          "rel": null,
-          "text": "关于"
-        },
-        {
-          "href": "https://ppywww.github.io/",
-          "target": null,
-          "rel": null,
-          "text": "返回首页"
-        },
-        {
-          "href": "https://ppywww.github.io/posts/2026-09-30-build-this-blog/",
-          "target": null,
-          "rel": null,
-          "text": "从 0 搭建这个博客：选型、目录与实测数据"
-        },
-        {
-          "href": "https://ppywww.github.io/tags/Astro/",
-          "target": null,
-          "rel": null,
-          "text": "Astro"
-        },
-        {
-          "href": "https://ppywww.github.io/tags/%E9%9D%99%E6%80%81%E7%AB%99%E7%82%B9/",
-          "target": null,
-          "rel": null,
-          "text": "静态站点"
-        },
-        {
-          "href": "https://ppywww.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/",
-          "target": null,
-          "rel": null,
-          "text": "性能优化"
-        },
-        {
-          "href": "https://ppywww.github.io/tags/GitHub%20Pages/",
-          "target": null,
-          "rel": null,
-          "text": "GitHub Pages"
-        },
-        {
-          "href": "https://ppywww.github.io/posts/2026-09-28-why-i-blog/",
-          "target": null,
-          "rel": null,
-          "text": "我为什么开始写博客"
-        },
-        {
-          "href": "https://ppywww.github.io/tags/%E5%86%99%E4%BD%9C/",
-          "target": null,
-          "rel": null,
-          "text": "写作"
-        },
-        {
-          "href": "https://ppywww.github.io/tags/%E9%9A%8F%E7%AC%94/",
-          "target": null,
-          "rel": null,
-          "text": "随笔"
-        },
-        {
-          "href": "https://ppywww.github.io/posts/2026-09-25-reading-note-template/",
-          "target": null,
-          "rel": null,
-          "text": "读书笔记模板：把读完的书变成能回看的东西"
-        },
-        {
-          "href": "https://ppywww.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/",
-          "target": null,
-          "rel": null,
-          "text": "读书笔记"
-        },
-        {
-          "href": "https://ppywww.github.io/tags/%E6%A8%A1%E6%9D%BF/",
-          "target": null,
-          "rel": null,
-          "text": "模板"
-        },
-        {
-          "href": "https://ppywww.github.io/tags/%E5%86%99%E4%BD%9C/",
-          "target": null,
-          "rel": null,
-          "text": "写作"
-        },
-        {
-          "href": "https://github.com/ppywww",
-          "target": "_blank",
-          "rel": "noopener noreferrer",
-          "text": "GitHub"
-        },
-        {
-          "href": "https://ppywww.github.io/rss.xml",
-          "target": null,
-          "rel": null,
-          "text": "RSS"
-        }
-      ],
+      "anchors": [],
       "resources": [
         {
-          "name": "/_astro/Footer.CTXkZ4Th.css",
-          "type": "link",
-          "transfer": 0,
-          "encoded": 2381,
-          "decoded": 9186,
-          "start": 78,
-          "end": 103
+          "name": "/favicon.ico",
+          "type": "other",
+          "transfer": 4592,
+          "encoded": 4292,
+          "decoded": 11386,
+          "start": 130,
+          "end": 535
         }
       ],
       "navTiming": {
-        "ttfb": 68.10000002384186,
-        "dcl": 106,
-        "load": 213.20000004768372,
-        "transfer": 4384,
-        "encoded": 4084
+        "ttfb": 47,
+        "dcl": 63.60000002384186,
+        "load": 91.10000002384186,
+        "transfer": 1259,
+        "encoded": 959
       },
-      "lcp": 248,
+      "lcp": 172,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 248
+          "t": 172
         },
         {
           "name": "first-contentful-paint",
-          "t": 248
+          "t": 172
         }
       ],
-      "headingLevels": [
-        1,
-        2,
-        3,
-        3,
-        3
-      ],
-      "h1Count": 1,
+      "headingLevels": [],
+      "h1Count": 0,
       "imgCount": 0,
       "imgsNoAlt": 0,
       "landmarks": {
-        "main": true,
-        "header": true,
-        "footer": true,
-        "nav": 1
+        "main": false,
+        "header": false,
+        "footer": false,
+        "nav": 0
       },
       "detailsCount": 0,
       "summaryCount": 0,
-      "skipLink": {
-        "text": "跳到正文",
-        "href": "#main-content",
-        "cls": "skip-link"
-      },
-      "metaDescription": "这个页面走丢了，可以返回首页或使用站内搜索。",
-      "canonical": "https://ppywww.github.io/404/",
-      "ogTitle": "页面未找到 · ppy-Blog",
+      "skipLink": null,
+      "metaDescription": null,
+      "canonical": null,
+      "ogTitle": null,
       "ogImage": null,
-      "twitterCard": "summary",
-      "jsonLdTypes": [
-        "WebSite"
-      ],
-      "robots": "noindex, nofollow",
-      "viewport": "width=device-width, initial-scale=1",
-      "searchInputs": 2,
-      "bodyTextHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 404 这个页面走丢了 链接可能已失效，或者文章被移到了别处。可以回到首页，或者直接搜索。 返回首页 站内搜索 最新文章 从 0 搭建这个博客：选型、目录与实测数据 记录本站从选型到骨架跑通的真实过程：Astro、Hugo、VitePress 的实测对比结论、最终目录结构，以及构建产物的真实体积数据。 2026-09-30 · 4 分钟 ·",
-      "httpStatus": 404
+      "twitterCard": null,
+      "jsonLdTypes": [],
+      "robots": null,
+      "viewport": null,
+      "searchInputs": 0,
+      "bodyTextHead": "This XML file does not appear to have any style information associated with it. The document tree is shown below. <rss version=\"2.0\"> <channel> <title>ppy-Blog</title> <description>Hi, this is ppy. I’",
+      "httpStatus": 200
     },
     {
       "url": "https://ppywww.github.io/categories/",
@@ -3339,6 +3451,12 @@
           "text": "关于"
         },
         {
+          "href": "https://ppywww.github.io/search/",
+          "target": null,
+          "rel": null,
+          "text": ""
+        },
+        {
           "href": "https://ppywww.github.io/categories/%E6%8A%80%E6%9C%AF/",
           "target": null,
           "rel": null,
@@ -3377,32 +3495,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.CTXkZ4Th.css",
+          "name": "/_astro/Footer.c3_ocj9b.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2381,
-          "decoded": 9186,
-          "start": 379,
-          "end": 452
+          "encoded": 2499,
+          "decoded": 9855,
+          "start": 59,
+          "end": 82
         }
       ],
       "navTiming": {
-        "ttfb": 368.40000009536743,
-        "dcl": 454.60000002384186,
-        "load": 498.2000000476837,
-        "transfer": 3417,
-        "encoded": 3117
+        "ttfb": 48.59999990463257,
+        "dcl": 123.69999992847443,
+        "load": 125.39999997615814,
+        "transfer": 3641,
+        "encoded": 3341
       },
-      "lcp": 520,
+      "lcp": 216,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 520
+          "t": 216
         },
         {
           "name": "first-contentful-paint",
-          "t": 520
+          "t": 216
         }
       ],
       "headingLevels": [
@@ -3497,6 +3615,12 @@
           "text": "关于"
         },
         {
+          "href": "https://ppywww.github.io/search/",
+          "target": null,
+          "rel": null,
+          "text": ""
+        },
+        {
           "href": "https://ppywww.github.io/tags/%E5%86%99%E4%BD%9C/",
           "target": null,
           "rel": "tag",
@@ -3559,32 +3683,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.CTXkZ4Th.css",
+          "name": "/_astro/Footer.c3_ocj9b.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2381,
-          "decoded": 9186,
-          "start": 372,
-          "end": 395
+          "encoded": 2499,
+          "decoded": 9855,
+          "start": 60,
+          "end": 95
         }
       ],
       "navTiming": {
-        "ttfb": 364.3000000715256,
-        "dcl": 396.10000002384186,
-        "load": 397.39999997615814,
-        "transfer": 3503,
-        "encoded": 3203
+        "ttfb": 49.199999928474426,
+        "dcl": 96.89999997615814,
+        "load": 147.39999997615814,
+        "transfer": 3731,
+        "encoded": 3431
       },
-      "lcp": 476,
+      "lcp": 168,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 476
+          "t": 168
         },
         {
           "name": "first-contentful-paint",
-          "t": 476
+          "t": 168
         }
       ],
       "headingLevels": [
@@ -3679,6 +3803,12 @@
           "text": "关于"
         },
         {
+          "href": "https://ppywww.github.io/search/",
+          "target": null,
+          "rel": null,
+          "text": ""
+        },
+        {
           "href": "https://ppywww.github.io/posts/2026-09-30-build-this-blog/",
           "target": null,
           "rel": null,
@@ -3729,21 +3859,21 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.CTXkZ4Th.css",
+          "name": "/_astro/Footer.c3_ocj9b.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2381,
-          "decoded": 9186,
-          "start": 59,
-          "end": 87
+          "encoded": 2499,
+          "decoded": 9855,
+          "start": 53,
+          "end": 78
         }
       ],
       "navTiming": {
-        "ttfb": 51.39999997615814,
-        "dcl": 89.19999992847443,
-        "load": 92.39999997615814,
-        "transfer": 3399,
-        "encoded": 3099
+        "ttfb": 46.5,
+        "dcl": 79.40000009536743,
+        "load": 83.80000007152557,
+        "transfer": 3617,
+        "encoded": 3317
       },
       "lcp": 180,
       "cls": 0,
@@ -3850,6 +3980,12 @@
           "text": "关于"
         },
         {
+          "href": "https://ppywww.github.io/search/",
+          "target": null,
+          "rel": null,
+          "text": ""
+        },
+        {
           "href": "https://ppywww.github.io/posts/2026-09-28-why-i-blog/",
           "target": null,
           "rel": null,
@@ -3888,32 +4024,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.CTXkZ4Th.css",
+          "name": "/_astro/Footer.c3_ocj9b.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2381,
-          "decoded": 9186,
-          "start": 322,
-          "end": 351
+          "encoded": 2499,
+          "decoded": 9855,
+          "start": 56,
+          "end": 84
         }
       ],
       "navTiming": {
-        "ttfb": 316,
-        "dcl": 352.60000002384186,
-        "load": 354.60000002384186,
-        "transfer": 3288,
-        "encoded": 2988
+        "ttfb": 47.199999928474426,
+        "dcl": 86.39999997615814,
+        "load": 155,
+        "transfer": 3509,
+        "encoded": 3209
       },
-      "lcp": 428,
+      "lcp": 188,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 428
+          "t": 188
         },
         {
           "name": "first-contentful-paint",
-          "t": 428
+          "t": 188
         }
       ],
       "headingLevels": [
@@ -4009,6 +4145,12 @@
           "text": "关于"
         },
         {
+          "href": "https://ppywww.github.io/search/",
+          "target": null,
+          "rel": null,
+          "text": ""
+        },
+        {
           "href": "https://ppywww.github.io/posts/2026-09-25-reading-note-template/",
           "target": null,
           "rel": null,
@@ -4053,32 +4195,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.CTXkZ4Th.css",
+          "name": "/_astro/Footer.c3_ocj9b.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2381,
-          "decoded": 9186,
-          "start": 309,
-          "end": 356
+          "encoded": 2499,
+          "decoded": 9855,
+          "start": 55,
+          "end": 89
         }
       ],
       "navTiming": {
-        "ttfb": 297.89999997615814,
-        "dcl": 425.2000000476837,
-        "load": 425.60000002384186,
-        "transfer": 3322,
-        "encoded": 3022
+        "ttfb": 48.700000047683716,
+        "dcl": 136,
+        "load": 199.70000004768372,
+        "transfer": 3540,
+        "encoded": 3240
       },
-      "lcp": 460,
+      "lcp": 232,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 460
+          "t": 232
         },
         {
           "name": "first-contentful-paint",
-          "t": 460
+          "t": 232
         }
       ],
       "headingLevels": [
@@ -4174,6 +4316,12 @@
           "text": "关于"
         },
         {
+          "href": "https://ppywww.github.io/search/",
+          "target": null,
+          "rel": null,
+          "text": ""
+        },
+        {
           "href": "https://ppywww.github.io/posts/",
           "target": null,
           "rel": null,
@@ -4200,32 +4348,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.CTXkZ4Th.css",
+          "name": "/_astro/Footer.c3_ocj9b.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2381,
-          "decoded": 9186,
-          "start": 330,
-          "end": 405
+          "encoded": 2499,
+          "decoded": 9855,
+          "start": 59,
+          "end": 81
         }
       ],
       "navTiming": {
-        "ttfb": 318.7000000476837,
-        "dcl": 481.2000000476837,
-        "load": 481.7000000476837,
-        "transfer": 3008,
-        "encoded": 2708
+        "ttfb": 49.89999997615814,
+        "dcl": 82.80000007152557,
+        "load": 84.80000007152557,
+        "transfer": 3230,
+        "encoded": 2930
       },
-      "lcp": 516,
+      "lcp": 176,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 516
+          "t": 176
         },
         {
           "name": "first-contentful-paint",
-          "t": 516
+          "t": 176
         }
       ],
       "headingLevels": [
@@ -4262,7 +4410,188 @@
       "httpStatus": 200
     }
   ],
-  "linkStatus": {},
+  "linkStatus": [
+    {
+      "url": "https://ppywww.github.io/",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/"
+    },
+    {
+      "url": "https://ppywww.github.io/404/",
+      "status": 404,
+      "ok": false,
+      "finalUrl": "https://ppywww.github.io/404/"
+    },
+    {
+      "url": "https://ppywww.github.io/about/",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/about/"
+    },
+    {
+      "url": "https://ppywww.github.io/archives/",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/archives/"
+    },
+    {
+      "url": "https://ppywww.github.io/categories/",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/categories/"
+    },
+    {
+      "url": "https://ppywww.github.io/categories/%E4%BD%9C%E5%93%81/",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/categories/%E4%BD%9C%E5%93%81/"
+    },
+    {
+      "url": "https://ppywww.github.io/categories/%E6%8A%80%E6%9C%AF/",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/categories/%E6%8A%80%E6%9C%AF/"
+    },
+    {
+      "url": "https://ppywww.github.io/categories/%E7%94%9F%E6%B4%BB/",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/categories/%E7%94%9F%E6%B4%BB/"
+    },
+    {
+      "url": "https://ppywww.github.io/categories/%E8%AF%BB%E4%B9%A6/",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/categories/%E8%AF%BB%E4%B9%A6/"
+    },
+    {
+      "url": "https://ppywww.github.io/feed.xml",
+      "status": 404,
+      "ok": false,
+      "finalUrl": "https://ppywww.github.io/feed.xml"
+    },
+    {
+      "url": "https://ppywww.github.io/index.xml",
+      "status": 404,
+      "ok": false,
+      "finalUrl": "https://ppywww.github.io/index.xml"
+    },
+    {
+      "url": "https://ppywww.github.io/posts/",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/posts/"
+    },
+    {
+      "url": "https://ppywww.github.io/posts/2026-09-25-reading-note-template/",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/posts/2026-09-25-reading-note-template/"
+    },
+    {
+      "url": "https://ppywww.github.io/posts/2026-09-28-why-i-blog/",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/posts/2026-09-28-why-i-blog/"
+    },
+    {
+      "url": "https://ppywww.github.io/posts/2026-09-30-build-this-blog/",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/posts/2026-09-30-build-this-blog/"
+    },
+    {
+      "url": "https://ppywww.github.io/robots.txt",
+      "status": 404,
+      "ok": false,
+      "finalUrl": "https://ppywww.github.io/robots.txt"
+    },
+    {
+      "url": "https://ppywww.github.io/rss.xml",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/rss.xml"
+    },
+    {
+      "url": "https://ppywww.github.io/search/",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/search/"
+    },
+    {
+      "url": "https://ppywww.github.io/sitemap.xml",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/sitemap.xml"
+    },
+    {
+      "url": "https://ppywww.github.io/tags/",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/tags/"
+    },
+    {
+      "url": "https://ppywww.github.io/tags/%E5%86%99%E4%BD%9C/",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/tags/%E5%86%99%E4%BD%9C/"
+    },
+    {
+      "url": "https://ppywww.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"
+    },
+    {
+      "url": "https://ppywww.github.io/tags/%E6%A8%A1%E6%9D%BF/",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/tags/%E6%A8%A1%E6%9D%BF/"
+    },
+    {
+      "url": "https://ppywww.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"
+    },
+    {
+      "url": "https://ppywww.github.io/tags/%E9%9A%8F%E7%AC%94/",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/tags/%E9%9A%8F%E7%AC%94/"
+    },
+    {
+      "url": "https://ppywww.github.io/tags/%E9%9D%99%E6%80%81%E7%AB%99%E7%82%B9/",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/tags/%E9%9D%99%E6%80%81%E7%AB%99%E7%82%B9/"
+    },
+    {
+      "url": "https://ppywww.github.io/tags/Astro/",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/tags/Astro/"
+    },
+    {
+      "url": "https://ppywww.github.io/tags/GitHub%20Pages/",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/tags/GitHub%20Pages/"
+    },
+    {
+      "url": "https://ppywww.github.io/this-page-does-not-exist-xyz/",
+      "status": 404,
+      "ok": false,
+      "finalUrl": "https://ppywww.github.io/this-page-does-not-exist-xyz/"
+    },
+    {
+      "url": "https://ppywww.github.io/works/",
+      "status": 200,
+      "ok": true,
+      "finalUrl": "https://ppywww.github.io/works/"
+    }
+  ],
   "overflow320": [
     {
       "path": "/",
@@ -4356,7 +4685,7 @@
           "href": "#main-content",
           "cls": "skip-link",
           "aria": null,
-          "outline": "solid 2px rgb(59, 76, 224)",
+          "outline": "solid 2px rgb(142, 156, 255)",
           "boxShadow": "none",
           "rect": "98x54",
           "visible": true,
@@ -4377,7 +4706,7 @@
           "href": "/",
           "cls": "brand",
           "aria": null,
-          "outline": "solid 2px rgb(59, 76, 224)",
+          "outline": "solid 2px rgb(142, 156, 255)",
           "boxShadow": "none",
           "rect": "70x30",
           "visible": true,
@@ -4398,7 +4727,7 @@
           "href": "/",
           "cls": null,
           "aria": null,
-          "outline": "solid 2px rgb(59, 76, 224)",
+          "outline": "solid 2px rgb(142, 156, 255)",
           "boxShadow": "none",
           "rect": "54x42",
           "visible": true,
@@ -4419,7 +4748,7 @@
           "href": "/posts/",
           "cls": null,
           "aria": null,
-          "outline": "solid 2px rgb(59, 76, 224)",
+          "outline": "solid 2px rgb(142, 156, 255)",
           "boxShadow": "none",
           "rect": "54x42",
           "visible": true,
@@ -4440,7 +4769,7 @@
           "href": "/archives/",
           "cls": null,
           "aria": null,
-          "outline": "solid 2px rgb(59, 76, 224)",
+          "outline": "solid 2px rgb(142, 156, 255)",
           "boxShadow": "none",
           "rect": "54x42",
           "visible": true,
@@ -4461,7 +4790,7 @@
           "href": "/works/",
           "cls": null,
           "aria": null,
-          "outline": "solid 2px rgb(59, 76, 224)",
+          "outline": "solid 2px rgb(142, 156, 255)",
           "boxShadow": "none",
           "rect": "54x42",
           "visible": true,
@@ -4482,7 +4811,7 @@
           "href": "/about/",
           "cls": null,
           "aria": null,
-          "outline": "solid 2px rgb(59, 76, 224)",
+          "outline": "solid 2px rgb(142, 156, 255)",
           "boxShadow": "none",
           "rect": "54x42",
           "visible": true,
@@ -4498,231 +4827,14 @@
           }
         },
         {
-          "tag": "button",
+          "tag": "a",
           "text": "",
-          "href": null,
-          "cls": "btn theme-toggle",
-          "aria": "切换到深色模式",
-          "outline": "solid 2px rgb(59, 76, 224)",
+          "href": "/search/",
+          "cls": "icon-btn",
+          "aria": "站内搜索",
+          "outline": "solid 2px rgb(142, 156, 255)",
           "boxShadow": "none",
           "rect": "36x36",
-          "visible": true,
-          "skipLink": {
-            "top": -44,
-            "left": 16,
-            "w": 98,
-            "h": 54,
-            "clip": "auto",
-            "transform": "none",
-            "opacity": "1",
-            "position": "absolute"
-          }
-        },
-        {
-          "tag": "a",
-          "text": "从 0 搭建这个博客：选型、目录与实测数据",
-          "href": "/posts/2026-09-30-build-this-blog/",
-          "cls": null,
-          "aria": null,
-          "outline": "solid 2px rgb(59, 76, 224)",
-          "boxShadow": "none",
-          "rect": "352x25",
-          "visible": true,
-          "skipLink": {
-            "top": -44,
-            "left": 16,
-            "w": 98,
-            "h": 54,
-            "clip": "auto",
-            "transform": "none",
-            "opacity": "1",
-            "position": "absolute"
-          }
-        },
-        {
-          "tag": "a",
-          "text": "Astro",
-          "href": "/tags/Astro/",
-          "cls": "tag",
-          "aria": null,
-          "outline": "solid 2px rgb(59, 76, 224)",
-          "boxShadow": "none",
-          "rect": "54x25",
-          "visible": true,
-          "skipLink": {
-            "top": -44,
-            "left": 16,
-            "w": 98,
-            "h": 54,
-            "clip": "auto",
-            "transform": "none",
-            "opacity": "1",
-            "position": "absolute"
-          }
-        }
-      ],
-      "themeBefore": {
-        "cls": "light",
-        "theme": "light",
-        "bg": "rgba(0, 0, 0, 0)",
-        "bodyBg": "rgb(252, 252, 253)",
-        "inlineColorScheme": "light",
-        "stored": null,
-        "aria": "false",
-        "label": "切换到深色模式"
-      },
-      "themeAfterEnter": {
-        "cls": "dark",
-        "theme": "dark",
-        "bg": "rgba(0, 0, 0, 0)",
-        "bodyBg": "rgb(15, 17, 21)",
-        "inlineColorScheme": "dark",
-        "stored": "dark",
-        "aria": "true",
-        "label": "切换到浅色模式"
-      },
-      "toc": {
-        "present": false
-      }
-    },
-    {
-      "url": "https://ppywww.github.io/posts/2026-09-30-build-this-blog/",
-      "tabSequence": [
-        {
-          "tag": "a",
-          "text": "跳到正文",
-          "href": "#main-content",
-          "cls": "skip-link",
-          "aria": null,
-          "outline": "solid 2px rgb(142, 156, 255)",
-          "boxShadow": "none",
-          "rect": "98x54",
-          "visible": true,
-          "skipLink": {
-            "top": 16,
-            "left": 16,
-            "w": 98,
-            "h": 54,
-            "clip": "auto",
-            "transform": "none",
-            "opacity": "1",
-            "position": "absolute"
-          }
-        },
-        {
-          "tag": "a",
-          "text": "ppy-Blog",
-          "href": "/",
-          "cls": "brand",
-          "aria": null,
-          "outline": "solid 2px rgb(142, 156, 255)",
-          "boxShadow": "none",
-          "rect": "70x30",
-          "visible": true,
-          "skipLink": {
-            "top": -44,
-            "left": 16,
-            "w": 98,
-            "h": 54,
-            "clip": "auto",
-            "transform": "none",
-            "opacity": "1",
-            "position": "absolute"
-          }
-        },
-        {
-          "tag": "a",
-          "text": "首页",
-          "href": "/",
-          "cls": null,
-          "aria": null,
-          "outline": "solid 2px rgb(142, 156, 255)",
-          "boxShadow": "none",
-          "rect": "54x42",
-          "visible": true,
-          "skipLink": {
-            "top": -44,
-            "left": 16,
-            "w": 98,
-            "h": 54,
-            "clip": "auto",
-            "transform": "none",
-            "opacity": "1",
-            "position": "absolute"
-          }
-        },
-        {
-          "tag": "a",
-          "text": "文章",
-          "href": "/posts/",
-          "cls": null,
-          "aria": null,
-          "outline": "solid 2px rgb(142, 156, 255)",
-          "boxShadow": "none",
-          "rect": "54x42",
-          "visible": true,
-          "skipLink": {
-            "top": -44,
-            "left": 16,
-            "w": 98,
-            "h": 54,
-            "clip": "auto",
-            "transform": "none",
-            "opacity": "1",
-            "position": "absolute"
-          }
-        },
-        {
-          "tag": "a",
-          "text": "归档",
-          "href": "/archives/",
-          "cls": null,
-          "aria": null,
-          "outline": "solid 2px rgb(142, 156, 255)",
-          "boxShadow": "none",
-          "rect": "54x42",
-          "visible": true,
-          "skipLink": {
-            "top": -44,
-            "left": 16,
-            "w": 98,
-            "h": 54,
-            "clip": "auto",
-            "transform": "none",
-            "opacity": "1",
-            "position": "absolute"
-          }
-        },
-        {
-          "tag": "a",
-          "text": "作品",
-          "href": "/works/",
-          "cls": null,
-          "aria": null,
-          "outline": "solid 2px rgb(142, 156, 255)",
-          "boxShadow": "none",
-          "rect": "54x42",
-          "visible": true,
-          "skipLink": {
-            "top": -44,
-            "left": 16,
-            "w": 98,
-            "h": 54,
-            "clip": "auto",
-            "transform": "none",
-            "opacity": "1",
-            "position": "absolute"
-          }
-        },
-        {
-          "tag": "a",
-          "text": "关于",
-          "href": "/about/",
-          "cls": null,
-          "aria": null,
-          "outline": "solid 2px rgb(142, 156, 255)",
-          "boxShadow": "none",
-          "rect": "54x42",
           "visible": true,
           "skipLink": {
             "top": -44,
@@ -4755,6 +4867,27 @@
             "opacity": "1",
             "position": "absolute"
           }
+        },
+        {
+          "tag": "a",
+          "text": "从 0 搭建这个博客：选型、目录与实测数据",
+          "href": "/posts/2026-09-30-build-this-blog/",
+          "cls": null,
+          "aria": null,
+          "outline": "solid 2px rgb(142, 156, 255)",
+          "boxShadow": "none",
+          "rect": "352x25",
+          "visible": true,
+          "skipLink": {
+            "top": -44,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "position": "absolute"
+          }
         }
       ],
       "themeBefore": {
@@ -4776,6 +4909,202 @@
         "stored": "light",
         "aria": "false",
         "label": "切换到深色模式"
+      },
+      "toc": {
+        "present": false
+      }
+    },
+    {
+      "url": "https://ppywww.github.io/posts/2026-09-30-build-this-blog/",
+      "tabSequence": [
+        {
+          "tag": "a",
+          "text": "跳到正文",
+          "href": "#main-content",
+          "cls": "skip-link",
+          "aria": null,
+          "outline": "solid 2px rgb(59, 76, 224)",
+          "boxShadow": "none",
+          "rect": "98x54",
+          "visible": true,
+          "skipLink": {
+            "top": 16,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "position": "absolute"
+          }
+        },
+        {
+          "tag": "a",
+          "text": "ppy-Blog",
+          "href": "/",
+          "cls": "brand",
+          "aria": null,
+          "outline": "solid 2px rgb(59, 76, 224)",
+          "boxShadow": "none",
+          "rect": "70x30",
+          "visible": true,
+          "skipLink": {
+            "top": -44,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "position": "absolute"
+          }
+        },
+        {
+          "tag": "a",
+          "text": "首页",
+          "href": "/",
+          "cls": null,
+          "aria": null,
+          "outline": "solid 2px rgb(59, 76, 224)",
+          "boxShadow": "none",
+          "rect": "54x42",
+          "visible": true,
+          "skipLink": {
+            "top": -44,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "position": "absolute"
+          }
+        },
+        {
+          "tag": "a",
+          "text": "文章",
+          "href": "/posts/",
+          "cls": null,
+          "aria": null,
+          "outline": "solid 2px rgb(59, 76, 224)",
+          "boxShadow": "none",
+          "rect": "54x42",
+          "visible": true,
+          "skipLink": {
+            "top": -44,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "position": "absolute"
+          }
+        },
+        {
+          "tag": "a",
+          "text": "归档",
+          "href": "/archives/",
+          "cls": null,
+          "aria": null,
+          "outline": "solid 2px rgb(59, 76, 224)",
+          "boxShadow": "none",
+          "rect": "54x42",
+          "visible": true,
+          "skipLink": {
+            "top": -44,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "position": "absolute"
+          }
+        },
+        {
+          "tag": "a",
+          "text": "作品",
+          "href": "/works/",
+          "cls": null,
+          "aria": null,
+          "outline": "solid 2px rgb(59, 76, 224)",
+          "boxShadow": "none",
+          "rect": "54x42",
+          "visible": true,
+          "skipLink": {
+            "top": -44,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "position": "absolute"
+          }
+        },
+        {
+          "tag": "a",
+          "text": "关于",
+          "href": "/about/",
+          "cls": null,
+          "aria": null,
+          "outline": "solid 2px rgb(59, 76, 224)",
+          "boxShadow": "none",
+          "rect": "54x42",
+          "visible": true,
+          "skipLink": {
+            "top": -44,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "position": "absolute"
+          }
+        },
+        {
+          "tag": "a",
+          "text": "",
+          "href": "/search/",
+          "cls": "icon-btn",
+          "aria": "站内搜索",
+          "outline": "solid 2px rgb(59, 76, 224)",
+          "boxShadow": "none",
+          "rect": "36x36",
+          "visible": true,
+          "skipLink": {
+            "top": -44,
+            "left": 16,
+            "w": 98,
+            "h": 54,
+            "clip": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "position": "absolute"
+          }
+        }
+      ],
+      "themeBefore": {
+        "cls": "light",
+        "theme": "light",
+        "bg": "rgba(0, 0, 0, 0)",
+        "bodyBg": "rgb(252, 252, 253)",
+        "inlineColorScheme": "light",
+        "stored": "light",
+        "aria": "false",
+        "label": "切换到深色模式"
+      },
+      "themeAfterEnter": {
+        "cls": "dark",
+        "theme": "dark",
+        "bg": "rgba(0, 0, 0, 0)",
+        "bodyBg": "rgb(15, 17, 21)",
+        "inlineColorScheme": "dark",
+        "stored": "dark",
+        "aria": "true",
+        "label": "切换到浅色模式"
       },
       "toc": {
         "present": true,
@@ -4843,5 +5172,5 @@
     }
   ],
   "errors": [],
-  "durationMs": 78935
+  "durationMs": 73742
 }
