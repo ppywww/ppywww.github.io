@@ -1,0 +1,157 @@
+/* =============================================================================
+   tokens.css · 方向 B「墨蓝极简 / Ink & Indigo」
+   -----------------------------------------------------------------------------
+   两层 token，职责严格分离：
+     ① 原始层 --palette-*  —— 只存**色值**，不含任何用途语义
+     ② 语义层 --color-*    —— 只存**用途**，值一律引用原始层
+   组件只准引用语义层；改配色只动本文件。
+
+   硬约束（决策 B-01 / 视觉调研）：
+     · 靛蓝强调色只允许出现在「链接 / 当前导航项 / 按钮」三处，禁止大面积使用
+     · 边框仅作装饰，不承载信息
+     · 暗色不是反色：降饱和、降对比，正文永不用纯白
+   ============================================================================= */
+
+/* ---------------------------------------------------------------------------
+   ① 原始层 · 色值
+   --------------------------------------------------------------------------- */
+:root {
+  /* 中性灰阶（亮色端，带极轻微冷调） */
+  --palette-white:        #FFFFFF;
+  --palette-neutral-25:   #FCFCFD;
+  --palette-neutral-100:  #F2F3F5;
+  --palette-neutral-200:  #E3E5EA;
+  --palette-neutral-500:  #5B6270;
+  --palette-neutral-900:  #16181D;
+
+  /* 墨色阶（暗色端，避免纯黑） */
+  --palette-ink-950:      #0F1115;
+  --palette-ink-900:      #171A21;
+  --palette-ink-800:      #1F232B;
+  --palette-ink-700:      #2A2F39;
+  --palette-ink-200:      #E7E9EE;
+  --palette-ink-400:      #98A0AE;
+
+  /* 靛蓝强调（亮色 600 / 暗色提亮 300） */
+  --palette-indigo-600:   #3B4CE0;
+  --palette-indigo-300:   #8E9CFF;
+
+  /* 阴影基色（仅用于合成 rgba） */
+  --palette-shadow-rgb:   16 18 22;
+}
+
+/* ---------------------------------------------------------------------------
+   ② 语义层 · 字体 / 字号 / 行高（零 Web Font，纯系统栈）
+   --------------------------------------------------------------------------- */
+:root {
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "Cascadia Code", Consolas,
+    "Liberation Mono", monospace;
+
+  /* 正文 16px / 行高 1.75 */
+  --font-size-body: 1rem;          /* 16px */
+  --line-height-body: 1.75;
+  --font-weight-body: 400;
+  --font-weight-heading: 600;
+
+  --font-size-h1: 1.875rem;        /* 30px */
+  --line-height-h1: 1.3;
+  --font-size-h2: 1.4rem;          /* 22.4px */
+  --line-height-h2: 1.45;
+  --font-size-h3: 1.15rem;         /* 18.4px */
+  --line-height-h3: 1.5;
+
+  /* 辅助字号（元信息行、标签、页脚） */
+  --font-size-sm: 0.875rem;        /* 14px */
+  --font-size-xs: 0.8125rem;       /* 13px */
+}
+
+/* ---------------------------------------------------------------------------
+   ② 语义层 · 间距（4px 基准）/ 圆角 / 阴影 / 布局宽度
+   --------------------------------------------------------------------------- */
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-9: 36px;
+  --space-10: 40px;
+  --space-11: 44px;
+
+  --card-padding: var(--space-5) var(--space-6);   /* 20px 24px */
+
+  --radius-sm: 4px;                /* 控件 */
+  --radius-md: 6px;                /* 卡片 */
+  --radius-full: 999px;            /* 标签 */
+
+  --shadow-card: 0 1px 2px rgb(var(--palette-shadow-rgb) / 0.05);
+
+  --content-width: 720px;          /* 正文列宽 */
+  --container-width: 1080px;       /* 页面容器 */
+}
+
+/* ---------------------------------------------------------------------------
+   ② 语义层 · 颜色（亮色，默认）
+   color-scheme 同时声明，让表单控件/滚动条跟随主题
+   --------------------------------------------------------------------------- */
+:root {
+  color-scheme: light;
+
+  --color-bg:               var(--palette-neutral-25);
+  --color-surface:          var(--palette-white);
+  --color-surface-2:        var(--palette-neutral-100);
+  --color-text:             var(--palette-neutral-900);
+  --color-text-secondary:   var(--palette-neutral-500);
+  --color-border:           var(--palette-neutral-200);
+  --color-accent:           var(--palette-indigo-600);
+  --color-accent-text:      var(--palette-indigo-600);
+
+  /* 派生：强调色**之上**的文字色（按钮用）。规范未给定，由各级强调色反推，保证 AA */
+  --color-on-accent:        var(--palette-white);
+}
+
+/* ---------------------------------------------------------------------------
+   ② 语义层 · 颜色（暗色）
+   选择器统一用 :root.dark —— 由 <head> 首帧内联脚本在首次绘制前加上，实现零闪烁。
+   下方 @media 块是**禁用 JS 时的回退**，值必须与本节保持同步。
+   --------------------------------------------------------------------------- */
+:root.dark {
+  color-scheme: dark;
+
+  --color-bg:               var(--palette-ink-950);
+  --color-surface:          var(--palette-ink-900);
+  --color-surface-2:        var(--palette-ink-800);
+  --color-text:             var(--palette-ink-200);   /* 永不用纯白 */
+  --color-text-secondary:   var(--palette-ink-400);
+  --color-border:           var(--palette-ink-700);
+  --color-accent:           var(--palette-indigo-300);
+  --color-accent-text:      var(--palette-indigo-300);
+
+  --color-on-accent:        var(--palette-ink-950);
+
+  /* 暗色下阴影几乎不可见，按规范改为 1px 描边式 ring */
+  --shadow-card: 0 0 0 1px var(--color-border);
+}
+
+/* 无 JS 回退：未显式选择亮色时跟随系统 */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    color-scheme: dark;
+
+    --color-bg:               var(--palette-ink-950);
+    --color-surface:          var(--palette-ink-900);
+    --color-surface-2:        var(--palette-ink-800);
+    --color-text:             var(--palette-ink-200);
+    --color-text-secondary:   var(--palette-ink-400);
+    --color-border:           var(--palette-ink-700);
+    --color-accent:           var(--palette-indigo-300);
+    --color-accent-text:      var(--palette-indigo-300);
+    --color-on-accent:        var(--palette-ink-950);
+    --shadow-card: 0 0 0 1px var(--color-border);
+  }
+}

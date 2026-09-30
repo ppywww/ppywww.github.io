@@ -1,0 +1,50 @@
+# ppy-Blog · GitHub Pages 自动部署
+# 依据官方模板：https://docs.astro.build/en/guides/deploy/github/
+# 版本号取自官方文档当前模板（checkout@v7 / withastro@v6 / deploy-pages@v5）
+name: Deploy to GitHub Pages
+
+on:
+  # 推送到 main 即发布（PRD F-14）
+  push:
+    branches: [main]
+  # 允许在 Actions 页手动触发
+  workflow_dispatch:
+
+# 允许克隆仓库并创建 Pages 部署
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同一时间只跑一个 Pages 部署；不打断正在进行的发布
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      # withastro/action 自动完成：装依赖 → 构建 → configure-pages → upload-pages-artifact
+      # 包管理器按仓库内的 lockfile 自动识别（本项目为 package-lock.json → npm）
+      - name: Install, build, and upload site
+        uses: withastro/action@v6
+        with:
+          node-version: 24
+          # path: .   # Astro 项目就在仓库根目录，无需指定
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
