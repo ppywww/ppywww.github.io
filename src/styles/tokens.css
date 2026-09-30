@@ -19,7 +19,9 @@
   /* 中性灰阶（亮色端，带极轻微冷调） */
   --palette-white:        #FFFFFF;
   --palette-neutral-25:   #FCFCFD;
+  --palette-neutral-50:  #F7F8FA;
   --palette-neutral-100:  #F2F3F5;
+  --palette-neutral-150:  #E9EBEF;
   --palette-neutral-200:  #E3E5EA;
   --palette-neutral-500:  #5B6270;
   --palette-neutral-900:  #16181D;
@@ -34,7 +36,9 @@
 
   /* 靛蓝强调（亮色 600 / 暗色提亮 300） */
   --palette-indigo-600:   #3B4CE0;
+  --palette-indigo-200:   #A8B4FF;
   --palette-indigo-300:   #8E9CFF;
+  --palette-indigo-700:   #2F3DC4;
 
   /* 阴影基色（仅用于合成 rgba） */
   --palette-shadow-rgb:   16 18 22;
@@ -54,6 +58,10 @@
   --line-height-body: 1.75;
   --font-weight-body: 400;
   --font-weight-heading: 600;
+
+  /* 展示级字号（仅用于 404 大数字） */
+
+  --fs-display: 2.75rem;           /* 44px */
 
   --font-size-h1: 1.875rem;        /* 30px */
   --line-height-h1: 1.3;
@@ -89,6 +97,8 @@
   --radius-md: 6px;                /* 卡片 */
   --radius-full: 999px;            /* 标签 */
 
+  --header-height: 64px;           /* 与 base.css 页头 min-height 对齐 */
+
   --shadow-card: 0 1px 2px rgb(var(--palette-shadow-rgb) / 0.05);
 
   --content-width: 720px;          /* 正文列宽 */
@@ -105,11 +115,15 @@
   --color-bg:               var(--palette-neutral-25);
   --color-surface:          var(--palette-white);
   --color-surface-2:        var(--palette-neutral-100);
+  --color-surface-3:        var(--palette-neutral-150);   /* 第三层表面：hover / pressed / mark 底 */
   --color-text:             var(--palette-neutral-900);
   --color-text-secondary:   var(--palette-neutral-500);
   --color-border:           var(--palette-neutral-200);
+  --color-code-bg:           var(--palette-neutral-50);     /* 代码块底 */
   --color-accent:           var(--palette-indigo-600);
+  --color-accent-hover:      var(--palette-indigo-700);
   --color-accent-text:      var(--palette-indigo-600);
+  --color-focus:      var(--palette-indigo-600);        /* 焦点环 */
 
   /* 派生：强调色**之上**的文字色（按钮用）。规范未给定，由各级强调色反推，保证 AA */
   --color-on-accent:        var(--palette-white);
@@ -126,11 +140,15 @@
   --color-bg:               var(--palette-ink-950);
   --color-surface:          var(--palette-ink-900);
   --color-surface-2:        var(--palette-ink-800);
+  --color-surface-3:        var(--palette-ink-700);
   --color-text:             var(--palette-ink-200);   /* 永不用纯白 */
   --color-text-secondary:   var(--palette-ink-400);
   --color-border:           var(--palette-ink-700);
+  --color-code-bg:           var(--palette-ink-800);
   --color-accent:           var(--palette-indigo-300);
+  --color-accent-hover:      var(--palette-indigo-200);
   --color-accent-text:      var(--palette-indigo-300);
+  --color-focus:      var(--palette-indigo-300);
 
   --color-on-accent:        var(--palette-ink-950);
 
@@ -146,11 +164,15 @@
     --color-bg:               var(--palette-ink-950);
     --color-surface:          var(--palette-ink-900);
     --color-surface-2:        var(--palette-ink-800);
+    --color-surface-3:        var(--palette-ink-700);
     --color-text:             var(--palette-ink-200);
     --color-text-secondary:   var(--palette-ink-400);
     --color-border:           var(--palette-ink-700);
+    --color-code-bg:           var(--palette-ink-800);
     --color-accent:           var(--palette-indigo-300);
+    --color-accent-hover:      var(--palette-indigo-200);
     --color-accent-text:      var(--palette-indigo-300);
+    --color-focus:      var(--palette-indigo-300);
     --color-on-accent:        var(--palette-ink-950);
     --shadow-card: 0 0 0 1px var(--color-border);
   }

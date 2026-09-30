@@ -1,0 +1,109 @@
+---
+/**
+ * PostMeta · 文章元信息行（PRD §7.2 / 设计系统 §6.17 .meta-row）
+ *
+ * 顺序固定：日期 · 阅读时长 · 主分类 · 标签。
+ * · <time datetime> 用 ISO 8601，显示用 formatDate（固定 Asia/Shanghai，避免 CI 时区漂移）
+ * · 分隔符是 aria-hidden 的纯视觉元素，屏幕阅读器不会朗读「·」
+ * · 用 <div> 而不是 <p> 承载：标签是列表（<ul> 不能出现在 <p> 内，会被浏览器强行截断）
+ */
+import type { CollectionEntry } from 'astro:content';
+import { formatDate } from '../lib/date';
+import { readingTime } from '../lib/reading-time';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+const { date, categories, tags } = post.data;
+const category = categories[0];
+const minutes = readingTime(post.body ?? '');
+---
+
+<div class="post-meta">
+  <time class="post-meta__time" datetime={date.toISOString()}>{formatDate(date)}</time>
+  <span class="post-meta__sep" aria-hidden="true">·</span>
+  <span>{minutes} 分钟</span>
+  {
+    category && (
+      <>
+        <span class="post-meta__sep" aria-hidden="true">·</span>
+        <a class="post-meta__link" href={`/categories/${encodeURIComponent(category)}/`}>{category}</a>
+      </>
+    )
+  }
+  {
+    tags.length > 0 && (
+      <>
+        <span class="post-meta__sep" aria-hidden="true">·</span>
+        <ul class="post-meta__tags">
+          {tags.map((tag) => (
+            <li>
+              <a class="post-meta__link" href={`/tags/${encodeURIComponent(tag)}/`} rel="tag">
+                {tag}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+</div>
+
+<style>
+  /* ---------- 尺寸与间距（设计系统 §6.17）---------- */
+  .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    line-height: 1.6;
+  }
+
+  /* 日期用等宽数字，元信息行不会因数字宽度变化而抖动 */
+  .post-meta__time {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .post-meta__sep {
+    color: var(--color-border);
+  }
+
+  .post-meta__link {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+
+  /* hover 只在真有指针的设备上生效，避免触屏「粘住」hover 态 */
+  @media (hover: hover) and (pointer: fine) {
+    .post-meta__link:hover {
+      color: var(--color-text);
+      text-decoration: underline;
+    }
+  }
+
+  .post-meta__link:active {
+    color: var(--color-text);
+  }
+
+  .post-meta__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* 触控目标：视觉不变，用 padding 补足命中区（§6.0） */
+  @media (pointer: coarse) {
+    .post-meta__link {
+      display: inline-block;
+      padding-block: var(--space-3);
+    }
+  }
+</style>

@@ -1,0 +1,88 @@
+---
+/**
+ * TermPill · 分类 / 标签胶囊（设计系统 §6.4 TagPill）
+ * 契约（冻结，跨任务共享）：props { label: string; href: string; count?: number }
+ *
+ * 约束：
+ *  · 只引用语义层 token（--color-* / --space-* / --radius-* / --font-*），无裸色值
+ *  · 靛蓝只用于「当前项」（aria-current="page"），普通态 hover 走中性面色阶 —— §2.6
+ *  · 计数是视觉冗余：aria-hidden 隐藏数字，由 aria-label 播报完整语义 —— §6.4
+ */
+interface Props {
+  label: string;
+  href: string;
+  count?: number;
+}
+
+const { label, href, count } = Astro.props;
+
+/** 只有 /tags/ 下的词条才是 rel="tag"；分类属栏目，不加 rel 以免语义误导 */
+const rel = href.startsWith('/tags/') ? 'tag' : undefined;
+/** 当前页即该词条页时标记「当前项」（§6.4）。
+ *  pathname 与 href 的百分号编码形态可能不同（中文词条），先各自解码再比较。 */
+function samePath(a: string, b: string): boolean {
+  try {
+    return decodeURIComponent(a) === decodeURIComponent(b);
+  } catch {
+    return a === b;
+  }
+}
+const isCurrent = samePath(Astro.url.pathname, href);
+const ariaLabel = count === undefined ? undefined : `${label}，共 ${count} 篇文章`;
+---
+
+<a
+  class="tag-pill"
+  href={href}
+  rel={rel}
+  aria-current={isCurrent ? 'page' : undefined}
+  aria-label={ariaLabel}
+>{label}{count !== undefined && <span class="tag-pill__count" aria-hidden="true">{count}</span>}</a>
+
+<style>
+  .tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-3);
+    border: 1px solid transparent; /* 与「当前项」同宽，切换时不产生 1px 抖动 */
+    border-radius: var(--radius-full);
+    background: var(--color-surface-2);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    text-decoration: none;
+  }
+
+  .tag-pill__count {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* hover：面色阶下沉一档。
+     tokens.css（M1）暂无 --color-surface-3，借用 --color-border 的深一档中性色，不占用强调色 */
+  @media (hover: hover) and (pointer: fine) {
+    .tag-pill:hover {
+      background: var(--color-border);
+      color: var(--color-text);
+      text-decoration: none;
+    }
+  }
+
+  .tag-pill:active {
+    background: var(--color-border);
+    transform: translateY(1px);
+  }
+
+  /* 当前项：透明底 + 1px 强调色描边 + 强调色文字（§2.6 允许的「当前项」，不做大面积填充） */
+  .tag-pill[aria-current='page'] {
+    background: transparent;
+    border-color: var(--color-accent);
+    color: var(--color-accent-text);
+  }
+
+  /* 触控命中区 ≥44×44，视觉尺寸不变 —— §6.0 */
+  @media (pointer: coarse) {
+    .tag-pill {
+      min-height: var(--space-11);
+    }
+  }
+</style>

@@ -1,0 +1,154 @@
+---
+/**
+ * 关于 /about/ —— PRD §7.7 / F-07
+ * 内容读取 pages 集合的 about 条目（src/content/pages/about.md），契约见 content.config.ts。
+ * 条目缺失或为草稿时走友好空态，保证 0 内容也能正常构建。
+ */
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { formatDate } from '../lib/date';
+
+const entry = await getEntry('pages', 'about');
+
+// 生产构建过滤草稿；本地 dev 保留草稿便于预览（与首页同口径）
+const page = entry && (import.meta.env.PROD ? !entry.data.draft : true) ? entry : undefined;
+const rendered = page ? await render(page) : undefined;
+const Content = rendered?.Content;
+
+const pageTitle = page?.data.title ?? '关于';
+const lastmod = page?.data.lastmod;
+---
+
+<BaseLayout title={pageTitle} description={page?.data.description}>
+  <Header />
+
+  <main class="main" id="main-content">
+    <div class="container">
+      {
+        Content ? (
+          <article>
+            <header class="page-head">
+              <h1 class="page-title">{pageTitle}</h1>
+              {lastmod && (
+                <p class="meta page-meta">
+                  <span>最后更新</span>
+                  <span class="meta__sep" aria-hidden="true">·</span>
+                  <time datetime={lastmod.toISOString()}>{formatDate(lastmod)}</time>
+                </p>
+              )}
+            </header>
+
+            <div class="prose about-body">
+              <Content />
+            </div>
+          </article>
+        ) : (
+          <div class="empty">
+            <p class="empty__title">关于页还没有内容</p>
+            <p>
+              把 Markdown 放进 <code>src/content/pages/about.md</code>，这里会自动渲染。
+            </p>
+            <p>
+              <a href="/">返回首页</a>
+            </p>
+          </div>
+        )
+      }
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page-head {
+    margin-bottom: var(--space-8);
+  }
+
+  .page-title {
+    margin-bottom: var(--space-4);
+  }
+
+  .page-meta {
+    font-size: var(--font-size-sm);
+  }
+
+  /* base.css 的 .prose 只锁了 720px 宽，这里补上居中（设计系统 §3.6） */
+  .about-body {
+    margin-inline: auto;
+  }
+
+  /*
+    最小正文节奏（设计系统 §4.3 / §3.6）。
+    ⚠️ 依赖说明：M1 的 base.css 未包含 Markdown 元素样式，prose.css 尚未产出；
+    本块只在 /about/ 页生效（作用域 + .about-body 限定），若后续 pages-post 产出全局
+    .prose 样式，本块可整体删除以避免重复 —— 已写入回报。
+  */
+  .about-body :global(> :first-child) {
+    margin-top: 0;
+  }
+
+  .about-body :global(p) {
+    margin-top: var(--space-5);
+  }
+
+  .about-body :global(h2) {
+    margin-top: var(--space-11);
+    margin-bottom: var(--space-4);
+    scroll-margin-top: calc(var(--space-11) + var(--space-5));
+  }
+
+  .about-body :global(h3) {
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-3);
+    scroll-margin-top: calc(var(--space-11) + var(--space-5));
+  }
+
+  .about-body :global(ul),
+  .about-body :global(ol) {
+    margin-top: var(--space-5);
+    padding-inline-start: var(--space-6);
+  }
+
+  .about-body :global(li + li) {
+    margin-top: var(--space-2);
+  }
+
+  .about-body :global(blockquote) {
+    margin-top: var(--space-6);
+    padding-left: var(--space-4);
+    border-left: 2px solid var(--color-border);
+  }
+
+  .about-body :global(pre) {
+    margin-top: var(--space-6);
+    padding: var(--space-4);
+    overflow-x: auto;
+    background: var(--color-surface-2);
+    border-radius: var(--radius-md);
+  }
+
+  .about-body :global(:not(pre) > code) {
+    padding: 0 var(--space-1);
+    background: var(--color-surface-2);
+    border-radius: var(--radius-sm);
+  }
+
+  .about-body :global(img) {
+    margin-top: var(--space-6);
+    border-radius: var(--radius-md);
+  }
+
+  .about-body :global(hr) {
+    margin-top: var(--space-8);
+    border: 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  /* 正文内链接默认带下划线：颜色不能作为唯一线索（§3.4 / WCAG 1.4.1） */
+  .about-body :global(a) {
+    text-decoration: underline;
+  }
+</style>

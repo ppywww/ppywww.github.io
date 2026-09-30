@@ -1,0 +1,192 @@
+---
+/**
+ * Toc · 文章目录（PRD F-12 / 设计系统 §6.6 · 记忆点 M3）
+ *
+ * · 零 JS：原生 <details> 默认折叠，<summary> 自带展开/折叠语义与键盘可达
+ * · 只收 h2 / h3；无标题时整个组件不渲染
+ * · 形态：左侧 1px 轨道 + 两位 mono 序号（CSS 计数器）+ hover/focus 靛蓝滑块
+ */
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+
+// 只保留正文的 h2/h3；satteri 会把脚注区那个 .sr-only 的「Footnotes」标题也算进来，需剔除
+const items = headings.filter((h) => (h.depth === 2 || h.depth === 3) && h.slug !== 'footnote-label');
+---
+
+{
+  items.length > 0 && (
+    <details class="toc">
+      <summary class="toc__toggle">
+        <span class="toc__label">目录</span>
+        <span class="toc__count" aria-hidden="true">{items.length}</span>
+        <svg
+          class="toc__chevron"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </summary>
+
+      <nav class="toc__nav" aria-label="文章目录">
+        <ol class="toc__list">
+          {items.map((h) => (
+            <li class:list={['toc__item', h.depth === 3 && 'toc__item--h3']}>
+              <a class="toc__link" href={`#${encodeURIComponent(h.slug)}`}>
+                {h.text}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </details>
+  )
+}
+
+<style>
+  /* ---------- 折叠条 ---------- */
+  .toc {
+    margin-bottom: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+  }
+
+  /*
+    ⚠️ <summary> 不能用 display: flex —— Safari / Firefox 会因此丢失展开语义。
+    自绘箭头的定位改用 position: absolute。
+  */
+  .toc__toggle {
+    position: relative;
+    display: block;
+    padding: var(--space-2) var(--space-3);
+    padding-right: var(--space-8);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    line-height: 1.6;
+    cursor: pointer;
+    list-style: none;
+  }
+  .toc__toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .toc__label {
+    color: var(--color-text);
+  }
+
+  .toc__count {
+    margin-left: var(--space-2);
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    color: var(--color-text-secondary);
+  }
+
+  .toc__chevron {
+    position: absolute;
+    top: 50%;
+    right: var(--space-3);
+    width: 16px;
+    height: 16px;
+    transform: translateY(-50%);
+    transition: transform 150ms ease-out;
+  }
+  .toc[open] .toc__chevron {
+    transform: translateY(-50%) rotate(180deg);
+  }
+
+  /* ---------- 展开区 ---------- */
+  .toc__nav {
+    max-height: 40vh;
+    overflow-y: auto;
+    padding: var(--space-2) var(--space-3) var(--space-3);
+  }
+
+  /* 1px 竖线轨道；条目 hover/focus 时用 2px 靛蓝滑块「压」在轨道上（记忆点 M3） */
+  .toc__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-left: 1px solid var(--color-border);
+    counter-reset: toc;
+  }
+
+  .toc__item {
+    counter-increment: toc;
+  }
+
+  .toc__link {
+    display: block;
+    position: relative;
+    padding: var(--space-1) var(--space-3);
+    /* 让滑块正好盖住轨道 */
+    margin-left: -1px;
+    border-left: 2px solid transparent;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    line-height: 1.6;
+    text-decoration: none;
+  }
+
+  /* 两位序号 01 02 03……（tokens.css 无 12px 档，此处沿用 --font-size-xs） */
+  .toc__link::before {
+    content: counter(toc, decimal-leading-zero);
+    margin-right: var(--space-2);
+    font-family: var(--font-mono);
+    color: var(--color-text-secondary);
+    opacity: 0.7;
+  }
+
+  .toc__item--h3 .toc__link {
+    padding-left: calc(var(--space-3) + var(--space-4));
+  }
+
+  /* ---------- 状态：hover / focus-visible / active ---------- */
+  @media (hover: hover) and (pointer: fine) {
+    .toc__link:hover {
+      border-left-color: var(--color-accent);
+      color: var(--color-text);
+    }
+  }
+
+  /* 键盘用户必须看得见：焦点态与 hover 同款左轨变色 */
+  .toc__link:focus-visible {
+    border-left-color: var(--color-accent);
+    color: var(--color-text);
+  }
+
+  .toc__link:active {
+    background: var(--color-surface-2);
+  }
+
+  /* ---------- 触控命中区 ≥44px ---------- */
+  @media (pointer: coarse) {
+    .toc__toggle {
+      padding-block: var(--space-3);
+    }
+    .toc__link {
+      padding-block: var(--space-3);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .toc__chevron {
+      transition: none;
+    }
+  }
+</style>

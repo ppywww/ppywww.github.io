@@ -1,0 +1,176 @@
+---
+/**
+ * WorkCard · 作品卡片（PRD §7.6）
+ * 契约（冻结，跨任务共享）：props { work: CollectionEntry<'works'> }
+ * 结构：缩略图（可选）/ 名称 / 一句话 / 技术栈标签 / 链接（GitHub、在线 Demo）
+ * 外链一律 target="_blank" + rel="noopener"（决策 V9 / AC-12），并带 1em 外链图标（§3.4）
+ */
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  work: CollectionEntry<'works'>;
+}
+
+const { work } = Astro.props;
+const { title, summary, stack, cover, repo, demo, featured } = work.data;
+
+/** Demo 链接文字用可读域名（§3.4 规则 2：不写「点击这里」）；data.demo 已由 Zod 校验为完整 URL */
+const demoHost = demo ? new URL(demo).host : undefined;
+---
+
+<li class="card work-card">
+  {
+    cover && (
+      <div class="work-card__media">
+        {/* 缩略图紧邻标题，属装饰性配图：alt 留空避免重复播报（§6.11） */}
+        <img class="work-card__cover" src={cover} alt="" loading="lazy" decoding="async" />
+      </div>
+    )
+  }
+
+  <div class="work-card__body">
+    <h3 class="work-card__title">
+      {title}
+      {featured && <span class="work-card__badge">精选</span>}
+    </h3>
+
+    <p class="work-card__summary">{summary}</p>
+
+    {
+      stack.length > 0 && (
+        <ul class="tag-list work-card__stack">
+          {stack.map((item) => (
+            <li>
+              <span class="tag">{item}</span>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    {
+      (repo || demo) && (
+        <p class="work-card__links">
+          {repo && (
+            <a class="work-card__link" href={repo} target="_blank" rel="noopener">
+              GitHub
+              <svg
+                class="work-card__icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M14 4h6v6" />
+                <path d="M20 4 10 14" />
+                <path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" />
+              </svg>
+            </a>
+          )}
+          {demo && (
+            <a class="work-card__link" href={demo} target="_blank" rel="noopener">
+              {demoHost}
+              <svg
+                class="work-card__icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M14 4h6v6" />
+                <path d="M20 4 10 14" />
+                <path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" />
+              </svg>
+            </a>
+          )}
+        </p>
+      )
+    }
+  </div>
+</li>
+
+<style>
+  .work-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  /* 缩略图容器用 aspect-ratio 预留空间，图片未加载时不产生 CLS；
+     封面路径来自 Front-Matter 字符串（无法在构建期取尺寸），故未写 width/height 属性 */
+  .work-card__media {
+    aspect-ratio: 16 / 10;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: var(--color-surface-2);
+  }
+
+  .work-card__cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .work-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    flex: 1 1 auto;
+  }
+
+  .work-card__title {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .work-card__badge {
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-full);
+    background: var(--color-surface-2);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-body);
+  }
+
+  .work-card__summary {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+  }
+
+  .work-card__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin-top: auto; /* 卡片等高时把链接压到底部 */
+    font-size: var(--font-size-sm);
+  }
+
+  .work-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .work-card__icon {
+    width: 1em;
+    height: 1em;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .work-card__link:hover {
+      text-decoration: underline;
+    }
+  }
+
+  @media (pointer: coarse) {
+    .work-card__link {
+      min-height: var(--space-11);
+    }
+  }
+</style>

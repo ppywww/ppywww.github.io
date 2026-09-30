@@ -10,7 +10,15 @@ const year = new Date().getFullYear();
     <ul class="nav">
       {SOCIAL.map((item) => (
         <li>
-          <a href={item.href} rel="noopener">{item.label}</a>
+          {/^https?:\/\//i.test(item.href) ? (
+            /* 站外链接：AC-12 / 决策 V9 要求 target=_blank + rel="noopener noreferrer" */
+            <a href={item.href} target="_blank" rel="noopener noreferrer">
+              {item.label}
+            </a>
+          ) : (
+            /* 站内链接（如 /rss.xml）不加 target */
+            <a href={item.href}>{item.label}</a>
+          )}
         </li>
       ))}
     </ul>

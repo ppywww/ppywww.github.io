@@ -26,6 +26,10 @@
 | **B-04** | **站点副标题（description）** | ✅ `Hi, this is ppy. I’m documenting my learning notes in this blog since 2026.`（老板 2026-09-30 定稿） | 老板拍板 | 2026-09-30 |
 | **B-03** | **GitHub 账号 / 仓库** | ✅ 用户名 `ppywww`（https://github.com/ppywww）；仓库 `ppywww.github.io`；站点 `https://ppywww.github.io` | 老板提供 | 2026-09-30 |
 | **T-03** | 技术定案 | ✅ ADR-001 已批准：Astro v7.3.5 + Pagefind + npm，Gate G1 兜底有效 | 老板默认放行 | 2026-09-30 |
+| **G-01** | **Gate G1 闭环** | ✅ 2026-09-30：本地冷构建通过 + GitHub Pages 线上 200，Astro 定案验证通过，兜底方案取消 | Lead 实测 | 2026-09-30 |
+| **G-03** | Token 层命名冲突 | ✅ 裁决：**语义层 --color-* 以文档为准（两端一致）；原始层 --palette-* 以代码为准**（tokens.css 已上线验证）。组件只准引用语义层，故无实际影响 | Lead 裁决 | 2026-09-30 |
+| **G-04** | 代码块主题策略 | ✅ 裁决：采用 Astro **双主题** shikiConfig（light=github-light / dark=github-dark），消除 github-dark 强制深色底与内联样式，代码块随主题切换 | Lead 裁决 | 2026-09-30 |
+| **G-02** | 仓库命名 | ✅ `ppywww.github.io`（User site，站点位于根路径 `/`，全站链接无需 base 前缀） | 老板拍板 | 2026-09-30 |
 | **S-01** | **凭据安全** | 🔒 **老板不得向任何 Agent 提供密码/Token**。首次推送由老板本人在本机完成浏览器授权（Git Credential Manager） | PM | 2026-09-30 |
 
 ### MVP 交付定义（不可扩张）

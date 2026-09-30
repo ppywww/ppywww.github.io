@@ -1,0 +1,33 @@
+---
+/**
+ * 文章详情 —— /posts/<slug>/（PRD §7.2 / F-02 / F-12）
+ *
+ * 只管取数与路由：正文 HTML 由 markdown 管线渲染后经 <slot /> 交给 PostLayout 排版，
+ * 标题、目录、元信息、文末版权都在 PostLayout 内统一处理。
+ * id 形如 2026-09-30-build-this-blog（Page Bundle 的 /index 会被 glob loader 去掉）。
+ */
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import PostLayout from '../../layouts/PostLayout.astro';
+
+/*
+  ⚠️ getStaticPaths 会被 Astro 提升到独立作用域，frontmatter 里同级的 const 在它内部不可见，
+  过滤条件必须写在函数内部（与 [...page].astro 同一处坑）。
+*/
+export async function getStaticPaths() {
+  // 生产构建过滤草稿；本地 dev 保留草稿便于预览
+  const posts = await getCollection('posts', ({ data }) => (import.meta.env.PROD ? !data.draft : true));
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+---
+
+<PostLayout post={post} headings={headings}>
+  <Content />
+</PostLayout>

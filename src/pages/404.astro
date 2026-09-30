@@ -1,0 +1,145 @@
+---
+/**
+ * 404 —— PRD §7.8 / F-13 / AC-10 + 设计系统 §6.15 .notfound
+ * 结构：装饰数字 404（aria-hidden）+ 唯一 H1 + 返回首页 + 搜索入口（占位，指向 /search/）+ 最新 3 篇。
+ * GitHub Pages 以根级 404.html 承载（Astro 静态构建自动产出）。
+ */
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PostCard from '../components/PostCard.astro';
+
+const latest = (
+  await getCollection('posts', ({ data }) => (import.meta.env.PROD ? !data.draft : true))
+)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+---
+
+<BaseLayout title="页面未找到" description="这个页面走丢了，可以返回首页或使用站内搜索。" noindex>
+  <Header />
+
+  <main class="main" id="main-content">
+    <div class="container">
+      <div class="notfound">
+        {/* 装饰数字：含义由 H1 承载，屏幕阅读器不朗读 */}
+        <p class="notfound__code" aria-hidden="true">404</p>
+        <h1 class="notfound__title">这个页面走丢了</h1>
+        <p class="notfound__desc">链接可能已失效，或者文章被移到了别处。可以回到首页，或者直接搜索。</p>
+
+        <div class="notfound__actions">
+          <a class="btn btn--accent" href="/">返回首页</a>
+
+          {/* 搜索入口占位：/search/ 页由后续任务交付，这里先给出可提交的查询入口 */}
+          <form class="search-form" role="search" action="/search/" method="get">
+            <label class="visually-hidden" for="notfound-q">站内搜索</label>
+            <input
+              class="search-input"
+              id="notfound-q"
+              type="search"
+              name="q"
+              placeholder="输入关键词……"
+              autocomplete="off"
+            />
+          </form>
+        </div>
+
+        <section class="notfound__recent" aria-labelledby="notfound-recent-title">
+          <h2 class="notfound__recent-title" id="notfound-recent-title">最新文章</h2>
+          {
+            latest.length > 0 ? (
+              <ul class="post-list">
+                {latest.map((post) => (
+                  <PostCard post={post} />
+                ))}
+              </ul>
+            ) : (
+              <p class="muted">站内还没有文章，欢迎稍后再来。</p>
+            )
+          }
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .notfound {
+    max-width: var(--content-width);
+    margin-inline: auto;
+    padding-block: var(--space-11);
+  }
+
+  /* tokens.css（M1）暂无 --fs-display（44px）：降级用 --font-size-h1，不新增 token、不写魔法字号 */
+  .notfound__code {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-h1);
+    line-height: var(--line-height-h1);
+    font-weight: var(--font-weight-heading);
+    color: var(--color-text-secondary);
+  }
+
+  .notfound__title {
+    margin-top: var(--space-3);
+  }
+
+  .notfound__desc {
+    margin-top: var(--space-4);
+    color: var(--color-text-secondary);
+    max-width: 46ch;
+  }
+
+  .notfound__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+  }
+
+  .search-form {
+    display: flex;
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: var(--content-width);
+  }
+
+  .search-input {
+    width: 100%;
+    height: var(--space-10);
+    padding-inline: var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-2);
+    color: var(--color-text);
+    font-family: inherit;
+    font-size: var(--font-size-sm);
+  }
+
+  .search-input::placeholder {
+    color: var(--color-text-secondary);
+  }
+
+  .search-input:focus {
+    border-color: var(--color-accent);
+  }
+
+  .notfound__recent {
+    margin-top: var(--space-11);
+  }
+
+  .notfound__recent-title {
+    margin-bottom: var(--space-5);
+  }
+
+  /* 卡片列表：间距 12px（设计系统 §6.3 卡片之间 --space-3），与 pages-post 侧口径一致 */
+  .post-list {
+    display: grid;
+    gap: var(--space-3);
+    list-style: none;
+    padding: 0;
+  }
+</style>

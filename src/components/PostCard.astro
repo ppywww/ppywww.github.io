@@ -30,7 +30,7 @@ const minutes = readingTime(post.body ?? '');
 
   {
     tags.length > 0 && (
-      <ul class="tag-list" style="margin-top: var(--space-4)">
+      <ul class="tag-list">
         {tags.map((tag) => (
           <li>
             <a class="tag" href={`/tags/${encodeURIComponent(tag)}/`}>

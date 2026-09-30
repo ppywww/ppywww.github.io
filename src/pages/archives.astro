@@ -1,0 +1,207 @@
+---
+/**
+ * 归档页 /archives/ —— PRD §7.3 / F-03 / AC-6
+ * 布局：年 → 月 两级分组 + 计数上标；≥900px 启用「年份脊 + 40px 条目轨」（设计系统 §6.17 / 记忆点 M1）
+ * 计数口径：直接由**渲染用的同一份数组**推导 —— 归档条目数必然等于实际文章数（AC-6）
+ */
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ArchiveEntry from '../components/ArchiveEntry.astro';
+import { SITE } from '../consts';
+import { formatDate } from '../lib/date';
+
+// 生产构建过滤草稿；本地 dev 保留草稿便于预览（与首页 index.astro 同口径）
+const posts = (
+  await getCollection('posts', ({ data }) => (import.meta.env.PROD ? !data.draft : true))
+).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+interface MonthGroup {
+  month: string;
+  count: number;
+  posts: typeof posts;
+}
+interface YearGroup {
+  year: string;
+  count: number;
+  months: MonthGroup[];
+}
+
+// 分组键取 formatDate（固定 Asia/Shanghai）的结果，避免 CI（UTC）把文章分到上一年/月
+const yearMap = new Map<string, Map<string, typeof posts>>();
+for (const post of posts) {
+  const iso = formatDate(post.data.date);
+  const year = iso.slice(0, 4);
+  const month = iso.slice(5, 7);
+  const months = yearMap.get(year) ?? new Map<string, typeof posts>();
+  const bucket = months.get(month) ?? ([] as unknown as typeof posts);
+  bucket.push(post);
+  months.set(month, bucket);
+  yearMap.set(year, months);
+}
+
+const yearGroups: YearGroup[] = [...yearMap.entries()]
+  .sort((a, b) => Number(b[0]) - Number(a[0]))
+  .map(([year, months]) => {
+    const monthGroups: MonthGroup[] = [...months.entries()]
+      .sort((a, b) => Number(b[0]) - Number(a[0]))
+      .map(([month, list]) => ({ month, count: list.length, posts: list }));
+    return {
+      year,
+      count: monthGroups.reduce((sum, item) => sum + item.count, 0),
+      months: monthGroups,
+    };
+  });
+---
+
+<BaseLayout title="归档" description={`${SITE.title} 全部文章的按年归档，共 ${posts.length} 篇。`}>
+  <Header />
+
+  <main class="main" id="main-content">
+    <div class="container">
+      <div class="page-head">
+        <h1 class="page-title">归档</h1>
+        <p class="page-lead">按年份与月份排列，共 {posts.length} 篇文章。</p>
+      </div>
+
+      {
+        posts.length === 0 ? (
+          <div class="empty">
+            <p class="empty__title">还没有文章</p>
+            <p>
+              把 Markdown 放进 <code>src/content/posts/</code>，这里会自动按年份归档。
+            </p>
+            <p>
+              <a href="/">返回首页</a>
+            </p>
+          </div>
+        ) : (
+          <div class="archive">
+            {yearGroups.map((group) => (
+              <section class="archive__year" aria-labelledby={`year-${group.year}`}>
+                <h2 class="archive__year-label" id={`year-${group.year}`}>
+                  <span class="archive__year-num">{group.year}</span>
+                  <span class="visually-hidden">年</span>
+                  <span class="archive__count">{group.count} 篇</span>
+                </h2>
+
+                <div class="archive__body">
+                  {group.months.map((month) => (
+                    <section
+                      class="archive__month"
+                      aria-labelledby={`month-${group.year}-${month.month}`}
+                    >
+                      <h3 class="archive__month-label" id={`month-${group.year}-${month.month}`}>
+                        {Number(month.month)} 月
+                        <span class="archive__count">{month.count} 篇</span>
+                      </h3>
+                      <ul class="archive__list">
+                        {month.posts.map((post) => (
+                          <ArchiveEntry post={post} />
+                        ))}
+                      </ul>
+                    </section>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+        )
+      }
+
+      {/* PRD §5：分类与标签不进主导航，从归档页进入，避免导航臃肿 */}
+      <p class="page-actions">
+        <a href="/categories/">按分类浏览</a>
+        <span class="meta__sep" aria-hidden="true">·</span>
+        <a href="/tags/">按标签浏览</a>
+      </p>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page-head {
+    margin-bottom: var(--space-9);
+  }
+
+  .page-title {
+    margin-bottom: var(--space-3);
+  }
+
+  .page-lead {
+    color: var(--color-text-secondary);
+  }
+
+  .archive {
+    display: grid;
+    gap: var(--space-9);
+  }
+
+  .archive__year {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .archive__year-label {
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-h3);
+    color: var(--color-text-secondary);
+  }
+
+  /* 年份数字用等宽体（记忆点 M1：年份脊的语言与 mono 元信息一致） */
+  .archive__year-num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .archive__body {
+    display: grid;
+    gap: var(--space-7);
+  }
+
+  .archive__month-label {
+    margin-bottom: var(--space-2);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-h3);
+    color: var(--color-text);
+  }
+
+  /* 计数上标：字号降一档、走次文字色，不占用强调色预算 */
+  .archive__count {
+    margin-left: var(--space-2);
+    font-family: var(--font-body);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-body);
+    color: var(--color-text-secondary);
+    vertical-align: super;
+  }
+
+  .archive__list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .page-actions {
+    margin-top: var(--space-9);
+    font-size: var(--font-size-sm);
+  }
+
+  /* ≥900px：年份脊（88px 固定列，设计系统 §4.2 / M1）+ sticky 跟随滚动 */
+  @media (min-width: 900px) {
+    .archive__year {
+      grid-template-columns: 88px 1fr;
+      gap: var(--space-6);
+      align-items: start;
+    }
+
+    .archive__year-label {
+      position: sticky;
+      /* tokens.css（M1）暂无 --header-height：--space-11 + --space-5 = 64px，
+         与 base.css 的 .site-header__inner min-height 对齐 */
+      top: calc(var(--space-11) + var(--space-5));
+    }
+  }
+</style>

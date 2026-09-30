@@ -1,0 +1,80 @@
+---
+/**
+ * ArchiveEntry · 归档条目（PRD §7.3 + 设计系统 §6.17 .archive-list / 记忆点 M1）
+ * 契约（冻结，跨任务共享）：props { post: CollectionEntry<'posts'> }
+ * 形态：40px 条目轨，三列对齐（日期 56px / 标题 / 阅读时长），整行可点，hover 左侧 2px 靛蓝滑块。
+ */
+import type { CollectionEntry } from 'astro:content';
+import { formatDate } from '../lib/date';
+import { readingTime } from '../lib/reading-time';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+const { title, date } = post.data;
+const minutes = readingTime(post.body ?? '');
+/** 年份由左边「年份脊」承载、月份由分组标题承载，条目内只留 MM-DD 以适配 56px 列宽 */
+const day = formatDate(date).slice(5);
+---
+
+<li class="archive-item">
+  <a class="archive-item__link" href={`/posts/${post.id}/`}>
+    <time class="archive-item__date" datetime={date.toISOString()}>{day}</time>
+    <span class="archive-item__title">{title}</span>
+    <span class="archive-item__meta">{minutes} 分钟</span>
+  </a>
+</li>
+
+<style>
+  .archive-item__link {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: var(--space-10); /* 40px 条目轨（§6.17） */
+    padding-inline: var(--space-3);
+    border-left: 2px solid transparent; /* 预留 hover 滑块位，避免文字位移 */
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    text-decoration: none;
+  }
+
+  .archive-item__date {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    color: var(--color-text-secondary);
+  }
+
+  .archive-item__title {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* 截断只发生在 CSS 层，完整标题仍在 DOM 中（D6） */
+  }
+
+  .archive-item__meta {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+  }
+
+  /* hover：行底下沉一档 + 左侧 2px 强调色滑块（属「链接」状态，符合 §2.6） */
+  @media (hover: hover) and (pointer: fine) {
+    .archive-item__link:hover {
+      background: var(--color-surface-2);
+      border-left-color: var(--color-accent);
+      text-decoration: none;
+    }
+  }
+
+  .archive-item__link:active {
+    background: var(--color-surface-2);
+  }
+
+  @media (pointer: coarse) {
+    .archive-item__link {
+      min-height: var(--space-11);
+    }
+  }
+</style>

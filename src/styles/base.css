@@ -150,7 +150,13 @@ a:hover { text-decoration: underline; }
   padding: var(--card-padding);
   box-shadow: var(--shadow-card);
 }
-.card-list { list-style: none; padding: 0; display: grid; gap: var(--space-5); }
+.card-list { list-style: none; padding: 0; display: grid; gap: var(--space-3); }
+
+/* 文章/内容列表：与 .card-list 同节奏（设计系统 §6.3：卡片之间 --space-3 12px） */
+.post-list { list-style: none; padding: 0; display: grid; gap: var(--space-3); }
+
+/* PostCard 标签行（原为内联 style，违反设计系统 D11，收口到此） */
+.post-card .tag-list { margin-top: var(--space-4); }
 
 /* ---------- 文本与元信息 ---------- */
 .meta {

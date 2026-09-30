@@ -1,0 +1,112 @@
+---
+/**
+ * 单栏目 /categories/<栏目>/ —— PRD §7.4
+ * getStaticPaths 只遍历 consts.CATEGORIES：**非法分类不生成页面**（AC-7），访问即 404。
+ * 路由参数直传原始中文栏目名（Astro 静态构建按原值落盘 dist/categories/<栏目>/index.html），
+ * 链接侧统一 encodeURIComponent，服务器解码后与产物目录一一对应。
+ */
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PostCard from '../../components/PostCard.astro';
+import { CATEGORIES, SITE } from '../../consts';
+
+export async function getStaticPaths() {
+  return CATEGORIES.map((category) => ({ params: { category }, props: { category } }));
+}
+
+interface Props {
+  category: string;
+}
+
+/** 兜底：getStaticPaths 已直传原始值，此处仅防未来改成 SSR 时参数被百分号编码 */
+function decodeParam(value: string): string {
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+}
+
+const category = Astro.props.category ?? decodeParam(Astro.params.category ?? '');
+
+const posts = (
+  await getCollection('posts', ({ data }) => (import.meta.env.PROD ? !data.draft : true))
+)
+  .filter((post) => post.data.categories.includes(category))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout
+  title={`分类：${category}`}
+  description={`${SITE.title} 的「${category}」栏目，共 ${posts.length} 篇文章。`}
+>
+  <Header />
+
+  <main class="main" id="main-content">
+    <div class="container">
+      <div class="page-head">
+        <p class="page-eyebrow">分类</p>
+        <h1 class="page-title">{category}</h1>
+        <p class="page-lead">共 {posts.length} 篇文章。</p>
+      </div>
+
+      {
+        posts.length === 0 ? (
+          <div class="empty">
+            <p class="empty__title">这个栏目还没有文章</p>
+            <p>
+              换一个栏目看看，或者浏览<a href="/posts/">全部文章</a>。
+            </p>
+          </div>
+        ) : (
+          <ul class="post-list">
+            {posts.map((post) => (
+              <PostCard post={post} />
+            ))}
+          </ul>
+        )
+      }
+
+      <p class="page-back">
+        <a href="/categories/">← 全部分类</a>
+      </p>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page-head {
+    margin-bottom: var(--space-9);
+  }
+
+  .page-eyebrow {
+    margin-bottom: var(--space-2);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+  }
+
+  .page-title {
+    margin-bottom: var(--space-3);
+  }
+
+  .page-lead {
+    color: var(--color-text-secondary);
+  }
+
+  .page-back {
+    margin-top: var(--space-9);
+    font-size: var(--font-size-sm);
+  }
+
+  /* 卡片列表：间距 12px（设计系统 §6.3 卡片之间 --space-3），与 pages-post 侧口径一致 */
+  .post-list {
+    display: grid;
+    gap: var(--space-3);
+    list-style: none;
+    padding: 0;
+  }
+</style>

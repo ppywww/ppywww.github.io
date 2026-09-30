@@ -1,0 +1,122 @@
+---
+/**
+ * 单标签 /tags/<标签>/ —— PRD §7.4
+ * getStaticPaths 遍历全部已发布文章的标签：无文章的标签不产出页面。
+ * 标签名是自由中文，URL 一律 encodeURIComponent（与 PostCard 的链接口径一致）；
+ * 显示名走 props 直传原始值，避免编码/解码往返带来的歧义。
+ */
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PostCard from '../../components/PostCard.astro';
+import { SITE } from '../../consts';
+
+/**
+ * ⚠️ 实测结论（pages-post 构建报错定位）：Astro 7 会把 getStaticPaths **提升到独立模块作用域**，
+ * 那里访问不到本文件顶层的 const（只有 import 进来的绑定可见）。
+ * 因此过滤条件必须内联在函数体内，不得抽成外层常量。
+ */
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => (import.meta.env.PROD ? !data.draft : true));
+  const tags = new Set<string>();
+  for (const post of posts) {
+    for (const tag of post.data.tags) {
+      tags.add(tag);
+    }
+  }
+  return [...tags].map((tag) => ({ params: { tag }, props: { tag } }));
+}
+
+interface Props {
+  tag: string;
+}
+
+/** 兜底解码：props 已是原始标签名；若未来改成 SSR，路由参数可能是百分号编码形态 */
+function decodeParam(value: string): string {
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+}
+
+const tag = Astro.props.tag ?? decodeParam(Astro.params.tag ?? '');
+
+const posts = (await getCollection('posts', ({ data }) => (import.meta.env.PROD ? !data.draft : true)))
+  .filter((post) => post.data.tags.includes(tag))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout
+  title={`标签：${tag}`}
+  description={`${SITE.title} 中带有「${tag}」标签的文章，共 ${posts.length} 篇。`}
+>
+  <Header />
+
+  <main class="main" id="main-content">
+    <div class="container">
+      <div class="page-head">
+        <p class="page-eyebrow">标签</p>
+        <h1 class="page-title">{tag}</h1>
+        <p class="page-lead">共 {posts.length} 篇文章。</p>
+      </div>
+
+      {
+        posts.length === 0 ? (
+          <div class="empty">
+            <p class="empty__title">这个标签下还没有文章</p>
+            <p>
+              换一个标签看看，或者浏览<a href="/tags/">全部标签</a>。
+            </p>
+          </div>
+        ) : (
+          <ul class="post-list">
+            {posts.map((post) => (
+              <PostCard post={post} />
+            ))}
+          </ul>
+        )
+      }
+
+      <p class="page-back">
+        <a href="/tags/">← 全部标签</a>
+      </p>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page-head {
+    margin-bottom: var(--space-9);
+  }
+
+  .page-eyebrow {
+    margin-bottom: var(--space-2);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+  }
+
+  .page-title {
+    margin-bottom: var(--space-3);
+  }
+
+  .page-lead {
+    color: var(--color-text-secondary);
+  }
+
+  .page-back {
+    margin-top: var(--space-9);
+    font-size: var(--font-size-sm);
+  }
+
+  /* 卡片列表：间距 12px（设计系统 §6.3 卡片之间 --space-3），与 pages-post 侧口径一致 */
+  .post-list {
+    display: grid;
+    gap: var(--space-3);
+    list-style: none;
+    padding: 0;
+  }
+</style>

@@ -1,0 +1,164 @@
+---
+/**
+ * Pagination · 列表分页（PRD F-01 / 设计系统 §6.5）
+ *
+ * · 只有一页时整个组件不渲染（没有可翻的页，页码条只是噪音）
+ * · 当前页 aria-current="page"，不做靛蓝填充（强调色只用于「可点」与「当前项」的文字）
+ * · 首页 / 末页不渲染伪禁用按钮：<a> 没有 disabled，伪禁用会骗过辅助技术
+ * · 每个页码都有 aria-label="第 N 页"，避免屏幕阅读器只读出一个数字
+ */
+interface Props {
+  currentPage: number;
+  lastPage: number;
+  urlPrev?: string;
+  urlNext?: string;
+}
+
+const { currentPage, lastPage, urlPrev, urlNext } = Astro.props;
+
+/**
+ * 页码窗口：首页、末页、当前页及其前后各一页，其余用省略号折叠。
+ */
+function buildPages(current: number, last: number): (number | '…')[] {
+  const wanted = new Set<number>([1, last, current - 1, current, current + 1]);
+  const nums = [...wanted].filter((n) => n >= 1 && n <= last).sort((a, b) => a - b);
+
+  const result: (number | '…')[] = [];
+  let prev = 0;
+  for (const n of nums) {
+    if (prev !== 0 && n - prev > 1) result.push('…');
+    result.push(n);
+    prev = n;
+  }
+  return result;
+}
+
+const pages = buildPages(currentPage, lastPage);
+
+/**
+ * 目录式 URL 归一化：paginate() 给出的首页 URL 是 `/posts`（无尾斜杠，受 trailingSlash: 'ignore' 影响），
+ * 而站内其它链接统一用 `/posts/`。这里补上尾斜杠，保证全站口径一致。
+ */
+function normalizePath(url?: string): string | undefined {
+  if (!url) return url;
+  if (url.endsWith('/') || url.includes('?') || url.includes('#')) return url;
+  return `${url}/`;
+}
+
+const prevHref = normalizePath(urlPrev);
+const nextHref = normalizePath(urlNext);
+
+/**
+ * 页码 → URL：从 paginate() 给的 urlPrev / urlNext 反推列表根路径
+ * （/posts/ → /posts/，/posts/2/ → /posts/），这样组件不写死任何路由前缀。
+ * ⚠️ 必须先把页码段整段（含尾斜杠）抹掉再补斜杠，否则 /posts + 2/ 会拼出 /posts2/。
+ */
+const sample = prevHref ?? nextHref ?? Astro.url.pathname;
+const basePath = sample.replace(/\d+\/?$/, '').replace(/\/?$/, '/');
+const pageHref = (p: number) => (p === 1 ? basePath : `${basePath}${p}/`);
+---
+
+{
+  lastPage > 1 && (
+    <nav class="pagination" aria-label="分页导航">
+      {prevHref && (
+        <a class="pagination__link pagination__link--step" rel="prev" href={prevHref}>
+          ← 上一页
+        </a>
+      )}
+
+      <ol class="pagination__list">
+        {pages.map((p) =>
+          p === '…' ? (
+            <li>
+              <span class="pagination__ellipsis" aria-hidden="true">
+                …
+              </span>
+            </li>
+          ) : (
+            <li>
+              <a
+                class="pagination__link"
+                href={pageHref(p)}
+                aria-current={p === currentPage ? 'page' : undefined}
+                aria-label={p === currentPage ? `第 ${p} 页，当前页` : `第 ${p} 页`}
+              >
+                {p}
+              </a>
+            </li>
+          ),
+        )}
+      </ol>
+
+      {nextHref && (
+        <a class="pagination__link pagination__link--step" rel="next" href={nextHref}>
+          下一页 →
+        </a>
+      )}
+    </nav>
+  )
+}
+
+<style>
+  .pagination {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-1);
+    margin-top: var(--space-8);
+    font-size: var(--font-size-sm);
+  }
+
+  .pagination__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-1);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .pagination__link,
+  .pagination__ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding-inline: var(--space-3);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+
+  /* ---------- 状态 ---------- */
+  @media (hover: hover) and (pointer: fine) {
+    .pagination__link:hover {
+      color: var(--color-text);
+      background: var(--color-surface-2);
+      text-decoration: none;
+    }
+  }
+
+  /* 当前页：靛蓝文字 + 600 字重，不做大色块填充 */
+  .pagination__link[aria-current='page'] {
+    color: var(--color-accent-text);
+    font-weight: var(--font-weight-heading);
+    background: var(--color-surface-2);
+  }
+
+  .pagination__link:active {
+    background: var(--color-surface-2);
+  }
+
+  /* ---------- 触控命中区 ≥44px ---------- */
+  @media (pointer: coarse) {
+    .pagination__link,
+    .pagination__ellipsis {
+      min-width: 44px;
+      height: 44px;
+    }
+  }
+</style>

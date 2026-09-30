@@ -1,0 +1,250 @@
+---
+/**
+ * PostLayout · 文章详情页外壳（PRD §7.2 / 设计系统 §6.6 · §6.11 · §6.13 · §6.17）
+ *
+ * 职责：语义结构与版式顺序 —— 面包屑 → H1 → 元信息 → 封面 → 目录 → 正文 → 文末（更新于/版权）→ 评论容器。
+ * 正文 HTML 由调用方通过 <slot /> 注入（<Content /> 的产物），本布局不解析 Markdown。
+ * <head> 全部交给 BaseLayout：本布局**不写任何 head 标签**。
+ */
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PostMeta from '../components/PostMeta.astro';
+import Toc from '../components/Toc.astro';
+import { SITE } from '../consts';
+import { formatDate } from '../lib/date';
+import '../styles/prose.css';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+  /** markdown 管线产出的标题列表（{ depth, slug, text }），直接交给 Toc 消费 */
+  headings: { depth: number; slug: string; text: string }[];
+}
+
+const { post, headings } = Astro.props;
+const { title, description, date, lastmod, categories, cover, toc, comments, tags } = post.data;
+const category = categories[0];
+const postPath = `/posts/${post.id}/`;
+const publishedYear = formatDate(date).slice(0, 4);
+
+/** 文章页结构化数据（F-10 SEO）：BaseLayout 会把它追加进 JSON-LD 数组 */
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  datePublished: date.toISOString(),
+  ...(lastmod ? { dateModified: lastmod.toISOString() } : {}),
+  inLanguage: SITE.lang,
+  author: { '@type': 'Person', name: SITE.author },
+  mainEntityOfPage: new URL(postPath, SITE.url).href,
+  ...(category ? { articleSection: category } : {}),
+  ...(tags.length > 0 ? { keywords: tags.join(', ') } : {}),
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  path={postPath}
+  ogType="article"
+  publishedTime={date.toISOString()}
+  modifiedTime={lastmod?.toISOString()}
+  image={cover}
+  jsonLd={jsonLd}
+>
+  <Header />
+
+  <main class="main" id="main-content">
+    <div class="container">
+      <article class="post">
+        <nav class="breadcrumb" aria-label="面包屑">
+          <ol class="breadcrumb__list">
+            <li class="breadcrumb__item"><a href="/">首页</a></li>
+            {
+              category && (
+                <li class="breadcrumb__item">
+                  <a href={`/categories/${encodeURIComponent(category)}/`}>{category}</a>
+                </li>
+              )
+            }
+            <li class="breadcrumb__item" aria-current="page">{title}</li>
+          </ol>
+        </nav>
+
+        <h1 class="post__title">{title}</h1>
+
+        <PostMeta post={post} />
+
+        {cover && <img class="post__cover" src={cover} alt={`${title} 的封面图`} loading="lazy" decoding="async" />}
+
+        {toc && <Toc headings={headings} />}
+
+        <div class="prose">
+          <slot />
+        </div>
+
+        <footer class="post__footer">
+          {
+            lastmod && (
+              <p class="post__updated">
+                更新于 <time datetime={lastmod.toISOString()}>{formatDate(lastmod)}</time>
+              </p>
+            )
+          }
+          <p class="post__copyright">
+            © {publishedYear} {SITE.author} · 本文采用 <a
+              href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"
+              target="_blank"
+              rel="noopener noreferrer">CC BY-NC-SA 4.0</a
+            > 许可协议，转载请注明出处。
+          </p>
+        </footer>
+
+        {
+          comments && (
+            <section class="giscus-wrap" aria-labelledby="comments-title">
+              <h2 class="giscus-wrap__title" id="comments-title">
+                评论
+              </h2>
+              <p class="giscus-wrap__note">
+                评论由 Giscus（基于 GitHub Discussions）提供，将在 M4 接入。若此处没有出现评论区，说明你的浏览器未启用 JavaScript。
+              </p>
+              {/* Giscus 容器占位（PRD F-08，默认关闭、逐篇可开）：
+                  M4 接入时把 <script src="https://giscus.app/client.js" data-repo=… data-mapping="pathname"
+                  data-theme=… loading="lazy"> 放进本 section，并删掉上面的说明文字。
+                  注意：暗色主题需随 :root.dark 用 postMessage 同步（设计系统 §12 U6，未实测）。 */}
+            </section>
+          )
+        }
+      </article>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* 文章页统一 720px 阅读列，面包屑 / 标题 / 元信息 / 正文左对齐在同一列上 */
+  .post {
+    max-width: var(--content-width);
+    margin-inline: auto;
+  }
+
+  /* ---------- 面包屑（设计系统 §6.13）---------- */
+  .breadcrumb {
+    margin-bottom: var(--space-4);
+    font-size: var(--font-size-xs);
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* 分隔符用 CSS 生成，不进 DOM 文本（避免屏幕阅读器朗读「/」） */
+  .breadcrumb__item + .breadcrumb__item::before {
+    content: '/';
+    margin-right: var(--space-2);
+    color: var(--color-border);
+  }
+
+  .breadcrumb__item {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+
+  /* 末项不是链接，靠 aria-current 与位置区分，不加粗 */
+  .breadcrumb__item[aria-current='page'] {
+    max-width: 26ch;
+    overflow: hidden;
+    color: var(--color-text);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .breadcrumb__item a:hover {
+      color: var(--color-text);
+      text-decoration: underline;
+    }
+  }
+
+  /* ---------- 标题与元信息（§4.3 面包屑 ↦ H1 ↦ 元信息 ↦ 正文）---------- */
+  .post__title {
+    margin-bottom: var(--space-4);
+    font-size: var(--font-size-h1);
+    line-height: var(--line-height-h1);
+  }
+
+  .post__cover {
+    width: 100%;
+    height: auto;
+    margin-top: var(--space-6);
+    border-radius: var(--radius-md);
+  }
+
+  /* 元信息行 ↦ 目录/正文：与 .post__title 的 margin-bottom 一起构成 32px 节奏 */
+  .post :global(.post-meta) {
+    margin-bottom: var(--space-8);
+  }
+
+  .post :global(.toc) {
+    margin-bottom: var(--space-6);
+  }
+
+  /* ---------- 文末区块（正文结束 ↦ 文末 44px）---------- */
+  .post__footer {
+    margin-top: var(--space-11);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+  }
+
+  .post__updated {
+    margin-bottom: var(--space-2);
+  }
+
+  .post__updated time {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .post__copyright a {
+    color: var(--color-accent-text);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+
+  /* ---------- 评论区占位（设计系统 §6.17 .giscus-wrap）---------- */
+  .giscus-wrap {
+    margin-top: var(--space-11);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .giscus-wrap__title {
+    margin-bottom: var(--space-3);
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-h3);
+  }
+
+  .giscus-wrap__note {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+  }
+</style>

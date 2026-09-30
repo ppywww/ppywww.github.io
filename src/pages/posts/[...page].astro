@@ -1,0 +1,104 @@
+---
+/**
+ * 文章列表（全部分页）—— /posts/ 与 /posts/2/（PRD §5 站点地图 / §7 / F-01）
+ *
+ * 每页 10 篇、按发布时间倒序；draft:true 的文章不进生产列表。
+ *
+ * ⚠️ 文件名说明：任务书写的是 index.astro，但 Astro 的 paginate() 要求路由里存在名为
+ * page 的**动态参数**，且只有 rest 参数（[...page]）才能让第 1 页落在 /posts/、
+ * 第 2 页落在 /posts/2/。index.astro 没有动态段，调用 paginate() 会直接抛
+ * PageNumberParamNotFound。因此这里用 [...page].astro 以满足「页码路径 /posts/ 与 /posts/2/」。
+ */
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PostCard from '../../components/PostCard.astro';
+import Pagination from '../../components/Pagination.astro';
+import { SITE } from '../../consts';
+
+/*
+  ⚠️ getStaticPaths 会被 Astro 提升到独立作用域，frontmatter 里同级的 const 在它内部**不可见**
+  （实测：PublishedFilter is not defined 构建报错）。所以页大小与草稿过滤必须写在函数内部。
+*/
+export async function getStaticPaths({
+  paginate,
+}: {
+  paginate: (data: any[], options: { pageSize: number }) => any;
+}) {
+  const PAGE_SIZE = 10;
+  // 生产构建过滤草稿；本地 dev 保留草稿便于预览（与首页口径一致）
+  const posts = (
+    await getCollection('posts', ({ data }) => (import.meta.env.PROD ? !data.draft : true))
+  ).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return paginate(posts, { pageSize: PAGE_SIZE });
+}
+
+const { page } = Astro.props;
+---
+
+<BaseLayout
+  title="文章"
+  description={`${SITE.title} 的全部文章：技术、生活、读书与作品笔记，按发布时间倒序排列。`}
+>
+  <Header />
+
+  <main class="main" id="main-content">
+    <div class="container">
+      <div class="page-head">
+        <p class="page-eyebrow">文章</p>
+        <h1 class="page-title">全部文章</h1>
+        <p class="page-lead">
+          共 {page.total} 篇{page.lastPage > 1 && ` · 第 ${page.currentPage} / ${page.lastPage} 页`}。
+        </p>
+      </div>
+
+      {
+        page.total === 0 ? (
+          <div class="empty">
+            <p class="empty__title">还没有文章</p>
+            <p>
+              把 Markdown 放进 <code>src/content/posts/</code>，提交后自动上线。先去
+              <a href="/">首页</a> 看看，或浏览 <a href="/archives/">归档</a>。
+            </p>
+          </div>
+        ) : (
+          <ul class="post-list">
+            {page.data.map((post: any) => (
+              <PostCard post={post} />
+            ))}
+          </ul>
+        )
+      }
+
+      <Pagination
+        currentPage={page.currentPage}
+        lastPage={page.lastPage}
+        urlPrev={page.url.prev}
+        urlNext={page.url.next}
+      />
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page-head {
+    margin-bottom: var(--space-9);
+  }
+
+  .page-eyebrow {
+    margin-bottom: var(--space-2);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+  }
+
+  .page-title {
+    margin-bottom: var(--space-3);
+  }
+
+  .page-lead {
+    color: var(--color-text-secondary);
+  }
+</style>

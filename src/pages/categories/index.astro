@@ -1,0 +1,93 @@
+---
+/**
+ * 分类总览 /categories/ —— PRD §7.4 / F-04 / AC-7
+ * 4 个固定栏目恒显示（即使 0 篇）；非法分类由 content.config.ts 的 Zod 枚举在**构建期**报错，
+ * 本页只从 consts.CATEGORIES 取数，不做任何硬编码。
+ */
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import TermPill from '../../components/TermPill.astro';
+import { CATEGORIES, SITE } from '../../consts';
+
+const posts = await getCollection('posts', ({ data }) => (import.meta.env.PROD ? !data.draft : true));
+
+// 计数与列表页共用同一份 posts，保证「计数 = 实际文章数」
+const counts = new Map<string, number>();
+for (const post of posts) {
+  // 按「每篇文章计一次」去重：一篇文章多分类时每个栏目各计 1，重复值不重复计
+  for (const name of new Set(post.data.categories)) {
+    counts.set(name, (counts.get(name) ?? 0) + 1);
+  }
+}
+---
+
+<BaseLayout
+  title="分类"
+  description={`按 ${CATEGORIES.join(' / ')} 四个栏目浏览 ${SITE.title} 的文章，共 ${posts.length} 篇。`}
+>
+  <Header />
+
+  <main class="main" id="main-content">
+    <div class="container">
+      <div class="page-head">
+        <h1 class="page-title">分类</h1>
+        <p class="page-lead">
+          共 {CATEGORIES.length} 个栏目、{posts.length} 篇文章。栏目少而稳，用来导航；标签多而活，用来聚类。
+        </p>
+      </div>
+
+      <ul class="term-cloud">
+        {
+          CATEGORIES.map((name) => (
+            <li>
+              <TermPill label={name} href={`/categories/${encodeURIComponent(name)}/`} count={counts.get(name) ?? 0} />
+            </li>
+          ))
+        }
+      </ul>
+
+      {
+        posts.length === 0 && (
+          <div class="empty">
+            <p class="empty__title">还没有文章</p>
+            <p>写下第一篇后，四个栏目的计数会自动更新。</p>
+            <p>
+              <a href="/">返回首页</a>
+            </p>
+          </div>
+        )
+      }
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page-head {
+    margin-bottom: var(--space-9);
+  }
+
+  .page-title {
+    margin-bottom: var(--space-3);
+  }
+
+  .page-lead {
+    color: var(--color-text-secondary);
+    max-width: var(--content-width);
+  }
+
+  .term-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+    padding: 0;
+  }
+
+  .empty {
+    margin-top: var(--space-9);
+  }
+</style>
