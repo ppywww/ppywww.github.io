@@ -55,3 +55,27 @@ export function createReporter(title) {
     },
   };
 }
+
+/**
+ * 统一收尾：**不要直接 process.exit()**。
+ *
+ * 原因（真实故障，2026-09-30 由实现方复现）：在 Windows 上，若还有 libuv 句柄处在关闭过程中就
+ * 调 process.exit()，会触发
+ *   Assertion failed: !(handle->flags & UV_HANDLE_CLOSING), file src\win\async.c, line 94
+ * 进程退出码变成 -1073740791 —— 汇总明明白白写着「不通过 0」，CI 却判定失败。
+ * 验收脚本的退出码必须可信，所以改成：
+ *   ① 设 process.exitCode，让事件循环自然排空（首选，最干净）；
+ *   ② 主动关掉 undici 的 keep-alive 连接池，避免它把事件循环多拖 4 秒；
+ *   ③ 兜底：5s 后仍未自然退出才强杀（unref 定时器本身不阻止自然退出）。
+ */
+export async function finish(code) {
+  process.exitCode = code;
+  try {
+    const dispatcher = globalThis[Symbol.for('undici.globalDispatcher.1')];
+    if (dispatcher && typeof dispatcher.close === 'function') await dispatcher.close();
+  } catch {
+    /* 拿不到 dispatcher 就跳过，不影响退出码 */
+  }
+  const timer = setTimeout(() => process.exit(code), 5000);
+  if (typeof timer.unref === 'function') timer.unref();
+}

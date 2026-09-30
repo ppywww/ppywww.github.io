@@ -158,8 +158,25 @@ export async function launchChrome({ chromePath = DEFAULT_CHROME, width = 1280, 
       } catch {
         /* 忽略 */
       }
-      child.kill();
-      await sleep(200);
+      // 等 Chrome 真的退出再返回：在句柄关闭过程中被 process.exit() 打断，会触发
+      // Windows 上 libuv 的 UV_HANDLE_CLOSING 断言（见 lib/report.mjs 的 finish 注释）。
+      await new Promise((resolve) => {
+        if (child.exitCode !== null || child.signalCode !== null) {
+          resolve();
+          return;
+        }
+        child.once('exit', () => resolve());
+        child.kill();
+        const timer = setTimeout(() => {
+          try {
+            child.kill('SIGKILL');
+          } catch {
+            /* 忽略 */
+          }
+          resolve();
+        }, 3000);
+        if (typeof timer.unref === 'function') timer.unref();
+      });
       try {
         fs.rmSync(userDataDir, { recursive: true, force: true });
       } catch {

@@ -1,0 +1,116 @@
+{
+  "generatedAt": "2026-09-30T10:09:39.603Z",
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "hasOgImage": true,
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "hasTwitterImage": true
+    },
+    {
+      "path": "/posts/",
+      "status": 200,
+      "hasOgImage": true,
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "hasTwitterImage": true
+    },
+    {
+      "path": "/archives/",
+      "status": 200,
+      "hasOgImage": true,
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "hasTwitterImage": true
+    },
+    {
+      "path": "/categories/",
+      "status": 200,
+      "hasOgImage": true,
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "hasTwitterImage": true
+    },
+    {
+      "path": "/tags/",
+      "status": 200,
+      "hasOgImage": true,
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "hasTwitterImage": true
+    },
+    {
+      "path": "/works/",
+      "status": 200,
+      "hasOgImage": true,
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "hasTwitterImage": true
+    },
+    {
+      "path": "/about/",
+      "status": 200,
+      "hasOgImage": true,
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "hasTwitterImage": true
+    },
+    {
+      "path": "/search/",
+      "status": 200,
+      "hasOgImage": true,
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "hasTwitterImage": true
+    },
+    {
+      "path": "/posts/2026-09-30-build-this-blog/",
+      "status": 200,
+      "hasOgImage": true,
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "hasTwitterImage": true
+    },
+    {
+      "path": "/posts/2026-09-28-why-i-blog/",
+      "status": 200,
+      "hasOgImage": true,
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "hasTwitterImage": true
+    },
+    {
+      "path": "/posts/2026-09-25-reading-note-template/",
+      "status": 200,
+      "hasOgImage": true,
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "hasTwitterImage": true
+    },
+    {
+      "path": "/categories/技术/",
+      "status": 200,
+      "hasOgImage": true,
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "hasTwitterImage": true
+    },
+    {
+      "path": "/tags/Astro/",
+      "status": 200,
+      "hasOgImage": true,
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "hasTwitterImage": true
+    },
+    {
+      "path": "/404.html",
+      "status": 200,
+      "hasOgImage": true,
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "hasTwitterImage": true
+    }
+  ],
+  "ogImage": {
+    "status": 200,
+    "contentType": "image/png",
+    "bytes": 56952,
+    "dimensions": {
+      "width": 1200,
+      "height": 630
+    }
+  },
+  "robots": {
+    "status": 200,
+    "body": "# ppy-Blog · robots.txt\n# 站点：https://ppywww.github.io（GitHub Pages 用户站点，站点位于根路径 /）\n#\n# 维护约定：Sitemap 里的域名必须与 src/consts.ts 的 SITE.url 保持一致，改域名时两处一起改。\n# 本文件位于 public/，Astro 会原样复制到 dist 根目录 → 线上地址为 /robots.txt。\n\nUser-agent: *\nAllow: /\n\n# /search/ 是工具页且已带 <meta name=\"robots\" content=\"noindex\">（见 src/pages/search.astro），\n# 禁止抓取以免浪费爬取配额；它同样不列入 sitemap.xml。\nDisallow: /search/\n\nSitemap: https://ppywww.git"
+  }
+}

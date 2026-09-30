@@ -1,51 +1,63 @@
 /* =============================================================================
-   tokens.css · 方向 B「墨蓝极简 / Ink & Indigo」
+   tokens.css · v1.1「PaperMod 灰阶 + 靛蓝点缀」
    -----------------------------------------------------------------------------
+   依据：docs/06-visual-spec.md §1/§2/§3（工程参数）
+         docs/00-decision-log.md G-05（采纳 06 参数但保留一个强调色）
+                                 G-07（保留变量名，写范围外有 11 处引用）
+                                 G-15（强调色限定四处）
    两层 token，职责严格分离：
-     ① 原始层 --palette-*  —— 只存**色值**，不含任何用途语义
+     ① 原始层 --palette-*  —— 只存**色值**，不含用途语义
      ② 语义层 --color-*    —— 只存**用途**，值一律引用原始层
-   组件只准引用语义层；改配色只动本文件。
+   组件只准引用语义层；换肤只动本文件。
 
-   硬约束（决策 B-01 / 视觉调研）：
-     · 靛蓝强调色只允许出现在「链接 / 当前导航项 / 按钮」三处，禁止大面积使用
-     · 边框仅作装饰，不承载信息
-     · 暗色不是反色：降饱和、降对比，正文永不用纯白
+   强调色（靛蓝）只允许出现在四处：正文链接 / 当前导航项 / 按钮 / 焦点环。
+   其余一律灰阶（卡片、标签、边框、标题、元信息）。
+
+   ⚠️ 维护须知（改本文件前必读）
+   1) --color-code-bg 与 astro.config.mjs 的 CODE_BG 存在构建期耦合：该文件的
+      Shiki transformer 以 CODE_BG 为基准把每个 token 颜色兜底到 4.5:1。两者取值
+      必须「同值或更保守」（亮色更浅 / 暗色更深），否则
+      scripts/qa-contrast/check-code-tokens.mjs 会失败。
+   2) 全仓有 11 处强调色引用落在本文件之外（Toc / TermPill / search / PostLayout /
+      ArchiveEntry / Pagination / 404 / prose.css）。**不得删除** --color-accent /
+      --color-accent-text / --color-on-accent —— CSS 变量缺失不会报错，只会静默掉色。
    ============================================================================= */
 
 /* ---------------------------------------------------------------------------
-   ① 原始层 · 色值
+   ① 原始层 · 灰阶色板（PaperMod 体系，06 §1.1）
    --------------------------------------------------------------------------- */
 :root {
-  /* 中性灰阶（亮色端，带极轻微冷调） */
+  /* 亮色端灰阶 */
   --palette-white:        #FFFFFF;
-  --palette-neutral-25:   #FCFCFD;
-  --palette-neutral-50:  #F7F8FA;
-  --palette-neutral-100:  #F2F3F5;
-  --palette-neutral-150:  #E9EBEF;
-  --palette-neutral-200:  #E3E5EA;
-  --palette-neutral-500:  #5B6270;
-  --palette-neutral-900:  #16181D;
+  --palette-gray-50:      #F5F5F5;   /* 列表页底色 / 行内代码底 */
+  --palette-gray-100:     #EEEEEE;   /* 边框 */
+  --palette-gray-300:     #D6D6D6;   /* tertiary：分隔符 / 禁用态（不可作正文色） */
+  --palette-gray-400:     #AAAAAA;   /* 浅灰文字（暗色端 secondary；06 原为链接 hover） */
+  --palette-gray-500:     #6C6C6C;   /* 亮色端 secondary：元信息、摘要 */
+  --palette-gray-800:     #333333;   /* 暗色边框 */
+  --palette-gray-900:     #1F1F1F;   /* 06 §1.1 的 --content（与 #1E1E1E 无感知差异，本文件不单独使用） */
+  --palette-gray-950:     #1E1E1E;   /* 亮色端正文 / 标题（06 §1.1 的 --primary） */
 
-  /* 墨色阶（暗色端，避免纯黑） */
-  --palette-ink-950:      #0F1115;
-  --palette-ink-900:      #171A21;
-  --palette-ink-800:      #1F232B;
-  --palette-ink-700:      #2A2F39;
-  --palette-ink-200:      #E7E9EE;
-  --palette-ink-400:      #98A0AE;
+  /* 暗色端墨阶 */
+  --palette-ink-950:      #1D1E20;   /* 暗色页面底 */
+  --palette-ink-900:      #2E2E33;   /* 暗色卡片底 */
+  --palette-ink-800:      #37383E;   /* 暗色 surface-2（06 §1.3，task-18 简表未列，按 06 补齐） */
+  --palette-ink-700:      #414244;   /* 暗色 tertiary */
+  --palette-ink-400:      #9B9C9D;   /* 06 的暗色 secondary（本文件未采用，见 ③ 暗色块注释） */
+  --palette-ink-200:      #C4C4C5;   /* 暗色正文备选（06 §1.1） */
+  --palette-ink-100:      #DADADB;   /* 暗色正文 / 标题 */
+  --palette-code-block:   #1C1D21;   /* 代码块底（PaperMod 原值，本文件用于暗色端） */
 
-  /* 靛蓝强调（亮色 600 / 暗色提亮 300） */
+  /* 强调色（G-15：保留变量名与靛蓝值） */
   --palette-indigo-600:   #3B4CE0;
-  --palette-indigo-200:   #A8B4FF;
-  --palette-indigo-300:   #8E9CFF;
   --palette-indigo-700:   #2F3DC4;
-
-  /* 阴影基色（仅用于合成 rgba） */
-  --palette-shadow-rgb:   16 18 22;
+  --palette-indigo-300:   #8E9CFF;
+  --palette-indigo-200:   #A8B4FF;
 }
 
 /* ---------------------------------------------------------------------------
-   ② 语义层 · 字体 / 字号 / 行高（零 Web Font，纯系统栈）
+   ② 语义层 · 字体 / 字号 / 行高 / 字重（零 Web Font，纯系统栈）
+   06 §2：正文 16px/1.75 不变；标题字重统一 700
    --------------------------------------------------------------------------- */
 :root {
   --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
@@ -53,32 +65,36 @@
   --font-mono: ui-monospace, SFMono-Regular, "Cascadia Code", Consolas,
     "Liberation Mono", monospace;
 
-  /* 正文 16px / 行高 1.75 */
+  /* 正文（06 §2 唯一保留的排版偏离：行高 1.75） */
   --font-size-body: 1rem;          /* 16px */
   --line-height-body: 1.75;
   --font-weight-body: 400;
-  --font-weight-heading: 600;
+  --font-weight-heading: 700;      /* 06 §2：标题字重 700（原 600） */
 
-  /* 展示级字号（仅用于 404 大数字） */
-
-  --fs-display: 2.75rem;           /* 44px */
-
-  --font-size-h1: 1.875rem;        /* 30px */
-  --line-height-h1: 1.3;
-  --font-size-h2: 1.4rem;          /* 22.4px */
+  /* 行高 */
+  --line-height-tight: 1.3;        /* h1 / 页标题 / 卡片标题 */
   --line-height-h2: 1.45;
-  --font-size-h3: 1.15rem;         /* 18.4px */
   --line-height-h3: 1.5;
+  --line-height-compact: 1.6;      /* 摘要 / 元信息 / 空态 */
 
-  /* 辅助字号（元信息行、标签、页脚） */
-  --font-size-sm: 0.875rem;        /* 14px */
-  --font-size-xs: 0.8125rem;       /* 13px */
+  /* 字号阶 */
+  --font-size-h1: 2.125rem;        /* 34px · 首页问候 h1 */
+  --font-size-post-title: 2.25rem; /* 36px · 文章页标题（新增，供 PostLayout 接线） */
+  --font-size-page-title: 2.5rem;  /* 40px · 列表/归档/标签页 h1（新增，供列表页接线） */
+  --font-size-h2: 1.5rem;          /* 24px · 正文 h2 / 卡片标题 */
+  --font-size-h3: 1.1875rem;       /* 19px · 正文 h3 */
+  --font-size-brand: 1.5rem;       /* 24px · 站名（06 §2：logo/站名 24px/700） */
+  --font-size-sm: 0.875rem;        /* 14px · 摘要 / 页脚 / 空态 */
+  --font-size-xs: 0.8125rem;       /* 13px · 元信息 / 标签 / 图注 */
+
+  --line-height-h1: var(--line-height-tight);
 }
 
 /* ---------------------------------------------------------------------------
-   ② 语义层 · 间距（4px 基准）/ 圆角 / 阴影 / 布局宽度
+   ③ 语义层 · 间距 / 圆角 / 阴影 / 布局（06 §3）
    --------------------------------------------------------------------------- */
 :root {
+  /* 4px 基准间距阶（沿用 v1.0，供既有组件继续引用） */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -90,90 +106,123 @@
   --space-9: 36px;
   --space-10: 40px;
   --space-11: 44px;
+  --space-12: 48px;                /* 首页 profile 区下留白 */
 
-  --card-padding: var(--space-5) var(--space-6);   /* 20px 24px */
+  /* 06 §3 的间距基准：卡片 padding / 卡间距 / 页面左右留白统一用它 */
+  --gap: 24px;
+  --card-padding: var(--gap);
 
-  --radius-sm: 4px;                /* 控件 */
-  --radius-md: 6px;                /* 卡片 */
-  --radius-full: 999px;            /* 标签 */
+  /* 圆角：全站 8px（06 §3，v1.0 的「≤6px」作废）；标签仍用胶囊 */
+  --radius: 8px;
+  --radius-sm: var(--radius);
+  --radius-md: var(--radius);
+  --radius-full: 999px;
 
-  --header-height: 64px;           /* 与 base.css 页头 min-height 对齐 */
+  /* 阴影：卡片无阴影（06 §3）。变量名保留，值置 none */
+  --shadow-card: none;
 
-  --shadow-card: 0 1px 2px rgb(var(--palette-shadow-rgb) / 0.05);
+  /* 布局宽度 */
+  --container-width: 1024px;       /* 导航列 / 页脚列 */
+  --column-width: 768px;           /* 内容列（.content 内层） */
+  --content-width: 720px;          /* 正文列（.prose，硬约束不变） */
+  --header-height: 60px;
+  --footer-height: 60px;
 
-  --content-width: 720px;          /* 正文列宽 */
-  --container-width: 1080px;       /* 页面容器 */
+  /* 动效：卡片按压（06 §3：transition transform .1s + :active scale(.96)） */
+  --dur-press: 100ms;
 }
 
 /* ---------------------------------------------------------------------------
-   ② 语义层 · 颜色（亮色，默认）
-   color-scheme 同时声明，让表单控件/滚动条跟随主题
+   ④ 语义层 · 颜色（亮色，默认主题）
+   color-scheme 让表单控件 / 滚动条跟随主题
    --------------------------------------------------------------------------- */
 :root {
   color-scheme: light;
 
-  --color-bg:               var(--palette-neutral-25);
-  --color-surface:          var(--palette-white);
-  --color-surface-2:        var(--palette-neutral-100);
-  --color-surface-3:        var(--palette-neutral-150);   /* 第三层表面：hover / pressed / mark 底 */
-  --color-text:             var(--palette-neutral-900);
-  --color-text-secondary:   var(--palette-neutral-500);
-  --color-border:           var(--palette-neutral-200);
-  --color-code-bg:           var(--palette-neutral-50);     /* 代码块底 */
-  --color-accent:           var(--palette-indigo-600);
-  --color-accent-hover:      var(--palette-indigo-700);
-  --color-accent-text:      var(--palette-indigo-600);
-  --color-focus:      var(--palette-indigo-600);        /* 焦点环 */
+  --color-bg:               var(--palette-white);       /* 文章页底 */
+  --color-bg-list:          var(--palette-gray-50);     /* 列表类页面底（body.list） */
+  --color-surface:          var(--palette-white);       /* 卡片底 */
+  --color-surface-2:        var(--palette-gray-50);     /* 标签底 / hover 底 / 行内代码底 */
+  --color-text:             var(--palette-gray-950);
+  --color-text-secondary:   var(--palette-gray-500);
+  --color-text-tertiary:    var(--palette-gray-300);    /* 分隔符 / 禁用态；1.45:1，不可作正文色 */
+  --color-border:           var(--palette-gray-100);
+  --color-link-hover:       var(--palette-gray-400);    /* 06 §1.2 的链接 hover；G-15 后链接 hover 走强调色，此 token 留作后续用途 */
+  /* 代码块底：G-04 保留双主题（亮色模式必须浅底），故不采用 06 §1.2 的 #1C1D21。
+     取值受限：astro.config.mjs 的 CODE_BG.light=#F7F8FA 决定 token 颜色亮度，
+     实测 #F5F5F5 只有 4.40:1（不达标），#FFFFFF 为 4.80:1 —— 故选调色板内的白。 */
+  --color-code-bg:          var(--palette-white);
 
-  /* 派生：强调色**之上**的文字色（按钮用）。规范未给定，由各级强调色反推，保证 AA */
-  --color-on-accent:        var(--palette-white);
+  /* 强调色（G-15：只用于链接 / 当前导航项 / 按钮 / 焦点环） */
+  --color-accent:           var(--palette-indigo-600);
+  --color-accent-hover:     var(--palette-indigo-700);
+  --color-accent-text:      var(--palette-indigo-600);
+  --color-on-accent:        var(--palette-white);       /* 强调色块上的文字（6.37:1） */
+  --color-focus:            var(--palette-indigo-600);
 }
 
 /* ---------------------------------------------------------------------------
-   ② 语义层 · 颜色（暗色）
-   选择器统一用 :root.dark —— 由 <head> 首帧内联脚本在首次绘制前加上，实现零闪烁。
-   下方 @media 块是**禁用 JS 时的回退**，值必须与本节保持同步。
+   ⑤ 语义层 · 颜色（暗色）
+   选择器统一用 :root.dark —— 由 <head> 首帧内联脚本在首次绘制前加上（零闪烁）。
+   暗色不是反色：降饱和、降对比，正文不用纯白。
    --------------------------------------------------------------------------- */
 :root.dark {
   color-scheme: dark;
 
   --color-bg:               var(--palette-ink-950);
+  --color-bg-list:          var(--palette-ink-950);     /* 暗色下列表页与文章页同色（06 §1.3） */
   --color-surface:          var(--palette-ink-900);
   --color-surface-2:        var(--palette-ink-800);
-  --color-surface-3:        var(--palette-ink-700);
-  --color-text:             var(--palette-ink-200);   /* 永不用纯白 */
-  --color-text-secondary:   var(--palette-ink-400);
-  --color-border:           var(--palette-ink-700);
-  --color-code-bg:           var(--palette-ink-800);
+  --color-text:             var(--palette-ink-100);
+  /* 06 §1.3 的 #9B9C9D 在 06 §1.3 的 surface-2(#37383E) 上只有 4.25:1，
+     tag / badge / term-pill 的 13px 文字不达 AA —— 改用调色板内的 #AAAAAA，得 5.32:1；
+     其余组合同步提升（/bg 6.89、/surface 5.59）。 */
+  --color-text-secondary:   var(--palette-gray-400);
+  --color-text-tertiary:    var(--palette-ink-700);
+  --color-border:           var(--palette-gray-800);
+  --color-link-hover:       var(--palette-gray-400);    /* 06 §1.3：亮暗同值 */
+  /* 代码块底：06 §1.3 的 #2E2E33 只有 3.87:1（不达标），改用调色板内的 #1C1D21，得 4.82:1 */
+  --color-code-bg:          var(--palette-code-block);
+
   --color-accent:           var(--palette-indigo-300);
-  --color-accent-hover:      var(--palette-indigo-200);
+  --color-accent-hover:     var(--palette-indigo-200);
   --color-accent-text:      var(--palette-indigo-300);
-  --color-focus:      var(--palette-indigo-300);
-
-  --color-on-accent:        var(--palette-ink-950);
-
-  /* 暗色下阴影几乎不可见，按规范改为 1px 描边式 ring */
-  --shadow-card: 0 0 0 1px var(--color-border);
+  --color-on-accent:        var(--palette-ink-950);     /* 6.63:1 */
+  --color-focus:            var(--palette-indigo-300);
 }
 
-/* 无 JS 回退：未显式选择亮色时跟随系统 */
+/* ---------------------------------------------------------------------------
+   ⑥ 无 JS 回退：未显式选择亮色时跟随系统
+   值必须与 ⑤ 保持一致；媒体查询放在文件末尾，避免影响构建期解析
+   --------------------------------------------------------------------------- */
 @media (prefers-color-scheme: dark) {
   :root:not(.light) {
     color-scheme: dark;
 
     --color-bg:               var(--palette-ink-950);
+    --color-bg-list:          var(--palette-ink-950);
     --color-surface:          var(--palette-ink-900);
     --color-surface-2:        var(--palette-ink-800);
-    --color-surface-3:        var(--palette-ink-700);
-    --color-text:             var(--palette-ink-200);
-    --color-text-secondary:   var(--palette-ink-400);
-    --color-border:           var(--palette-ink-700);
-    --color-code-bg:           var(--palette-ink-800);
+    --color-text:             var(--palette-ink-100);
+    --color-text-secondary:   var(--palette-gray-400);
+    --color-text-tertiary:    var(--palette-ink-700);
+    --color-border:           var(--palette-gray-800);
+    --color-link-hover:       var(--palette-gray-400);
+    --color-code-bg:          var(--palette-code-block);
     --color-accent:           var(--palette-indigo-300);
-    --color-accent-hover:      var(--palette-indigo-200);
+    --color-accent-hover:     var(--palette-indigo-200);
     --color-accent-text:      var(--palette-indigo-300);
-    --color-focus:      var(--palette-indigo-300);
     --color-on-accent:        var(--palette-ink-950);
-    --shadow-card: 0 0 0 1px var(--color-border);
+    --color-focus:            var(--palette-indigo-300);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   ⑦ 移动端收窄（断点 768px，与 06 §3 的 --gap 断点一致）
+   --------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  :root {
+    --gap: 14px;          /* 卡片 padding / 卡间距 / 页面左右留白同步收窄 */
+    --header-height: 56px;
   }
 }

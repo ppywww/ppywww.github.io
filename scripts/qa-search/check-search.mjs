@@ -15,7 +15,7 @@ import fs from 'node:fs';
 import process from 'node:process';
 import { serveDist } from './lib/serve-dist.mjs';
 import { launchChrome, waitFor, DEFAULT_CHROME } from './lib/chrome-cdp.mjs';
-import { createReporter } from './lib/report.mjs';
+import { createReporter, finish } from './lib/report.mjs';
 
 const PROJECT_ROOT = new URL('../../', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1');
 const DIST_DIR = PROJECT_ROOT + 'dist';
@@ -291,7 +291,9 @@ export async function run(opts = {}) {
       'Q-2',
       '搜索结果以文章为主（非文章页占比 < 50%）',
       allUrls.length > 0 && nonArticle.length / allUrls.length < 0.5,
-      nonArticle.length + ' / ' + allUrls.length + ' 条非文章页（根因：全站未标 data-pagefind-body，Pagefind 索引整页，标签/分类/首页/归档页文字一并进索引；修复点在 PostLayout.astro 或列表页，超出 task-8 写入范围）',
+      nonArticle.length === 0
+        ? '0 / ' + allUrls.length + ' 条非文章页 —— data-pagefind-body 已加在 <article class="post"> 上（含标题/标签/正文），Pagefind 只索引正文页，列表/标签/分类/首页不再挤占结果'
+        : nonArticle.length + ' / ' + allUrls.length + ' 条非文章页：如果全站未标 data-pagefind-body，Pagefind 会索引整页，标签/分类/首页/归档页文字会一并进索引（修复点：PostLayout 的正文容器加该属性）',
     );
 
     await page0.close();
@@ -312,5 +314,6 @@ if (invokedDirectly) {
   const opts = parseArgs(process.argv.slice(2));
   const out = await run(opts);
   if (opts.json) console.log(JSON.stringify({ summary: out.summary, results: out.results }, null, 2));
-  process.exit(out.report.exitCode());
+  // 用 finish 而非 process.exit：见 lib/report.mjs 关于 Windows libuv 断言的说明
+  await finish(out.report.exitCode());
 }

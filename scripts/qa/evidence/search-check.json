@@ -1,6 +1,6 @@
 {
   "url": "https://ppywww.github.io/search/",
-  "generatedAt": "2026-09-30T09:28:52.932Z",
+  "generatedAt": "2026-09-30T10:16:10.554Z",
   "steps": {
     "initial": {
       "inputValue": "",
@@ -27,7 +27,7 @@
       "activeHref": null,
       "activeText": "",
       "scriptSrcs": [
-        "/_astro/search.astro_astro_type_script_index_0_lang.D3_SV1GQ.js"
+        "/_astro/search.astro_astro_type_script_index_0_lang.zwndWbBl.js"
       ],
       "bodyHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 搜索 站内搜索 输入关键词，检索全站文章的标题与正文。 搜索关键词 输入关键词开始搜索 可以搜标题、正文与标签，例如「性能优化」「Astro」。 © 2026 ppy · ppy-Blog GitHub RSS"
     },
@@ -36,35 +36,29 @@
     },
     "query1": {
       "query": "读书笔记",
-      "firstResultAtMs": 1057,
+      "firstResultAtMs": 2713,
       "sampleAt100ms": {
-        "dt": 108,
+        "dt": 115,
         "count": 0,
         "status": ""
       },
       "sampleAt180ms": {
-        "dt": 186,
+        "dt": 194,
         "count": 0,
         "status": ""
       },
       "final": {
         "inputValue": "读书笔记",
-        "resultsCount": 11,
+        "resultsCount": 2,
         "resultTitles": [
-          "读书笔记模板：把读完的书变成能回看的东西-Blog 读书笔记模板：把读完的书变成能回看的东西. 2026-09-25·2 分钟·读书· 读书",
-          "读书笔记. 读书笔记. 共 1 篇文章。 读书笔记模板：把读完的书变成能回看的东西. 一份可直接复用的读书笔记",
-          "读书分类. 读书. 共 1 篇文章。 读书笔记模板：把读完的书变成能回看的东西. 一份可直接复用的读书笔记",
-          "模板. 共 1 篇文章。 读书笔记模板：把读完的书变成能回看的东西. 一份可直接复用的读书笔记模板：从",
-          "写作. 写作. 随笔. 读书笔记模板：把读完的书变成能回看的东西. 一份可直接复用的读书笔记模板：从"
+          "读书笔记模板：把读完的书变成能回看的东西读书笔记模板：把读完的书变成能回看的东西. 2026-09-25·2 分钟·读书· 读书笔记. 模板",
+          "我为什么开始写博客：观察与想法，不必有结论，但要诚实； 读书：读完之后的笔记，重点是我怎么想，而不是书里2026-09-28"
         ],
         "resultHrefs": [
           "/posts/2026-09-25-reading-note-template/",
-          "/tags/读书笔记/",
-          "/categories/读书/",
-          "/tags/模板/",
-          "/tags/写作/"
+          "/posts/2026-09-28-why-i-blog/"
         ],
-        "statusText": "找到 11 条结果",
+        "statusText": "找到 2 条结果",
         "statusRole": "status/polite",
         "emptyTitle": "输入关键词开始搜索",
         "emptyVisible": {
@@ -84,9 +78,9 @@
         "activeHref": null,
         "activeText": "",
         "scriptSrcs": [
-          "/_astro/search.astro_astro_type_script_index_0_lang.D3_SV1GQ.js"
+          "/_astro/search.astro_astro_type_script_index_0_lang.zwndWbBl.js"
         ],
-        "bodyHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 搜索 站内搜索 输入关键词，检索全站文章的标题与正文。 搜索关键词 找到 11 条结果 读书笔记模板：把读完的书变成能回看的东西 -Blog 读书笔记模板：把读完的书变成能回看的东西. 2026-09-25·2 分钟·读书· 读书笔记 2026-09-25 读书"
+        "bodyHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 搜索 站内搜索 输入关键词，检索全站文章的标题与正文。 搜索关键词 找到 2 条结果 读书笔记模板：把读完的书变成能回看的东西 读书笔记模板：把读完的书变成能回看的东西. 2026-09-25·2 分钟·读书· 读书笔记. 模板 2026-09-25 我为什么开"
       }
     },
     "afterEscape": {
@@ -114,7 +108,7 @@
       "activeHref": null,
       "activeText": "",
       "scriptSrcs": [
-        "/_astro/search.astro_astro_type_script_index_0_lang.D3_SV1GQ.js"
+        "/_astro/search.astro_astro_type_script_index_0_lang.zwndWbBl.js"
       ],
       "bodyHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 搜索 站内搜索 输入关键词，检索全站文章的标题与正文。 搜索关键词 输入关键词开始搜索 可以搜标题、正文与标签，例如「性能优化」「Astro」。 © 2026 ppy · ppy-Blog GitHub RSS"
     },
@@ -122,7 +116,7 @@
       "before": {
         "activeTag": "input",
         "activeId": "search-input",
-        "count": 19
+        "count": 3
       },
       "afterDown": {
         "activeTag": "a",
@@ -131,7 +125,7 @@
       },
       "afterDown2": {
         "activeTag": "a",
-        "activeHref": "/categories/读书/"
+        "activeHref": "/posts/2026-09-28-why-i-blog/"
       },
       "afterUp": {
         "activeTag": "a",
@@ -164,20 +158,18 @@
       "activeHref": null,
       "activeText": "",
       "scriptSrcs": [
-        "/_astro/search.astro_astro_type_script_index_0_lang.D3_SV1GQ.js"
+        "/_astro/search.astro_astro_type_script_index_0_lang.zwndWbBl.js"
       ],
       "bodyHead": "跳到正文 ppy-Blog 首页 文章 归档 作品 关于 搜索 站内搜索 输入关键词，检索全站文章的标题与正文。 搜索关键词 找到 0 条结果 没有找到匹配的内容 试试更短的关键词，或者换一个说法。 浏览全部文章 按标签找 © 2026 ppy · ppy-Blog GitHub RSS"
     },
     "singleCharQuery": {
       "query": "的",
-      "count": 19,
-      "status": "找到 19 条结果",
+      "count": 3,
+      "status": "找到 3 条结果",
       "titles": [
-        "读书笔记模板：把读完的书变成能回看的东西读书笔记模板：把读完的书变成能回看的东西. 2026-09-25·2 分钟·读书· 读书笔记. 模板",
-        "读书1 篇文章。 读书笔记模板：把读完的书变成能回看的东西. 一份可直接复用的读书笔记模板：从书籍信息",
-        "模板1 篇文章。 读书笔记模板：把读完的书变成能回看的东西. 一份可直接复用的读书笔记模板：从书籍信息",
-        "读书笔记1 篇文章。 读书笔记模板：把读完的书变成能回看的东西. 一份可直接复用的读书笔记模板：从书籍信息",
-        "写作. 随笔. 读书笔记模板：把读完的书变成能回看的东西. 一份可直接复用的读书笔记模板：从书籍信息"
+        "读书笔记模板：把读完的书变成能回看的东西：把读完的书变成能回看的东西. 2026-09-25·2 分钟·读书· 读书笔记. 模板. 写作.2",
+        "我为什么开始写博客通用的「为什么开始写博客」，不含任何具体的个人经历，可以直接当作模板改写成你自己的版本。 一个朴素2026-09-28",
+        "从 0 搭建这个博客：选型、目录与实测数据/ wordsPerMinute)); } 构建产物的实测体积. 骨架跑通后，直接量 dist/ "
       ]
     },
     "notFoundIndexed": {

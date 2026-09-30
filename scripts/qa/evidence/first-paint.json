@@ -1,12 +1,12 @@
 {
   "url": "https://ppywww.github.io/",
-  "generatedAt": "2026-09-30T09:25:40.358Z",
+  "generatedAt": "2026-09-30T10:12:58.105Z",
   "structural": {
     "firstInlineScriptAt": 273,
     "firstScriptSrcAt": -1,
-    "firstExternalCssAt": 2529,
+    "firstExternalCssAt": 3144,
     "firstStyleBlockAt": -1,
-    "bodyAt": 2594,
+    "bodyAt": 3209,
     "themeScriptBeforeFirstCss": true,
     "themeScriptBeforeBody": true,
     "inlineStyleBeforeBody": false,
@@ -16,7 +16,7 @@
       "darkClass": true
     },
     "firstStyleBlockHead": "",
-    "headBytes": 2594
+    "headBytes": 3209
   },
   "cases": [
     {
@@ -25,18 +25,7 @@
       "seededTheme": null,
       "samples": {
         "dcl": {
-          "t": 146,
-          "readyState": "interactive",
-          "htmlClass": "dark",
-          "dataTheme": "dark",
-          "htmlBg": "rgba(0, 0, 0, 0)",
-          "bodyExists": true,
-          "bodyBg": "rgb(15, 17, 21)",
-          "stored": null,
-          "styleSheetCount": 1
-        },
-        "firstRaf": {
-          "t": 164,
+          "t": 51,
           "readyState": "interactive",
           "htmlClass": "dark",
           "dataTheme": "dark",
@@ -47,7 +36,18 @@
           "styleSheetCount": 1
         },
         "load": {
-          "t": 253,
+          "t": 65,
+          "readyState": "complete",
+          "htmlClass": "dark",
+          "dataTheme": "dark",
+          "htmlBg": "rgba(0, 0, 0, 0)",
+          "bodyExists": true,
+          "bodyBg": "rgb(15, 17, 21)",
+          "stored": null,
+          "styleSheetCount": 1
+        },
+        "firstRaf": {
+          "t": 155,
           "readyState": "complete",
           "htmlClass": "dark",
           "dataTheme": "dark",
@@ -58,7 +58,7 @@
           "styleSheetCount": 1
         },
         "secondRaf": {
-          "t": 255,
+          "t": 159,
           "readyState": "complete",
           "htmlClass": "dark",
           "dataTheme": "dark",
@@ -76,7 +76,18 @@
       "seededTheme": null,
       "samples": {
         "dcl": {
-          "t": 46,
+          "t": 116,
+          "readyState": "interactive",
+          "htmlClass": "light",
+          "dataTheme": "light",
+          "htmlBg": "rgba(0, 0, 0, 0)",
+          "bodyExists": true,
+          "bodyBg": "rgb(252, 252, 253)",
+          "stored": null,
+          "styleSheetCount": 1
+        },
+        "firstRaf": {
+          "t": 131,
           "readyState": "interactive",
           "htmlClass": "light",
           "dataTheme": "light",
@@ -87,18 +98,7 @@
           "styleSheetCount": 1
         },
         "load": {
-          "t": 63,
-          "readyState": "complete",
-          "htmlClass": "light",
-          "dataTheme": "light",
-          "htmlBg": "rgba(0, 0, 0, 0)",
-          "bodyExists": true,
-          "bodyBg": "rgb(252, 252, 253)",
-          "stored": null,
-          "styleSheetCount": 1
-        },
-        "firstRaf": {
-          "t": 148,
+          "t": 210,
           "readyState": "complete",
           "htmlClass": "light",
           "dataTheme": "light",
@@ -109,7 +109,7 @@
           "styleSheetCount": 1
         },
         "secondRaf": {
-          "t": 152,
+          "t": 210,
           "readyState": "complete",
           "htmlClass": "light",
           "dataTheme": "light",
@@ -127,7 +127,18 @@
       "seededTheme": "dark",
       "samples": {
         "dcl": {
-          "t": 46,
+          "t": 70,
+          "readyState": "interactive",
+          "htmlClass": "dark",
+          "dataTheme": "dark",
+          "htmlBg": "rgba(0, 0, 0, 0)",
+          "bodyExists": true,
+          "bodyBg": "rgb(15, 17, 21)",
+          "stored": "dark",
+          "styleSheetCount": 1
+        },
+        "firstRaf": {
+          "t": 86,
           "readyState": "interactive",
           "htmlClass": "dark",
           "dataTheme": "dark",
@@ -138,18 +149,7 @@
           "styleSheetCount": 1
         },
         "load": {
-          "t": 62,
-          "readyState": "complete",
-          "htmlClass": "dark",
-          "dataTheme": "dark",
-          "htmlBg": "rgba(0, 0, 0, 0)",
-          "bodyExists": true,
-          "bodyBg": "rgb(15, 17, 21)",
-          "stored": "dark",
-          "styleSheetCount": 1
-        },
-        "firstRaf": {
-          "t": 150,
+          "t": 183,
           "readyState": "complete",
           "htmlClass": "dark",
           "dataTheme": "dark",
@@ -160,7 +160,7 @@
           "styleSheetCount": 1
         },
         "secondRaf": {
-          "t": 155,
+          "t": 184,
           "readyState": "complete",
           "htmlClass": "dark",
           "dataTheme": "dark",

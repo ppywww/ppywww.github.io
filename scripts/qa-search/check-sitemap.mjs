@@ -10,10 +10,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
-import { createReporter } from './lib/report.mjs';
+import { createReporter, finish } from './lib/report.mjs';
 import { readSiteConsts, listRoutes, listDistFiles, routeToFile } from './lib/dist-info.mjs';
 import { inspectXml } from './lib/xml-check.mjs';
 import { serveDist } from './lib/serve-dist.mjs';
+import { safeFetchText } from './lib/fetch-safe.mjs';
 import { DEFAULT_CHROME } from './lib/chrome-cdp.mjs';
 
 const PROJECT_ROOT = new URL('../../', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1');
@@ -49,9 +50,14 @@ export async function run(opts = {}) {
 
   let xml = null;
   if (opts.base) {
-    const res = await fetch(origin + '/sitemap.xml');
-    xml = await res.text();
-    rep.check('M-1', '线上 /sitemap.xml 返回 200', res.status === 200, 'HTTP ' + res.status + ' · content-type=' + (res.headers.get('content-type') || ''));
+    const got = await safeFetchText(origin + '/sitemap.xml');
+    if (!got.ok) {
+      rep.fail('M-1', '线上 /sitemap.xml 可访问', 'HTTP ' + got.status + (got.error ? ' · ' + got.error : ''));
+      if (!opts.json) rep.print();
+      return { report: rep, summary: rep.summary(), results: rep.results };
+    }
+    xml = got.text;
+    rep.pass('M-1', '线上 /sitemap.xml 返回 200', origin + '/sitemap.xml');
   } else {
     const file = path.join(DIST_DIR, 'sitemap.xml');
     if (!fs.existsSync(file)) {
@@ -165,10 +171,10 @@ export async function run(opts = {}) {
   let robotsWhere = '';
 
   if (opts.base) {
-    const res = await fetch(origin + '/robots.txt');
-    robotsStatus = res.status;
-    robotsText = res.status === 200 ? await res.text() : null;
-    robotsWhere = origin + '/robots.txt';
+    const got = await safeFetchText(origin + '/robots.txt');
+    robotsStatus = got.ok ? got.status : got.status;
+    robotsText = got.ok ? got.text : null;
+    robotsWhere = origin + '/robots.txt' + (got.error ? '（' + got.error + '）' : '');
   } else {
     localServer = await serveDist({ distDir: DIST_DIR, port: 0 });
     const res = await fetch(localServer.origin + '/robots.txt');
@@ -284,5 +290,6 @@ if (invokedDirectly) {
   const opts = parseArgs(process.argv.slice(2));
   const out = await run(opts);
   if (opts.json) console.log(JSON.stringify({ summary: out.summary, results: out.results }, null, 2));
-  process.exit(out.report.exitCode());
+  // 用 finish 而非 process.exit：见 lib/report.mjs 关于 Windows libuv 断言的说明
+  await finish(out.report.exitCode());
 }

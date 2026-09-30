@@ -13,6 +13,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
+import { finish } from './lib/report.mjs';
 import { run as runSearch, parseArgs as parseSearchArgs } from './check-search.mjs';
 import { run as runRss } from './check-rss.mjs';
 import { run as runSitemap } from './check-sitemap.mjs';
@@ -84,9 +85,27 @@ async function remoteFingerprint() {
 const fingerprintBefore = opts.base ? await remoteFingerprint() : distFingerprint();
 if (fingerprintBefore) console.log('产物指纹（开始）：' + JSON.stringify(fingerprintBefore));
 
-const search = await runSearch(opts);
-const rss = await runRss(opts);
-const sitemap = await runSitemap(opts);
+/**
+ * 套件异常隔离：任一子套件抛异常时，也要照常输出汇总与「产物指纹」结论。
+ * 否则崩掉的进程既没有汇总、也跳过了守卫，退出码就失去意义（这正是 18:0x 那次
+ * check-rss 用 --base 指向坏端口时发生的事）。
+ */
+async function guardSuite(title, fn) {
+  try {
+    return await fn();
+  } catch (err) {
+    const detail = String((err && err.stack) || err);
+    console.log('\n⚠️ 套件「' + title + '」执行异常，已记为不通过（不吞掉、不崩掉）：' + detail.split('\n')[0]);
+    return {
+      summary: { title: title + '（异常中止）', pass: 0, fail: 1, unverified: 0, info: 0, elapsedMs: 0 },
+      results: [{ status: 'FAIL', id: 'X-0', name: '套件执行异常（详见 stderr/堆栈）', detail: detail }],
+    };
+  }
+}
+
+const search = await guardSuite('站内搜索验收', () => runSearch(opts));
+const rss = await guardSuite('RSS 验收', () => runRss(opts));
+const sitemap = await guardSuite('sitemap 验收', () => runSitemap(opts));
 
 const all = [search, rss, sitemap];
 const totals = all.reduce(
@@ -134,4 +153,5 @@ if (opts.json) {
     ),
   );
 }
-process.exit(totals.fail > 0 || invalidated ? 1 : 0);
+// 用 finish 而非 process.exit：见 lib/report.mjs 关于 Windows libuv 断言的说明
+await finish(totals.fail > 0 || invalidated ? 1 : 0);

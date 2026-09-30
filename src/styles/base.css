@@ -1,7 +1,15 @@
 /* =============================================================================
-   base.css · 全局基础样式
-   规则：本文件**只引用语义层 token**（--color-* / --space-* / --font-*），
-        绝不出现裸色值，也绝不引用 --palette-*。
+   base.css · 全局基础样式（v1.1 换肤）
+   -----------------------------------------------------------------------------
+   依据：docs/06-visual-spec.md §2 字号 / §3 布局与组件
+         docs/00-decision-log.md G-05（保留强调色）· G-15（强调色限定四处）
+   规则：本文件**只引用语义层 token**（--color-* / --space-* / --gap / --radius-* /
+         --font-* / --line-height-*），绝不出现裸色值，也绝不引用 --palette-*。
+
+   强调色（靛蓝）在本文件的出现处（G-15 允许的四处）：
+     ① 正文链接（a）  ② 当前导航项（.nav a[aria-current]）
+     ③ 按钮（.btn--accent）  ④ 焦点环（:focus-visible）
+   其余全部灰阶。
    ============================================================================= */
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -30,13 +38,17 @@ body {
   text-autospace: normal;
 }
 
-/* ---------- 标题 ---------- */
+/* 列表类页面底色（首页 / 文章列表 / 归档 / 标签 / 分类）——06 §1.2 的 body.list。
+   body 背景会传播到画布，故整屏底色一并生效。 */
+body.list { background: var(--color-bg-list); }
+
+/* ---------- 标题（06 §2：字重统一 700）---------- */
 h1, h2, h3, h4 {
   font-weight: var(--font-weight-heading);
   text-wrap: balance;
 }
-h1 { font-size: var(--font-size-h1); line-height: var(--line-height-h1); letter-spacing: -0.015em; }
-h2 { font-size: var(--font-size-h2); line-height: var(--line-height-h2); letter-spacing: -0.01em; }
+h1 { font-size: var(--font-size-h1); line-height: var(--line-height-h1); }
+h2 { font-size: var(--font-size-h2); line-height: var(--line-height-h2); }
 h3 { font-size: var(--font-size-h3); line-height: var(--line-height-h3); }
 
 img, svg, video { display: block; max-width: 100%; height: auto; }
@@ -44,33 +56,52 @@ ul, ol { padding-inline-start: 1.25em; }
 
 code, kbd, pre, samp { font-family: var(--font-mono); font-size: 0.9em; }
 
-/* ---------- 链接（靛蓝出现处 ①）---------- */
+/* ---------- 链接（强调色出现处 ①）----------
+   G-15 刻意偏离 06 §1.4：06 要求「--color-text + hover #AAAAAA」，
+   这里改为「强调色 + 常驻 1px 下划线」——颜色与下划线双通道，无障碍更优。 */
 a {
   color: var(--color-accent-text);
-  text-decoration: none;
-  text-underline-offset: 0.2em;
+  text-decoration: underline;
   text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
 }
-a:hover { text-decoration: underline; }
+@media (hover: hover) and (pointer: fine) {
+  a:hover { text-decoration-thickness: 2px; }
+}
+/* 以下元素不参与常驻下划线（task-18 逐条点名；它们是导航/控件而非正文链接） */
+.brand,
+.nav a,
+.post-card__title a,
+.tag,
+.btn,
+.skip-link { text-decoration: none; }
 
-/* ---------- 焦点可见（无障碍硬要求）---------- */
+/* ---------- 焦点可见（强调色出现处 ④，无障碍硬要求）---------- */
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-focus);
   outline-offset: 2px;
   border-radius: var(--radius-sm);
 }
 
-/* ---------- 布局 ---------- */
+/* ---------- 布局（06 §3）---------- */
+/* 导航列 / 页脚列：内容 1024px + 两侧 --gap */
 .container {
   width: 100%;
-  max-width: var(--container-width);
+  max-width: calc(var(--container-width) + var(--gap) * 2);
   margin-inline: auto;
-  padding-inline: var(--space-6);
+  padding-inline: var(--gap);
+}
+/* 内容列：内容 768px + 两侧 --gap；内层正文由 .prose 锁 720px */
+.content {
+  width: 100%;
+  max-width: calc(var(--column-width) + var(--gap) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gap);
 }
 .main { flex: 1 0 auto; padding-block: var(--space-9) var(--space-11); }
 .prose { max-width: var(--content-width); }
 
-/* ---------- 页头 ---------- */
+/* ---------- 页头（06 §3 + §5 第 2 条：保留 sticky 与 1px 底线）---------- */
 .site-header {
   position: sticky;
   top: 0;
@@ -78,18 +109,21 @@ a:hover { text-decoration: underline; }
   background: var(--color-bg);
   border-bottom: 1px solid var(--color-border);
 }
+/* 列表页底色同步：否则吸顶页头下会露出一条异色带。
+   依赖 BaseLayout 给 body 加 .list（B 落地后才真正触发 → 待复验）。 */
+body.list .site-header { background: var(--color-bg-list); }
+
 .site-header__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-5);
-  min-height: 64px;
+  gap: var(--gap);
+  min-height: var(--header-height);
   flex-wrap: wrap;
 }
 .brand {
-  font-size: 1.0625rem;
+  font-size: var(--font-size-brand);
   font-weight: var(--font-weight-heading);
-  letter-spacing: -0.01em;
   color: var(--color-text);
 }
 .brand:hover { text-decoration: none; }
@@ -99,13 +133,20 @@ a:hover { text-decoration: underline; }
 .nav a {
   display: inline-block;
   padding: var(--space-2) var(--space-3);
-  border-radius: var(--radius-sm);
-  font-size: 0.9375rem;
+  /* 透明下划线占位：当前项切换时不产生 2px 抖动 */
+  border-bottom: 2px solid transparent;
+  font-size: var(--font-size-body);   /* 06 §2：导航项 16px（原 15px） */
   color: var(--color-text-secondary);
 }
-.nav a:hover { color: var(--color-text); background: var(--color-surface-2); text-decoration: none; }
-/* 当前导航项（靛蓝出现处 ②） */
-.nav a[aria-current="page"] { color: var(--color-accent-text); font-weight: var(--font-weight-heading); }
+@media (hover: hover) and (pointer: fine) {
+  .nav a:hover { color: var(--color-text); background: var(--color-surface-2); text-decoration: none; }
+}
+/* 当前导航项（强调色出现处 ②）：颜色 + 字重 + 2px 下划线三通道 */
+.nav a[aria-current="page"] {
+  color: var(--color-accent-text);
+  font-weight: 500;
+  border-bottom-color: currentColor;
+}
 
 /* ---------- 按钮 ---------- */
 .btn {
@@ -124,13 +165,13 @@ a:hover { text-decoration: underline; }
   cursor: pointer;
 }
 .btn:hover { background: var(--color-surface-2); }
-/* 主按钮（靛蓝出现处 ③） */
+/* 主按钮（强调色出现处 ③） */
 .btn--accent {
   color: var(--color-on-accent);
   background: var(--color-accent);
   border-color: var(--color-accent);
 }
-.btn--accent:hover { background: var(--color-accent); filter: brightness(1.06); }
+.btn--accent:hover { background: var(--color-accent-hover); border-color: var(--color-accent-hover); }
 
 .theme-toggle { padding: var(--space-2); width: 36px; height: 36px; }
 .theme-toggle svg { width: 18px; height: 18px; }
@@ -142,18 +183,21 @@ a:hover { text-decoration: underline; }
   :root:not(.light) .theme-toggle__moon { display: none; }
 }
 
-/* ---------- 卡片 ---------- */
+/* ---------- 卡片（06 §3：白底 + 1px 边框 + 无阴影 + 按压缩放）---------- */
 .card {
+  position: relative;                 /* 整卡可点：overlay 链接铺满（C 落地） */
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius);
   padding: var(--card-padding);
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-card);     /* --shadow-card = none */
+  transition: transform var(--dur-press) ease;
 }
-.card-list { list-style: none; padding: 0; display: grid; gap: var(--space-3); }
+.card:active { transform: scale(0.96); }
 
-/* 文章/内容列表：与 .card-list 同节奏（设计系统 §6.3：卡片之间 --space-3 12px） */
-.post-list { list-style: none; padding: 0; display: grid; gap: var(--space-3); }
+/* 卡片之间统一用 --gap（06 §3：卡间距 24px / ≤768px 14px） */
+.card-list { list-style: none; padding: 0; display: grid; gap: var(--gap); }
+.post-list { list-style: none; padding: 0; display: grid; gap: var(--gap); }
 
 /* PostCard 标签行（原为内联 style，违反设计系统 D11，收口到此） */
 .post-card .tag-list { margin-top: var(--space-4); }
@@ -165,16 +209,24 @@ a:hover { text-decoration: underline; }
   align-items: center;
   gap: var(--space-2);
   color: var(--color-text-secondary);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);     /* 06 §2：卡片元信息 13px */
 }
-.meta__sep { color: var(--color-border); }
+/* 06 §3：分隔符与元信息同色（原为 --color-border，几乎不可见） */
+.meta__sep { color: inherit; }
 .muted { color: var(--color-text-secondary); }
 
-.post-card__title { font-size: var(--font-size-h3); line-height: var(--line-height-h3); margin-bottom: var(--space-2); }
+/* 卡片标题（06 §2：24px / 1.3 / 700 —— 原来 18.4px/600 是「列表被压平」的主因） */
+.post-card__title {
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-heading);
+  margin-bottom: var(--space-2);
+}
 .post-card__title a { color: var(--color-text); }
-.post-card__title a:hover { color: var(--color-accent-text); text-decoration: none; }
 .post-card__desc {
   color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);     /* 06 §2：卡片摘要 14px（原是 16px） */
+  line-height: var(--line-height-compact);
   margin-bottom: var(--space-4);
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -183,7 +235,7 @@ a:hover { text-decoration: underline; }
   overflow: hidden;
 }
 
-/* ---------- 标签（靛蓝不得进入此处）---------- */
+/* ---------- 标签（灰阶，强调色不得进入）---------- */
 .tag-list { display: flex; flex-wrap: wrap; gap: var(--space-2); list-style: none; padding: 0; }
 .tag {
   display: inline-block;
@@ -192,35 +244,75 @@ a:hover { text-decoration: underline; }
   background: var(--color-surface-2);
   color: var(--color-text-secondary);
   font-size: var(--font-size-xs);
-  line-height: 1.6;
+  line-height: var(--line-height-compact);
 }
 .tag:hover { color: var(--color-text); text-decoration: none; }
 
-/* ---------- 空态 ---------- */
+/* ---------- 空态（06 §3：去掉虚线框，一行文案 + 一个出口链接）---------- */
 .empty {
-  border: 1px dashed var(--color-border);
-  border-radius: var(--radius-md);
-  padding: var(--space-10) var(--space-6);
+  padding: var(--space-8) 0;
   text-align: center;
   color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
 }
-.empty__title { color: var(--color-text); font-size: var(--font-size-h3); line-height: var(--line-height-h3); margin-bottom: var(--space-2); }
+.empty__title {
+  color: var(--color-text);
+  font-size: inherit;                 /* 06 §3：主文案不再放大 */
+  font-weight: var(--font-weight-body);
+  line-height: var(--line-height-compact);
+  margin-bottom: var(--space-2);
+}
 
-/* ---------- 欢迎区 ---------- */
+/* ---------- 首页 profile 区（06 §3：透明块，无边框/背景/圆角；上 24 下 48）----------
+   B 将用 .profile 取代旧的 .hero；旧类暂时保留，避免首页在 B 落地前掉样式。 */
+.profile { margin-block: var(--space-6) var(--space-12); }
+.profile__title {
+  font-size: var(--font-size-h1);
+  line-height: var(--line-height-h1);
+  font-weight: var(--font-weight-heading);
+  margin-bottom: var(--space-3);
+}
+.profile__lead { color: var(--color-text-secondary); font-size: var(--font-size-body); max-width: 46ch; }
+
+/* ---------- 社交图标行（06 §4；C 将新建 SocialIcons.astro 使用）---------- */
+.social-icons {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);                /* 12px */
+  padding: var(--space-3) 0;          /* 12px 0 */
+}
+.social-icons svg { width: 26px; height: 26px; }
+.social-icons__link { color: var(--color-text-secondary); display: inline-flex; }
+@media (hover: hover) and (pointer: fine) {
+  .social-icons__link:hover { color: var(--color-text); }
+}
+
+/* ---------- 旧欢迎区（B 切换后删除）---------- */
 .hero { margin-bottom: var(--space-9); }
 .hero__title { margin-bottom: var(--space-3); }
 .hero__lead { color: var(--color-text-secondary); max-width: 46ch; }
 .section-title { margin-bottom: var(--space-5); }
 
-/* ---------- 页脚 ---------- */
+/* ---------- 页脚（06 §3：高 60px）---------- */
 .site-footer {
   margin-top: auto;
+  min-height: var(--footer-height);
+  display: flex;
+  align-items: center;
   border-top: 1px solid var(--color-border);
-  padding-block: var(--space-8);
+  padding-block: var(--space-4);
   color: var(--color-text-secondary);
   font-size: var(--font-size-sm);
 }
-.site-footer__inner { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-5); justify-content: space-between; align-items: center; }
+.site-footer__inner {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-5);
+  justify-content: space-between;
+  align-items: center;
+}
 
 /* ---------- 无障碍工具类 ---------- */
 .visually-hidden {
@@ -239,9 +331,4 @@ a:hover { text-decoration: underline; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-}
-
-@media (max-width: 640px) {
-  .container { padding-inline: var(--space-4); }
-  .site-header__inner { min-height: 56px; }
 }

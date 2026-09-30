@@ -161,7 +161,7 @@
   --fs-body:   1rem;       /* 16px · 正文（PRD G2：中文 ≥16px） */
   --fs-h3:     1.15rem;    /* 18.4px */
   --fs-h2:     1.4rem;     /* 22.4px */
-  --fs-h1:     1.875rem;   /* 30px · 文章标题 */
+  --fs-h1:     1.875rem;   /* 30px · 文章标题 —— ⚠️ v1.1 起本值作废：新字号阶见 docs/06-visual-spec.md §2 */
   --fs-display:2.75rem;    /* 44px · 仅 404 代码数字（mono） */
 
   /* ---------- 行高 ---------- */
@@ -184,16 +184,18 @@
 
   /* ---------- 圆角 ---------- */
   --radius-sm:   4px;    /* 控件：按钮、输入框、行内代码 */
-  --radius-md:   6px;    /* 卡片、代码块、图片 */
+  --radius-md:   8px;    /* 卡片、代码块、图片 —— v1.1：原 6px，依 06-visual-spec §3 改 8px */
   --radius-full: 999px;  /* 标签胶囊、头像 */
 
   /* ---------- 阴影（全站仅此一档） ---------- */
   --shadow-card: 0 1px 2px rgba(16, 18, 22, 0.05);
 
   /* ---------- 布局 ---------- */
-  --content-width:   720px;
-  --container-width: 1080px;
-  --header-height:   56px;
+  /* v1.1（2026-09-30 · task-19，依 06-visual-spec §3）：--content-width 768px 指**外层内容列**（含左右 24px padding）
+     → 内层正文恒为 720px；--container-width 1072px。tokens.css 实际值在换肤 commit 时同步。 */
+  --content-width:   768px;
+  --container-width: 1072px;
+  --header-height:   56px;   /* v1.1：06-visual-spec §3 要求页头 60px，本值待换肤时同步 */
 
   /* ---------- 动效 ---------- */
   --dur-fast: 120ms;
@@ -285,7 +287,9 @@ html.dark {
 | `--fs-xs` | 13px / 0.8125rem | 元信息、图注、页脚、面包屑、标签 | 1.6 | 400 |
 | `--fs-2xs` | 12px / 0.75rem | 代码块语言标签（**仅 `--font-mono`**） | 1.4 | 500 |
 
-**上限规则**：全站最大字号 30px（`--fs-h1`），除 404 数字外**不得出现比正文更大的装饰性文字**；不使用 `clamp()` 流体字号（方向 B 要"准"，不要"飘"）。
+> **⚠️ v1.1 修订（2026-09-30 · task-19，依 G-05 / `06-visual-spec.md` §7）**：本节的**字号硬上限规则（原：全站最大 30px）作废**。v1.1 字号阶以 `docs/06-visual-spec.md` §2 为准：列表 / 归档 / 标签页 `h1` **40px**、文章页标题 **36px**、首页问候 `h1` **34px**、正文内 `h2` / `h3` **24 / 19px**、**卡片标题 24px**、卡片摘要 **14px**、卡片元信息 **13px**、导航项 16px、logo 24px。**标题字重统一 700**——故 §3.2「禁止 700+」中**针对标题**的部分一并失效（正文仍为 400 / 500）。本表 `--fs-*` 的正式重定义在 `tokens.css` 换肤 commit 时同步。
+>
+> **上限规则（残余有效部分）**：除 404 数字外**不得出现比正文更大的装饰性文字**；不使用 `clamp()` 流体字号（方向 B 要「准」，不要「飘」）。
 
 ### 3.2 行高与字重
 
@@ -360,7 +364,7 @@ html.dark {
 
 ```css
 .prose {
-  max-width: var(--content-width);      /* 720px；任何视口都不放宽（PRD G2 / AC-4） */
+  max-width: 100%;                      /* v1.1：正文列宽由外层 .content（768px − 24px×2 padding）决定 = 720px；任何视口都不放宽（PRD G2 / AC-4） */
   margin-inline: auto;
   font-family: var(--font-body);
   font-size: var(--fs-body);            /* 16px */
@@ -402,9 +406,11 @@ html.dark {
 ### 4.2 容器与断点
 
 ```css
+/* v1.1（2026-09-30 · task-19，依 06-visual-spec §3）：--container-width 1072px / --content-width 768px（含 padding）
+   .content 的 768px = 24px×2 padding + 720px 内层正文，正文宽度因此恒为 720px */
 .container { width: 100%; max-width: var(--container-width); margin-inline: auto; padding-inline: var(--space-4); }
 @media (min-width: 640px) { .container { padding-inline: var(--space-6); } }
-.content  { width: 100%; max-width: var(--content-width); margin-inline: auto; }
+.content  { width: 100%; max-width: var(--content-width); margin-inline: auto; padding-inline: var(--space-6); }
 ```
 
 | 断点 | 范围 | 变化 |
@@ -412,7 +418,7 @@ html.dark {
 | **sm** | < 640px | 单列；容器左右 16px；顶部导航折叠为汉堡；卡片 padding 16px 20px；h2 上边距 36px；TOC 为折叠块；归档页降级为单列 |
 | **md** | 640–899px | 容器左右 24px；卡片 padding 20px 24px；h2 上边距 44px |
 | **lg** | ≥ 900px | 顶部导航完整展开；页脚两栏；归档页启用"年份脊"（sticky）；作品页网格 ≥2 列 |
-| **xl** | ≥ 1080px | 容器达 1080px；**正文仍锁 720px 居中**，不随视口变宽 |
+| **xl** | ≥ 1080px | 容器达 **1072px**（v1.1，原 1080px，依 06-visual-spec §3）；**正文仍锁 720px 居中**，不随视口变宽 |
 
 > CSS 媒体查询条件里**必须写字面值**（`@media (min-width: 900px)`），CSS 变量不能用于媒体查询条件；`tokens.css` 中的断点注释仅供文档与 JS 引用。
 
@@ -438,10 +444,10 @@ html.dark {
 | Token | 值 | 用途 |
 |---|---|---|
 | `--radius-sm` | 4px | 控件：按钮、输入框、分页项、行内代码、焦点环 |
-| `--radius-md` | 6px | 容器：卡片、代码块、图片、搜索结果项 |
+| `--radius-md` | **8px** | 容器：卡片、代码块、图片、搜索结果项（v1.1：原 6px，依 06-visual-spec §3） |
 | `--radius-full` | 999px | 标签胶囊、头像 |
 
-规则：卡片内部元素圆角 ≤ 卡片圆角；**全站不使用 >6px 的圆角**（方向 B 是"准、快"，不是"圆润"）；同一元素不混用两种圆角。
+规则：卡片内部元素圆角 ≤ 卡片圆角；**全站圆角上限 8px**（v1.1 · 2026-09-30 依 `06-visual-spec.md` §3：原「圆角上限 6px」规则**作废**）（方向 B 是"准、快"，不是"圆润"）；同一元素不混用两种圆角。
 
 ### 5.2 阴影（全站仅一档）
 
@@ -520,7 +526,7 @@ html.dark {
 
 | 状态 | 表现 |
 |---|---|
-| 默认 | `position: sticky; top: 0; z-index: 10;` 背景 `--color-bg`；底边 `1px solid var(--color-border)`；**无阴影、无毛玻璃** |
+| 默认 | `position: sticky; top: 0; z-index: 10;` 背景 `--color-bg`；底边 `1px solid var(--color-border)`；**无阴影、无毛玻璃**。**⚠️ 此为对参考站的「故意偏离」（v1.1 · 2026-09-30 · task-19）**：参考站（Lil'Log / PaperMod）页头**既无 sticky 也无底线**，我们**保留 sticky + 1px 底线**——理由是长文里导航 / 搜索 / 返回的可用性，属功能决策而非风格决策（出处：`docs/06-visual-spec.md` §5 第 2 条「故意不抄」） |
 | hover（导航项） | 色 `--color-text-secondary` → `--color-text` |
 | focus-visible | 全局焦点环（§8.1） |
 | active | 色保持 hover；不加位移 |
@@ -583,7 +589,7 @@ html.dark {
 </article>
 ```
 
-**尺寸**：宽 100%（列表容器 `--content-width` 720px）；标题 `--fs-h3` / `--lh-subheading` / 600；摘要 `--fs-sm` / `--lh-compact`，**最多 2 行**；元信息 `--fs-xs`。
+**尺寸**：宽 100%（列表容器内层 720px）；标题 **24px** / `--lh-subheading` / **700**；摘要 **14px** / `--lh-compact`，**最多 2 行**；元信息 **`--fs-xs` 13px**。**v1.1 修订（2026-09-30 · task-19，依 `06-visual-spec.md` §2）**：标题由 `--fs-h3` 18.4px / 600 改为 **24px / 700**；摘要由 `--fs-sm` 15px 改为 **14px**；元信息 13px 不变。
 
 **间距**：padding 20px 24px（<640px 16px 20px）；卡片之间 `--space-3` 12px；标题 ↦ 摘要 `--space-2`；摘要 ↦ 元信息 `--space-3`。
 

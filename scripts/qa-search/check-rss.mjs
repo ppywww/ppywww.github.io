@@ -9,9 +9,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
-import { createReporter } from './lib/report.mjs';
+import { createReporter, finish } from './lib/report.mjs';
 import { readSiteConsts, listPostRoutes } from './lib/dist-info.mjs';
 import { inspectXml } from './lib/xml-check.mjs';
+import { safeFetchText } from './lib/fetch-safe.mjs';
 import { DEFAULT_CHROME } from './lib/chrome-cdp.mjs';
 
 const PROJECT_ROOT = new URL('../../', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1');
@@ -37,9 +38,14 @@ export async function run(opts = {}) {
 
   let xml = null;
   if (opts.base) {
-    const res = await fetch(origin + '/rss.xml');
-    xml = await res.text();
-    rep.check('R-1', '线上 /rss.xml 返回 200', res.status === 200, 'HTTP ' + res.status + ' · content-type=' + (res.headers.get('content-type') || ''));
+    const got = await safeFetchText(origin + '/rss.xml');
+    if (!got.ok) {
+      rep.fail('R-1', '线上 /rss.xml 可访问', 'HTTP ' + got.status + (got.error ? ' · ' + got.error : ''));
+      if (!opts.json) rep.print();
+      return { report: rep, summary: rep.summary(), results: rep.results };
+    }
+    xml = got.text;
+    rep.pass('R-1', '线上 /rss.xml 返回 200', origin + '/rss.xml');
   } else {
     const file = path.join(DIST_DIR, 'rss.xml');
     if (!fs.existsSync(file)) {
@@ -112,5 +118,6 @@ if (invokedDirectly) {
   const opts = parseArgs(process.argv.slice(2));
   const out = await run(opts);
   if (opts.json) console.log(JSON.stringify({ summary: out.summary, results: out.results }, null, 2));
-  process.exit(out.report.exitCode());
+  // 用 finish 而非 process.exit：见 lib/report.mjs 关于 Windows libuv 断言的说明
+  await finish(out.report.exitCode());
 }

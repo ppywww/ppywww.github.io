@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T09:21:59.469Z",
+  "generatedAt": "2026-09-30T10:19:37.935Z",
   "origin": "https://ppywww.github.io",
   "chrome": "Chrome/154.0.8037.59",
   "pages": [
@@ -154,13 +154,13 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.c3_ocj9b.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
-          "transfer": 2799,
-          "encoded": 2499,
-          "decoded": 9855,
-          "start": 159,
-          "end": 285
+          "transfer": 2821,
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 165,
+          "end": 404
         },
         {
           "name": "/favicon.svg",
@@ -168,27 +168,27 @@
           "transfer": 564,
           "encoded": 264,
           "decoded": 337,
-          "start": 399,
-          "end": 447
+          "start": 519,
+          "end": 869
         }
       ],
       "navTiming": {
-        "ttfb": 146.39999997615814,
-        "dcl": 393.2000000476837,
-        "load": 393.5,
-        "transfer": 3850,
-        "encoded": 3550
+        "ttfb": 152.69999992847443,
+        "dcl": 406.59999990463257,
+        "load": 516.0999999046326,
+        "transfer": 3946,
+        "encoded": 3646
       },
-      "lcp": 464,
+      "lcp": 940,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 464
+          "t": 940
         },
         {
           "name": "first-contentful-paint",
-          "t": 464
+          "t": 940
         }
       ],
       "headingLevels": [
@@ -217,8 +217,8 @@
       "metaDescription": "Hi, this is ppy. I’m documenting my learning notes in this blog since 2026.",
       "canonical": "https://ppywww.github.io/",
       "ogTitle": "ppy-Blog",
-      "ogImage": null,
-      "twitterCard": "summary",
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "twitterCard": "summary_large_image",
       "jsonLdTypes": [
         "WebSite"
       ],
@@ -379,32 +379,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.c3_ocj9b.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2499,
-          "decoded": 9855,
-          "start": 59,
-          "end": 98
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 301,
+          "end": 397
         }
       ],
       "navTiming": {
-        "ttfb": 49.90000009536743,
-        "dcl": 144.5,
-        "load": 147.30000007152557,
-        "transfer": 4326,
-        "encoded": 4026
+        "ttfb": 295.8000000715256,
+        "dcl": 463.90000009536743,
+        "load": 464.10000002384186,
+        "transfer": 4414,
+        "encoded": 4114
       },
-      "lcp": 224,
+      "lcp": 496,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 224
+          "t": 496
         },
         {
           "name": "first-contentful-paint",
-          "t": 224
+          "t": 496
         }
       ],
       "headingLevels": [
@@ -432,8 +432,8 @@
       "metaDescription": "ppy-Blog 的全部文章：技术、生活、读书与作品笔记，按发布时间倒序排列。",
       "canonical": "https://ppywww.github.io/posts/",
       "ogTitle": "文章 · ppy-Blog",
-      "ogImage": null,
-      "twitterCard": "summary",
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "twitterCard": "summary_large_image",
       "jsonLdTypes": [
         "WebSite"
       ],
@@ -552,32 +552,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.c3_ocj9b.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2499,
-          "decoded": 9855,
-          "start": 59,
-          "end": 87
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 369,
+          "end": 402
         }
       ],
       "navTiming": {
-        "ttfb": 50.59999990463257,
-        "dcl": 89,
-        "load": 187.29999995231628,
-        "transfer": 4122,
-        "encoded": 3822
+        "ttfb": 359.8000000715256,
+        "dcl": 403.8000000715256,
+        "load": 516.3000000715256,
+        "transfer": 4207,
+        "encoded": 3907
       },
-      "lcp": 208,
+      "lcp": 544,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 208
+          "t": 544
         },
         {
           "name": "first-contentful-paint",
-          "t": 208
+          "t": 544
         }
       ],
       "headingLevels": [
@@ -604,8 +604,8 @@
       "metaDescription": "ppy-Blog 全部文章的按年归档，共 3 篇。",
       "canonical": "https://ppywww.github.io/archives/",
       "ogTitle": "归档 · ppy-Blog",
-      "ogImage": null,
-      "twitterCard": "summary",
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "twitterCard": "summary_large_image",
       "jsonLdTypes": [
         "WebSite"
       ],
@@ -692,18 +692,6 @@
           "text": "ppywww.github.io"
         },
         {
-          "href": "https://example.com/",
-          "target": "_blank",
-          "rel": "noopener",
-          "text": "GitHub"
-        },
-        {
-          "href": "https://example.com/",
-          "target": "_blank",
-          "rel": "noopener",
-          "text": "example.com"
-        },
-        {
           "href": "https://github.com/ppywww",
           "target": "_blank",
           "rel": "noopener noreferrer",
@@ -718,32 +706,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.c3_ocj9b.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2499,
-          "decoded": 9855,
-          "start": 53,
-          "end": 75
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 54,
+          "end": 87
         }
       ],
       "navTiming": {
-        "ttfb": 47.40000009536743,
-        "dcl": 76.30000007152557,
-        "load": 78.80000007152557,
-        "transfer": 4099,
-        "encoded": 3799
+        "ttfb": 45.10000002384186,
+        "dcl": 173.39999997615814,
+        "load": 173.79999995231628,
+        "transfer": 4144,
+        "encoded": 3844
       },
-      "lcp": 180,
+      "lcp": 196,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 180
+          "t": 196
         },
         {
           "name": "first-contentful-paint",
-          "t": 180
+          "t": 196
         }
       ],
       "headingLevels": [
@@ -770,8 +758,8 @@
       "metaDescription": "ppy-Blog 的作品与项目集，共 2 个，含技术栈与源码、Demo 链接。",
       "canonical": "https://ppywww.github.io/works/",
       "ogTitle": "作品 · ppy-Blog",
-      "ogImage": null,
-      "twitterCard": "summary",
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "twitterCard": "summary_large_image",
       "jsonLdTypes": [
         "WebSite"
       ],
@@ -872,32 +860,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.c3_ocj9b.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2499,
-          "decoded": 9855,
+          "encoded": 2521,
+          "decoded": 9971,
           "start": 58,
-          "end": 82
+          "end": 89
         }
       ],
       "navTiming": {
-        "ttfb": 48.5,
-        "dcl": 83.59999990463257,
-        "load": 86.69999992847443,
-        "transfer": 4407,
-        "encoded": 4107
+        "ttfb": 45.10000002384186,
+        "dcl": 242,
+        "load": 242.60000002384186,
+        "transfer": 4496,
+        "encoded": 4196
       },
-      "lcp": 240,
+      "lcp": 276,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 240
+          "t": 276
         },
         {
           "name": "first-contentful-paint",
-          "t": 240
+          "t": 276
         }
       ],
       "headingLevels": [
@@ -926,8 +914,8 @@
       "metaDescription": "关于页的骨架：我是谁、我在做什么、这个站，以及怎么联系我。正式发布前请把占位内容替换成真实介绍。",
       "canonical": "https://ppywww.github.io/about/",
       "ogTitle": "关于我 · ppy-Blog",
-      "ogImage": null,
-      "twitterCard": "summary",
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "twitterCard": "summary_large_image",
       "jsonLdTypes": [
         "WebSite"
       ],
@@ -1028,41 +1016,41 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.c3_ocj9b.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2499,
-          "decoded": 9855,
-          "start": 54,
-          "end": 78
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 391,
+          "end": 422
         },
         {
-          "name": "/_astro/search.astro_astro_type_script_index_0_lang.D3_SV1GQ.js",
+          "name": "/_astro/search.astro_astro_type_script_index_0_lang.zwndWbBl.js",
           "type": "script",
-          "transfer": 2374,
-          "encoded": 2074,
-          "decoded": 4560,
-          "start": 54,
-          "end": 125
+          "transfer": 2440,
+          "encoded": 2140,
+          "decoded": 4680,
+          "start": 391,
+          "end": 471
         }
       ],
       "navTiming": {
-        "ttfb": 46.700000047683716,
-        "dcl": 165.80000007152557,
-        "load": 167.39999997615814,
-        "transfer": 4009,
-        "encoded": 3709
+        "ttfb": 379.89999997615814,
+        "dcl": 506.39999997615814,
+        "load": 507.7999999523163,
+        "transfer": 4092,
+        "encoded": 3792
       },
-      "lcp": 152,
+      "lcp": 540,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 152
+          "t": 540
         },
         {
           "name": "first-contentful-paint",
-          "t": 152
+          "t": 540
         }
       ],
       "headingLevels": [
@@ -1087,8 +1075,8 @@
       "metaDescription": "在 ppy-Blog 内检索文章的标题、正文与标签。",
       "canonical": "https://ppywww.github.io/search/",
       "ogTitle": "搜索 · ppy-Blog",
-      "ogImage": null,
-      "twitterCard": "summary",
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "twitterCard": "summary_large_image",
       "jsonLdTypes": [
         "WebSite"
       ],
@@ -1315,41 +1303,41 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.c3_ocj9b.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2499,
-          "decoded": 9855,
-          "start": 66,
-          "end": 95
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 342,
+          "end": 381
         },
         {
-          "name": "/_astro/_..DeutuQ4r.css",
+          "name": "/_astro/_..DUCWxe9z.css",
           "type": "link",
-          "transfer": 2374,
-          "encoded": 2074,
-          "decoded": 10094,
-          "start": 67,
-          "end": 390
+          "transfer": 2402,
+          "encoded": 2102,
+          "decoded": 10153,
+          "start": 342,
+          "end": 686
         }
       ],
       "navTiming": {
-        "ttfb": 54.60000002384186,
-        "dcl": 392.1999999284744,
-        "load": 681,
-        "transfer": 10752,
-        "encoded": 10452
+        "ttfb": 330.2999999523163,
+        "dcl": 955.6999999284744,
+        "load": 956.5,
+        "transfer": 10855,
+        "encoded": 10555
       },
-      "lcp": 732,
+      "lcp": 1000,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 732
+          "t": 1000
         },
         {
           "name": "first-contentful-paint",
-          "t": 732
+          "t": 1000
         }
       ],
       "headingLevels": [
@@ -1389,8 +1377,8 @@
       "metaDescription": "记录本站从选型到骨架跑通的真实过程：Astro、Hugo、VitePress 的实测对比结论、最终目录结构，以及构建产物的真实体积数据。",
       "canonical": "https://ppywww.github.io/posts/2026-09-30-build-this-blog/",
       "ogTitle": "从 0 搭建这个博客：选型、目录与实测数据 · ppy-Blog",
-      "ogImage": null,
-      "twitterCard": "summary",
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "twitterCard": "summary_large_image",
       "jsonLdTypes": [
         "WebSite,BlogPosting"
       ],
@@ -1515,32 +1503,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.c3_ocj9b.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2499,
-          "decoded": 9855,
-          "start": 60,
-          "end": 106
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 62,
+          "end": 120
         }
       ],
       "navTiming": {
-        "ttfb": 51.89999997615814,
-        "dcl": 107.60000002384186,
-        "load": 112.10000002384186,
-        "transfer": 3604,
-        "encoded": 3304
+        "ttfb": 50.699999928474426,
+        "dcl": 206.19999992847443,
+        "load": 206.60000002384186,
+        "transfer": 3701,
+        "encoded": 3401
       },
-      "lcp": 200,
+      "lcp": 224,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 200
+          "t": 224
         },
         {
           "name": "first-contentful-paint",
-          "t": 200
+          "t": 224
         }
       ],
       "headingLevels": [
@@ -1566,8 +1554,8 @@
       "metaDescription": "ppy-Blog 中带有「Astro」标签的文章，共 1 篇。",
       "canonical": "https://ppywww.github.io/tags/Astro/",
       "ogTitle": "标签：Astro · ppy-Blog",
-      "ogImage": null,
-      "twitterCard": "summary",
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "twitterCard": "summary_large_image",
       "jsonLdTypes": [
         "WebSite"
       ],
@@ -1692,32 +1680,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.c3_ocj9b.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2499,
-          "decoded": 9855,
-          "start": 61,
-          "end": 93
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 58,
+          "end": 86
         }
       ],
       "navTiming": {
-        "ttfb": 50.5,
-        "dcl": 150.29999995231628,
-        "load": 228.5,
-        "transfer": 3610,
-        "encoded": 3310
+        "ttfb": 45.799999952316284,
+        "dcl": 143.5,
+        "load": 217.89999997615814,
+        "transfer": 3706,
+        "encoded": 3406
       },
-      "lcp": 256,
+      "lcp": 232,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 256
+          "t": 232
         },
         {
           "name": "first-contentful-paint",
-          "t": 256
+          "t": 232
         }
       ],
       "headingLevels": [
@@ -1743,8 +1731,8 @@
       "metaDescription": "ppy-Blog 中带有「静态站点」标签的文章，共 1 篇。",
       "canonical": "https://ppywww.github.io/tags/%E9%9D%99%E6%80%81%E7%AB%99%E7%82%B9/",
       "ogTitle": "标签：静态站点 · ppy-Blog",
-      "ogImage": null,
-      "twitterCard": "summary",
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "twitterCard": "summary_large_image",
       "jsonLdTypes": [
         "WebSite"
       ],
@@ -1869,32 +1857,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.c3_ocj9b.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2499,
-          "decoded": 9855,
-          "start": 54,
-          "end": 81
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 57,
+          "end": 91
         }
       ],
       "navTiming": {
-        "ttfb": 48.10000002384186,
-        "dcl": 83.20000004768372,
-        "load": 85.70000004768372,
-        "transfer": 3615,
-        "encoded": 3315
+        "ttfb": 45.39999997615814,
+        "dcl": 92.89999997615814,
+        "load": 96,
+        "transfer": 3712,
+        "encoded": 3412
       },
-      "lcp": 188,
+      "lcp": 200,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 188
+          "t": 200
         },
         {
           "name": "first-contentful-paint",
-          "t": 188
+          "t": 200
         }
       ],
       "headingLevels": [
@@ -1920,8 +1908,8 @@
       "metaDescription": "ppy-Blog 中带有「性能优化」标签的文章，共 1 篇。",
       "canonical": "https://ppywww.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/",
       "ogTitle": "标签：性能优化 · ppy-Blog",
-      "ogImage": null,
-      "twitterCard": "summary",
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "twitterCard": "summary_large_image",
       "jsonLdTypes": [
         "WebSite"
       ],
@@ -2046,32 +2034,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.c3_ocj9b.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2499,
-          "decoded": 9855,
-          "start": 60,
-          "end": 84
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 56,
+          "end": 80
         }
       ],
       "navTiming": {
-        "ttfb": 49.700000047683716,
-        "dcl": 141,
-        "load": 217.70000004768372,
-        "transfer": 3611,
-        "encoded": 3311
+        "ttfb": 47.60000002384186,
+        "dcl": 82.89999997615814,
+        "load": 152.60000002384186,
+        "transfer": 3709,
+        "encoded": 3409
       },
-      "lcp": 248,
+      "lcp": 168,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 248
+          "t": 168
         },
         {
           "name": "first-contentful-paint",
-          "t": 248
+          "t": 168
         }
       ],
       "headingLevels": [
@@ -2097,8 +2085,8 @@
       "metaDescription": "ppy-Blog 中带有「GitHub Pages」标签的文章，共 1 篇。",
       "canonical": "https://ppywww.github.io/tags/GitHub%20Pages/",
       "ogTitle": "标签：GitHub Pages · ppy-Blog",
-      "ogImage": null,
-      "twitterCard": "summary",
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "twitterCard": "summary_large_image",
       "jsonLdTypes": [
         "WebSite"
       ],
@@ -2271,41 +2259,41 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.c3_ocj9b.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2499,
-          "decoded": 9855,
-          "start": 55,
-          "end": 87
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 57,
+          "end": 100
         },
         {
-          "name": "/_astro/_..DeutuQ4r.css",
+          "name": "/_astro/_..DUCWxe9z.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2074,
-          "decoded": 10094,
-          "start": 55,
-          "end": 88
+          "encoded": 2102,
+          "decoded": 10153,
+          "start": 57,
+          "end": 100
         }
       ],
       "navTiming": {
-        "ttfb": 48.10000002384186,
-        "dcl": 202.10000002384186,
-        "load": 341.89999997615814,
-        "transfer": 5791,
-        "encoded": 5491
+        "ttfb": 45.39999997615814,
+        "dcl": 103.5,
+        "load": 249.70000004768372,
+        "transfer": 5902,
+        "encoded": 5602
       },
-      "lcp": 372,
+      "lcp": 284,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 372
+          "t": 284
         },
         {
           "name": "first-contentful-paint",
-          "t": 372
+          "t": 284
         }
       ],
       "headingLevels": [
@@ -2338,8 +2326,8 @@
       "metaDescription": "关于记录、公开写作与长期主义的一点想法：写博客不是输出表演，而是把模糊的念头逼成清晰句子的过程。",
       "canonical": "https://ppywww.github.io/posts/2026-09-28-why-i-blog/",
       "ogTitle": "我为什么开始写博客 · ppy-Blog",
-      "ogImage": null,
-      "twitterCard": "summary",
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "twitterCard": "summary_large_image",
       "jsonLdTypes": [
         "WebSite,BlogPosting"
       ],
@@ -2476,32 +2464,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.c3_ocj9b.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2499,
-          "decoded": 9855,
-          "start": 56,
-          "end": 90
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 313,
+          "end": 361
         }
       ],
       "navTiming": {
-        "ttfb": 47.39999997615814,
-        "dcl": 186.19999992847443,
-        "load": 186.5,
-        "transfer": 3743,
-        "encoded": 3443
+        "ttfb": 302.39999997615814,
+        "dcl": 412.7000000476837,
+        "load": 484.60000002384186,
+        "transfer": 3841,
+        "encoded": 3541
       },
-      "lcp": 212,
+      "lcp": 508,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 212
+          "t": 508
         },
         {
           "name": "first-contentful-paint",
-          "t": 212
+          "t": 508
         }
       ],
       "headingLevels": [
@@ -2528,8 +2516,8 @@
       "metaDescription": "ppy-Blog 中带有「写作」标签的文章，共 2 篇。",
       "canonical": "https://ppywww.github.io/tags/%E5%86%99%E4%BD%9C/",
       "ogTitle": "标签：写作 · ppy-Blog",
-      "ogImage": null,
-      "twitterCard": "summary",
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "twitterCard": "summary_large_image",
       "jsonLdTypes": [
         "WebSite"
       ],
@@ -2642,32 +2630,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.c3_ocj9b.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2499,
-          "decoded": 9855,
-          "start": 62,
-          "end": 84
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 349,
+          "end": 374
         }
       ],
       "navTiming": {
-        "ttfb": 51.39999997615814,
-        "dcl": 134.89999997615814,
-        "load": 211.59999990463257,
-        "transfer": 3500,
-        "encoded": 3200
+        "ttfb": 339.2000000476837,
+        "dcl": 376,
+        "load": 380.7999999523163,
+        "transfer": 3595,
+        "encoded": 3295
       },
-      "lcp": 228,
+      "lcp": 468,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 228
+          "t": 468
         },
         {
           "name": "first-contentful-paint",
-          "t": 228
+          "t": 468
         }
       ],
       "headingLevels": [
@@ -2693,8 +2681,8 @@
       "metaDescription": "ppy-Blog 中带有「随笔」标签的文章，共 1 篇。",
       "canonical": "https://ppywww.github.io/tags/%E9%9A%8F%E7%AC%94/",
       "ogTitle": "标签：随笔 · ppy-Blog",
-      "ogImage": null,
-      "twitterCard": "summary",
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "twitterCard": "summary_large_image",
       "jsonLdTypes": [
         "WebSite"
       ],
@@ -2897,41 +2885,41 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.c3_ocj9b.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2499,
-          "decoded": 9855,
-          "start": 61,
-          "end": 85
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 57,
+          "end": 88
         },
         {
-          "name": "/_astro/_..DeutuQ4r.css",
+          "name": "/_astro/_..DUCWxe9z.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2074,
-          "decoded": 10094,
-          "start": 62,
-          "end": 85
+          "encoded": 2102,
+          "decoded": 10153,
+          "start": 58,
+          "end": 88
         }
       ],
       "navTiming": {
-        "ttfb": 50.60000002384186,
-        "dcl": 89.10000002384186,
-        "load": 101.30000007152557,
-        "transfer": 6409,
-        "encoded": 6109
+        "ttfb": 45.700000047683716,
+        "dcl": 90.20000004768372,
+        "load": 267.89999997615814,
+        "transfer": 6512,
+        "encoded": 6212
       },
-      "lcp": 304,
+      "lcp": 300,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 304
+          "t": 300
         },
         {
           "name": "first-contentful-paint",
-          "t": 304
+          "t": 300
         }
       ],
       "headingLevels": [
@@ -2968,8 +2956,8 @@
       "metaDescription": "一份可直接复用的读书笔记模板：从书籍信息、一句话结论，到摘抄卡片与行动清单，复制结构即可开始写。",
       "canonical": "https://ppywww.github.io/posts/2026-09-25-reading-note-template/",
       "ogTitle": "读书笔记模板：把读完的书变成能回看的东西 · ppy-Blog",
-      "ogImage": null,
-      "twitterCard": "summary",
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "twitterCard": "summary_large_image",
       "jsonLdTypes": [
         "WebSite,BlogPosting"
       ],
@@ -3088,32 +3076,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.c3_ocj9b.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2499,
-          "decoded": 9855,
-          "start": 53,
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 54,
           "end": 78
         }
       ],
       "navTiming": {
-        "ttfb": 46.89999997615814,
-        "dcl": 80.19999992847443,
-        "load": 82.69999992847443,
-        "transfer": 3548,
-        "encoded": 3248
+        "ttfb": 46.5,
+        "dcl": 79.5,
+        "load": 82.39999997615814,
+        "transfer": 3640,
+        "encoded": 3340
       },
-      "lcp": 180,
+      "lcp": 176,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 180
+          "t": 176
         },
         {
           "name": "first-contentful-paint",
-          "t": 180
+          "t": 176
         }
       ],
       "headingLevels": [
@@ -3139,8 +3127,8 @@
       "metaDescription": "ppy-Blog 中带有「读书笔记」标签的文章，共 1 篇。",
       "canonical": "https://ppywww.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/",
       "ogTitle": "标签：读书笔记 · ppy-Blog",
-      "ogImage": null,
-      "twitterCard": "summary",
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "twitterCard": "summary_large_image",
       "jsonLdTypes": [
         "WebSite"
       ],
@@ -3259,32 +3247,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.c3_ocj9b.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2499,
-          "decoded": 9855,
-          "start": 55,
-          "end": 82
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 57,
+          "end": 85
         }
       ],
       "navTiming": {
-        "ttfb": 48.5,
-        "dcl": 191.59999990463257,
-        "load": 192.69999992847443,
-        "transfer": 3549,
-        "encoded": 3249
+        "ttfb": 48.300000071525574,
+        "dcl": 87.80000007152557,
+        "load": 92.70000004768372,
+        "transfer": 3640,
+        "encoded": 3340
       },
-      "lcp": 220,
+      "lcp": 196,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 220
+          "t": 196
         },
         {
           "name": "first-contentful-paint",
-          "t": 220
+          "t": 196
         }
       ],
       "headingLevels": [
@@ -3310,8 +3298,8 @@
       "metaDescription": "ppy-Blog 中带有「模板」标签的文章，共 1 篇。",
       "canonical": "https://ppywww.github.io/tags/%E6%A8%A1%E6%9D%BF/",
       "ogTitle": "标签：模板 · ppy-Blog",
-      "ogImage": null,
-      "twitterCard": "summary",
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "twitterCard": "summary_large_image",
       "jsonLdTypes": [
         "WebSite"
       ],
@@ -3341,30 +3329,30 @@
         {
           "name": "/favicon.ico",
           "type": "other",
-          "transfer": 4592,
-          "encoded": 4292,
-          "decoded": 11386,
-          "start": 130,
-          "end": 535
+          "transfer": 4680,
+          "encoded": 4380,
+          "decoded": 12007,
+          "start": 160,
+          "end": 491
         }
       ],
       "navTiming": {
-        "ttfb": 47,
-        "dcl": 63.60000002384186,
-        "load": 91.10000002384186,
+        "ttfb": 44.700000047683716,
+        "dcl": 111.10000002384186,
+        "load": 115.60000002384186,
         "transfer": 1259,
         "encoded": 959
       },
-      "lcp": 172,
+      "lcp": 196,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 172
+          "t": 196
         },
         {
           "name": "first-contentful-paint",
-          "t": 172
+          "t": 196
         }
       ],
       "headingLevels": [],
@@ -3495,32 +3483,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.c3_ocj9b.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2499,
-          "decoded": 9855,
-          "start": 59,
-          "end": 82
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 60,
+          "end": 85
         }
       ],
       "navTiming": {
-        "ttfb": 48.59999990463257,
-        "dcl": 123.69999992847443,
-        "load": 125.39999997615814,
-        "transfer": 3641,
-        "encoded": 3341
+        "ttfb": 48.89999997615814,
+        "dcl": 88,
+        "load": 89.89999997615814,
+        "transfer": 3731,
+        "encoded": 3431
       },
-      "lcp": 216,
+      "lcp": 164,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 216
+          "t": 164
         },
         {
           "name": "first-contentful-paint",
-          "t": 216
+          "t": 164
         }
       ],
       "headingLevels": [
@@ -3545,8 +3533,8 @@
       "metaDescription": "按 技术 / 生活 / 读书 / 作品 四个栏目浏览 ppy-Blog 的文章，共 3 篇。",
       "canonical": "https://ppywww.github.io/categories/",
       "ogTitle": "分类 · ppy-Blog",
-      "ogImage": null,
-      "twitterCard": "summary",
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "twitterCard": "summary_large_image",
       "jsonLdTypes": [
         "WebSite"
       ],
@@ -3683,32 +3671,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.c3_ocj9b.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2499,
-          "decoded": 9855,
-          "start": 60,
-          "end": 95
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 300,
+          "end": 324
         }
       ],
       "navTiming": {
-        "ttfb": 49.199999928474426,
-        "dcl": 96.89999997615814,
-        "load": 147.39999997615814,
-        "transfer": 3731,
-        "encoded": 3431
+        "ttfb": 294.60000002384186,
+        "dcl": 324.8000000715256,
+        "load": 326.5,
+        "transfer": 3818,
+        "encoded": 3518
       },
-      "lcp": 168,
+      "lcp": 404,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 168
+          "t": 404
         },
         {
           "name": "first-contentful-paint",
-          "t": 168
+          "t": 404
         }
       ],
       "headingLevels": [
@@ -3733,8 +3721,8 @@
       "metaDescription": "ppy-Blog 的全部标签，共 8 个，按文章数量排列。",
       "canonical": "https://ppywww.github.io/tags/",
       "ogTitle": "标签 · ppy-Blog",
-      "ogImage": null,
-      "twitterCard": "summary",
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "twitterCard": "summary_large_image",
       "jsonLdTypes": [
         "WebSite"
       ],
@@ -3859,32 +3847,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.c3_ocj9b.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2499,
-          "decoded": 9855,
-          "start": 53,
-          "end": 78
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 62,
+          "end": 94
         }
       ],
       "navTiming": {
-        "ttfb": 46.5,
-        "dcl": 79.40000009536743,
-        "load": 83.80000007152557,
-        "transfer": 3617,
-        "encoded": 3317
+        "ttfb": 51.700000047683716,
+        "dcl": 96.60000002384186,
+        "load": 99.5,
+        "transfer": 3716,
+        "encoded": 3416
       },
-      "lcp": 180,
+      "lcp": 212,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 180
+          "t": 212
         },
         {
           "name": "first-contentful-paint",
-          "t": 180
+          "t": 212
         }
       ],
       "headingLevels": [
@@ -3910,8 +3898,8 @@
       "metaDescription": "ppy-Blog 的「技术」栏目，共 1 篇文章。",
       "canonical": "https://ppywww.github.io/categories/%E6%8A%80%E6%9C%AF/",
       "ogTitle": "分类：技术 · ppy-Blog",
-      "ogImage": null,
-      "twitterCard": "summary",
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "twitterCard": "summary_large_image",
       "jsonLdTypes": [
         "WebSite"
       ],
@@ -4024,32 +4012,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.c3_ocj9b.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2499,
-          "decoded": 9855,
-          "start": 56,
-          "end": 84
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 57,
+          "end": 80
         }
       ],
       "navTiming": {
-        "ttfb": 47.199999928474426,
-        "dcl": 86.39999997615814,
-        "load": 155,
-        "transfer": 3509,
-        "encoded": 3209
+        "ttfb": 47.10000002384186,
+        "dcl": 81.80000007152557,
+        "load": 84.20000004768372,
+        "transfer": 3603,
+        "encoded": 3303
       },
-      "lcp": 188,
+      "lcp": 176,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 188
+          "t": 176
         },
         {
           "name": "first-contentful-paint",
-          "t": 188
+          "t": 176
         }
       ],
       "headingLevels": [
@@ -4075,8 +4063,8 @@
       "metaDescription": "ppy-Blog 的「生活」栏目，共 1 篇文章。",
       "canonical": "https://ppywww.github.io/categories/%E7%94%9F%E6%B4%BB/",
       "ogTitle": "分类：生活 · ppy-Blog",
-      "ogImage": null,
-      "twitterCard": "summary",
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "twitterCard": "summary_large_image",
       "jsonLdTypes": [
         "WebSite"
       ],
@@ -4195,32 +4183,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.c3_ocj9b.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2499,
-          "decoded": 9855,
-          "start": 55,
-          "end": 89
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 60,
+          "end": 92
         }
       ],
       "navTiming": {
-        "ttfb": 48.700000047683716,
-        "dcl": 136,
-        "load": 199.70000004768372,
-        "transfer": 3540,
-        "encoded": 3240
+        "ttfb": 49.699999928474426,
+        "dcl": 93.39999997615814,
+        "load": 98,
+        "transfer": 3634,
+        "encoded": 3334
       },
-      "lcp": 232,
+      "lcp": 188,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 232
+          "t": 188
         },
         {
           "name": "first-contentful-paint",
-          "t": 232
+          "t": 188
         }
       ],
       "headingLevels": [
@@ -4246,8 +4234,8 @@
       "metaDescription": "ppy-Blog 的「读书」栏目，共 1 篇文章。",
       "canonical": "https://ppywww.github.io/categories/%E8%AF%BB%E4%B9%A6/",
       "ogTitle": "分类：读书 · ppy-Blog",
-      "ogImage": null,
-      "twitterCard": "summary",
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "twitterCard": "summary_large_image",
       "jsonLdTypes": [
         "WebSite"
       ],
@@ -4348,32 +4336,32 @@
       ],
       "resources": [
         {
-          "name": "/_astro/Footer.c3_ocj9b.css",
+          "name": "/_astro/Footer.CSBw4cU9.css",
           "type": "link",
           "transfer": 0,
-          "encoded": 2499,
-          "decoded": 9855,
-          "start": 59,
-          "end": 81
+          "encoded": 2521,
+          "decoded": 9971,
+          "start": 62,
+          "end": 87
         }
       ],
       "navTiming": {
-        "ttfb": 49.89999997615814,
-        "dcl": 82.80000007152557,
-        "load": 84.80000007152557,
-        "transfer": 3230,
-        "encoded": 2930
+        "ttfb": 54.200000047683716,
+        "dcl": 88.5,
+        "load": 90.39999997615814,
+        "transfer": 3323,
+        "encoded": 3023
       },
-      "lcp": 176,
+      "lcp": 184,
       "cls": 0,
       "paints": [
         {
           "name": "first-paint",
-          "t": 176
+          "t": 184
         },
         {
           "name": "first-contentful-paint",
-          "t": 176
+          "t": 184
         }
       ],
       "headingLevels": [
@@ -4398,8 +4386,8 @@
       "metaDescription": "ppy-Blog 的「作品」栏目，共 0 篇文章。",
       "canonical": "https://ppywww.github.io/categories/%E4%BD%9C%E5%93%81/",
       "ogTitle": "分类：作品 · ppy-Blog",
-      "ogImage": null,
-      "twitterCard": "summary",
+      "ogImage": "https://ppywww.github.io/og-default.png",
+      "twitterCard": "summary_large_image",
       "jsonLdTypes": [
         "WebSite"
       ],
@@ -4503,8 +4491,8 @@
     },
     {
       "url": "https://ppywww.github.io/robots.txt",
-      "status": 404,
-      "ok": false,
+      "status": 200,
+      "ok": true,
       "finalUrl": "https://ppywww.github.io/robots.txt"
     },
     {
@@ -4708,7 +4696,7 @@
           "aria": null,
           "outline": "solid 2px rgb(142, 156, 255)",
           "boxShadow": "none",
-          "rect": "70x30",
+          "rect": "70x38",
           "visible": true,
           "skipLink": {
             "top": -44,
@@ -4946,7 +4934,7 @@
           "aria": null,
           "outline": "solid 2px rgb(59, 76, 224)",
           "boxShadow": "none",
-          "rect": "70x30",
+          "rect": "70x38",
           "visible": true,
           "skipLink": {
             "top": -44,
@@ -5135,16 +5123,6 @@
       ]
     },
     {
-      "url": "https://example.com/",
-      "count": 2,
-      "targets": [
-        "_blank"
-      ],
-      "rels": [
-        "noopener"
-      ]
-    },
-    {
       "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh",
       "count": 3,
       "targets": [
@@ -5172,5 +5150,5 @@
     }
   ],
   "errors": [],
-  "durationMs": 73742
+  "durationMs": 76164
 }

@@ -91,11 +91,19 @@ export async function serveDist({ distDir, port = 0, extraRoutes = {} }) {
     requests,
     close: () =>
       new Promise((resolve) => {
-        // Chrome 的 keep-alive 连接会让 server.close() 永远不回调 → 必须主动断开
-        if (typeof server.closeAllConnections === 'function') server.closeAllConnections();
+        // ⚠️ 这里的顺序与「不许提前 resolve」都是踩过坑的：
+        //   旧的 setTimeout(resolve, 1000).unref() 会在 server 句柄仍在关闭中时提前放行，
+        //   紧接着脚本调用 process.exit() → Windows 上 libuv 报
+        //   "Assertion failed: !(handle->flags & UV_HANDLE_CLOSING), src\win\async.c, line 94"，
+        //   进程退出码变成 -1073740791，CI 会把「全绿」误判成失败。
+        //   现在只认 server.close() 的回调（全部连接结束、句柄关闭后才回调）。
+        if (server.listening === false) {
+          resolve();
+          return;
+        }
         server.close(() => resolve());
-        // 双保险：1s 后仍未关掉也放行，避免脚本挂死
-        setTimeout(resolve, 1000).unref();
+        // Chrome 的 keep-alive 连接会让上面的回调一直不来 → 主动断开（必须在 close() 之后调用）
+        if (typeof server.closeAllConnections === 'function') server.closeAllConnections();
       }),
   };
 }
